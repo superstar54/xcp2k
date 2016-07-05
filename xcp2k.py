@@ -23,85 +23,8 @@ from os.path import join, isfile, split, islink
 from warnings import warn
 from subprocess import Popen, PIPE
 import numpy as np
-
-
-
-# Parameters that can be set to control cp2k calculation. The values which are None are not written and default parameters of cp2k are used for them.
-
-system_keys = [
-'PROJECT',      # my_system
-'RUN_TYPE',     # md, geo_opt, energy_force
-'PRINT_LEVEL',  # medium
-'WALLTIME'      # my_cpu_time
-]
-
-forces_keys = [
-'RESTART',      # FALSE,
-'BASISFILE',    # file_with_basis_set, Name of the file that contains the basis set
-'PSEUDOFILE',   # file_with_pseudo, Name of the file that contains the pseudo-potentials
-'WAVEFILE',     # file_with_wavefunction, Name of the file that contains the wave-function (for restart)
-'CUTOFF',       # 300
-'GRIDS',        # 5
-'XC',   # BLYP, functional
-]
-
-scf_keys = [
-'SCF_NCYCLES',  # 500
-'SCF_OCYCLES',  # 100
-'SCF_CONV',     # 1E-6
-'SCF_GUESS',    # ATOMIC, RESTART, depend on restart
-'SCF_MINI',     # CG, BROYDEN, DIIS, Minimizer algorithm for SCF
-'OUT_STEPS'     # 1, ! Save results every OUT_STEPS molecular dynamics steps
-]
-
-subsys_keys = [
-]
-
-motion_keys = [
-'RTYPE',       # GEO_OPT, 
-'GEO_MINI',    # CG, Minimizer algorithm for geometry optimization
-'GEO_MAXS',    # 10000, Maximum number of geometry optimization steps
-'OUT_FORM',    # XYZ, Output format
-'OUT_UNIT',    # angstrom, Output unit
-'OUT_STEPS',   # Save results every OUT_STEPS steps of geometry optimization
-'MD_ENS',      # NVT, Thermodynamical ensemble: NVT or NVE
-'MD_DT',       # 2.0, Integration time step of the Newton’s equation of motion (in fs)
-'MD_STEPS',    # 10000, Number of MD steps
-'MD_TEMP',     # 300, Target temperature (in K)
-]
-
-restart_keys = [
-'RTYPE',       # MD
-'RESTART',     # TRUE
-'RESTARTFILE', # My_restart_file, Name of the restart file from the previous run
-'MD_ENS',      # NVT, Thermodynamical ensemble: NVT or NVE
-]
-
-
-float_keys = [
-    'aexx',       # Fraction of exact/DFT exchange
-]
-
-
-exp_keys = [
-    'ediff',      # stopping-criterion for electronic upd.
-    'ediffg',     # stopping-criterion for ionic upd.
-    'symprec',    # precession in symmetry routines
-    # The next keywords pertain to the VTST add-ons from Graeme Henkelman's
-    # group at UT Austin
-    'fdstep',     # Finite diference step for IOPT = 1 or 2
-]
-
-string_keys = [
-    'xc',       # algorithm: Normal (Davidson) | Fast | Very_Fast (RMM-DIIS)
-    'gga',        # xc-type: PW PB LM or 91
-    'metagga',    #
-    'prec',       # Precission of calculation (Low, Normal, Accurate)
-    'system',     # name of System
-    'tebeg',      #
-    'teend',      # temperature during run
-    'precfock',    # FFT grid in the HF related routines
-]
+from xcp2k_params import *
+from xcp2k_tools import *
 
 
 
@@ -112,33 +35,8 @@ class CP2K(Calculator):
     name = 'cp2k'
 
     implemented_properties = ['energy', 'forces', 'stress']
-    command = None
 
-    # check data
-    if 'CP2K_DATA_DIR' is None:
-        pppaths = CP2K_DATA_DIR
-    elif 'CP2K_DATA_DIR' in os.environ:
-        pppaths = os.environ['CP2K_DATA_DIR']
-    else:
-        raise RuntimeError('Please set CP2K_DATA_DIR')
 
-    default_parameters = dict(
-        run_type='ENERGY_FORCE',
-        auto_write=False,
-        basis_set='DZVP-MOLOPT-SR-GTH',
-        basis_set_file=os.environ['CP2K_DATA_DIR'] + '/BASIS_MOLOPT',
-        charge=0,
-        cutoff=400 * Rydberg,
-        force_eval_method="Quickstep",
-        inp='',
-        max_scf=50,
-        potential_file=os.environ['CP2K_DATA_DIR'] + '/POTENTIAL',
-        pseudo_potential='auto',
-        forces=True,
-        stress_tensor=True,
-        uks=False,
-        poisson_solver='auto',
-        xc='LDA')
 
     def __init__(self, restart=None, ignore_bad_restart_file=False,
                  label='cp2k', atoms=None, command=None,
@@ -146,36 +44,44 @@ class CP2K(Calculator):
         """Construct CP2K-calculator object."""
 
         self._debug = debug
-        self._force_env_id = None
-        self._shell = None
-        self.parameters = None
-        self.results = None
-        self.label = None
-        self.atoms = None
-        self.positions = None
+        self.results = {}
+        self.parameters = {}  # calculational parameters
 
-        self.directory = split(label)[0]
+        self.label = None
+        self.directory = None
+        self.prefix = None
+
+        #label='dir1/abc': (directory='dir1', prefix='abc')
+        self.set_label(label)
         self.inp = join(self.directory, 'cp2k.inp')
         self.out = join(self.directory, 'cp2k.out')
 
-        self.initdata()
+        self.atoms = None
+        self.positions = None
+
+        if atoms is not None:
+            atoms.calc = self
+
+        self.params = params
         self.set(**kwargs)
+        
+        # check data
+        if 'CP2K_DATA_DIR' is None:
+            pppaths = CP2K_DATA_DIR
+        elif 'CP2K_DATA_DIR' in os.environ:
+            pppaths = os.environ['CP2K_DATA_DIR']
+        else:
+            raise RuntimeError('Please set CP2K_DATA_DIR')
 
         # Several places are check to determine self.command
         if command is not None:
             self.command = command
-        elif CP2K.command is not None:
-            self.command = CP2K.command
         elif 'ASE_CP2K_COMMAND' in os.environ:
             self.command = os.environ['ASE_CP2K_COMMAND']
         else:
             raise RuntimeError('Please set ASE_CP2K_COMMAND')
 
-
-
-        Calculator.__init__(self, restart, ignore_bad_restart_file,
-                            label, atoms, **kwargs)
-
+        
         if restart is not None:
             try:
                 self.read(restart)
@@ -185,55 +91,33 @@ class CP2K(Calculator):
                 else:
                     raise
 
-    def initdata(self):         
-        self.system_params = {}
-        self.forces_params = {}
-        self.scf_params = {}
-        self.subsys_params = {}
-        self.motion_params = {}
-        self.restart_params = {}
-        for key in system_keys:
-            self.system_params[key] = None
-        for key in forces_keys:
-            self.forces_params[key] = None
-        for key in scf_keys:
-            self.scf_params[key] = None
-        for key in subsys_keys:
-            self.subsys_params[key] = None
-        for key in motion_keys:
-            self.motion_params[key] = None
-        for key in restart_keys:
-            self.restart_params[key] = None
-
-        self.input_params = {}
-
-
     def set(self, **kwargs):
         """Set parameters like set(key1=value1, key2=value2, ...)."""
-        kwargs = self.capitalize_keys(kwargs)
+        changed_parameters = {}
+        kwargs = capitalize_keys(kwargs)
         for key in kwargs:
-            if key in self.system_params:
-                self.system_params[key] = kwargs[key]
-            elif key in self.forces_params:
-                self.forces_params[key] = kwargs[key]
-            elif key in self.scf_params:
-                self.scf_params[key] = kwargs[key]
-            elif key in self.subsys_params:
-                self.subsys_params[key] = kwargs[key]
-            elif key in self.motion_params:
-                self.motion_params[key] = kwargs[key]
-            elif key in self.restart_params:
-                self.restart_params[key] = kwargs[key]
-            elif key in self.input_params:
-                self.input_params[key] = kwargs[key]
-            else:
-                raise TypeError('Parameter not defined: ' + key)
-    def capitalize_keys(self, d):
-        result = {}
-        for key, value in d.items():
-            upper_key = key.upper()
-            result[upper_key] = value.upper()
-        return result
+        	oldvalue = self.parameters.get(key)
+        	if key not in self.parameters:
+        		if isinstance(oldvalue, dict):
+        		# Special treatment for dictionary parameters:
+        		    for name in value:
+        		    	if name not in oldvalue:
+        		    		raise KeyError(
+        		    			'Unknown subparameter "%s" in '
+        		    			'dictionary parameter "%s"' % (name, key))
+        		    oldvalue.update(value)
+        		    value = oldvalue
+        		changed_parameters[key] = kwargs[key]
+        		self.parameters[key] = kwargs[key]
+        	flag = 0
+        	for param in self.params:
+        		if key in self.params[param]:
+        			self.params[param][key] = kwargs[key]
+        			flag = 1
+        			break
+        	if flag ==0:
+        	   	raise TypeError('Parameter not defined: ' + key)
+
 
     def update(self, atoms):
         if self.calculation_required(atoms, ['energy']):
@@ -248,8 +132,12 @@ class CP2K(Calculator):
         'Write atoms, parameters and calculated results into restart files.'
         if self._debug:
             print("Writting restart to: ", label)
+
         self.atoms.write(label + '_restart.traj')
-        self.parameters.write(label + '_params.ase')
+        f = open(label + '_params.ase', 'a')
+        for key, val in self.parameters.items():
+            f.write('{0} = {1} \n'.format(key, val))
+        f.close()
         open(label + '_results.ase', 'w').write(repr(self.results))
 
     def read(self, label):
@@ -265,10 +153,12 @@ class CP2K(Calculator):
 
         if not properties:
             properties = ['energy']
-        Calculator.calculate(self, atoms, properties, system_changes)
-
+        
         if self._debug:
             print("system_changes:", system_changes)
+
+        if atoms is not None:
+            self.atoms = atoms
 
         #generate inputfile
         self.generate_input()
@@ -279,8 +169,8 @@ class CP2K(Calculator):
         self.run()
 
        # Updata atoms positions and cell
-        if self.parameters.run_type == 'geo_opt':
-            atoms_sorted = ase.io.read(os.path.split(self.label)[1]+'-pos-1.xyz')
+        if self.params['global']['RUN_TYPE'] == 'GEO_OPT':
+            atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
             atoms.positions = atoms_sorted.positions
             atoms.cell = atoms_sorted.cell
         os.chdir(olddir)
@@ -288,71 +178,72 @@ class CP2K(Calculator):
         self.converged = self.read_convergence()
         self.read_results()
         self.set_results(atoms)
-        if self.parameters.auto_write:
-            self.write(self.label)
-        
+        self.write(self.directory + '/' + self.prefix)
+    
     def generate_input(self):
         """Generates a CP2K input file"""
-        self.directory = os.path.split(self.label)[0]
-        label_dir = self.directory
-        if len(label_dir) > 0 and not os.path.exists(label_dir):
-            print('Creating directory: ' + label_dir)
-            os.makedirs(label_dir)  # cp2k expects dirs to exist
+        if len(self.prefix) > 0 and not os.path.exists(self.directory):
+            #print('Creating directory: ' + self.directory)
+            os.makedirs(self.directory)  # cp2k expects dirs to exist
 
 
-        p = self.parameters
-        root = parse_input(p.inp)
-        label = os.path.split(self.label)[1]
+        # global
+        root = InputSection('CP2K_INPUT')
+        self.params['global']['PROJECT_NAME'] = self.prefix
+        for key, value in self.params['global'].items():
+            if value is not None:
+                root.add_keyword('GLOBAL', '{0}   {1}'.format(key, value))
+        
 
-        root.add_keyword('GLOBAL', 'PROJECT ' + label)
-        if p.run_type:
-            root.add_keyword('GLOBAL', 'RUN_TYPE ' + p.run_type)
-        if p.force_eval_method:
-            root.add_keyword('FORCE_EVAL', 'METHOD ' + p.force_eval_method)
-        if p.forces:
-            root.add_keyword('FORCE_EVAL/PRINT/FORCES',
-                             '_SECTION_PARAMETERS_ ON')
-        if p.stress_tensor:
-            root.add_keyword('FORCE_EVAL', 'STRESS_TENSOR ANALYTICAL')
-            root.add_keyword('FORCE_EVAL/PRINT/STRESS_TENSOR',
-                             '_SECTION_PARAMETERS_ ON')
-        if p.basis_set_file:
-            root.add_keyword('FORCE_EVAL/DFT',
-                             'BASIS_SET_FILE_NAME ' + p.basis_set_file)
-        if p.potential_file:
-            root.add_keyword('FORCE_EVAL/DFT',
-                             'POTENTIAL_FILE_NAME ' + p.potential_file)
-        if p.cutoff:
-            root.add_keyword('FORCE_EVAL/DFT/MGRID',
-                             'CUTOFF [eV] %.18e' % p.cutoff)
-        if p.max_scf:
-            root.add_keyword('FORCE_EVAL/DFT/SCF', 'MAX_SCF %d' % p.max_scf)
-            root.add_keyword('FORCE_EVAL/DFT/LS_SCF', 'MAX_SCF %d' % p.max_scf)
+        # force
+        for key, value in self.params['forces'].items():
+        	if value is not None:
+        	   	root.add_keyword('FORCE_EVAL',
+                                 '{0}    {1}'.format(key, value))
+        
+        # print force
+        for key, value in self.params['p_forces'].items():
+            if value is not None:
+                root.add_keyword('FORCE_EVAL/PRINT/FORCES',
+                                 '{0}  {1} '.format(key, value))
+        # print stress
+        for key, value in self.params['p_stress'].items():
+            if value is not None:
+                root.add_keyword('FORCE_EVAL/PRINT/STRESS_TENSOR',
+                                 '{0}  {1} '.format(key, value))
+        # XC
+        for key, value in self.params['xc'].items():
+        	if value is not None:
+        	   	root.add_keyword('FORCE_EVAL/DFT/XC/XC_FUNCTIONAL',
+                                 '_SECTION_PARAMETERS_ ' + value)
+        # BASIS_SET_FILE_NAME
+        for key, value in self.params['dft'].items():
+            if value is not None:
+                root.add_keyword('FORCE_EVAL/DFT',
+                                 '{0}    {1}'.format(key, value))
 
-        if p.xc:
-            if p.xc.startswith("XC_"):
-                root.add_keyword('FORCE_EVAL/DFT/XC/XC_FUNCTIONAL/LIBXC',
-                                 'FUNCTIONAL ' + p.xc)
-            else:
-                root.add_keyword('FORCE_EVAL/DFT/XC/XC_FUNCTIONAL',
-                                 '_SECTION_PARAMETERS_ ' + p.xc)
+        # MGRID
+        for key, value in self.params['mgrid'].items():
+            if value is not None:
+                root.add_keyword('FORCE_EVAL/DFT/MGRID',
+                                 '{0}    {1}'.format(key, value))
+        # SCF
+        for key, value in self.params['scf'].items():
+            if value is not None:
+                root.add_keyword('FORCE_EVAL/DFT/SCF',
+                                 '{0}    {1}'.format(key, value))
 
-        if p.uks:
-            root.add_keyword('FORCE_EVAL/DFT', 'UNRESTRICTED_KOHN_SHAM ON')
-
-        if p.charge and p.charge != 0:
-            root.add_keyword('FORCE_EVAL/DFT', 'CHARGE %d' % p.charge)
-
-        # add Poisson solver if needed
-        if p.poisson_solver == 'auto' and not any(self.atoms.get_pbc()):
-            root.add_keyword('FORCE_EVAL/DFT/POISSON', 'PERIODIC NONE')
-            root.add_keyword('FORCE_EVAL/DFT/POISSON', 'PSOLVER  MT')
-
+        # POSSON
+        for key, value in self.params['possion'].items():
+            if value is not None and not any(self.atoms.get_pbc()):
+                root.add_keyword('FORCE_EVAL/DFT/POISSON',
+                                 '{0}    {1}'.format(key, value))
+        # SUBSYS
         # write coords
         syms = self.atoms.get_chemical_symbols()
-        atoms = self.atoms.get_positions()
-        for elm, pos in zip(syms, atoms):
-            line = '%s %.18e %.18e %.18e' % (elm, pos[0], pos[1], pos[2])
+        positions = self.atoms.get_positions()
+        for elm, pos in zip(syms, positions):
+            line = '%s  %.20e   %.20e   %.20e' % (elm, pos[0], pos[1], pos[2])
             root.add_keyword('FORCE_EVAL/SUBSYS/COORD', line, unique=False)
 
         # write cell
@@ -362,20 +253,12 @@ class CP2K(Calculator):
         root.add_keyword('FORCE_EVAL/SUBSYS/CELL', 'PERIODIC ' + pbc)
         c = self.atoms.get_cell()
         for i, a in enumerate('ABC'):
-            line = '%s %.18e %.18e %.18e' % (a, c[i, 0], c[i, 1], c[i, 2])
+            line = '%s  %.20e  %.20e  %.20e' % (a, c[i, 0], c[i, 1], c[i, 2])
             root.add_keyword('FORCE_EVAL/SUBSYS/CELL', line)
 
-        # determine pseudo-potential
-        potential = p.pseudo_potential
-        if p.pseudo_potential == 'auto':
-            if p.xc and p.xc.upper() in ('LDA', 'PADE', 'BP', 'BLYP', 'PBE',):
-                potential = 'GTH-' + p.xc.upper()
-            else:
-                msg = 'No matching pseudo potential found, using GTH-PBE'
-                warn(msg, RuntimeWarning)
-                potential = 'GTH-PBE'  # fall back
 
-        # write atomic kinds
+
+        # KIND AND POTENTIAL
         subsys = root.get_subsection('FORCE_EVAL/SUBSYS').subsections
         kinds = dict([(s.params, s) for s in subsys if s.name == "KIND"])
         for elem in set(self.atoms.get_chemical_symbols()):
@@ -383,16 +266,16 @@ class CP2K(Calculator):
                 s = InputSection(name='KIND', params=elem)
                 subsys.append(s)
                 kinds[elem] = s
-            if p.basis_set:
-                kinds[elem].keywords.append('BASIS_SET ' + p.basis_set)
-            if potential:
-                kinds[elem].keywords.append('POTENTIAL ' + potential)
-
+                for key, value in self.params['kind'].items():
+                    if value is not None:
+                        kinds[elem].keywords.append('{0}  {1}'.format(key, value))
         output_lines = ['!!! Generated by ASE !!!'] + root.write()
         inp = open(self.inp, 'w')
         for line in output_lines:
             inp.write(line+'\n')
         inp.close()
+
+    
 
     def run(self):
         """Method which explicitely runs VASP."""
@@ -422,23 +305,13 @@ class CP2K(Calculator):
                                'The last lines of output are printed above ' +
                                'and should give an indication why.')
         self.read_energy()
-        if self.parameters.forces:
-            self.read_forces()
-        if self.parameters.forces:
-            self.read_stress()
-        if ('dipole' in self.parameters.get('output', []) and
-            not self.atoms.pbc.any()):
-            self.read_dipole()
+        self.read_forces()
+        #self.read_stress()
+
 
     def set_results(self, atoms):
         #self.read(atoms)
-        self.old_system_params = self.system_params.copy()
-        self.old_forces_params = self.forces_params.copy()
-        self.old_scf_params = self.scf_params.copy()
-        self.old_subsys_params = self.subsys_params.copy()
-        self.old_input_params = self.input_params.copy()
-        self.old_motion_params = self.motion_params.copy()
-        self.old_restart_params = self.restart_params.copy()
+        self.old_params = self.params.copy()
         self.atoms = atoms.copy()
         self.positions = atoms.positions   # +++++++++++##????
         self.name = 'cp2k'
@@ -511,14 +384,7 @@ class CP2K(Calculator):
     def calculation_required(self, atoms, quantities):
         if (self.positions is None or
             (self.atoms != atoms) or
-            (self.system_params != self.old_system_params) or
-            (self.forces_params != self.old_forces_params) or
-            (self.scf_params != self.old_scf_params) or
-            (self.subsys_params != self.old_subsys_params) or
-            (self.motion_params != self.old_motion_params) or
-            (self.restart_params != self.old_restart_params) or
-            (self.input_params != self.old_input_params)
-            or not self.converged):
+            (self.params != self.old_params) or not self.converged):
             return True
         return False
 
@@ -548,98 +414,4 @@ class CP2K(Calculator):
             raise NotImplementedError
         return self.stress
 
-
-
-
-
-
-class InputSection(object):
-    """Represents a section of a CP2K input file"""
-    def __init__(self, name, params=None):
-        self.name = name.upper()
-        self.params = params
-        self.keywords = []
-        self.subsections = []
-
-    def write(self):
-        """Outputs input section as string"""
-        output = []
-        for k in self.keywords:
-            output.append(k)
-        for s in self.subsections:
-            if s.params:
-                output.append('&%s %s' % (s.name, s.params))
-            else:
-                output.append('&%s' % s.name)
-            for l in s.write():
-                output.append('   %s' % l)
-            output.append('&END %s' % s.name)
-        return output
-
-    def add_keyword(self, path, line, unique=True):
-        """Adds a keyword to section."""
-        parts = path.upper().split('/', 1)
-        candidates = [s for s in self.subsections if s.name == parts[0]]
-        if len(candidates) == 0:
-            s = InputSection(name=parts[0])
-            self.subsections.append(s)
-            candidates = [s]
-        elif len(candidates) != 1:
-            raise Exception('Multiple %s sections found ' % parts[0])
-
-        key = line.split()[0].upper()
-        if len(parts) > 1:
-            candidates[0].add_keyword(parts[1], line, unique)
-        elif key == '_SECTION_PARAMETERS_':
-            if candidates[0].params is not None:
-                msg = 'Section parameter of section %s already set' % parts[0]
-                raise Exception(msg)
-            candidates[0].params = line.split(' ', 1)[1].strip()
-        else:
-            old_keys = [k.split()[0].upper() for k in candidates[0].keywords]
-            if unique and key in old_keys:
-                msg = 'Keyword %s already present in section %s'
-                raise Exception(msg % (key, parts[0]))
-            candidates[0].keywords.append(line)
-
-    def get_subsection(self, path):
-        """Finds a subsection"""
-        parts = path.upper().split('/', 1)
-        candidates = [s for s in self.subsections if s.name == parts[0]]
-        if len(candidates) > 1:
-            raise Exception('Multiple %s sections found ' % parts[0])
-        if len(candidates) == 0:
-            s = InputSection(name=parts[0])
-            self.subsections.append(s)
-            candidates = [s]
-        if len(parts) == 1:
-            return candidates[0]
-        return candidates[0].get_subsection(parts[1])
-
-
-def parse_input(inp):
-    """Parses the given CP2K input string"""
-    root_section = InputSection('CP2K_INPUT')
-    section_stack = [root_section]
-
-    for line in inp.split('\n'):
-        line = line.split('!', 1)[0].strip()
-        if len(line) == 0:
-            continue
-
-        if line.upper().startswith('&END'):
-            s = section_stack.pop()
-        elif line[0] == '&':
-            parts = line.split(' ', 1)
-            name = parts[0][1:]
-            if len(parts) > 1:
-                s = InputSection(name=name, params=parts[1].strip())
-            else:
-                s = InputSection(name=name)
-            section_stack[-1].subsections.append(s)
-            section_stack.append(s)
-        else:
-            section_stack[-1].keywords.append(line)
-
-    return root_section
 

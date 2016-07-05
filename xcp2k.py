@@ -28,9 +28,60 @@ import numpy as np
 
 # Parameters that can be set to control cp2k calculation. The values which are None are not written and default parameters of cp2k are used for them.
 
+system_keys = [
+'PROJECT',      # my_system
+'RUN_TYPE',     # md, geo_opt, energy_force
+'PRINT_LEVEL',  # medium
+'WALLTIME'      # my_cpu_time
+]
+
+forces_keys = [
+'RESTART',      # FALSE,
+'BASISFILE',    # file_with_basis_set, Name of the file that contains the basis set
+'PSEUDOFILE',   # file_with_pseudo, Name of the file that contains the pseudo-potentials
+'WAVEFILE',     # file_with_wavefunction, Name of the file that contains the wave-function (for restart)
+'CUTOFF',       # 300
+'GRIDS',        # 5
+'XC',   # BLYP, functional
+]
+
+scf_keys = [
+'SCF_NCYCLES',  # 500
+'SCF_OCYCLES',  # 100
+'SCF_CONV',     # 1E-6
+'SCF_GUESS',    # ATOMIC, RESTART, depend on restart
+'SCF_MINI',     # CG, BROYDEN, DIIS, Minimizer algorithm for SCF
+'OUT_STEPS'     # 1, ! Save results every OUT_STEPS molecular dynamics steps
+]
+
+subsys_keys = [
+]
+
+motion_keys = [
+'RTYPE',       # GEO_OPT, 
+'GEO_MINI',    # CG, Minimizer algorithm for geometry optimization
+'GEO_MAXS',    # 10000, Maximum number of geometry optimization steps
+'OUT_FORM',    # XYZ, Output format
+'OUT_UNIT',    # angstrom, Output unit
+'OUT_STEPS',   # Save results every OUT_STEPS steps of geometry optimization
+'MD_ENS',      # NVT, Thermodynamical ensemble: NVT or NVE
+'MD_DT',       # 2.0, Integration time step of the Newton’s equation of motion (in fs)
+'MD_STEPS',    # 10000, Number of MD steps
+'MD_TEMP',     # 300, Target temperature (in K)
+]
+
+restart_keys = [
+'RTYPE',       # MD
+'RESTART',     # TRUE
+'RESTARTFILE', # My_restart_file, Name of the restart file from the previous run
+'MD_ENS',      # NVT, Thermodynamical ensemble: NVT or NVE
+]
+
+
 float_keys = [
     'aexx',       # Fraction of exact/DFT exchange
 ]
+
 
 exp_keys = [
     'ediff',      # stopping-criterion for electronic upd.
@@ -52,30 +103,6 @@ string_keys = [
     'precfock',    # FFT grid in the HF related routines
 ]
 
-int_keys = [
-    'ialgo',      # algorithm: use only 8 (CG) or 48 (RMM-DIIS)
-]
-
-bool_keys = [
-    'addgrid',    # finer grid for augmentation charge density
-]
-list_keys = [
-    'dipol',      # center of cell for dipol
-]
-special_keys = [
-    'lreal',      # non-local projectors in real space
-]
-
-dict_keys = [
-    'ldau_luj',   # dictionary with L(S)DA+U parameters, e.g. {'Fe':{'L':2,
-                  # 'U':4.0, 'J':0.9}, ...}
-]
-
-keys = [
-    # 'NBLOCK' and KBLOCK       inner block; outer block
-    # 'NPACO' and APACO         distance and nr. of slots for P.C.
-    # 'WEIMIN, EBREAK, DEPER    special control tags
-]
 
 
 class CP2K(Calculator):
@@ -159,57 +186,55 @@ class CP2K(Calculator):
                     raise
 
     def initdata(self):         
-        self.float_params = {}
-        self.exp_params = {}
-        self.string_params = {}
-        self.int_params = {}
-        self.bool_params = {}
-        self.list_params = {}
-        self.special_params = {}
-        self.dict_params = {}
-        for key in float_keys:
-            self.float_params[key] = None
-        for key in exp_keys:
-            self.exp_params[key] = None
-        for key in string_keys:
-            self.string_params[key] = None
-        for key in int_keys:
-            self.int_params[key] = None
-        for key in bool_keys:
-            self.bool_params[key] = None
-        for key in list_keys:
-            self.list_params[key] = None
-        for key in special_keys:
-            self.special_params[key] = None
-        for key in dict_keys:
-            self.dict_params[key] = None
+        self.system_params = {}
+        self.forces_params = {}
+        self.scf_params = {}
+        self.subsys_params = {}
+        self.motion_params = {}
+        self.restart_params = {}
+        for key in system_keys:
+            self.system_params[key] = None
+        for key in forces_keys:
+            self.forces_params[key] = None
+        for key in scf_keys:
+            self.scf_params[key] = None
+        for key in subsys_keys:
+            self.subsys_params[key] = None
+        for key in motion_keys:
+            self.motion_params[key] = None
+        for key in restart_keys:
+            self.restart_params[key] = None
 
         self.input_params = {}
 
 
     def set(self, **kwargs):
         """Set parameters like set(key1=value1, key2=value2, ...)."""
+        kwargs = self.capitalize_keys(kwargs)
         for key in kwargs:
-            if key in self.float_params:
-                self.float_params[key] = kwargs[key]
-            elif key in self.exp_params:
-                self.exp_params[key] = kwargs[key]
-            elif key in self.string_params:
-                self.string_params[key] = kwargs[key]
-            elif key in self.int_params:
-                self.int_params[key] = kwargs[key]
-            elif key in self.bool_params:
-                self.bool_params[key] = kwargs[key]
-            elif key in self.list_params:
-                self.list_params[key] = kwargs[key]
-            elif key in self.special_params:
-                self.special_params[key] = kwargs[key]
-            elif key in self.dict_params:
-                self.dict_params[key] = kwargs[key]
+            if key in self.system_params:
+                self.system_params[key] = kwargs[key]
+            elif key in self.forces_params:
+                self.forces_params[key] = kwargs[key]
+            elif key in self.scf_params:
+                self.scf_params[key] = kwargs[key]
+            elif key in self.subsys_params:
+                self.subsys_params[key] = kwargs[key]
+            elif key in self.motion_params:
+                self.motion_params[key] = kwargs[key]
+            elif key in self.restart_params:
+                self.restart_params[key] = kwargs[key]
             elif key in self.input_params:
                 self.input_params[key] = kwargs[key]
             else:
                 raise TypeError('Parameter not defined: ' + key)
+    def capitalize_keys(self, d):
+        result = {}
+        for key, value in d.items():
+            upper_key = key.upper()
+            result[upper_key] = value.upper()
+        return result
+
     def update(self, atoms):
         if self.calculation_required(atoms, ['energy']):
             if (self.atoms is None or
@@ -407,14 +432,13 @@ class CP2K(Calculator):
 
     def set_results(self, atoms):
         #self.read(atoms)
-        self.old_float_params = self.float_params.copy()
-        self.old_exp_params = self.exp_params.copy()
-        self.old_string_params = self.string_params.copy()
-        self.old_int_params = self.int_params.copy()
+        self.old_system_params = self.system_params.copy()
+        self.old_forces_params = self.forces_params.copy()
+        self.old_scf_params = self.scf_params.copy()
+        self.old_subsys_params = self.subsys_params.copy()
         self.old_input_params = self.input_params.copy()
-        self.old_bool_params = self.bool_params.copy()
-        self.old_list_params = self.list_params.copy()
-        self.old_dict_params = self.dict_params.copy()
+        self.old_motion_params = self.motion_params.copy()
+        self.old_restart_params = self.restart_params.copy()
         self.atoms = atoms.copy()
         self.positions = atoms.positions   # +++++++++++##????
         self.name = 'cp2k'
@@ -487,14 +511,13 @@ class CP2K(Calculator):
     def calculation_required(self, atoms, quantities):
         if (self.positions is None or
             (self.atoms != atoms) or
-            (self.float_params != self.old_float_params) or
-            (self.exp_params != self.old_exp_params) or
-            (self.string_params != self.old_string_params) or
-            (self.int_params != self.old_int_params) or
-            (self.bool_params != self.old_bool_params) or
-            (self.list_params != self.old_list_params) or
-            (self.input_params != self.old_input_params) or
-            (self.dict_params != self.old_dict_params)
+            (self.system_params != self.old_system_params) or
+            (self.forces_params != self.old_forces_params) or
+            (self.scf_params != self.old_scf_params) or
+            (self.subsys_params != self.old_subsys_params) or
+            (self.motion_params != self.old_motion_params) or
+            (self.restart_params != self.old_restart_params) or
+            (self.input_params != self.old_input_params)
             or not self.converged):
             return True
         return False

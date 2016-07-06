@@ -25,7 +25,7 @@ from subprocess import Popen, PIPE
 import numpy as np
 from xcp2k_params import *
 from xcp2k_tools import *
-from xcp2k_queue import *
+from xcp2krc import *
 
 
 
@@ -40,7 +40,7 @@ class CP2K(Calculator):
 
 
     def __init__(self, restart=None, ignore_bad_restart_file=False,
-                 label='cp2k', atoms=None, command=None,
+                 label='cp2k', cpu=4, atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
 
@@ -92,6 +92,7 @@ class CP2K(Calculator):
                     self.reset()
                 else:
                     raise
+        self.cpu = cpu
 
     def set(self, **kwargs):
         """Set parameters like set(key1=value1, key2=value2, ...)."""
@@ -117,7 +118,9 @@ class CP2K(Calculator):
         			self.params[param][key] = kwargs[key]
         			flag = 1
         			break
-        	if flag ==0 and key not in self.ase_params:
+        	if flag ==0 and key in self.ase_params:
+        		self.ase_params[key] = kwargs[key]
+        	elif flag ==0 and key not in self.ase_params:
         	   	raise TypeError('Parameter not defined: ' + key)
 
 
@@ -174,13 +177,36 @@ class CP2K(Calculator):
         if self.params['global']['RUN_TYPE'] == 'GEO_OPT':
             atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
             atoms.positions = atoms_sorted.positions
-            atoms.cell = atoms_sorted.cell
+        if self.params['global']['RUN_TYPE'] == 'CELL_OPT':
+            lines = open(self.out, 'r').readlines()
+            for n, line in enumerate(lines):
+                if line.rfind('CELL| Vector a') > -1:
+                    pass
+
         os.chdir(olddir)
         # read results
         self.converged = self.read_convergence()
         self.read_results()
         self.set_results(atoms)
         self.write(self.directory + '/' + self.prefix)
+
+    def run(self):
+        """Method which explicitely runs VASP."""
+
+        if 'ASE_CP2K_COMMAND' in os.environ:
+            cp2k = os.environ['ASE_CP2K_COMMAND']
+            #print(cp2k)
+            exitcode = os.system('%s > %s' % (cp2k, 'cp2k.out'))
+        elif 'ASE_CP2K_SCRIPT' in os.environ:
+            cp2k = os.environ['ASE_CP2K_SCRIPT']
+            locals = {}
+            exec(compile(open(cp2k).read(), cp2k, 'exec'), {}, locals)
+            exitcode = locals['exitcode']
+        else:
+            raise RuntimeError('Please set either ASE_CP2K_COMMAND'
+                               ' or ASE_CP2K_SCRIPT environment variable')
+        if exitcode != 0:
+            raise RuntimeError('cp2k exited with exit code: %d.  ' % exitcode)
     
     def generate_input(self):
         """Generates a CP2K input file"""
@@ -241,6 +267,10 @@ class CP2K(Calculator):
                 root.add_keyword('FORCE_EVAL/DFT/POISSON',
                                  '{0}    {1}'.format(key, value))
         # MOTION
+        for key, value in self.params['geo_opt'].items():
+            if value is not None:
+                root.add_keyword('MOTION/GEO_OPT',
+                                 '{0}    {1}'.format(key, value))
         # cell_opt
         if self.ase_params['CELL_OPT'] is not False:
             for key, value in self.params['cell_opt'].items():
@@ -290,23 +320,9 @@ class CP2K(Calculator):
 
     
 
-    def run(self):
-        """Method which explicitely runs VASP."""
+    
 
-        if 'ASE_CP2K_COMMAND' in os.environ:
-            cp2k = os.environ['ASE_CP2K_COMMAND']
-            #print(cp2k)
-            exitcode = os.system('%s > %s' % (cp2k, 'cp2k.out'))
-        elif 'ASE_CP2K_SCRIPT' in os.environ:
-            cp2k = os.environ['ASE_CP2K_SCRIPT']
-            locals = {}
-            exec(compile(open(cp2k).read(), cp2k, 'exec'), {}, locals)
-            exitcode = locals['exitcode']
-        else:
-            raise RuntimeError('Please set either ASE_CP2K_COMMAND'
-                               ' or ASE_CP2K_SCRIPT environment variable')
-        if exitcode != 0:
-            raise RuntimeError('cp2k exited with exit code: %d.  ' % exitcode)
+
 
 
 
@@ -427,4 +443,6 @@ class CP2K(Calculator):
             raise NotImplementedError
         return self.stress
 
+
+from xcp2k_extensions import *
 

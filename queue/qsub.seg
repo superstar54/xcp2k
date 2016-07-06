@@ -1,0 +1,94 @@
+#!/bin/bash
+# example_pe_openmpi_using_openmpi-intel.sge
+#
+# This script uses the parallel environment (PE) "openmpi" with an explicit machinefile.
+# This script must be used with qsub command - do NOT run it as a stand-alone
+# script unless NSLOTS and TMPDIR/machines are properly set for the MPI command MPICMD
+# and PE_HOSTFILE is set to an empty file.
+
+# Define your job name, parallel environment with the number of slots, and run time:
+#$ -cwd
+#$ -N cp2k
+#$ -pe openmpi 4
+#$ -l s_rt=10:00:00,h_rt=10:00:30
+
+###################################################
+# Fix the SGE environment-handling bug (bash):
+source /usr/share/Modules/init/sh
+export -n -f module
+
+# Load the environment modules for this job (the order may be important):
+#module add intel/intel-12.1_intel64
+#module add mpi/openmpi-1.4.3-intel-12.1
+source ~/apps/cp2k-3.0/tools/toolchain/install/setup
+
+###################################################
+# Set the environment variables:
+#MPIEXEC=$OPENMPI/bin/mpiexec
+MPIEXEC=~/apps/cp2k-3.0/tools/toolchain/install/bin/mpiexec
+
+# OPENMPI is set by the mpi/openmpi-1.4.3-intel-12.1 module.
+
+export OMP_NUM_THREADS=1
+export OMPI_MCA_btl='openib,sm,self'
+
+export PYTHONPATH=~/apps/ase:$PYTHONPATH
+export PATH=~/apps/ase/tools:$PATH
+
+export PYTHONPATH=~/apps/xcp2k:$PYTHONPATH
+
+# export OMPI_MCA_orte_process_binding=core
+
+##############
+# BEGIN DEBUG
+# Print the SGE environment on master host:
+echo "================================================================"
+echo "=== SGE job  JOB_NAME=$JOB_NAME  JOB_ID=$JOB_ID"
+echo "================================================================"
+echo DATE=`date`
+echo HOSTNAME=`hostname`
+echo PWD=`pwd`
+echo "NSLOTS=$NSLOTS"
+echo "PE_HOSTFILE=$PE_HOSTFILE"
+cat $PE_HOSTFILE
+echo "Machinefile created by openmpi PE $TMPDIR/machines:"
+cat $TMPDIR/machines
+echo "================================================================"
+echo "Running environment:"
+env
+echo "================================================================"
+echo "Loaded environment modules:"
+module list 2>&1
+echo
+# END DEBUG
+##############
+
+###################################################
+# The command to run with mpiexec:
+# CMD=$HOME/bin/xhpl-OpenMPI_Intel-12.1
+#
+#CMD=/bin/hostname
+CMD=~/apps/cp2k-3.0/exe/local/cp2k.psmp
+
+ARGS='-i cp2k.inp'
+
+##############
+# BEGIN DEBUG
+# Check that the libraries are available (on the master host):
+echo "ldd $CMD"
+ldd $CMD
+echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+# Check the number of threads used by OpenMP:
+echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
+# END DEBUG
+##############
+
+# The MPI command to run:
+export ASE_CP2K_COMMAND="$MPIEXEC -np $NSLOTS $CMD $ARGS"
+export CP2K_DATA_DIR=~/apps/cp2k-3.0/data
+
+
+
+python job.py
+
+################################################################################

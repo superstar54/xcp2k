@@ -48,7 +48,7 @@ kpoints_keys = {
 'FULL_GRID': None,
 'KPOINT': None,
 'PARALLEL_GROUP_SIZE': None,
-'SCHEME': None,
+'SCHEME': 'MONKHORST-PACK 5 5 5',
 'SYMMETRY': None,
 'VERBOSE': None,
 'WAVEFUNCTIONS': None,
@@ -117,6 +117,9 @@ subsys_keys = {
 'VELOCITY': None
 }
 
+
+#=================================================================================
+#CP2K_INPUT / MOTION
 motion_keys = {
 'RTYPE': None,       # GEO_OPT, 
 'GEO_MINI': None,    # CG, Minimizer algorithm for geometry optimization
@@ -130,20 +133,33 @@ motion_keys = {
 'MD_TEMP': None,     # 300, Target temperature (in K)
 }
 
+#CP2K_INPUT / MOTION / GEO_OPT
+geo_opt_key = {
+	
+'MAX_DR': None,
+'MAX_FORCE': None,
+'MAX_ITER': None,
+'OPTIMIZER': 'BFGS',
+'RMS_DR': None,
+'RMS_FORCE': None,
+'STEP_START_VAL': None,
+'TYPE': None,
+
+}
 #CP2K_INPUT / MOTION / CELL_OPT
 cell_opt_key = {
-'EXTERNAL_PRESSURE': None, 
-'KEEP_ANGLES': None, 
+'EXTERNAL_PRESSURE': 0, 
+'KEEP_ANGLES': 'True', 
 'KEEP_SYMMETRY': None, 
 'MAX_DR': None, 
-'MAX_FORCE': None, 
-'MAX_ITER': None, 
-'OPTIMIZER': 'BFGS', 
+'MAX_FORCE': 0.002, 
+'MAX_ITER': 100, 
+'OPTIMIZER': 'CG', 
 'PRESSURE_TOLERANCE': None, 
 'RMS_DR': None, 
 'RMS_FORCE': None, 
 'STEP_START_VAL': None, 
-'TYPE': None, 
+'TYPE': 'DIRECT_CELL_OPT', 
 }
 
 restart_keys = {
@@ -283,9 +299,11 @@ params = {
 'restart': restart_keys,
 'poisson': poisson_key,
 'kind': kind_key,
+'geo_opt': geo_opt_key,
 'cell_opt': cell_opt_key,
 }
 
 ase_params = {
 'CELL_OPT': False,
+'CPU':4,
 }

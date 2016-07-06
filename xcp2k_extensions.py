@@ -78,22 +78,38 @@ def run(self):
               stdin=PIPE, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate(XCP2KRC['queue.script'])
 
+    print(out)
+
     if out == '' or err != '':
         raise Exception('something went wrong in qsub:\n\n{0}'.format(err))
 
     import time
     #print(out)
-    job_id = int(out.split()[2])
+    if 'SLURM_CONF' in os.environ:
+        job_id = int(out.split()[3])
+    elif 'SGE_ROOT' in os.environ:
+        job_id = int(out.split()[2])
+        
 
     delay = 1
     while True:
-        output = Popen("qstat -j %i" %(job_id), shell = True,
+        if 'SLURM_CONF' in os.environ:
+            output = Popen("sacct -j %i" %(job_id), shell = True,
                    stdin = PIPE,
                    stdout = PIPE,
                    stderr = PIPE).communicate()
-        if "do not exist" in output[1]:
-            break
-        time.sleep(delay)
+            print(output)
+            if "COMPLETED" in output[0] and output[0].split()[15]==self.prefix:
+                break
+            time.sleep(delay)
+        elif 'SGE_ROOT' in os.environ:
+            output = Popen("qstat -j %i" %(job_id), shell = True,
+                   stdin = PIPE,
+                   stdout = PIPE,
+                   stderr = PIPE).communicate()
+            if "do not exist" in output[1]:
+                break
+            time.sleep(delay)
 
 
 CP2K.run = MethodType(run, None, CP2K)

@@ -28,17 +28,16 @@ def run(self):
         NPROCS = os.environ['NSLOTS ']
         # no question. running in serial.
         cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-        parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
-        exitcode = os.system(parcmd)
+        #parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
+        exitcode = os.system(cp2kcmd)
         return exitcode
     elif 'SLURM_JOB_NODELIST' in os.environ:
         # we are in the queue. determine if we should run serial
         # or parallel
-        NPROCS = os.environ['SLURM_NTASKS ']
+        NPROCS = int(os.environ['SLURM_NTASKS'])
         # no question. running in serial.
         cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-        parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
-        exitcode = os.system(parcmd)
+        exitcode = os.system(cp2kcmd)
         return exitcode
 
 

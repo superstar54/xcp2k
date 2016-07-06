@@ -64,7 +64,6 @@ def  read_script(fname):
 config_files = [os.path.join(os.environ['HOME'], '.xcp2krc'),
                 '.xcp2krc']
               
-print(config_files)
 for cf in config_files:
     if os.path.exists(cf):
         #read_configuration(cf)

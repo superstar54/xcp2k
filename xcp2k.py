@@ -25,6 +25,7 @@ from subprocess import Popen, PIPE
 import numpy as np
 from xcp2k_params import *
 from xcp2k_tools import *
+from xcp2k_queue import *
 
 
 

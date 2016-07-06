@@ -130,6 +130,22 @@ motion_keys = {
 'MD_TEMP': None,     # 300, Target temperature (in K)
 }
 
+#CP2K_INPUT / MOTION / CELL_OPT
+cell_opt_key = {
+'EXTERNAL_PRESSURE': None, 
+'KEEP_ANGLES': None, 
+'KEEP_SYMMETRY': None, 
+'MAX_DR': None, 
+'MAX_FORCE': None, 
+'MAX_ITER': None, 
+'OPTIMIZER': 'BFGS', 
+'PRESSURE_TOLERANCE': None, 
+'RMS_DR': None, 
+'RMS_FORCE': None, 
+'STEP_START_VAL': None, 
+'TYPE': None, 
+}
+
 restart_keys = {
 'RTYPE': None,       # MD
 'RESTART': None,     # TRUE
@@ -188,7 +204,7 @@ dft_keys = {
 
 
 # CP2K_INPUT / FORCE_EVAL / DFT / POISSON
-possion_key = {
+poisson_key = {
 
 'PERIODIC': None,
 'POISSON_SOLVER': 'MT',
@@ -265,6 +281,11 @@ params = {
 'plus': plus_u_key,
 'motion': motion_keys,
 'restart': restart_keys,
-'possion': possion_key,
-'kind': kind_key
+'poisson': poisson_key,
+'kind': kind_key,
+'cell_opt': cell_opt_key,
+}
+
+ase_params = {
+'CELL_OPT': False,
 }

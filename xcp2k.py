@@ -63,6 +63,7 @@ class CP2K(Calculator):
             atoms.calc = self
 
         self.params = params
+        self.ase_params = ase_params
         self.set(**kwargs)
         
         # check data
@@ -115,7 +116,7 @@ class CP2K(Calculator):
         			self.params[param][key] = kwargs[key]
         			flag = 1
         			break
-        	if flag ==0:
+        	if flag ==0 and key not in self.ase_params:
         	   	raise TypeError('Parameter not defined: ' + key)
 
 
@@ -233,11 +234,22 @@ class CP2K(Calculator):
                 root.add_keyword('FORCE_EVAL/DFT/SCF',
                                  '{0}    {1}'.format(key, value))
 
-        # POSSON
-        for key, value in self.params['possion'].items():
+        # POISSON
+        for key, value in self.params['poisson'].items():
             if value is not None and not any(self.atoms.get_pbc()):
                 root.add_keyword('FORCE_EVAL/DFT/POISSON',
                                  '{0}    {1}'.format(key, value))
+        # MOTION
+        # cell_opt
+        if self.ase_params['CELL_OPT'] is not False:
+            for key, value in self.params['cell_opt'].items():
+                if value is not None:
+                    root.add_keyword('MOTION/CELL_OPT',
+                                 '{0}    {1}'.format(key, value))
+
+
+
+
         # SUBSYS
         # write coords
         syms = self.atoms.get_chemical_symbols()

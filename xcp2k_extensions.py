@@ -16,50 +16,33 @@ def run(self):
 
     # if we are in the queue and jasp is called or if we want to use
     # mode='run' , we should just run the job. First, we consider how.
-    if 'PBS_O_WORKDIR' in os.environ or XCP2KRC['mode'] == 'run':
-        log.info('In the queue. determining how to run')
-        if 'PBS_NODEFILE' in os.environ:
-            # we are in the queue. determine if we should run serial
-            # or parallel
-            NPROCS = len(open(os.environ['PBS_NODEFILE']).readlines())
-            if NPROCS == 1:
-                # no question. running in serial.
-                cp2kcmd = XCP2KRC['cp2k.serial']
-                exitcode = os.system(cp2kcmd)
-                return exitcode
-            else:
-                # vanilla MPI run. multiprocessing does not work on more
-                # than one node, and you must specify in XCP2KRC to use it
-                if (XCP2KRC['queue.nodes'] > 1
-                    or (XCP2KRC['queue.nodes'] == 1
-                        and XCP2KRC['queue.ppn'] > 1
-                        and (XCP2KRC['multiprocessing.cores_per_process']
-                             == 'None'))):
 
-                    print('MPI NPROCS = ', NPROCS)
-                    cp2kcmd = XCP2KRC['cp2k.parallel']
-                    parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
-                    exitcode = os.system(parcmd)
-                    return exitcode
-                else:
-                    # we need to run an MPI job on cores_per_process
-                    if XCP2KRC['multiprocessing.cores_per_process'] == 1:
-                        cp2kcmd = XCP2KRC['cp2k.serial']
-                        exitcode = os.system(cp2kcmd)
-                    elif XCP2KRC['multiprocessing.cores_per_process'] > 1:
-                        NPROCS = XCP2KRC['multiprocessing.cores_per_process']
+    if XCP2KRC['mode'] == 'run':
+        # probably running at cmd line, in serial.
+        cp2kcmd = os.environ['ASE_CP2K_COMMAND']
+        exitcode = os.system(cp2kcmd)
+        return exitcode
+    elif 'NHOSTS' in os.environ:
+        # we are in the queue. determine if we should run serial
+        # or parallel
+        NPROCS = os.environ['NSLOTS ']
+        # no question. running in serial.
+        cp2kcmd = os.environ['ASE_CP2K_COMMAND']
+        parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
+        exitcode = os.system(parcmd)
+        return exitcode
+    elif 'SLURM_JOB_NODELIST' in os.environ:
+        # we are in the queue. determine if we should run serial
+        # or parallel
+        NPROCS = os.environ['SLURM_NTASKS ']
+        # no question. running in serial.
+        cp2kcmd = os.environ['ASE_CP2K_COMMAND']
+        parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
+        exitcode = os.system(parcmd)
+        return exitcode
 
-                        cp2kcmd = XCP2KRC['cp2k.parallel']
-                        parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
-                        exitcode = os.system(parcmd)
-                        return exitcode
-        else:
-            # probably running at cmd line, in serial.
-            cp2kcmd = XCP2KRC['cp2k.serial']
-            exitcode = os.system(cp2kcmd)
-            return exitcode
-        # end
-        # if you get here, a job is getting submitted
+
+    # if you get here, a job is getting submitted
 
     jobname = self.prefix
     print(XCP2KRC['queue.command'])
@@ -98,7 +81,6 @@ def run(self):
                    stdin = PIPE,
                    stdout = PIPE,
                    stderr = PIPE).communicate()
-            print(output)
             if "COMPLETED" in output[0] and output[0].split()[15]==self.prefix:
                 break
             time.sleep(delay)

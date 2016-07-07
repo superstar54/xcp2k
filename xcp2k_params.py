@@ -214,7 +214,7 @@ kpoints_keys = {
 'FULL_GRID': None,
 'KPOINT': None,
 'PARALLEL_GROUP_SIZE': None,
-'SCHEME': 'MONKHORST-PACK 5 5 5',
+'SCHEME': None,  #'MONKHORST-PACK 5 5 5'
 'SYMMETRY': None,
 'VERBOSE': None,
 'WAVEFUNCTIONS': None,

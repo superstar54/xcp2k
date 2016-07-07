@@ -43,7 +43,7 @@ class CP2K(Calculator):
                  label='cp2k', cpu=4, atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
-        print('Construct CP2K-calculator object.')
+        #print('Construct CP2K-calculator object.')
 
         self._debug = debug
         self.results = {}
@@ -94,6 +94,8 @@ class CP2K(Calculator):
                 else:
                     raise
         self.cpu = cpu
+        #print('Finish construct CP2K-calculator object.')
+
 
     def set(self, **kwargs):
         """Set parameters like set(key1=value1, key2=value2, ...)."""

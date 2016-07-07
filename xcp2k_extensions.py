@@ -25,7 +25,7 @@ def run(self):
     elif 'NHOSTS' in os.environ:
         # we are in the queue. determine if we should run serial
         # or parallel
-        NPROCS = os.environ['NSLOTS ']
+        #NPROCS = os.environ['NSLOTS ']
         # no question. running in serial.
         cp2kcmd = os.environ['ASE_CP2K_COMMAND']
         #parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
@@ -44,8 +44,8 @@ def run(self):
     # if you get here, a job is getting submitted
 
     jobname = self.prefix
-    print(XCP2KRC['queue.command'])
-    print(XCP2KRC['queue.script'])
+    #print(XCP2KRC['queue.command'])
+    #print(XCP2KRC['queue.script'])
 
     if 'SLURM_CONF' in os.environ:
         cmdlist = ['sbatch']
@@ -54,13 +54,13 @@ def run(self):
         cmdlist = ['qsub']
         cmdlist += ['-N', '{0}'.format(jobname)]
     
-    print(cmdlist)
+    #print(cmdlist)
 
     p = Popen(cmdlist,
               stdin=PIPE, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate(XCP2KRC['queue.script'])
 
-    print(out)
+    #print(out)
 
     if out == '' or err != '':
         raise Exception('something went wrong in qsub:\n\n{0}'.format(err))

@@ -42,17 +42,6 @@ global_keys = {
 
 
 
-kpoints_keys = {
-
-'EPS_GEO': None,
-'FULL_GRID': None,
-'KPOINT': None,
-'PARALLEL_GROUP_SIZE': None,
-'SCHEME': 'MONKHORST-PACK 5 5 5',
-'SYMMETRY': None,
-'VERBOSE': None,
-'WAVEFUNCTIONS': None,
-}
 
 
 mgrid_keys = {
@@ -214,8 +203,21 @@ dft_keys = {
 'SUBCELLS': None,
 'SURFACE_DIPOLE_CORRECTION': None,
 'SURF_DIP_DIR': None,
-'UKS': True,
+'UKS': None,
 'WFN_RESTART_FILE_NAME': None,
+}
+
+#CP2K_INPUT / FORCE_EVAL / DFT / KPOINTS
+kpoints_keys = {
+
+'EPS_GEO': None,
+'FULL_GRID': None,
+'KPOINT': None,
+'PARALLEL_GROUP_SIZE': None,
+'SCHEME': 'MONKHORST-PACK 5 5 5',
+'SYMMETRY': None,
+'VERBOSE': None,
+'WAVEFUNCTIONS': None,
 }
 
 
@@ -284,8 +286,6 @@ plus_u_key = {
 #===================================================================================
 params = {
 'global': global_keys,
-'kpoints': kpoints_keys,
-'mgrid': mgrid_keys,
 'scf': scf_keys,
 'xc': xc_keys,
 'potential': potential_keys,
@@ -294,6 +294,8 @@ params = {
 'p_forces': p_forces_keys,
 'p_stress': p_stress_keys,
 'dft': dft_keys,
+'kpoints': kpoints_keys,
+'mgrid': mgrid_keys,
 'plus': plus_u_key,
 'motion': motion_keys,
 'restart': restart_keys,

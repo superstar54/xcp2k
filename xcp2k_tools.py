@@ -95,10 +95,10 @@ def parse_input(inp):
 def capitalize_keys(d):
     result = {}
     for key, value in d.items():
-    	if isinstance(value, str):
-    	    upper_key = key.upper()
-    	    result[upper_key] = value.upper()
-     	else:
-     	    upper_key = key.upper()
-     	    result[upper_key] = value
+        if isinstance(value, str):
+            upper_key = key.upper()
+            result[upper_key] = value.upper()
+        else:
+            upper_key = key.upper()
+            result[upper_key] = value
     return result

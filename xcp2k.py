@@ -43,6 +43,7 @@ class CP2K(Calculator):
                  label='cp2k', cpu=4, atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
+        print('Construct CP2K-calculator object.')
 
         self._debug = debug
         self.results = {}
@@ -99,29 +100,29 @@ class CP2K(Calculator):
         changed_parameters = {}
         kwargs = capitalize_keys(kwargs)
         for key in kwargs:
-        	oldvalue = self.parameters.get(key)
-        	if key not in self.parameters:
-        		if isinstance(oldvalue, dict):
-        		# Special treatment for dictionary parameters:
-        		    for name in value:
-        		    	if name not in oldvalue:
-        		    		raise KeyError(
-        		    			'Unknown subparameter "%s" in '
-        		    			'dictionary parameter "%s"' % (name, key))
-        		    oldvalue.update(value)
-        		    value = oldvalue
-        		changed_parameters[key] = kwargs[key]
-        		self.parameters[key] = kwargs[key]
-        	flag = 0
-        	for param in self.params:
-        		if key in self.params[param]:
-        			self.params[param][key] = kwargs[key]
-        			flag = 1
-        			break
-        	if flag ==0 and key in self.ase_params:
-        		self.ase_params[key] = kwargs[key]
-        	elif flag ==0 and key not in self.ase_params:
-        	   	raise TypeError('Parameter not defined: ' + key)
+            oldvalue = self.parameters.get(key)
+            if key not in self.parameters:
+                if isinstance(oldvalue, dict):
+                # Special treatment for dictionary parameters:
+                    for name in value:
+                        if name not in oldvalue:
+                            raise KeyError(
+                                'Unknown subparameter "%s" in '
+                                'dictionary parameter "%s"' % (name, key))
+                    oldvalue.update(value)
+                    value = oldvalue
+                changed_parameters[key] = kwargs[key]
+                self.parameters[key] = kwargs[key]
+            flag = 0
+            for param in self.params:
+                if key in self.params[param]:
+                    self.params[param][key] = kwargs[key]
+                    flag = 1
+                    break
+            if flag ==0 and key in self.ase_params:
+                self.ase_params[key] = kwargs[key]
+            elif flag ==0 and key not in self.ase_params:
+                   raise TypeError('Parameter not defined: ' + key)
 
 
     def update(self, atoms):
@@ -225,8 +226,8 @@ class CP2K(Calculator):
 
         # force
         for key, value in self.params['forces'].items():
-        	if value is not None:
-        	   	root.add_keyword('FORCE_EVAL',
+            if value is not None:
+                   root.add_keyword('FORCE_EVAL',
                                  '{0}    {1}'.format(key, value))
         
         # print force
@@ -241,8 +242,8 @@ class CP2K(Calculator):
                                  '{0}  {1} '.format(key, value))
         # XC
         for key, value in self.params['xc'].items():
-        	if value is not None:
-        	   	root.add_keyword('FORCE_EVAL/DFT/XC/XC_FUNCTIONAL',
+            if value is not None:
+                   root.add_keyword('FORCE_EVAL/DFT/XC/XC_FUNCTIONAL',
                                  '_SECTION_PARAMETERS_ ' + value)
         # BASIS_SET_FILE_NAME
         for key, value in self.params['dft'].items():
@@ -254,6 +255,12 @@ class CP2K(Calculator):
         for key, value in self.params['mgrid'].items():
             if value is not None:
                 root.add_keyword('FORCE_EVAL/DFT/MGRID',
+                                 '{0}    {1}'.format(key, value))
+        
+        # KPOINTS
+        for key, value in self.params['kpoints'].items():
+            if value is not None:
+                root.add_keyword('FORCE_EVAL/DFT/KPOINTS',
                                  '{0}    {1}'.format(key, value))
         # SCF
         for key, value in self.params['scf'].items():

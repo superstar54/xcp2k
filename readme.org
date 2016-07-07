@@ -1,0 +1,54 @@
+=xcp2k= is an extension module for ase.calculators.cp2k.  Its primary purpose is to gives access to all features of CP2K, and job management/workflow, but it also has some enhanced capability too.
+
+1. xcp2k automatically changes into the calculation directory to run jobs, and automatically changes back out when it is done.
+2. xcp2k automatically submits jobs to the queue, and supports parallel and multiprocessing jobs.
+3. xcp2k supports a lot more data extraction than ase.calculators.cp2k.
+
+xcp2k requires python 2.6+ to work, and the latest svn version of ase.
+
+* Installing xcp2k
+** stable
+2. Installation  requirement:
+You need to install cp2k (codes see https://www.cp2k.org/)
+and ASE  (see https://wiki.fysik.dtu.dk/ase/index.html )
+
+Make sure you can run cp2k from the command line, make sure the ase tests pass.
+
+Python modules that xcp2k depends on:
+ase
+numpy
+matplotlib
+
+
+3. Installation :
+
+You can installation from source
+
+git clone https://github.com/superstar54/xcp2k.git
+
+
+** Configuring xcp2k
+Set these permanently in your ~/.bashrc file:
+
+$ export PYTHONPATH=~/ase:$PYTHONPATH
+$ export PATH=~ase/tools:$PATH
+
+
+
+
+
+4. Long-term plans for xcp2k
+We try using the latest features of python to see if it makes running calculations easier, faster or better in some way. 
+
+* Files
+
+[[./__init__.py]] - just imports everything from xcp2k
+
+[[./xcp2k.py]]
+Contains the xcp2k class and xcp2k context manager. Code to see if calculation finished ok. Code to see if you are in a cp2k directory. Is also an executable script that runs xcp2k
+
+[[./xcp2krc.py]] - configuration for xcp2k
+
+[[./xcp2k_extensions.py]] - monkey patches to ase.calculators.cp2k, hook functions, run and calculate function, pretty print functions. some additional get functions.
+
+[[./xcp2k_params.py]] - parameters for cp2k.

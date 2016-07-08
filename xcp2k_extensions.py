@@ -50,9 +50,11 @@ def run(self):
     if 'SLURM_CONF' in os.environ:
         cmdlist = ['sbatch']
         cmdlist += ['--job-name', '{0}'.format(jobname)]
+        cmdlist += ['--ntasks-per-node', '{0}'.format(self.cpu)]
     elif 'SGE_ROOT' in os.environ:
         cmdlist = ['qsub']
         cmdlist += ['-N', '{0}'.format(jobname)]
+        cmdlist += ['-pe', 'openmpi', '{0}'.format(self.cpu)]
     
     #print(cmdlist)
 

@@ -181,10 +181,15 @@ class CP2K(Calculator):
             atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
             atoms.positions = atoms_sorted.positions
         if self.params['global']['RUN_TYPE'] == 'CELL_OPT':
-            lines = open(self.out, 'r').readlines()
-            for n, line in enumerate(lines):
-                if line.rfind('CELL| Vector a') > -1:
-                    pass
+            lines = open('cp2k.out', 'r').readlines()
+            n = len(lines)
+            for i in range(n):
+                if 'CELL| Vector' in lines[n - i - 1]:
+                    for j in range(3):
+                        data = lines[n - i - 1 - j].split()
+                        for icell in range(3):
+                            atoms.cell[2 - j, icell] = float(data[4 + icell])
+                break
         # write Jmol
         atoms.write(self.prefix + '.in')
 
@@ -276,6 +281,8 @@ class CP2K(Calculator):
         # SCF
         for key, value in self.params['smear'].items():
             if value is not None:
+                if '0' in key:
+                    key = key.split('0')[1]
                 root.add_keyword('FORCE_EVAL/DFT/SCF/SMEAR',
                                  '{0}    {1}'.format(key, value))
         # POISSON

@@ -39,11 +39,6 @@ global_keys = {
 }
 
 
-
-
-
-
-
 mgrid_keys = {
 'COMMENSURATE': None,
 'CUTOFF': 400,
@@ -104,7 +99,7 @@ geo_opt_key = {
 'MAX_DR': None,
 'MAX_FORCE': None,
 'MAX_ITER': None,
-'OPTIMIZER': 'BFGS',
+'OPTIMIZER': None,
 'RMS_DR': None,
 'RMS_FORCE': None,
 'STEP_START_VAL': None,
@@ -133,8 +128,6 @@ restart_keys = {
 'RESTARTFILE': None, # My_restart_file, Name of the restart file from the previous run
 'MD_ENS': None,      # NVT, Thermodynamical ensemble: NVT or NVE
 }
-
-
 
 #=======================================================================
 #CP2K_INPUT / FORCE_EVAL
@@ -208,13 +201,49 @@ scf_keys = {
 # CP2K_INPUT / FORCE_EVAL / DFT / SCF / SMEAR
 smear_keys = {
 	
-'SECTION_PARAMETERS': 'FERMI_DIRAC',
-'ELECTRONIC_TEMPERATURE': 300,
+'SECTION_PARAMETERS': None,
+'ELECTRONIC_TEMPERATURE': None,  #300
 'EPS_FERMI_DIRAC': None,
 'FIXED_MAGNETIC_MOMENT': None,
 'LIST': None,
-'METHOD': None,
+'SMEAR0METHOD': None,    # 'FERMI_DIRAC'
 'WINDOW_SIZE': None,
+
+}
+
+
+# CP2K_INPUT / FORCE_EVAL / DFT / SCF / DIAGONALIZATION
+diagonalization_keys = {
+	
+'SECTION_PARAMETERS': None,
+'ALGORITHM': None,
+'EPS_ADAPT': None,
+'EPS_ITER': None,
+'EPS_JACOBI': None,
+'JACOBI_THRESHOLD': None,
+'MAX_ITER': None,
+
+}
+#  CP2K_INPUT / FORCE_EVAL / DFT / SCF / MIXING
+mixing_keys = {
+	
+'SECTION_PARAMETERS': None,
+'ALPHA': None,
+'BETA': None,
+'BROY_W0': None,
+'BROY_WMAX': None,
+'BROY_WREF': None,
+'MAX_GVEC_EXP': None,
+'MAX_STEP': None,
+'METHOD': None,
+'NBUFFER': None,
+'NMIXING': None,
+'NSKIP': None,
+'N_SIMPLE_MIX': None,
+'PULAY_ALPHA': None,
+'PULAY_BETA': None,
+'REGULARIZATION': None,
+'R_FACTOR': None,
 
 }
 
@@ -245,10 +274,6 @@ poisson_key = {
 }
 
 #SUBSYS
-
-
-
-
 
 
 #  CP2K_INPUT / FORCE_EVAL / SUBSYS / KIND

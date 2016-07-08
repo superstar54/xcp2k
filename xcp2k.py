@@ -185,6 +185,8 @@ class CP2K(Calculator):
             for n, line in enumerate(lines):
                 if line.rfind('CELL| Vector a') > -1:
                     pass
+        # write Jmol
+        atoms.write(self.prefix + '.in')
 
         os.chdir(olddir)
         # read results
@@ -270,6 +272,12 @@ class CP2K(Calculator):
                 root.add_keyword('FORCE_EVAL/DFT/SCF',
                                  '{0}    {1}'.format(key, value))
 
+        # smear
+        # SCF
+        for key, value in self.params['smear'].items():
+            if value is not None:
+                root.add_keyword('FORCE_EVAL/DFT/SCF/SMEAR',
+                                 '{0}    {1}'.format(key, value))
         # POISSON
         for key, value in self.params['poisson'].items():
             if value is not None and not any(self.atoms.get_pbc()):

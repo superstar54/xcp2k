@@ -40,6 +40,12 @@ $ export PATH=~ase/tools:$PATH
 4. Long-term plans for xcp2k
 We try using the latest features of python to see if it makes running calculations easier, faster or better in some way. 
 
+a) visualization using Jmol, VMD
+
+
+
+
+
 * Files
 
 [[./__init__.py]] - just imports everything from xcp2k

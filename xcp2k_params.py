@@ -56,31 +56,7 @@ mgrid_keys = {
 'SKIP_LOAD_BALANCE_DISTRIBUTED': None,
 }
 
-scf_keys = {
-'ADDED_MOS': None,
-'CHOLESKY': None,
-'EPS_DIIS': None,
-'EPS_EIGVAL': None,
-'EPS_LUMO': None,
-'EPS_SCF': 1.00000000E-005,
-'EPS_SCF_HISTORY': None,
-'LEVEL_SHIFT': None,
-'MAX_DIIS': None,
-'MAX_ITER_LUMO': None,
-'MAX_SCF': 50,
-'MAX_SCF_HISTORY': None,
-'NCOL_BLOCK': None,
-'NROW_BLOCK': None,
-'ROKS_F': None,
-'ROKS_PARAMETERS': None,
-'ROKS_SCHEME': None,
-'SCF_GUESS': None,
-}
 
-xc_keys = {
-'XC_FUNCTIONAL': None,
-'XC':'PBE'
-}
 
 potential_keys = {
 'CONFINEMENT': None,
@@ -207,6 +183,46 @@ dft_keys = {
 'WFN_RESTART_FILE_NAME': None,
 }
 
+# CP2K_INPUT / FORCE_EVAL / DFT / SCF
+scf_keys = {
+'ADDED_MOS': None,
+'CHOLESKY': None,
+'EPS_DIIS': None,
+'EPS_EIGVAL': None,
+'EPS_LUMO': None,
+'EPS_SCF': 1.00000000E-005,
+'EPS_SCF_HISTORY': None,
+'LEVEL_SHIFT': None,
+'MAX_DIIS': None,
+'MAX_ITER_LUMO': None,
+'MAX_SCF': 50,
+'MAX_SCF_HISTORY': None,
+'NCOL_BLOCK': None,
+'NROW_BLOCK': None,
+'ROKS_F': None,
+'ROKS_PARAMETERS': None,
+'ROKS_SCHEME': None,
+'SCF_GUESS': None,
+}
+
+# CP2K_INPUT / FORCE_EVAL / DFT / SCF / SMEAR
+smear_keys = {
+	
+'SECTION_PARAMETERS': 'FERMI_DIRAC',
+'ELECTRONIC_TEMPERATURE': 300,
+'EPS_FERMI_DIRAC': None,
+'FIXED_MAGNETIC_MOMENT': None,
+'LIST': None,
+'METHOD': None,
+'WINDOW_SIZE': None,
+
+}
+
+xc_keys = {
+'XC_FUNCTIONAL': None,
+'XC':'PBE'
+}
+
 #CP2K_INPUT / FORCE_EVAL / DFT / KPOINTS
 kpoints_keys = {
 
@@ -286,14 +302,15 @@ plus_u_key = {
 #===================================================================================
 params = {
 'global': global_keys,
-'scf': scf_keys,
-'xc': xc_keys,
 'potential': potential_keys,
 'subsys': subsys_keys,
 'forces': forces_keys,
 'p_forces': p_forces_keys,
 'p_stress': p_stress_keys,
 'dft': dft_keys,
+'scf': scf_keys,
+'smear': smear_keys,
+'xc': xc_keys,
 'kpoints': kpoints_keys,
 'mgrid': mgrid_keys,
 'plus': plus_u_key,

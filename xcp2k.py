@@ -226,6 +226,7 @@ class CP2K(Calculator):
 
 
         # global
+        print('generate intput file')
         root = InputSection('CP2K_INPUT')
         self.params['global']['PROJECT_NAME'] = self.prefix
         for key, value in self.params['global'].items():
@@ -302,28 +303,7 @@ class CP2K(Calculator):
                     root.add_keyword('MOTION/CELL_OPT',
                                  '{0}    {1}'.format(key, value))
 
-
-
-
-        # SUBSYS
-        # write coords
-        syms = self.atoms.get_chemical_symbols()
-        positions = self.atoms.get_positions()
-        for elm, pos in zip(syms, positions):
-            line = '%s  %.20e   %.20e   %.20e' % (elm, pos[0], pos[1], pos[2])
-            root.add_keyword('FORCE_EVAL/SUBSYS/COORD', line, unique=False)
-
-        # write cell
-        pbc = ''.join([a for a, b in zip('XYZ', self.atoms.get_pbc()) if b])
-        if len(pbc) == 0:
-            pbc = 'NONE'
-        root.add_keyword('FORCE_EVAL/SUBSYS/CELL', 'PERIODIC ' + pbc)
-        c = self.atoms.get_cell()
-        for i, a in enumerate('ABC'):
-            line = '%s  %.20e  %.20e  %.20e' % (a, c[i, 0], c[i, 1], c[i, 2])
-            root.add_keyword('FORCE_EVAL/SUBSYS/CELL', line)
-
-
+        self.generate_atoms(root)
 
         # KIND AND POTENTIAL
         subsys = root.get_subsection('FORCE_EVAL/SUBSYS').subsections
@@ -343,12 +323,42 @@ class CP2K(Calculator):
         inp.close()
 
     
-
+    def generate_atoms(self, root):
+        # SUBSYS
+        # write coords
+        from ase.constraints import FixAtoms, FixScaled
+        syms = self.atoms.get_chemical_symbols()
+        positions = self.atoms.get_positions()
+        for elm, pos in zip(syms, positions):
+            line = '%s  %.20e   %.20e   %.20e' % (elm, pos[0], pos[1], pos[2])
+            root.add_keyword('FORCE_EVAL/SUBSYS/COORD', line, unique=False)
+        
+        # write cell
+        pbc = ''.join([a for a, b in zip('XYZ', self.atoms.get_pbc()) if b])
+        if len(pbc) == 0:
+            pbc = 'NONE'
+        root.add_keyword('FORCE_EVAL/SUBSYS/CELL', 'PERIODIC ' + pbc)
+        c = self.atoms.get_cell()
+        for i, a in enumerate('ABC'):
+            line = '%s  %.20e  %.20e  %.20e' % (a, c[i, 0], c[i, 1], c[i, 2])
+            root.add_keyword('FORCE_EVAL/SUBSYS/CELL', line)
     
-
-
-
-
+        # write constraint
+        sflags = np.zeros((len(self.atoms), 3), dtype=bool)
+        if self.atoms.constraints:
+            for constr in self.atoms.constraints:
+                if isinstance(constr, FixScaled):
+                    sflags[constr.a] = constr.mask
+                elif isinstance(constr, FixAtoms):
+                    sflags[constr.index] = [True, True, True]
+        subsys = root.get_subsection('MOTION/CONSTRAINT').subsections
+        for iatom, atom in enumerate(self.atoms):
+            fixed = ''.join([a for a, b in zip('XYZ', sflags[iatom]) if b])
+            if len(fixed) != 0:
+                s = InputSection(name='FIXED_ATOMS')
+                s.keywords.append('{0}  {1}'.format('COMPONENTS_TO_FIX', fixed))
+                s.keywords.append('{0}  {1}'.format('LIST', iatom))
+                subsys.append(s)
 
     def read_results(self):
         converged = self.read_convergence()

@@ -122,6 +122,19 @@ cell_opt_key = {
 'TYPE': 'DIRECT_CELL_OPT', 
 }
 
+
+fixedatom_key = {
+	
+'COMPONENTS_TO_FIX': None,
+'EXCLUDE_MM': None,
+'EXCLUDE_QM': None,
+'LIST': None,
+'MM_SUBSYS': None,
+'MOLNAME': None,
+'QM_SUBSYS': None,
+
+}
+
 restart_keys = {
 'RTYPE': None,       # MD
 'RESTART': None,     # TRUE

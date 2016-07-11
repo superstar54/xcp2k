@@ -34,7 +34,7 @@ def run(self):
     elif 'SLURM_JOB_NODELIST' in os.environ:
         # we are in the queue. determine if we should run serial
         # or parallel
-        NPROCS = int(os.environ['SLURM_NTASKS'])
+        # NPROCS = int(os.environ['SLURM_NTASKS'])
         # no question. running in serial.
         cp2kcmd = os.environ['ASE_CP2K_COMMAND']
         exitcode = os.system(cp2kcmd)

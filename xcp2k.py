@@ -279,12 +279,18 @@ class CP2K(Calculator):
                                  '{0}    {1}'.format(key, value))
 
         # smear
-        # SCF
         for key, value in self.params['smear'].items():
             if value is not None:
                 if '0' in key:
                     key = key.split('0')[1]
                 root.add_keyword('FORCE_EVAL/DFT/SCF/SMEAR',
+                                 '{0}    {1}'.format(key, value))
+        # OT
+        for key, value in self.params['ot'].items():
+            if value is not None:
+                if '0' in key:
+                    key = key.split('0')[1]
+                root.add_keyword('FORCE_EVAL/DFT/SCF/OT',
                                  '{0}    {1}'.format(key, value))
         # POISSON
         for key, value in self.params['poisson'].items():

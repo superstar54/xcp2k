@@ -225,6 +225,50 @@ smear_keys = {
 }
 
 
+# CP2K_INPUT / FORCE_EVAL / DFT / SCF / OT
+ot_keys = {
+
+'SECTION_PARAMETERS': None,
+'ALGORITHM': None,
+'BROYDEN_ADAPTIVE_SIGMA': None,
+'BROYDEN_BETA': None,
+'BROYDEN_ENABLE_FLIP': None,
+'BROYDEN_ETA': None,
+'BROYDEN_FORGET_HISTORY': None,
+'BROYDEN_GAMMA': None,
+'BROYDEN_OMEGA': None,
+'BROYDEN_SIGMA': None,
+'BROYDEN_SIGMA_DECREASE': None,
+'BROYDEN_SIGMA_MIN': None,
+'ENERGIES': None,
+'ENERGY_GAP': None,
+'EPS_IRAC': None,
+'EPS_IRAC_FILTER_MATRIX': None,
+'EPS_IRAC_QUICK_EXIT': None,
+'EPS_IRAC_SWITCH': None,
+'EPS_TAYLOR': None,
+'GOLD_TARGET': None,
+'IRAC_DEGREE': None,
+'LINESEARCH': None,
+'MAX_IRAC': None,
+'MAX_TAYLOR': None,
+'MINIMIZER': None,
+'MIXED_PRECISION': None,
+'NONDIAG_ENERGY': None,
+'NONDIAG_ENERGY_STRENGTH': None,
+'N_HISTORY_VEC': None,
+'OCCUPATION_PRECONDITIONER': None,
+'ON_THE_FLY_LOC': None,
+'ORTHO_IRAC': None,
+'PRECONDITIONER': None,
+'PRECOND_SOLVER': None,
+'ROTATION': None,
+'SAFE_DIIS': None,
+'STEPSIZE': None,
+
+}
+
+
 # CP2K_INPUT / FORCE_EVAL / DFT / SCF / DIAGONALIZATION
 diagonalization_keys = {
 	
@@ -348,6 +392,7 @@ params = {
 'dft': dft_keys,
 'scf': scf_keys,
 'smear': smear_keys,
+'ot': ot_keys,
 'xc': xc_keys,
 'kpoints': kpoints_keys,
 'mgrid': mgrid_keys,

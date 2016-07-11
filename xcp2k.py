@@ -226,7 +226,7 @@ class CP2K(Calculator):
 
 
         # global
-        print('generate intput file')
+        #print('generate intput file')
         root = InputSection('CP2K_INPUT')
         self.params['global']['PROJECT_NAME'] = self.prefix
         for key, value in self.params['global'].items():
@@ -351,12 +351,13 @@ class CP2K(Calculator):
     
         # write constraint
         sflags = np.zeros((len(self.atoms), 3), dtype=bool)
+        sflags_all = []
         if self.atoms.constraints:
             for constr in self.atoms.constraints:
                 if isinstance(constr, FixScaled):
                     sflags[constr.a] = constr.mask
                 elif isinstance(constr, FixAtoms):
-                    sflags[constr.index] = [True, True, True]
+                    sflags_all = constr.index
         # this is the same like "kind" module
         subsys = root.get_subsection('MOTION/CONSTRAINT').subsections
         for iatom, atom in enumerate(self.atoms):
@@ -366,6 +367,12 @@ class CP2K(Calculator):
                 s.keywords.append('{0}  {1}'.format('COMPONENTS_TO_FIX', fixed))
                 s.keywords.append('{0}  {1}'.format('LIST', iatom))
                 subsys.append(s)
+        fixed_atoms = ''.join('  ' + str(x) for x in sflags_all)
+        if len(sflags_all) != 0:
+                s = InputSection(name='FIXED_ATOMS')
+                s.keywords.append('{0}  {1}'.format('LIST', fixed_atoms))
+                subsys.append(s)
+
 
     def read_results(self):
         converged = self.read_convergence()

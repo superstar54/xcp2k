@@ -219,7 +219,7 @@ smear_keys = {
 'EPS_FERMI_DIRAC': None,
 'FIXED_MAGNETIC_MOMENT': None,
 'LIST': None,
-'SMEAR0METHOD': None,    # 'FERMI_DIRAC'
+'SME/METHOD': None,    # 'FERMI_DIRAC'
 'WINDOW_SIZE': None,
 
 }
@@ -273,7 +273,7 @@ ot_keys = {
 diagonalization_keys = {
 	
 'SECTION_PARAMETERS': None,
-'ALGORITHM': None,
+'DIA/ALGORITHM': None,
 'EPS_ADAPT': None,
 'EPS_ITER': None,
 'EPS_JACOBI': None,
@@ -292,7 +292,7 @@ mixing_keys = {
 'BROY_WREF': None,
 'MAX_GVEC_EXP': None,
 'MAX_STEP': None,
-'METHOD': None,
+'MIX/METHOD': None,
 'NBUFFER': None,
 'NMIXING': None,
 'NSKIP': None,
@@ -394,6 +394,8 @@ params = {
 'smear': smear_keys,
 'ot': ot_keys,
 'xc': xc_keys,
+'dia': diagonalization_keys,
+'mixing': mixing_keys,
 'kpoints': kpoints_keys,
 'mgrid': mgrid_keys,
 'plus': plus_u_key,

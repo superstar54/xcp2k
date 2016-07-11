@@ -45,6 +45,7 @@ class CP2K(Calculator):
         """Construct CP2K-calculator object."""
         #print('Construct CP2K-calculator object.')
 
+        
         self._debug = debug
         self.results = {}
         self.parameters = {}  # calculational parameters
@@ -237,7 +238,9 @@ class CP2K(Calculator):
         # force
         for key, value in self.params['forces'].items():
             if value is not None:
-                   root.add_keyword('FORCE_EVAL',
+                if '/' in key:
+                    key = key.split('/')[1]
+                root.add_keyword('FORCE_EVAL',
                                  '{0}    {1}'.format(key, value))
         
         # print force
@@ -264,34 +267,56 @@ class CP2K(Calculator):
         # MGRID
         for key, value in self.params['mgrid'].items():
             if value is not None:
+                if '/' in key:
+                    key = key.split('/')[1]
                 root.add_keyword('FORCE_EVAL/DFT/MGRID',
                                  '{0}    {1}'.format(key, value))
+         
         
         # KPOINTS
         for key, value in self.params['kpoints'].items():
             if value is not None:
+                if '/' in key:
+                    key = key.split('/')[1]
                 root.add_keyword('FORCE_EVAL/DFT/KPOINTS',
                                  '{0}    {1}'.format(key, value))
         # SCF
         for key, value in self.params['scf'].items():
             if value is not None:
+                if '/' in key:
+                    key = key.split('/')[1]
                 root.add_keyword('FORCE_EVAL/DFT/SCF',
                                  '{0}    {1}'.format(key, value))
 
         # smear
         for key, value in self.params['smear'].items():
             if value is not None:
-                if '0' in key:
-                    key = key.split('0')[1]
+                if '/' in key:
+                    key = key.split('/')[1]
                 root.add_keyword('FORCE_EVAL/DFT/SCF/SMEAR',
+                                 '{0}    {1}'.format(key, value))
+        # DIAGONALIZATION
+        for key, value in self.params['dia'].items():
+            if value is not None:
+                if '/' in key:
+                    key = key.split('/')[1]
+                root.add_keyword('FORCE_EVAL/DFT/SCF/DIAGONALIZATION',
+                                 '{0}    {1}'.format(key, value))
+        # MIXING
+        for key, value in self.params['mixing'].items():
+            if value is not None:
+                if '/' in key:
+                    key = key.split('/')[1]
+                root.add_keyword('FORCE_EVAL/DFT/SCF/MIXING',
                                  '{0}    {1}'.format(key, value))
         # OT
         for key, value in self.params['ot'].items():
             if value is not None:
-                if '0' in key:
-                    key = key.split('0')[1]
+                if '/' in key:
+                    key = key.split('/')[1]
                 root.add_keyword('FORCE_EVAL/DFT/SCF/OT',
                                  '{0}    {1}'.format(key, value))
+        
         # POISSON
         for key, value in self.params['poisson'].items():
             if value is not None and not any(self.atoms.get_pbc()):
@@ -300,12 +325,16 @@ class CP2K(Calculator):
         # MOTION
         for key, value in self.params['geo_opt'].items():
             if value is not None:
+                if '/' in key:
+                    key = key.split('/')[1]
                 root.add_keyword('MOTION/GEO_OPT',
                                  '{0}    {1}'.format(key, value))
         # cell_opt
         if self.ase_params['CELL_OPT'] is not False:
             for key, value in self.params['cell_opt'].items():
                 if value is not None:
+                    if '/' in key:
+                        key = key.split('/')[1]
                     root.add_keyword('MOTION/CELL_OPT',
                                  '{0}    {1}'.format(key, value))
 

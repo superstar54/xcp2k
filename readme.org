@@ -7,8 +7,7 @@
 xcp2k requires python 2.6+ to work, and the latest svn version of ase.
 
 * Installing xcp2k
-** stable
-2. Installation  requirement:
+1. Installation  requirement:
 You need to install cp2k (codes see https://www.cp2k.org/)
 and ASE  (see https://wiki.fysik.dtu.dk/ase/index.html )
 
@@ -20,7 +19,7 @@ numpy
 matplotlib
 
 
-3. Installation :
+2. Installation :
 
 You can installation from source
 
@@ -30,14 +29,11 @@ git clone https://github.com/superstar54/xcp2k.git
 ** Configuring xcp2k
 Set these permanently in your ~/.bashrc file:
 
-$ export PYTHONPATH=~/ase:$PYTHONPATH
-$ export PATH=~ase/tools:$PATH
+$ export PYTHONPATH=~/xcp2k:$PYTHONPATH
 
 
 
-
-
-4. Long-term plans for xcp2k
+* Long-term plans for xcp2k
 We try using the latest features of python to see if it makes running calculations easier, faster or better in some way. 
 
 a) visualization using Jmol, VMD

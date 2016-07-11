@@ -351,6 +351,7 @@ class CP2K(Calculator):
                     sflags[constr.a] = constr.mask
                 elif isinstance(constr, FixAtoms):
                     sflags[constr.index] = [True, True, True]
+        # this is the same like "kind" module
         subsys = root.get_subsection('MOTION/CONSTRAINT').subsections
         for iatom, atom in enumerate(self.atoms):
             fixed = ''.join([a for a, b in zip('XYZ', sflags[iatom]) if b])

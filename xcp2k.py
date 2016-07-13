@@ -39,7 +39,7 @@ class CP2K(Calculator):
 
 
 
-    def __init__(self, restart=None, ignore_bad_restart_file=False,
+    def __init__(self, mode = 0, restart=None, ignore_bad_restart_file=False,
                  label='cp2k', cpu=4, atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
@@ -47,6 +47,7 @@ class CP2K(Calculator):
 
         
         self._debug = debug
+        self.mode = mode
         self.results = {}
         self.parameters = {}  # calculational parameters
 
@@ -64,6 +65,7 @@ class CP2K(Calculator):
 
         if atoms is not None:
             atoms.calc = self
+            self.atoms = atoms
 
         self.params = params
         self.ase_params = ase_params
@@ -171,10 +173,14 @@ class CP2K(Calculator):
 
         #generate inputfile
         self.generate_input()
+        if self.mode == 1:
+            return
+
 
         olddir = os.getcwd()
         os.chdir(self.directory)
 
+        
         self.run()
 
        # Updata atoms positions and cell
@@ -182,6 +188,8 @@ class CP2K(Calculator):
             atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
             atoms.positions = atoms_sorted.positions
         if self.params['global']['RUN_TYPE'] == 'CELL_OPT':
+            atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
+            atoms.positions = atoms_sorted.positions
             lines = open('cp2k.out', 'r').readlines()
             n = len(lines)
             for i in range(n):
@@ -190,7 +198,7 @@ class CP2K(Calculator):
                         data = lines[n - i - 1 - j].split()
                         for icell in range(3):
                             atoms.cell[2 - j, icell] = float(data[4 + icell])
-                break
+                    break
         # write Jmol
         atoms.write(self.prefix + '.in')
 

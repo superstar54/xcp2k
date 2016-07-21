@@ -235,13 +235,13 @@ def write_input_file(self):
     self.create_constraint(CONSTRAINT, self.atoms)
     
     # write Kind
-    kinds = dict([(s.Section_parameters, s) for s in SUBSYS.KIND_list])
+    #kinds = dict([(s.Section_parameters, s) for s in SUBSYS.KIND_list])
     #print(kinds)
-    for elem in set(self.atoms.get_chemical_symbols()):
-        if elem not in kinds.keys():
-            KIND = SUBSYS.KIND_add(elem)  # Section_parameters can be provided as argument.
-            KIND.Basis_set = "DZVP-MOLOPT-SR-GTH"
-            KIND.Potential = "GTH-PBE"
+    #for elem in set(self.atoms.get_chemical_symbols()):
+    #    if elem not in kinds.keys():
+    #        KIND = SUBSYS.KIND_add(elem)  # Section_parameters can be provided as argument.
+    #        KIND.Basis_set = "DZVP-MOLOPT-SR-GTH"
+    #        KIND.Potential = "GTH-PBE"
 
      
     input_contents = self.CP2K_INPUT._print_input(-1)
@@ -274,20 +274,20 @@ def pre_write_input_file(self):
     if not FORCE_EVAL.Method:
         FORCE_EVAL.Method = "Quickstep"
     # xc functional 
-    if self.params['xc']['XC'] is not None:
-        DFT.XC.XC_FUNCTIONAL.Section_parameters = self.params['xc']['XC']
+    #if self.params['xc']['XC'] is not None:
+    #    DFT.XC.XC_FUNCTIONAL.Section_parameters = self.params['xc']['XC']
     # forces
-    calc_forces = ['ENERGY_FORCE', 'GEO_OPT', 'CELL_OPT', 'MD']
-    if GLOBAL.Run_type.upper() in calc_forces:
-        self.CP2K_INPUT.FORCE_EVAL_list[0].PRINT.FORCES.Section_parameters = "ON"
+    #calc_forces = ['ENERGY_FORCE', 'GEO_OPT', 'CELL_OPT', 'MD']
+    #if GLOBAL.Run_type.upper() in calc_forces:
+    #    self.CP2K_INPUT.FORCE_EVAL_list[0].PRINT.FORCES.Section_parameters = "ON"
         # ***todo
         #self.CP2K_INPUT.FORCE_EVAL_list[0].PRINT.FORCES.Filename = "forces"
 
     # basis_set
-    if not DFT.Basis_set_file_name:
-        DFT.Basis_set_file_name = "BASIS_MOLOPT"
-    if not DFT.Potential_file_name:
-       DFT.Potential_file_name = "POTENTIAL"
+    #if not DFT.Basis_set_file_name:
+    #    DFT.Basis_set_file_name = "BASIS_MOLOPT"
+    #if not DFT.Potential_file_name:
+    #   DFT.Potential_file_name = "POTENTIAL"
     
 
 CP2K.pre_write_input_file = MethodType(pre_write_input_file, None, CP2K)

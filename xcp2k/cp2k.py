@@ -76,12 +76,12 @@ class CP2K(Calculator):
         self.set(**kwargs)
         
         # check data
-        if 'CP2K_DATA_DIR' is None:
-            pppaths = CP2K_DATA_DIR
-        elif 'CP2K_DATA_DIR' in os.environ:
-            pppaths = os.environ['CP2K_DATA_DIR']
-        else:
-            raise RuntimeError('Please set CP2K_DATA_DIR')
+        #if 'CP2K_DATA_DIR' is None:
+        #    pppaths = CP2K_DATA_DIR
+        #elif 'CP2K_DATA_DIR' in os.environ:
+        #    pppaths = os.environ['CP2K_DATA_DIR']
+        #else:
+        #    raise RuntimeError('Please set CP2K_DATA_DIR')
 
         # Several places are check to determine self.command
         if command is not None:
@@ -248,6 +248,7 @@ class CP2K(Calculator):
         self.read_energy()
         self.read_forces()
         self.read_charges()
+        self.read_time()
         #self.read_stress()
 
 
@@ -325,6 +326,13 @@ class CP2K(Calculator):
         # rearrange in 6-component form and return
         self.results['stress'] = np.array([stress[0], stress[4], stress[8],
                                            stress[5], stress[2], stress[1]])
+    def read_time(self):
+        lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()
+        stress = None
+        for n, line in enumerate(lines):
+            if (line.rfind('TOTAL TIME') > -1):
+                time = float(lines[n + 2].split()[6])
+                self.results['time'] = time
 
     def clean(self):
         """Method which cleans up after a calculation.
@@ -364,6 +372,9 @@ class CP2K(Calculator):
                 version = "CP@K version " + line.split[-1]
                 break
         return version
+    def get_time(self):
+        return self.results['time']
+
     def get_forces(self, atoms):
         self.update(atoms)
         return self.results['forces']

@@ -220,11 +220,11 @@ class CP2K(Calculator):
     def update_atoms(self, atoms):
         """read new geometry when ."""
     # Updata atoms positions and cell
-        if self.params['global']['RUN_TYPE'] == 'GEO_OPT':
+        if self.CP2K_INPUT.GLOBAL.Run_type == 'GEO_OPT':
             atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
             atoms.positions = atoms_sorted.positions
             self.atoms = atoms
-        if self.params['global']['RUN_TYPE'] == 'CELL_OPT':
+        if self.CP2K_INPUT.GLOBAL.Run_type == 'CELL_OPT':
             atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
             atoms.positions = atoms_sorted.positions
             lines = open('cp2k.out', 'r').readlines()
@@ -247,7 +247,7 @@ class CP2K(Calculator):
                                'and should give an indication why.')
         self.read_energy()
         self.read_forces()
-        self.read_charges()
+        #self.read_charges()
         self.read_time()
         #self.read_stress()
 
@@ -271,7 +271,7 @@ class CP2K(Calculator):
         for line in open(join(self.directory, 'cp2k.out'), 'r'):
             if line.rfind('ENERGY|') > -1:
                 E0 = float(line.split()[8])
-                self.results['energy'] = E0*27.2107
+                self.results['energy'] = E0*27.2113860217
 
             elif line.rfind('Total energy uncorrected') > -1:
                 F = float(line.split()[5])

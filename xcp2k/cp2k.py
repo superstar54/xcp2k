@@ -248,6 +248,9 @@ class CP2K(Calculator):
         self.read_energy()
         self.read_forces()
         #self.read_charges()
+        #self.read_fermi()
+        #if self.CP2K_INPUT.FORCE_EVAL_list[0].DFT.PRINT.PDOS.
+        #self.read_bandgap()
         self.read_time()
         #self.read_stress()
 
@@ -261,11 +264,16 @@ class CP2K(Calculator):
 
     def read_convergence(self):
         converged = False
-        lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()
+        lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()[-100:-1]
         for n, line in enumerate(lines):
             if line.rfind('PROGRAM ENDED AT') > -1:
                 converged = True
+            if line.rfind('The number of warnings') > -1:
+                data = int(line.split()[9])
+                if data>0:
+                    print(line)
         return converged
+
 
     def read_energy(self):
         for line in open(join(self.directory, 'cp2k.out'), 'r'):
@@ -328,7 +336,6 @@ class CP2K(Calculator):
                                            stress[5], stress[2], stress[1]])
     def read_time(self):
         lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()
-        stress = None
         for n, line in enumerate(lines):
             if (line.rfind('TOTAL TIME') > -1):
                 time = float(lines[n + 2].split()[6])

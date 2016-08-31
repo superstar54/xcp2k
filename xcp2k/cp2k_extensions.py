@@ -98,7 +98,7 @@ def run(self):
 CP2K.run = MethodType(run, None, CP2K)
 
 
-def create_cell(self, subsys, atoms):
+def create_cell(self, CELL, atoms):
     """Creates the cell for a SUBSYS from an ASE Atoms object.
 
     Creates the cell unit vectors and replicates the periodic boundary
@@ -115,9 +115,9 @@ def create_cell(self, subsys, atoms):
     A = cell[0, :]
     B = cell[1, :]
     C = cell[2, :]
-    subsys.CELL.A = A.tolist()
-    subsys.CELL.B = B.tolist()
-    subsys.CELL.C = C.tolist()
+    CELL.A = A.tolist()
+    CELL.B = B.tolist()
+    CELL.C = C.tolist()
 
     pbc = atoms.get_pbc()
     periodicity = []
@@ -128,14 +128,14 @@ def create_cell(self, subsys, atoms):
     if pbc[2]:
         periodicity.append("Z")
     if len(periodicity) == 0:
-        subsys.CELL.Periodic = "NONE"
+        CELL.Periodic = "NONE"
     else:
-        subsys.CELL.Periodic = "".join(periodicity)
+        CELL.Periodic = "".join(periodicity)
 
 CP2K.create_cell = MethodType(create_cell, None, CP2K)
 
 
-def create_coord(self, subsys, atoms, molnames=None):
+def create_coord(self, COORD, atoms, molnames=None, symbol = 'True'):
     """Creates the atomic coordinates for a SUBSYS from an ASE Atoms object.
 
     args:
@@ -148,11 +148,14 @@ def create_coord(self, subsys, atoms, molnames=None):
     """
     atom_list = []
     for i_atom, atom in enumerate(atoms):
-        new_atom = [atom.symbol, atom.position[0], atom.position[1], atom.position[2]]
+        if symbol:
+            new_atom = [atom.symbol, atom.position[0], atom.position[1], atom.position[2]]
+        else:
+            new_atom = [atom.position[0], atom.position[1], atom.position[2]]
         if molnames is not None:
             new_atom.append(molnames[i_atom])
         atom_list.append(new_atom)
-    subsys.COORD.Default_keyword = atom_list
+    COORD.Default_keyword = atom_list
 
 CP2K.create_coord = MethodType(create_coord, None, CP2K)
 
@@ -231,8 +234,8 @@ def write_input_file(self):
     CONSTRAINT = self.CP2K_INPUT.MOTION.CONSTRAINT
     
     # write atoms
-    self.create_cell(SUBSYS, self.atoms)
-    self.create_coord(SUBSYS, self.atoms)
+    self.create_cell(SUBSYS.CELL, self.atoms)
+    self.create_coord(SUBSYS.COORD, self.atoms)
     self.create_constraint(CONSTRAINT, self.atoms)
     
     # write Kind

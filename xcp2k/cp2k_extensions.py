@@ -16,7 +16,8 @@ def run(self):
 
     # if we are in the queue and jasp is called or if we want to use
     # mode='run' , we should just run the job. First, we consider how.
-
+    
+    #print(os.environ)
     if XCP2KRC['mode'] == 'run':
         # probably running at cmd line, in serial.
         cp2kcmd = os.environ['ASE_CP2K_COMMAND']
@@ -32,6 +33,14 @@ def run(self):
         exitcode = os.system(cp2kcmd)
         return exitcode
     elif 'SLURM_JOB_NODELIST' in os.environ:
+        # we are in the queue. determine if we should run serial
+        # or parallel
+        # NPROCS = int(os.environ['SLURM_NTASKS'])
+        # no question. running in serial.
+        cp2kcmd = os.environ['ASE_CP2K_COMMAND']
+        exitcode = os.system(cp2kcmd)
+        return exitcode
+    elif 'PBS_NODEFILE' in os.environ:
         # we are in the queue. determine if we should run serial
         # or parallel
         # NPROCS = int(os.environ['SLURM_NTASKS'])
@@ -55,14 +64,21 @@ def run(self):
         cmdlist = ['qsub']
         cmdlist += ['-N', '{0}'.format(jobname)]
         cmdlist += ['-pe', 'openmpi', '{0}'.format(self.cpu)]
+    elif 'GRIDVIEW' in os.environ:
+        cmdlist = ['qsub']
+        cmdlist += ['-N', '{0}'.format(jobname)]
+        cmdlist += ['-l', 'nodes=1:ppn={0}'.format(self.cpu)]
+        cmdlist += ['-q', 'low']
     
     #print(cmdlist)
+    #print(XCP2KRC['queue.script'])
 
     p = Popen(cmdlist,
               stdin=PIPE, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate(XCP2KRC['queue.script'])
 
     #print(out)
+    #print(os.environ)
 
     if out == '' or err != '':
         raise Exception('something went wrong in qsub:\n\n{0}'.format(err))
@@ -73,6 +89,9 @@ def run(self):
         job_id = int(out.split()[3])
     elif 'SGE_ROOT' in os.environ:
         job_id = int(out.split()[2])
+    elif 'GRIDVIEW' in os.environ:
+        job_id = int(out.split('.')[0]) 
+        #print(job_id)
         
 
     delay = 0.05
@@ -91,6 +110,14 @@ def run(self):
                    stdout = PIPE,
                    stderr = PIPE).communicate()
             if "do not exist" in output[1]:
+                break
+            time.sleep(delay)
+        elif 'GRIDVIEW' in os.environ:
+            output = Popen("qstat -R %i" %(job_id), shell = True,
+                   stdin = PIPE,
+                   stdout = PIPE,
+                   stderr = PIPE).communicate()
+            if "Unknown" in output[1]:
                 break
             time.sleep(delay)
 

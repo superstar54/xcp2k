@@ -56,6 +56,8 @@ class CP2K(Calculator):
         self.directory = None
         self.prefix = None
 
+        self.symmetry = None
+
         self.results = {}
         self.parameters = {}  # calculational parameters
 

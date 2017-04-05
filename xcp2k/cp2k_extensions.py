@@ -158,6 +158,7 @@ def create_cell(self, CELL, atoms):
         CELL.Periodic = "NONE"
     else:
         CELL.Periodic = "".join(periodicity)
+    CELL.Symmetry = self.symmetry
 
 CP2K.create_cell = MethodType(create_cell, None, CP2K)
 

@@ -222,11 +222,11 @@ class CP2K(Calculator):
     def update_atoms(self, atoms):
         """read new geometry when ."""
     # Updata atoms positions and cell
-        if self.CP2K_INPUT.GLOBAL.Run_type == 'GEO_OPT':
+        if self.CP2K_INPUT.GLOBAL.Run_type.upper() == 'GEO_OPT':
             atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
             atoms.positions = atoms_sorted.positions
             self.atoms = atoms
-        if self.CP2K_INPUT.GLOBAL.Run_type == 'CELL_OPT':
+        if self.CP2K_INPUT.GLOBAL.Run_type.upper() == 'CELL_OPT':
             atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
             atoms.positions = atoms_sorted.positions
             lines = open('cp2k.out', 'r').readlines()

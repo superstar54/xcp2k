@@ -25,6 +25,7 @@ import os
 XCP2KRC = {'cp2k.serial':   '$HOME/apps/cp2k-3.0/exe/local/cp2k.popt',
           'cp2k.parallel':  '$HOME/apps/cp2k-3.0/exe/local/cp2k.psmp',
           'mode': 'queue',  # other value is 'run'
+          'env': 'slurm',  # other value is 'run'
           'queue.command': 'qsub',
           'queue.options': '-joe',
           'queue.walltime': '120:00:00',

@@ -44,10 +44,11 @@ class CP2K(Calculator):
     name = 'cp2k'
     implemented_properties = ['energy', 'forces', 'stress', 'charges']
 
-    def __init__(self, restart=None, mode = 0, ignore_bad_restart_file=False,
+    def __init__(self, restart=None, mode = 0, env = 'SLURM', ignore_bad_restart_file=False,
                  label='cp2k', cpu = 1, atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
+        XCP2KRC['env'] = env    # set environment for  job submission
 
         self.CP2K_INPUT = _CP2K_INPUT1()
         self._debug = debug

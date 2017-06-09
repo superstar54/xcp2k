@@ -56,15 +56,15 @@ def run(self):
     #print(XCP2KRC['queue.command'])
     #print(XCP2KRC['queue.script'])
 
-    if 'SLURM_CONF' in os.environ:
+    if XCP2KRC['env'].upper() == 'SLURM':
         cmdlist = ['sbatch']
         cmdlist += ['--job-name', '{0}'.format(jobname)]
         cmdlist += ['--ntasks-per-node', '{0}'.format(self.cpu)]
-    elif 'SGE_ROOT' in os.environ:
+    if XCP2KRC['env'].upper() == 'SGE':
         cmdlist = ['qsub']
         cmdlist += ['-N', '{0}'.format(jobname)]
         cmdlist += ['-pe', 'openmpi', '{0}'.format(self.cpu)]
-    elif 'GRIDVIEW' in os.environ:
+    if XCP2KRC['env'].upper() == 'gridview':
         cmdlist = ['qsub']
         cmdlist += ['-N', '{0}'.format(jobname)]
         cmdlist += ['-l', 'nodes=1:ppn={0}'.format(self.cpu)]
@@ -84,19 +84,19 @@ def run(self):
         raise Exception('something went wrong in qsub:\n\n{0}'.format(err))
 
     import time
-    #print(out)
-    if 'SLURM_CONF' in os.environ:
+    print(out)
+    if XCP2KRC['env'].upper() == 'SLURM':
         job_id = int(out.split()[3])
-    elif 'SGE_ROOT' in os.environ:
+    elif XCP2KRC['env'].upper() == 'SGE':
         job_id = int(out.split()[2])
-    elif 'GRIDVIEW' in os.environ:
+    elif XCP2KRC['env'].upper() == 'gridview':
         job_id = int(out.split('.')[0]) 
-        #print(job_id)
+    print(job_id)
         
 
-    delay = 0.05
+    delay = 5
     while True:
-        if 'SLURM_CONF' in os.environ:
+        if XCP2KRC['env'].upper() == 'SLURM':
             output = Popen("sacct -j %i" %(job_id), shell = True,
                    stdin = PIPE,
                    stdout = PIPE,
@@ -104,7 +104,7 @@ def run(self):
             if "COMPLETED" in output[0] and output[0].split()[15]==self.prefix:
                 break
             time.sleep(delay)
-        elif 'SGE_ROOT' in os.environ:
+        elif XCP2KRC['env'].upper() == 'SGE':
             output = Popen("qstat -j %i" %(job_id), shell = True,
                    stdin = PIPE,
                    stdout = PIPE,
@@ -112,7 +112,7 @@ def run(self):
             if "do not exist" in output[1]:
                 break
             time.sleep(delay)
-        elif 'GRIDVIEW' in os.environ:
+        elif XCP2KRC['env'].upper() == 'gridview':
             output = Popen("qstat -R %i" %(job_id), shell = True,
                    stdin = PIPE,
                    stdout = PIPE,

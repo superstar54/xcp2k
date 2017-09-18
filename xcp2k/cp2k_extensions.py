@@ -94,7 +94,7 @@ def run(self):
     print(job_id)
         
 
-    delay = 5
+    delay = 100 
     while True:
         if XCP2KRC['env'].upper() == 'SLURM':
             output = Popen("sacct -j %i" %(job_id), shell = True,

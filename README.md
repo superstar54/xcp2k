@@ -9,6 +9,6 @@ XCP2K: a ASE interface to CP2K
 * Install
 1. Generate the CP2K input reference manual
    cp2k.sopt --xml
-2. Run python setup.py install --user
+2. Run python setup.py
 3. Add xcp2k to you PYTHONPATH
 

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each366 import _each366
+from _each419 import _each419
 
 
 class _molden_vib1(InputSection):
@@ -10,7 +10,7 @@ class _molden_vib1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each366()
+        self.EACH = _each419()
         self._name = "MOLDEN_VIB"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

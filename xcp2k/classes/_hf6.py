@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
 from _hf_info6 import _hf_info6
-from _periodic7 import _periodic7
+from _periodic8 import _periodic8
 from _screening7 import _screening7
 from _interaction_potential8 import _interaction_potential8
 from _load_balance6 import _load_balance6
@@ -15,7 +15,7 @@ class _hf6(InputSection):
         self.Pw_hfx = None
         self.Pw_hfx_blocksize = None
         self.HF_INFO = _hf_info6()
-        self.PERIODIC = _periodic7()
+        self.PERIODIC = _periodic8()
         self.SCREENING = _screening7()
         self.INTERACTION_POTENTIAL = _interaction_potential8()
         self.LOAD_BALANCE = _load_balance6()

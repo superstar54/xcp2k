@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each78 import _each78
+from _each81 import _each81
 
 
 class _trajectory1(InputSection):
@@ -15,7 +15,7 @@ class _trajectory1(InputSection):
         self.Charge_occup = None
         self.Charge_beta = None
         self.Charge_extended = None
-        self.EACH = _each78()
+        self.EACH = _each81()
         self._name = "TRAJECTORY"
         self._keywords = {'Charge_beta': 'CHARGE_BETA', 'Log_print_key': 'LOG_PRINT_KEY', 'Format': 'FORMAT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Charge_occup': 'CHARGE_OCCUP', 'Add_last': 'ADD_LAST', 'Charge_extended': 'CHARGE_EXTENDED', 'Unit': 'UNIT'}
         self._subsections = {'EACH': 'EACH'}

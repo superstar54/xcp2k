@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point57 import _point57
+from _point54 import _point54
 
 
 class _torsion6(InputSection):
@@ -9,12 +9,12 @@ class _torsion6(InputSection):
         self.POINT_list = []
         self._name = "TORSION"
         self._keywords = {'Atoms': 'ATOMS'}
-        self._repeated_subsections = {'POINT': '_point57'}
+        self._repeated_subsections = {'POINT': '_point54'}
         self._aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point57()
+        new_section = _point54()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

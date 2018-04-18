@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each90 import _each90
+from _each93 import _each93
 
 
 class _mixed_energies1(InputSection):
@@ -10,7 +10,7 @@ class _mixed_energies1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each90()
+        self.EACH = _each93()
         self._name = "MIXED_ENERGIES"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

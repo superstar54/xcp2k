@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each267 import _each267
+from _each315 import _each315
 
 
 class _derivatives3(InputSection):
@@ -10,7 +10,7 @@ class _derivatives3(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each267()
+        self.EACH = _each315()
         self._name = "DERIVATIVES"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

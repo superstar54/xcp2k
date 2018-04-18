@@ -11,10 +11,11 @@ class _implicit1(InputSection):
         self.Max_iter = None
         self.Tol = None
         self.Or_parameter = None
+        self.Neumann_directions = None
         self.DIELECTRIC = _dielectric1()
         self.DIRICHLET_BC = _dirichlet_bc1()
         self._name = "IMPLICIT"
-        self._keywords = {'Max_iter': 'MAX_ITER', 'Zero_initial_guess': 'ZERO_INITIAL_GUESS', 'Boundary_conditions': 'BOUNDARY_CONDITIONS', 'Tol': 'TOL', 'Or_parameter': 'OR_PARAMETER'}
+        self._keywords = {'Zero_initial_guess': 'ZERO_INITIAL_GUESS', 'Max_iter': 'MAX_ITER', 'Boundary_conditions': 'BOUNDARY_CONDITIONS', 'Neumann_directions': 'NEUMANN_DIRECTIONS', 'Tol': 'TOL', 'Or_parameter': 'OR_PARAMETER'}
         self._subsections = {'DIRICHLET_BC': 'DIRICHLET_BC', 'DIELECTRIC': 'DIELECTRIC'}
         self._aliases = {'Omega': 'Or_parameter'}
 

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each39 import _each39
+from _each40 import _each40
 
 
 class _center_of_mass1(InputSection):
@@ -10,7 +10,7 @@ class _center_of_mass1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each39()
+        self.EACH = _each40()
         self._name = "CENTER_OF_MASS"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

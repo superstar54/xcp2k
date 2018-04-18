@@ -19,13 +19,14 @@ class _cell_opt1(InputSection):
         self.External_pressure = None
         self.Keep_angles = None
         self.Keep_symmetry = None
+        self.Constraint = None
         self.Pressure_tolerance = None
         self.LBFGS = _lbfgs3()
         self.CG = _cg3()
         self.BFGS = _bfgs3()
         self.PRINT_list = []
         self._name = "CELL_OPT"
-        self._keywords = {'Max_dr': 'MAX_DR', 'Optimizer': 'OPTIMIZER', 'Step_start_val': 'STEP_START_VAL', 'Keep_symmetry': 'KEEP_SYMMETRY', 'Max_iter': 'MAX_ITER', 'External_pressure': 'EXTERNAL_PRESSURE', 'Keep_angles': 'KEEP_ANGLES', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR', 'Pressure_tolerance': 'PRESSURE_TOLERANCE', 'Rms_force': 'RMS_FORCE', 'Type': 'TYPE'}
+        self._keywords = {'Max_dr': 'MAX_DR', 'Constraint': 'CONSTRAINT', 'Optimizer': 'OPTIMIZER', 'Step_start_val': 'STEP_START_VAL', 'Keep_symmetry': 'KEEP_SYMMETRY', 'Max_iter': 'MAX_ITER', 'External_pressure': 'EXTERNAL_PRESSURE', 'Keep_angles': 'KEEP_ANGLES', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR', 'Pressure_tolerance': 'PRESSURE_TOLERANCE', 'Rms_force': 'RMS_FORCE', 'Type': 'TYPE'}
         self._subsections = {'BFGS': 'BFGS', 'CG': 'CG', 'LBFGS': 'LBFGS'}
         self._repeated_subsections = {'PRINT': '_print4'}
         self._aliases = {'Minimizer': 'Optimizer'}

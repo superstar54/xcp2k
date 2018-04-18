@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point23 import _point23
+from _point22 import _point22
 
 
 class _population2(InputSection):
@@ -20,13 +20,13 @@ class _population2(InputSection):
         self._name = "POPULATION"
         self._keywords = {'N0': 'N0', 'Nd': 'ND', 'R0': 'R0', 'Nn': 'NN', 'Sigma': 'SIGMA'}
         self._repeated_keywords = {'Atoms_to': 'ATOMS_TO', 'Kinds_to': 'KINDS_TO', 'Kinds_from': 'KINDS_FROM', 'Atoms_from': 'ATOMS_FROM'}
-        self._repeated_subsections = {'POINT': '_point23'}
+        self._repeated_subsections = {'POINT': '_point22'}
         self._aliases = {'R_0': 'R0', 'Expon_numerator': 'Nn', 'N_0': 'N0', 'Expon_denominator': 'Nd'}
         self._repeated_aliases = {'Points_to': 'Atoms_to', 'Points_from': 'Atoms_from'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point23()
+        new_section = _point22()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

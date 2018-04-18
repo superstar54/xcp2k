@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each224 import _each224
+from _each272 import _each272
 
 
 class _optimize_lri_basis2(InputSection):
@@ -10,7 +10,7 @@ class _optimize_lri_basis2(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each224()
+        self.EACH = _each272()
         self._name = "OPTIMIZE_LRI_BASIS"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point34 import _point34
+from _point32 import _point32
 
 
 class _hbp2(InputSection):
@@ -14,12 +14,12 @@ class _hbp2(InputSection):
         self._name = "HBP"
         self._keywords = {'Npoints': 'NPOINTS', 'Shift': 'SHIFT', 'Rcut': 'RCUT'}
         self._repeated_keywords = {'Atoms': 'ATOMS'}
-        self._repeated_subsections = {'POINT': '_point34'}
+        self._repeated_subsections = {'POINT': '_point32'}
         self._repeated_aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point34()
+        new_section = _point32()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

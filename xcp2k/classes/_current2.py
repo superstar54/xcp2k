@@ -1,27 +1,20 @@
 from xcp2k.inputsection import InputSection
-from _print48 import _print48
-from _interpolator9 import _interpolator9
+from _each217 import _each217
 
 
 class _current2(InputSection):
     def __init__(self):
         InputSection.__init__(self)
         self.Section_parameters = None
-        self.Gauge = None
-        self.Gauge_atom_radius = None
-        self.Use_old_gauge_atom = None
-        self.Orbital_center = None
-        self.Common_center = None
-        self.Nbox = None
-        self.Chi_pbc = None
-        self.Selected_states_on_atom_list = []
-        self.Selected_states_atom_radius = None
-        self.Restart_current = None
-        self.PRINT = _print48()
-        self.INTERPOLATOR = _interpolator9()
+        self.Add_last = None
+        self.Common_iteration_levels = None
+        self.Filename = None
+        self.Log_print_key = None
+        self.Backup_copies = None
+        self.Stride = None
+        self.EACH = _each217()
         self._name = "CURRENT"
-        self._keywords = {'Common_center': 'COMMON_CENTER', 'Orbital_center': 'ORBITAL_CENTER', 'Gauge': 'GAUGE', 'Gauge_atom_radius': 'GAUGE_ATOM_RADIUS', 'Nbox': 'NBOX', 'Use_old_gauge_atom': 'USE_OLD_GAUGE_ATOM', 'Restart_current': 'RESTART_CURRENT', 'Selected_states_atom_radius': 'SELECTED_STATES_ATOM_RADIUS', 'Chi_pbc': 'CHI_PBC'}
-        self._repeated_keywords = {'Selected_states_on_atom_list': 'SELECTED_STATES_ON_ATOM_LIST'}
-        self._subsections = {'PRINT': 'PRINT', 'INTERPOLATOR': 'INTERPOLATOR'}
+        self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Stride': 'STRIDE', 'Backup_copies': 'BACKUP_COPIES', 'Add_last': 'ADD_LAST'}
+        self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

@@ -1,10 +1,11 @@
 from xcp2k.inputsection import InputSection
 from _linear1 import _linear1
+from _mixed_cdft1 import _mixed_cdft1
 from _coupling1 import _coupling1
 from _restraint7 import _restraint7
 from _generic1 import _generic1
 from _mapping1 import _mapping1
-from _print17 import _print17
+from _print18 import _print18
 
 
 class _mixed1(InputSection):
@@ -14,14 +15,15 @@ class _mixed1(InputSection):
         self.Group_partition = None
         self.Ngroups = None
         self.LINEAR = _linear1()
+        self.MIXED_CDFT = _mixed_cdft1()
         self.COUPLING = _coupling1()
         self.RESTRAINT = _restraint7()
         self.GENERIC = _generic1()
         self.MAPPING_list = []
-        self.PRINT = _print17()
+        self.PRINT = _print18()
         self._name = "MIXED"
         self._keywords = {'Group_partition': 'GROUP_PARTITION', 'Mixing_type': 'MIXING_TYPE', 'Ngroups': 'NGROUPS'}
-        self._subsections = {'GENERIC': 'GENERIC', 'RESTRAINT': 'RESTRAINT', 'PRINT': 'PRINT', 'LINEAR': 'LINEAR', 'COUPLING': 'COUPLING'}
+        self._subsections = {'LINEAR': 'LINEAR', 'GENERIC': 'GENERIC', 'RESTRAINT': 'RESTRAINT', 'MIXED_CDFT': 'MIXED_CDFT', 'PRINT': 'PRINT', 'COUPLING': 'COUPLING'}
         self._repeated_subsections = {'MAPPING': '_mapping1'}
         self._aliases = {'Ngroup': 'Ngroups'}
         self._attributes = ['MAPPING_list']

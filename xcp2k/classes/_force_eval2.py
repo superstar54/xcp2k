@@ -9,7 +9,7 @@ from _eip1 import _eip1
 from _bsse1 import _bsse1
 from _subsys1 import _subsys1
 from _properties1 import _properties1
-from _print57 import _print57
+from _print64 import _print64
 
 
 class _force_eval2(InputSection):
@@ -17,6 +17,7 @@ class _force_eval2(InputSection):
         InputSection.__init__(self)
         self.Method = None
         self.Stress_tensor = None
+        self.Embed = None
         self.EXTERNAL_POTENTIAL_list = []
         self.RESCALE_FORCES = _rescale_forces1()
         self.MIXED = _mixed1()
@@ -27,9 +28,9 @@ class _force_eval2(InputSection):
         self.BSSE = _bsse1()
         self.SUBSYS = _subsys1()
         self.PROPERTIES = _properties1()
-        self.PRINT = _print57()
+        self.PRINT = _print64()
         self._name = "FORCE_EVAL"
-        self._keywords = {'Method': 'METHOD', 'Stress_tensor': 'STRESS_TENSOR'}
+        self._keywords = {'Embed': 'EMBED', 'Method': 'METHOD', 'Stress_tensor': 'STRESS_TENSOR'}
         self._subsections = {'EIP': 'EIP', 'BSSE': 'BSSE', 'MM': 'MM', 'DFT': 'DFT', 'QMMM': 'QMMM', 'RESCALE_FORCES': 'RESCALE_FORCES', 'PRINT': 'PRINT', 'MIXED': 'MIXED', 'SUBSYS': 'SUBSYS', 'PROPERTIES': 'PROPERTIES'}
         self._repeated_subsections = {'EXTERNAL_POTENTIAL': '_external_potential1'}
         self._attributes = ['EXTERNAL_POTENTIAL_list']

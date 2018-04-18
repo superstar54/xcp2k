@@ -8,7 +8,8 @@ class _define_region6(InputSection):
         self.Temperature = None
         self.Temp_tol = None
         self.Do_langevin = None
+        self.Noisy_gamma_region = None
         self._name = "DEFINE_REGION"
-        self._keywords = {'Do_langevin': 'DO_LANGEVIN', 'Temp_tol': 'TEMP_TOL', 'Temperature': 'TEMPERATURE'}
+        self._keywords = {'Do_langevin': 'DO_LANGEVIN', 'Temp_tol': 'TEMP_TOL', 'Temperature': 'TEMPERATURE', 'Noisy_gamma_region': 'NOISY_GAMMA_REGION'}
         self._repeated_keywords = {'List': 'LIST'}
 

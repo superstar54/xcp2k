@@ -7,7 +7,7 @@ from _auxiliary_density_matrix_method1 import _auxiliary_density_matrix_method1
 from _qs1 import _qs1
 from _tddfpt1 import _tddfpt1
 from _mgrid1 import _mgrid1
-from _xc2 import _xc2
+from _xc3 import _xc3
 from _relativistic1 import _relativistic1
 from _sic2 import _sic2
 from _low_spin_roks1 import _low_spin_roks1
@@ -24,7 +24,7 @@ from _density_fitting1 import _density_fitting1
 from _xas1 import _xas1
 from _localize2 import _localize2
 from _real_time_propagation1 import _real_time_propagation1
-from _print33 import _print33
+from _print39 import _print39
 from _sccs2 import _sccs2
 
 
@@ -52,7 +52,7 @@ class _dft1(InputSection):
         self.QS = _qs1()
         self.TDDFPT = _tddfpt1()
         self.MGRID = _mgrid1()
-        self.XC = _xc2()
+        self.XC = _xc3()
         self.RELATIVISTIC = _relativistic1()
         self.SIC = _sic2()
         self.LOW_SPIN_ROKS = _low_spin_roks1()
@@ -69,7 +69,7 @@ class _dft1(InputSection):
         self.XAS = _xas1()
         self.LOCALIZE = _localize2()
         self.REAL_TIME_PROPAGATION = _real_time_propagation1()
-        self.PRINT = _print33()
+        self.PRINT = _print39()
         self.SCCS = _sccs2()
         self._name = "DFT"
         self._keywords = {'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Multiplicity': 'MULTIPLICITY', 'Surf_dip_dir': 'SURF_DIP_DIR', 'Uks': 'UKS', 'Plus_u_method': 'PLUS_U_METHOD', 'Charge': 'CHARGE', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Relax_multiplicity': 'RELAX_MULTIPLICITY', 'Roks': 'ROKS', 'Surface_dipole_correction': 'SURFACE_DIPOLE_CORRECTION', 'Excitations': 'EXCITATIONS', 'Subcells': 'SUBCELLS'}

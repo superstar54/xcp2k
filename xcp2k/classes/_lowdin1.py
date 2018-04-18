@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each217 import _each217
+from _each258 import _each258
 
 
 class _lowdin1(InputSection):
@@ -12,7 +12,7 @@ class _lowdin1(InputSection):
         self.Log_print_key = None
         self.Print_gop = None
         self.Print_all = None
-        self.EACH = _each217()
+        self.EACH = _each258()
         self._name = "LOWDIN"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Print_gop': 'PRINT_GOP', 'Print_all': 'PRINT_ALL', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

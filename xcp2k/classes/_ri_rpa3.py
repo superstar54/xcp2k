@@ -1,6 +1,8 @@
 from xcp2k.inputsection import InputSection
 from _hf6 import _hf6
 from _ri_g0w03 import _ri_g0w03
+from _im_time3 import _im_time3
+from _ri_axk3 import _ri_axk3
 
 
 class _ri_rpa3(InputSection):
@@ -11,13 +13,18 @@ class _ri_rpa3(InputSection):
         self.Mm_style = None
         self.Minimax_quadrature = None
         self.Ri_g0w0 = None
+        self.Ri_axk = None
+        self.Admm = None
+        self.Im_time = None
         self.HF_list = []
         self.RI_G0W0 = _ri_g0w03()
+        self.IM_TIME = _im_time3()
+        self.RI_AXK = _ri_axk3()
         self._name = "RI_RPA"
-        self._keywords = {'Mm_style': 'MM_STYLE', 'Minimax_quadrature': 'MINIMAX_QUADRATURE', 'Quadrature_points': 'QUADRATURE_POINTS', 'Size_freq_integ_group': 'SIZE_FREQ_INTEG_GROUP', 'Ri_g0w0': 'RI_G0W0'}
-        self._subsections = {'RI_G0W0': 'RI_G0W0'}
+        self._keywords = {'Admm': 'ADMM', 'Minimax_quadrature': 'MINIMAX_QUADRATURE', 'Im_time': 'IM_TIME', 'Ri_axk': 'RI_AXK', 'Quadrature_points': 'QUADRATURE_POINTS', 'Mm_style': 'MM_STYLE', 'Size_freq_integ_group': 'SIZE_FREQ_INTEG_GROUP', 'Ri_g0w0': 'RI_G0W0'}
+        self._subsections = {'RI_AXK': 'RI_AXK', 'RI_G0W0': 'RI_G0W0', 'IM_TIME': 'IM_TIME'}
         self._repeated_subsections = {'HF': '_hf6'}
-        self._aliases = {'Gw': 'Ri_g0w0', 'Rpa_num_quad_points': 'Quadrature_points', 'Minimax': 'Minimax_quadrature', 'Rpa_group_size': 'Size_freq_integ_group'}
+        self._aliases = {'Gw': 'Ri_g0w0', 'Minimax': 'Minimax_quadrature', 'Rpa_group_size': 'Size_freq_integ_group', 'Imag_time': 'Im_time', 'Axk': 'Ri_axk', 'Rpa_num_quad_points': 'Quadrature_points'}
         self._attributes = ['HF_list']
 
     def HF_add(self, section_parameters=None):
@@ -57,6 +64,20 @@ class _ri_rpa3(InputSection):
         """
         return self.Ri_g0w0
 
+    @property
+    def Axk(self):
+        """
+        See documentation for Ri_axk
+        """
+        return self.Ri_axk
+
+    @property
+    def Imag_time(self):
+        """
+        See documentation for Im_time
+        """
+        return self.Im_time
+
     @Rpa_num_quad_points.setter
     def Rpa_num_quad_points(self, value):
         self.Quadrature_points = value
@@ -72,3 +93,11 @@ class _ri_rpa3(InputSection):
     @Gw.setter
     def Gw(self, value):
         self.Ri_g0w0 = value
+
+    @Axk.setter
+    def Axk(self, value):
+        self.Ri_axk = value
+
+    @Imag_time.setter
+    def Imag_time(self, value):
+        self.Im_time = value

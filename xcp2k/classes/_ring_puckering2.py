@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point35 import _point35
+from _point33 import _point33
 
 
 class _ring_puckering2(InputSection):
@@ -10,12 +10,12 @@ class _ring_puckering2(InputSection):
         self.POINT_list = []
         self._name = "RING_PUCKERING"
         self._keywords = {'Coordinate': 'COORDINATE', 'Atoms': 'ATOMS'}
-        self._repeated_subsections = {'POINT': '_point35'}
+        self._repeated_subsections = {'POINT': '_point33'}
         self._aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point35()
+        new_section = _point33()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

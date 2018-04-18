@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each381 import _each381
+from _each370 import _each370
 
 
 class _hf_info7(InputSection):
@@ -10,7 +10,7 @@ class _hf_info7(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each381()
+        self.EACH = _each370()
         self._name = "HF_INFO"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

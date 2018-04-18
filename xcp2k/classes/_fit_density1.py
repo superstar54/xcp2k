@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each372 import _each372
+from _each427 import _each427
 
 
 class _fit_density1(InputSection):
@@ -11,7 +11,7 @@ class _fit_density1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Num_gto = None
-        self.EACH = _each372()
+        self.EACH = _each427()
         self._name = "FIT_DENSITY"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Num_gto': 'NUM_GTO', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

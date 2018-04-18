@@ -1,29 +1,31 @@
 from xcp2k.inputsection import InputSection
-from _derivatives2 import _derivatives2
-from _ewald_info2 import _ewald_info2
-from _dipole3 import _dipole3
-from _neighbor_lists6 import _neighbor_lists6
-from _iter_info1 import _iter_info1
-from _subcell3 import _subcell3
-from _program_banner2 import _program_banner2
-from _program_run_info26 import _program_run_info26
-from _ff_parameter_file1 import _ff_parameter_file1
-from _ff_info1 import _ff_info1
+from _wannier_cubes2 import _wannier_cubes2
+from _wannier_centers2 import _wannier_centers2
+from _wannier_spreads2 import _wannier_spreads2
+from _loc_restart2 import _loc_restart2
+from _iteration_info3 import _iteration_info3
+from _program_run_info23 import _program_run_info23
+from _xes_spectrum1 import _xes_spectrum1
+from _xas_spectrum1 import _xas_spectrum1
+from _pdos1 import _pdos1
+from _restart9 import _restart9
+from _cls_function_cubes1 import _cls_function_cubes1
 
 
 class _print35(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.DERIVATIVES = _derivatives2()
-        self.EWALD_INFO = _ewald_info2()
-        self.DIPOLE = _dipole3()
-        self.NEIGHBOR_LISTS = _neighbor_lists6()
-        self.ITER_INFO = _iter_info1()
-        self.SUBCELL = _subcell3()
-        self.PROGRAM_BANNER = _program_banner2()
-        self.PROGRAM_RUN_INFO = _program_run_info26()
-        self.FF_PARAMETER_FILE = _ff_parameter_file1()
-        self.FF_INFO = _ff_info1()
+        self.WANNIER_CUBES = _wannier_cubes2()
+        self.WANNIER_CENTERS = _wannier_centers2()
+        self.WANNIER_SPREADS = _wannier_spreads2()
+        self.LOC_RESTART = _loc_restart2()
+        self.ITERATION_INFO = _iteration_info3()
+        self.PROGRAM_RUN_INFO = _program_run_info23()
+        self.XES_SPECTRUM = _xes_spectrum1()
+        self.XAS_SPECTRUM = _xas_spectrum1()
+        self.PDOS = _pdos1()
+        self.RESTART = _restart9()
+        self.CLS_FUNCTION_CUBES = _cls_function_cubes1()
         self._name = "PRINT"
-        self._subsections = {'DERIVATIVES': 'DERIVATIVES', 'EWALD_INFO': 'EWALD_INFO', 'ITER_INFO': 'ITER_INFO', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'SUBCELL': 'SUBCELL', 'PROGRAM_BANNER': 'PROGRAM_BANNER', 'FF_INFO': 'FF_INFO', 'DIPOLE': 'DIPOLE', 'FF_PARAMETER_FILE': 'FF_PARAMETER_FILE', 'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS'}
+        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'XAS_SPECTRUM': 'XAS_SPECTRUM', 'LOC_RESTART': 'LOC_RESTART', 'PDOS': 'PDOS', 'WANNIER_CENTERS': 'WANNIER_CENTERS', 'XES_SPECTRUM': 'XES_SPECTRUM', 'WANNIER_CUBES': 'WANNIER_CUBES', 'CLS_FUNCTION_CUBES': 'CLS_FUNCTION_CUBES', 'ITERATION_INFO': 'ITERATION_INFO', 'WANNIER_SPREADS': 'WANNIER_SPREADS', 'RESTART': 'RESTART'}
 

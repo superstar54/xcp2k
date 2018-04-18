@@ -1,11 +1,11 @@
 from xcp2k.inputsection import InputSection
-from _localize3 import _localize3
-from _current2 import _current2
+from _localize4 import _localize4
+from _current3 import _current3
 from _nmr1 import _nmr1
 from _spinspin1 import _spinspin1
 from _epr1 import _epr1
 from _polar1 import _polar1
-from _print55 import _print55
+from _print61 import _print61
 
 
 class _linres1(InputSection):
@@ -18,13 +18,13 @@ class _linres1(InputSection):
         self.Energy_gap = None
         self.Restart = None
         self.Wfn_restart_file_name = None
-        self.LOCALIZE = _localize3()
-        self.CURRENT = _current2()
+        self.LOCALIZE = _localize4()
+        self.CURRENT = _current3()
         self.NMR = _nmr1()
         self.SPINSPIN = _spinspin1()
         self.EPR = _epr1()
         self.POLAR = _polar1()
-        self.PRINT = _print55()
+        self.PRINT = _print61()
         self._name = "LINRES"
         self._keywords = {'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Max_iter': 'MAX_ITER', 'Eps': 'EPS', 'Preconditioner': 'PRECONDITIONER', 'Energy_gap': 'ENERGY_GAP', 'Restart_every': 'RESTART_EVERY', 'Restart': 'RESTART'}
         self._subsections = {'POLAR': 'POLAR', 'NMR': 'NMR', 'EPR': 'EPR', 'CURRENT': 'CURRENT', 'PRINT': 'PRINT', 'SPINSPIN': 'SPINSPIN', 'LOCALIZE': 'LOCALIZE'}

@@ -3,13 +3,13 @@ from _force_mixing1 import _force_mixing1
 from _qm_kind3 import _qm_kind3
 from _mm_kind1 import _mm_kind1
 from _cell3 import _cell3
-from _periodic5 import _periodic5
+from _periodic10 import _periodic10
 from _link3 import _link3
 from _interpolator8 import _interpolator8
 from _forcefield2 import _forcefield2
 from _walls1 import _walls1
 from _image_charge1 import _image_charge1
-from _print38 import _print38
+from _print44 import _print44
 
 
 class _qmmm1(InputSection):
@@ -31,13 +31,13 @@ class _qmmm1(InputSection):
         self.QM_KIND_list = []
         self.MM_KIND_list = []
         self.CELL = _cell3()
-        self.PERIODIC = _periodic5()
+        self.PERIODIC = _periodic10()
         self.LINK_list = []
         self.INTERPOLATOR = _interpolator8()
         self.FORCEFIELD_list = []
         self.WALLS = _walls1()
         self.IMAGE_CHARGE = _image_charge1()
-        self.PRINT = _print38()
+        self.PRINT = _print44()
         self._name = "QMMM"
         self._keywords = {'Initial_translation_vector': 'INITIAL_TRANSLATION_VECTOR', 'Center': 'CENTER', 'Eps_mm_rspace': 'EPS_MM_RSPACE', 'Nocompatibility': 'NOCOMPATIBILITY', 'Use_geep_lib': 'USE_GEEP_LIB', 'Center_type': 'CENTER_TYPE', 'Parallel_scheme': 'PARALLEL_SCHEME', 'Spherical_cutoff': 'SPHERICAL_CUTOFF', 'E_coupl': 'E_COUPL', 'Center_grid': 'CENTER_GRID', 'Mm_potential_file_name': 'MM_POTENTIAL_FILE_NAME', 'Delta_charge': 'DELTA_CHARGE'}
         self._subsections = {'INTERPOLATOR': 'INTERPOLATOR', 'FORCE_MIXING': 'FORCE_MIXING', 'CELL': 'CELL', 'WALLS': 'WALLS', 'PERIODIC': 'PERIODIC', 'PRINT': 'PRINT', 'IMAGE_CHARGE': 'IMAGE_CHARGE'}

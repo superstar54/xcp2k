@@ -7,6 +7,7 @@ class _driver1(InputSection):
         self.Unix = None
         self.Port = None
         self.Host = None
+        self.Sleep_time = None
         self._name = "DRIVER"
-        self._keywords = {'Unix': 'UNIX', 'Host': 'HOST', 'Port': 'PORT'}
+        self._keywords = {'Unix': 'UNIX', 'Host': 'HOST', 'Port': 'PORT', 'Sleep_time': 'SLEEP_TIME'}
 

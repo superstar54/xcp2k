@@ -15,6 +15,7 @@ class _mc1(InputSection):
         self.Lbias = None
         self.Lstop = None
         self.Ldiscrete = None
+        self.Rclus = None
         self.Restart = None
         self.Nvirial = None
         self.Ensemble = None
@@ -38,6 +39,6 @@ class _mc1(InputSection):
         self.MOVE_UPDATES = _move_updates1()
         self.MAX_DISPLACEMENTS = _max_displacements1()
         self._name = "MC"
-        self._keywords = {'Lstop': 'LSTOP', 'Nswapmoves': 'NSWAPMOVES', 'Lbias': 'LBIAS', 'Box2_file_name': 'BOX2_FILE_NAME', 'Nvirial': 'NVIRIAL', 'Ensemble': 'ENSEMBLE', 'Temperature': 'TEMPERATURE', 'Data_file_name': 'DATA_FILE_NAME', 'Pressure': 'PRESSURE', 'Restart': 'RESTART', 'Cell_file_name': 'CELL_FILE_NAME', 'Moves_file_name': 'MOVES_FILE_NAME', 'Iprint': 'IPRINT', 'Eta': 'ETA', 'Molecules_file_name': 'MOLECULES_FILE_NAME', 'Virial_temps': 'VIRIAL_TEMPS', 'Randomtoskip': 'RANDOMTOSKIP', 'Max_disp_file_name': 'MAX_DISP_FILE_NAME', 'Restart_file_name': 'RESTART_FILE_NAME', 'Coordinate_file_name': 'COORDINATE_FILE_NAME', 'Nmoves': 'NMOVES', 'Discrete_step': 'DISCRETE_STEP', 'Energy_file_name': 'ENERGY_FILE_NAME', 'Ldiscrete': 'LDISCRETE', 'Nstep': 'NSTEP'}
+        self._keywords = {'Lstop': 'LSTOP', 'Nswapmoves': 'NSWAPMOVES', 'Lbias': 'LBIAS', 'Box2_file_name': 'BOX2_FILE_NAME', 'Nvirial': 'NVIRIAL', 'Ensemble': 'ENSEMBLE', 'Temperature': 'TEMPERATURE', 'Data_file_name': 'DATA_FILE_NAME', 'Pressure': 'PRESSURE', 'Restart': 'RESTART', 'Cell_file_name': 'CELL_FILE_NAME', 'Moves_file_name': 'MOVES_FILE_NAME', 'Iprint': 'IPRINT', 'Rclus': 'RCLUS', 'Eta': 'ETA', 'Molecules_file_name': 'MOLECULES_FILE_NAME', 'Virial_temps': 'VIRIAL_TEMPS', 'Randomtoskip': 'RANDOMTOSKIP', 'Max_disp_file_name': 'MAX_DISP_FILE_NAME', 'Restart_file_name': 'RESTART_FILE_NAME', 'Coordinate_file_name': 'COORDINATE_FILE_NAME', 'Nmoves': 'NMOVES', 'Discrete_step': 'DISCRETE_STEP', 'Energy_file_name': 'ENERGY_FILE_NAME', 'Ldiscrete': 'LDISCRETE', 'Nstep': 'NSTEP'}
         self._subsections = {'AVBMC': 'AVBMC', 'MOVE_UPDATES': 'MOVE_UPDATES', 'MAX_DISPLACEMENTS': 'MAX_DISPLACEMENTS', 'MOVE_PROBABILITIES': 'MOVE_PROBABILITIES'}
 

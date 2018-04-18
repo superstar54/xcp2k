@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each118 import _each118
+from _each137 import _each137
 
 
 class _subcell1(InputSection):
@@ -10,7 +10,7 @@ class _subcell1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each118()
+        self.EACH = _each137()
         self._name = "SUBCELL"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

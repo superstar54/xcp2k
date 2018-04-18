@@ -10,11 +10,12 @@ class _qparm1(InputSection):
         self.Atoms_to = []
         self.Points_to = self.Atoms_to
         self.Rcut = None
+        self.Include_images = None
+        self.Rstart = None
         self.L = None
-        self.Alpha = None
         self.POINT_list = []
         self._name = "QPARM"
-        self._keywords = {'Alpha': 'ALPHA', 'L': 'L', 'Rcut': 'RCUT'}
+        self._keywords = {'Include_images': 'INCLUDE_IMAGES', 'Rstart': 'RSTART', 'L': 'L', 'Rcut': 'RCUT'}
         self._repeated_keywords = {'Atoms_to': 'ATOMS_TO', 'Atoms_from': 'ATOMS_FROM'}
         self._repeated_subsections = {'POINT': '_point11'}
         self._repeated_aliases = {'Points_to': 'Atoms_to', 'Points_from': 'Atoms_from'}

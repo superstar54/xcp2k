@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _xc1 import _xc1
+from _xc2 import _xc2
 from _sic1 import _sic1
 
 
@@ -19,7 +19,7 @@ class _tddfpt1(InputSection):
         self.Diag_method = None
         self.Oe_corr = None
         self.Convergence = None
-        self.XC = _xc1()
+        self.XC = _xc2()
         self.SIC = _sic1()
         self._name = "TDDFPT"
         self._keywords = {'Kernel': 'KERNEL', 'Nlumo': 'NLUMO', 'Lsd_singlets': 'LSD_SINGLETS', 'Nreortho': 'NREORTHO', 'Max_kv': 'MAX_KV', 'Invert_s': 'INVERT_S', 'Restarts': 'RESTARTS', 'Preconditioner': 'PRECONDITIONER', 'Diag_method': 'DIAG_METHOD', 'Convergence': 'CONVERGENCE', 'Nev': 'NEV', 'Oe_corr': 'OE_CORR', 'Res_etype': 'RES_ETYPE'}

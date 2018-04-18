@@ -1,19 +1,17 @@
 from xcp2k.inputsection import InputSection
-from _each385 import _each385
+from _guess_vectors1 import _guess_vectors1
+from _iteration_info4 import _iteration_info4
+from _detailed_energy3 import _detailed_energy3
+from _restart13 import _restart13
 
 
 class _print63(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.Section_parameters = None
-        self.Add_last = None
-        self.Common_iteration_levels = None
-        self.Filename = None
-        self.Log_print_key = None
-        self.Load_balance_info = None
-        self.EACH = _each385()
+        self.GUESS_VECTORS = _guess_vectors1()
+        self.ITERATION_INFO = _iteration_info4()
+        self.DETAILED_ENERGY = _detailed_energy3()
+        self.RESTART = _restart13()
         self._name = "PRINT"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Load_balance_info': 'LOAD_BALANCE_INFO', 'Filename': 'FILENAME'}
-        self._subsections = {'EACH': 'EACH'}
-        self._attributes = ['Section_parameters']
+        self._subsections = {'DETAILED_ENERGY': 'DETAILED_ENERGY', 'ITERATION_INFO': 'ITERATION_INFO', 'GUESS_VECTORS': 'GUESS_VECTORS', 'RESTART': 'RESTART'}
 

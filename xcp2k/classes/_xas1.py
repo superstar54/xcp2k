@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
 from _scf2 import _scf2
 from _localize1 import _localize1
-from _print30 import _print30
+from _print35 import _print35
 
 
 class _xas1(InputSection):
@@ -26,7 +26,7 @@ class _xas1(InputSection):
         self.Wfn_restart_file_name = None
         self.SCF = _scf2()
         self.LOCALIZE = _localize1()
-        self.PRINT = _print30()
+        self.PRINT = _print35()
         self._name = "XAS"
         self._keywords = {'Xes_empty_homo': 'XES_EMPTY_HOMO', 'Eps_added': 'EPS_ADDED', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Ngauss': 'NGAUSS', 'Added_mos': 'ADDED_MOS', 'Xes_core': 'XES_CORE', 'Dipole_form': 'DIPOLE_FORM', 'State_type': 'STATE_TYPE', 'Xas_core': 'XAS_CORE', 'Restart': 'RESTART', 'Max_iter_added': 'MAX_ITER_ADDED', 'State_search': 'STATE_SEARCH', 'Method': 'METHOD', 'Xas_tot_el': 'XAS_TOT_EL'}
         self._repeated_keywords = {'Atoms_list': 'ATOMS_LIST'}

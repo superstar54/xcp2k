@@ -10,7 +10,10 @@ from _angle_plane_plane1 import _angle_plane_plane1
 from _bond_rotation1 import _bond_rotation1
 from _distance_function1 import _distance_function1
 from _qparm1 import _qparm1
-from _hydronium1 import _hydronium1
+from _hydronium_shell1 import _hydronium_shell1
+from _hydronium_distance1 import _hydronium_distance1
+from _acid_hydronium_distance1 import _acid_hydronium_distance1
+from _acid_hydronium_shell1 import _acid_hydronium_shell1
 from _rmsd1 import _rmsd1
 from _xyz_diag1 import _xyz_diag1
 from _xyz_outerdiag1 import _xyz_outerdiag1
@@ -22,7 +25,7 @@ from _conditioned_distance1 import _conditioned_distance1
 from _reaction_path1 import _reaction_path1
 from _distance_from_path1 import _distance_from_path1
 from _combine_colvar1 import _combine_colvar1
-from _print45 import _print45
+from _print51 import _print51
 from _colvar_func_info4 import _colvar_func_info4
 
 
@@ -40,7 +43,10 @@ class _colvar5(InputSection):
         self.BOND_ROTATION = _bond_rotation1()
         self.DISTANCE_FUNCTION = _distance_function1()
         self.QPARM = _qparm1()
-        self.HYDRONIUM = _hydronium1()
+        self.HYDRONIUM_SHELL = _hydronium_shell1()
+        self.HYDRONIUM_DISTANCE = _hydronium_distance1()
+        self.ACID_HYDRONIUM_DISTANCE = _acid_hydronium_distance1()
+        self.ACID_HYDRONIUM_SHELL = _acid_hydronium_shell1()
         self.RMSD = _rmsd1()
         self.XYZ_DIAG = _xyz_diag1()
         self.XYZ_OUTERDIAG = _xyz_outerdiag1()
@@ -55,12 +61,12 @@ class _colvar5(InputSection):
         self.PRINT_list = []
         self.COLVAR_FUNC_INFO = _colvar_func_info4()
         self._name = "COLVAR"
-        self._subsections = {'GYRATION_RADIUS': 'GYRATION_RADIUS', 'ANGLE': 'ANGLE', 'CONDITIONED_DISTANCE': 'CONDITIONED_DISTANCE', 'ANGLE_PLANE_PLANE': 'ANGLE_PLANE_PLANE', 'DISTANCE_POINT_PLANE': 'DISTANCE_POINT_PLANE', 'BOND_ROTATION': 'BOND_ROTATION', 'XYZ_OUTERDIAG': 'XYZ_OUTERDIAG', 'HBP': 'HBP', 'POPULATION': 'POPULATION', 'REACTION_PATH': 'REACTION_PATH', 'RMSD': 'RMSD', 'HYDRONIUM': 'HYDRONIUM', 'COORDINATION': 'COORDINATION', 'QPARM': 'QPARM', 'DISTANCE_FUNCTION': 'DISTANCE_FUNCTION', 'COMBINE_COLVAR': 'COMBINE_COLVAR', 'U': 'U', 'WC': 'WC', 'DISTANCE': 'DISTANCE', 'DISTANCE_FROM_PATH': 'DISTANCE_FROM_PATH', 'RING_PUCKERING': 'RING_PUCKERING', 'XYZ_DIAG': 'XYZ_DIAG', 'COLVAR_FUNC_INFO': 'COLVAR_FUNC_INFO', 'TORSION': 'TORSION'}
-        self._repeated_subsections = {'PRINT': '_print45'}
+        self._subsections = {'GYRATION_RADIUS': 'GYRATION_RADIUS', 'ANGLE': 'ANGLE', 'CONDITIONED_DISTANCE': 'CONDITIONED_DISTANCE', 'ANGLE_PLANE_PLANE': 'ANGLE_PLANE_PLANE', 'DISTANCE_POINT_PLANE': 'DISTANCE_POINT_PLANE', 'BOND_ROTATION': 'BOND_ROTATION', 'XYZ_OUTERDIAG': 'XYZ_OUTERDIAG', 'ACID_HYDRONIUM_DISTANCE': 'ACID_HYDRONIUM_DISTANCE', 'HBP': 'HBP', 'HYDRONIUM_SHELL': 'HYDRONIUM_SHELL', 'REACTION_PATH': 'REACTION_PATH', 'RMSD': 'RMSD', 'COORDINATION': 'COORDINATION', 'QPARM': 'QPARM', 'POPULATION': 'POPULATION', 'DISTANCE_FUNCTION': 'DISTANCE_FUNCTION', 'HYDRONIUM_DISTANCE': 'HYDRONIUM_DISTANCE', 'COMBINE_COLVAR': 'COMBINE_COLVAR', 'ACID_HYDRONIUM_SHELL': 'ACID_HYDRONIUM_SHELL', 'U': 'U', 'WC': 'WC', 'DISTANCE': 'DISTANCE', 'DISTANCE_FROM_PATH': 'DISTANCE_FROM_PATH', 'RING_PUCKERING': 'RING_PUCKERING', 'XYZ_DIAG': 'XYZ_DIAG', 'COLVAR_FUNC_INFO': 'COLVAR_FUNC_INFO', 'TORSION': 'TORSION'}
+        self._repeated_subsections = {'PRINT': '_print51'}
         self._attributes = ['PRINT_list']
 
     def PRINT_add(self, section_parameters=None):
-        new_section = _print45()
+        new_section = _print51()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

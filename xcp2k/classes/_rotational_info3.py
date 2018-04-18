@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each367 import _each367
+from _each420 import _each420
 
 
 class _rotational_info3(InputSection):
@@ -11,7 +11,7 @@ class _rotational_info3(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Coordinates = None
-        self.EACH = _each367()
+        self.EACH = _each420()
         self._name = "ROTATIONAL_INFO"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Coordinates': 'COORDINATES', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

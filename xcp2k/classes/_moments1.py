@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each215 import _each215
+from _each256 import _each256
 
 
 class _moments1(InputSection):
@@ -15,7 +15,7 @@ class _moments1(InputSection):
         self.Reference_point = None
         self.Max_moment = None
         self.Magnetic = None
-        self.EACH = _each215()
+        self.EACH = _each256()
         self._name = "MOMENTS"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Reference': 'REFERENCE', 'Reference_point': 'REFERENCE_POINT', 'Magnetic': 'MAGNETIC', 'Max_moment': 'MAX_MOMENT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Periodic': 'PERIODIC', 'Add_last': 'ADD_LAST'}
         self._subsections = {'EACH': 'EACH'}

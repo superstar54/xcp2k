@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point36 import _point36
+from _point34 import _point34
 
 
 class _conditioned_distance2(InputSection):
@@ -20,13 +20,13 @@ class _conditioned_distance2(InputSection):
         self._name = "CONDITIONED_DISTANCE"
         self._keywords = {'Nd': 'ND', 'R0': 'R0', 'Nn': 'NN', 'Lambda': 'LAMBDA'}
         self._repeated_keywords = {'Atoms_distance': 'ATOMS_DISTANCE', 'Kinds_to': 'KINDS_TO', 'Atoms_to': 'ATOMS_TO', 'Kinds_from': 'KINDS_FROM', 'Atoms_from': 'ATOMS_FROM'}
-        self._repeated_subsections = {'POINT': '_point36'}
+        self._repeated_subsections = {'POINT': '_point34'}
         self._aliases = {'R_0': 'R0', 'Expon_numerator': 'Nn', 'Expon_denominator': 'Nd'}
         self._repeated_aliases = {'Points_to': 'Atoms_to', 'Points_from': 'Atoms_from'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point36()
+        new_section = _point34()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

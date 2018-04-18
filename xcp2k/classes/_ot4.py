@@ -8,7 +8,6 @@ class _ot4(InputSection):
         self.Algorithm = None
         self.Irac_degree = None
         self.Max_irac = None
-        self.Mixed_precision = None
         self.Ortho_irac = None
         self.Eps_irac_filter_matrix = None
         self.Eps_irac = None
@@ -32,6 +31,7 @@ class _ot4(InputSection):
         self.Stepsize = None
         self.Gold_target = None
         self.Preconditioner = None
+        self.Cholesky = None
         self.Precond_solver = None
         self.Energy_gap = None
         self.Eps_taylor = None
@@ -42,7 +42,7 @@ class _ot4(InputSection):
         self.Nondiag_energy = None
         self.Nondiag_energy_strength = None
         self._name = "OT"
-        self._keywords = {'Ortho_irac': 'ORTHO_IRAC', 'Max_irac': 'MAX_IRAC', 'Broyden_sigma_decrease': 'BROYDEN_SIGMA_DECREASE', 'Energies': 'ENERGIES', 'N_history_vec': 'N_HISTORY_VEC', 'Eps_irac': 'EPS_IRAC', 'Nondiag_energy': 'NONDIAG_ENERGY', 'Broyden_adaptive_sigma': 'BROYDEN_ADAPTIVE_SIGMA', 'Occupation_preconditioner': 'OCCUPATION_PRECONDITIONER', 'Safe_diis': 'SAFE_DIIS', 'Preconditioner': 'PRECONDITIONER', 'Broyden_enable_flip': 'BROYDEN_ENABLE_FLIP', 'Stepsize': 'STEPSIZE', 'Irac_degree': 'IRAC_DEGREE', 'Broyden_omega': 'BROYDEN_OMEGA', 'Eps_taylor': 'EPS_TAYLOR', 'On_the_fly_loc': 'ON_THE_FLY_LOC', 'Broyden_beta': 'BROYDEN_BETA', 'Minimizer': 'MINIMIZER', 'Energy_gap': 'ENERGY_GAP', 'Eps_irac_filter_matrix': 'EPS_IRAC_FILTER_MATRIX', 'Algorithm': 'ALGORITHM', 'Eps_irac_switch': 'EPS_IRAC_SWITCH', 'Broyden_forget_history': 'BROYDEN_FORGET_HISTORY', 'Gold_target': 'GOLD_TARGET', 'Broyden_sigma': 'BROYDEN_SIGMA', 'Broyden_gamma': 'BROYDEN_GAMMA', 'Rotation': 'ROTATION', 'Eps_irac_quick_exit': 'EPS_IRAC_QUICK_EXIT', 'Broyden_eta': 'BROYDEN_ETA', 'Max_taylor': 'MAX_TAYLOR', 'Precond_solver': 'PRECOND_SOLVER', 'Nondiag_energy_strength': 'NONDIAG_ENERGY_STRENGTH', 'Broyden_sigma_min': 'BROYDEN_SIGMA_MIN', 'Mixed_precision': 'MIXED_PRECISION', 'Linesearch': 'LINESEARCH'}
+        self._keywords = {'Ortho_irac': 'ORTHO_IRAC', 'Max_irac': 'MAX_IRAC', 'Broyden_sigma_decrease': 'BROYDEN_SIGMA_DECREASE', 'Energies': 'ENERGIES', 'N_history_vec': 'N_HISTORY_VEC', 'Nondiag_energy': 'NONDIAG_ENERGY', 'Eps_irac': 'EPS_IRAC', 'Cholesky': 'CHOLESKY', 'Broyden_adaptive_sigma': 'BROYDEN_ADAPTIVE_SIGMA', 'Occupation_preconditioner': 'OCCUPATION_PRECONDITIONER', 'Safe_diis': 'SAFE_DIIS', 'Preconditioner': 'PRECONDITIONER', 'Broyden_enable_flip': 'BROYDEN_ENABLE_FLIP', 'Stepsize': 'STEPSIZE', 'Energy_gap': 'ENERGY_GAP', 'Broyden_omega': 'BROYDEN_OMEGA', 'Eps_taylor': 'EPS_TAYLOR', 'On_the_fly_loc': 'ON_THE_FLY_LOC', 'Broyden_beta': 'BROYDEN_BETA', 'Minimizer': 'MINIMIZER', 'Eps_irac_filter_matrix': 'EPS_IRAC_FILTER_MATRIX', 'Algorithm': 'ALGORITHM', 'Eps_irac_switch': 'EPS_IRAC_SWITCH', 'Broyden_forget_history': 'BROYDEN_FORGET_HISTORY', 'Gold_target': 'GOLD_TARGET', 'Broyden_sigma': 'BROYDEN_SIGMA', 'Broyden_gamma': 'BROYDEN_GAMMA', 'Rotation': 'ROTATION', 'Eps_irac_quick_exit': 'EPS_IRAC_QUICK_EXIT', 'Broyden_eta': 'BROYDEN_ETA', 'Max_taylor': 'MAX_TAYLOR', 'Precond_solver': 'PRECOND_SOLVER', 'Nondiag_energy_strength': 'NONDIAG_ENERGY_STRENGTH', 'Broyden_sigma_min': 'BROYDEN_SIGMA_MIN', 'Irac_degree': 'IRAC_DEGREE', 'Linesearch': 'LINESEARCH'}
         self._aliases = {'Epstaylor': 'Eps_taylor', 'Ndiis': 'N_history_vec', 'Line_search': 'Linesearch', 'Safer_diis': 'Safe_diis', 'N_diis': 'N_history_vec', 'N_broyden': 'N_history_vec'}
         self._attributes = ['Section_parameters']
 

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point38 import _point38
+from _point36 import _point36
 
 
 class _angle4(InputSection):
@@ -9,12 +9,12 @@ class _angle4(InputSection):
         self.POINT_list = []
         self._name = "ANGLE"
         self._keywords = {'Atoms': 'ATOMS'}
-        self._repeated_subsections = {'POINT': '_point38'}
+        self._repeated_subsections = {'POINT': '_point36'}
         self._aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point38()
+        new_section = _point36()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

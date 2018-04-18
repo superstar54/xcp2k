@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: xcp2k
+Version: 0.1
+Summary: ase-compliant calculator for CP2K
+Home-page: https://github.com/superstar54/xcp2k
+Author: Xing Wang
+Author-email: xing.wang@psi.ch
+License: GPL
+Description: Python module for setting up, running and analysing CP2K calculations.
+Platform: linux

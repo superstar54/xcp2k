@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _print58 import _print58
+from _print65 import _print65
 from _global_opt1 import _global_opt1
 
 
@@ -15,11 +15,11 @@ class _swarm1(InputSection):
         self._name = "SWARM"
         self._keywords = {'Number_of_workers': 'NUMBER_OF_WORKERS', 'Max_iter': 'MAX_ITER', 'Behavior': 'BEHAVIOR', 'Replay_communication_log': 'REPLAY_COMMUNICATION_LOG'}
         self._subsections = {'GLOBAL_OPT': 'GLOBAL_OPT'}
-        self._repeated_subsections = {'PRINT': '_print58'}
+        self._repeated_subsections = {'PRINT': '_print65'}
         self._attributes = ['PRINT_list']
 
     def PRINT_add(self, section_parameters=None):
-        new_section = _print58()
+        new_section = _print65()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

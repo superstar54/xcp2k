@@ -6,6 +6,7 @@ class _move_updates1(InputSection):
         InputSection.__init__(self)
         self.Iupvolume = None
         self.Iuptrans = None
+        self.Iupcltrans = None
         self._name = "MOVE_UPDATES"
-        self._keywords = {'Iuptrans': 'IUPTRANS', 'Iupvolume': 'IUPVOLUME'}
+        self._keywords = {'Iuptrans': 'IUPTRANS', 'Iupvolume': 'IUPVOLUME', 'Iupcltrans': 'IUPCLTRANS'}
 

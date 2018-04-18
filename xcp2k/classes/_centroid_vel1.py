@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each69 import _each69
+from _each72 import _each72
 
 
 class _centroid_vel1(InputSection):
@@ -12,7 +12,7 @@ class _centroid_vel1(InputSection):
         self.Log_print_key = None
         self.Unit = None
         self.Format = None
-        self.EACH = _each69()
+        self.EACH = _each72()
         self._name = "CENTROID_VEL"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Format': 'FORMAT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Add_last': 'ADD_LAST', 'Unit': 'UNIT'}
         self._subsections = {'EACH': 'EACH'}

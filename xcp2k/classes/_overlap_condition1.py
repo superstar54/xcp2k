@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each203 import _each203
+from _each243 import _each243
 
 
 class _overlap_condition1(InputSection):
@@ -10,9 +10,12 @@ class _overlap_condition1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each203()
+        self.Num1_norm = None
+        self.Diagonalization = None
+        self.Arnoldi = None
+        self.EACH = _each243()
         self._name = "OVERLAP_CONDITION"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
+        self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Add_last': 'ADD_LAST', 'Arnoldi': 'ARNOLDI', 'Num1_norm': '1-NORM', 'Diagonalization': 'DIAGONALIZATION'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

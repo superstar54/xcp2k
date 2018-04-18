@@ -1,4 +1,5 @@
 from xcp2k.inputsection import InputSection
+from _print_elpa1 import _print_elpa1
 from _timings1 import _timings1
 from _references1 import _references1
 from _program_run_info1 import _program_run_info1
@@ -14,6 +15,8 @@ class _global1(InputSection):
         self.Blacs_repeatable = None
         self.Preferred_diag_library = None
         self.Elpa_kernel = None
+        self.Elpa_qr = None
+        self.Elpa_qr_unsafe = None
         self.Preferred_fft_library = None
         self.Fftw_wisdom_file_name = None
         self.Fftw_plan_type = None
@@ -37,6 +40,7 @@ class _global1(InputSection):
         self.Callgraph_file_name = None
         self.Seed = None
         self.Save_mem = None
+        self.PRINT_ELPA = _print_elpa1()
         self.TIMINGS = _timings1()
         self.REFERENCES = _references1()
         self.PROGRAM_RUN_INFO = _program_run_info1()
@@ -44,8 +48,8 @@ class _global1(InputSection):
         self.FM = _fm1()
         self.DBCSR = _dbcsr1()
         self._name = "GLOBAL"
-        self._keywords = {'Trace_routines': 'TRACE_ROUTINES', 'Save_mem': 'SAVE_MEM', 'Callgraph_file_name': 'CALLGRAPH_FILE_NAME', 'Callgraph': 'CALLGRAPH', 'Echo_all_hosts': 'ECHO_ALL_HOSTS', 'Fftw_wisdom_file_name': 'FFTW_WISDOM_FILE_NAME', 'Echo_input': 'ECHO_INPUT', 'Preferred_fft_library': 'PREFERRED_FFT_LIBRARY', 'Trace': 'TRACE', 'Alltoall_sgl': 'ALLTOALL_SGL', 'Fftw_plan_type': 'FFTW_PLAN_TYPE', 'Blacs_repeatable': 'BLACS_REPEATABLE', 'Preferred_diag_library': 'PREFERRED_DIAG_LIBRARY', 'Output_file_name': 'OUTPUT_FILE_NAME', 'Blacs_grid': 'BLACS_GRID', 'Walltime': 'WALLTIME', 'Extended_fft_lengths': 'EXTENDED_FFT_LENGTHS', 'Trace_max': 'TRACE_MAX', 'Trace_master': 'TRACE_MASTER', 'Run_type': 'RUN_TYPE', 'Project_name': 'PROJECT_NAME', 'Flush_should_flush': 'FLUSH_SHOULD_FLUSH', 'Print_level': 'PRINT_LEVEL', 'Seed': 'SEED', 'Elpa_kernel': 'ELPA_KERNEL', 'Program_name': 'PROGRAM_NAME', 'Fft_pool_scratch_limit': 'FFT_POOL_SCRATCH_LIMIT'}
-        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'TIMINGS': 'TIMINGS', 'DBCSR': 'DBCSR', 'REFERENCES': 'REFERENCES', 'PRINT': 'PRINT', 'FM': 'FM'}
+        self._keywords = {'Trace_routines': 'TRACE_ROUTINES', 'Save_mem': 'SAVE_MEM', 'Callgraph_file_name': 'CALLGRAPH_FILE_NAME', 'Callgraph': 'CALLGRAPH', 'Echo_all_hosts': 'ECHO_ALL_HOSTS', 'Fftw_wisdom_file_name': 'FFTW_WISDOM_FILE_NAME', 'Echo_input': 'ECHO_INPUT', 'Preferred_fft_library': 'PREFERRED_FFT_LIBRARY', 'Trace': 'TRACE', 'Alltoall_sgl': 'ALLTOALL_SGL', 'Fftw_plan_type': 'FFTW_PLAN_TYPE', 'Blacs_repeatable': 'BLACS_REPEATABLE', 'Preferred_diag_library': 'PREFERRED_DIAG_LIBRARY', 'Output_file_name': 'OUTPUT_FILE_NAME', 'Blacs_grid': 'BLACS_GRID', 'Walltime': 'WALLTIME', 'Elpa_qr': 'ELPA_QR', 'Extended_fft_lengths': 'EXTENDED_FFT_LENGTHS', 'Trace_max': 'TRACE_MAX', 'Elpa_qr_unsafe': 'ELPA_QR_UNSAFE', 'Trace_master': 'TRACE_MASTER', 'Run_type': 'RUN_TYPE', 'Project_name': 'PROJECT_NAME', 'Flush_should_flush': 'FLUSH_SHOULD_FLUSH', 'Print_level': 'PRINT_LEVEL', 'Seed': 'SEED', 'Elpa_kernel': 'ELPA_KERNEL', 'Program_name': 'PROGRAM_NAME', 'Fft_pool_scratch_limit': 'FFT_POOL_SCRATCH_LIMIT'}
+        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'PRINT_ELPA': 'PRINT_ELPA', 'TIMINGS': 'TIMINGS', 'DBCSR': 'DBCSR', 'REFERENCES': 'REFERENCES', 'PRINT': 'PRINT', 'FM': 'FM'}
         self._aliases = {'Project': 'Project_name', 'Iolevel': 'Print_level', 'Program': 'Program_name', 'Wallti': 'Walltime'}
 
 

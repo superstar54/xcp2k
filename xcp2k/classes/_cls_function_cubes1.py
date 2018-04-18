@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each174 import _each174
+from _each202 import _each202
 
 
 class _cls_function_cubes1(InputSection):
@@ -14,7 +14,7 @@ class _cls_function_cubes1(InputSection):
         self.Cubes_lu_bounds = None
         self.Cubes_list = []
         self.Append = None
-        self.EACH = _each174()
+        self.EACH = _each202()
         self._name = "CLS_FUNCTION_CUBES"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Cubes_lu_bounds': 'CUBES_LU_BOUNDS', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Stride': 'STRIDE', 'Add_last': 'ADD_LAST', 'Append': 'APPEND'}
         self._repeated_keywords = {'Cubes_list': 'CUBES_LIST'}

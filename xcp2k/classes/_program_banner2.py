@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each240 import _each240
+from _each288 import _each288
 
 
 class _program_banner2(InputSection):
@@ -10,7 +10,7 @@ class _program_banner2(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each240()
+        self.EACH = _each288()
         self._name = "PROGRAM_BANNER"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

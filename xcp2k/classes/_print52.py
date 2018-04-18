@@ -1,19 +1,27 @@
 from xcp2k.inputsection import InputSection
-from _each326 import _each326
+from _atomic_coordinates1 import _atomic_coordinates1
+from _structure_data2 import _structure_data2
+from _interatomic_distances1 import _interatomic_distances1
+from _topology_info1 import _topology_info1
+from _cell5 import _cell5
+from _kinds1 import _kinds1
+from _symmetry1 import _symmetry1
+from _molecules1 import _molecules1
+from _radii1 import _radii1
 
 
 class _print52(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.Section_parameters = None
-        self.Add_last = None
-        self.Common_iteration_levels = None
-        self.Filename = None
-        self.Log_print_key = None
-        self.Load_balance_info = None
-        self.EACH = _each326()
+        self.ATOMIC_COORDINATES = _atomic_coordinates1()
+        self.STRUCTURE_DATA = _structure_data2()
+        self.INTERATOMIC_DISTANCES = _interatomic_distances1()
+        self.TOPOLOGY_INFO = _topology_info1()
+        self.CELL = _cell5()
+        self.KINDS = _kinds1()
+        self.SYMMETRY = _symmetry1()
+        self.MOLECULES = _molecules1()
+        self.RADII = _radii1()
         self._name = "PRINT"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Load_balance_info': 'LOAD_BALANCE_INFO', 'Filename': 'FILENAME'}
-        self._subsections = {'EACH': 'EACH'}
-        self._attributes = ['Section_parameters']
+        self._subsections = {'KINDS': 'KINDS', 'SYMMETRY': 'SYMMETRY', 'TOPOLOGY_INFO': 'TOPOLOGY_INFO', 'CELL': 'CELL', 'INTERATOMIC_DISTANCES': 'INTERATOMIC_DISTANCES', 'RADII': 'RADII', 'STRUCTURE_DATA': 'STRUCTURE_DATA', 'ATOMIC_COORDINATES': 'ATOMIC_COORDINATES', 'MOLECULES': 'MOLECULES'}
 

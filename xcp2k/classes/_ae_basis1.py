@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _basis2 import _basis2
+from _basis4 import _basis4
 
 
 class _ae_basis1(InputSection):
@@ -24,7 +24,7 @@ class _ae_basis1(InputSection):
         self.Quadrature = None
         self.Grid_points = None
         self.Eps_eigenvalue = None
-        self.BASIS = _basis2()
+        self.BASIS = _basis4()
         self._name = "AE_BASIS"
         self._keywords = {'Eps_eigenvalue': 'EPS_EIGENVALUE', 'Grid_points': 'GRID_POINTS', 'D_exponents': 'D_EXPONENTS', 'Num_gto': 'NUM_GTO', 'D_quantum_numbers': 'D_QUANTUM_NUMBERS', 'S_quantum_numbers': 'S_QUANTUM_NUMBERS', 'F_exponents': 'F_EXPONENTS', 'Basis_set_file_name': 'BASIS_SET_FILE_NAME', 'Num_slater': 'NUM_SLATER', 'Quadrature': 'QUADRATURE', 'Geometrical_factor': 'GEOMETRICAL_FACTOR', 'F_quantum_numbers': 'F_QUANTUM_NUMBERS', 'P_exponents': 'P_EXPONENTS', 'Geo_start_value': 'GEO_START_VALUE', 'Basis_set': 'BASIS_SET', 'Basis_type': 'BASIS_TYPE', 'P_quantum_numbers': 'P_QUANTUM_NUMBERS', 'S_exponents': 'S_EXPONENTS', 'Start_index': 'START_INDEX'}
         self._subsections = {'BASIS': 'BASIS'}

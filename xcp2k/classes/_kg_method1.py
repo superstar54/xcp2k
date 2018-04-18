@@ -1,5 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _print21 import _print21
+from _print23 import _print23
+from _energy_correction1 import _energy_correction1
 
 
 class _kg_method1(InputSection):
@@ -7,8 +8,9 @@ class _kg_method1(InputSection):
         InputSection.__init__(self)
         self.Coloring_method = None
         self.Tnadd_method = None
-        self.PRINT = _print21()
+        self.PRINT = _print23()
+        self.ENERGY_CORRECTION = _energy_correction1()
         self._name = "KG_METHOD"
         self._keywords = {'Coloring_method': 'COLORING_METHOD', 'Tnadd_method': 'TNADD_METHOD'}
-        self._subsections = {'PRINT': 'PRINT'}
+        self._subsections = {'PRINT': 'PRINT', 'ENERGY_CORRECTION': 'ENERGY_CORRECTION'}
 

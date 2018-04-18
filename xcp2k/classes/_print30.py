@@ -1,29 +1,19 @@
 from xcp2k.inputsection import InputSection
-from _wannier_cubes2 import _wannier_cubes2
-from _wannier_centers2 import _wannier_centers2
-from _wannier_spreads2 import _wannier_spreads2
-from _loc_restart2 import _loc_restart2
-from _iteration_info3 import _iteration_info3
-from _program_run_info21 import _program_run_info21
-from _xes_spectrum1 import _xes_spectrum1
-from _xas_spectrum1 import _xas_spectrum1
-from _restart9 import _restart9
-from _cls_function_cubes1 import _cls_function_cubes1
+from _each157 import _each157
 
 
 class _print30(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.WANNIER_CUBES = _wannier_cubes2()
-        self.WANNIER_CENTERS = _wannier_centers2()
-        self.WANNIER_SPREADS = _wannier_spreads2()
-        self.LOC_RESTART = _loc_restart2()
-        self.ITERATION_INFO = _iteration_info3()
-        self.PROGRAM_RUN_INFO = _program_run_info21()
-        self.XES_SPECTRUM = _xes_spectrum1()
-        self.XAS_SPECTRUM = _xas_spectrum1()
-        self.RESTART = _restart9()
-        self.CLS_FUNCTION_CUBES = _cls_function_cubes1()
+        self.Section_parameters = None
+        self.Add_last = None
+        self.Common_iteration_levels = None
+        self.Filename = None
+        self.Log_print_key = None
+        self.Load_balance_info = None
+        self.EACH = _each157()
         self._name = "PRINT"
-        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'XAS_SPECTRUM': 'XAS_SPECTRUM', 'LOC_RESTART': 'LOC_RESTART', 'WANNIER_CENTERS': 'WANNIER_CENTERS', 'XES_SPECTRUM': 'XES_SPECTRUM', 'WANNIER_CUBES': 'WANNIER_CUBES', 'CLS_FUNCTION_CUBES': 'CLS_FUNCTION_CUBES', 'ITERATION_INFO': 'ITERATION_INFO', 'WANNIER_SPREADS': 'WANNIER_SPREADS', 'RESTART': 'RESTART'}
+        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Load_balance_info': 'LOAD_BALANCE_INFO', 'Filename': 'FILENAME'}
+        self._subsections = {'EACH': 'EACH'}
+        self._attributes = ['Section_parameters']
 

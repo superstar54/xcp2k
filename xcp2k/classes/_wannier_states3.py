@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each309 import _each309
+from _each237 import _each237
 from _cubes6 import _cubes6
 
 
@@ -13,7 +13,7 @@ class _wannier_states3(InputSection):
         self.Log_print_key = None
         self.Cube_eval_range = None
         self.Mark_states = []
-        self.EACH = _each309()
+        self.EACH = _each237()
         self.CUBES = _cubes6()
         self._name = "WANNIER_STATES"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Cube_eval_range': 'CUBE_EVAL_RANGE', 'Filename': 'FILENAME'}

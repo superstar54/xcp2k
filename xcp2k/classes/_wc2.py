@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point33 import _point33
+from _point31 import _point31
 
 
 class _wc2(InputSection):
@@ -12,12 +12,12 @@ class _wc2(InputSection):
         self._name = "WC"
         self._keywords = {'Rcut': 'RCUT'}
         self._repeated_keywords = {'Atoms': 'ATOMS'}
-        self._repeated_subsections = {'POINT': '_point33'}
+        self._repeated_subsections = {'POINT': '_point31'}
         self._repeated_aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point33()
+        new_section = _point31()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

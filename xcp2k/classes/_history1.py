@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each356 import _each356
+from _each409 import _each409
 
 
 class _history1(InputSection):
@@ -10,7 +10,7 @@ class _history1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each356()
+        self.EACH = _each409()
         self._name = "HISTORY"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

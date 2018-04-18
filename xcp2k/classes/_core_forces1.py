@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each89 import _each89
+from _each92 import _each92
 
 
 class _core_forces1(InputSection):
@@ -12,7 +12,7 @@ class _core_forces1(InputSection):
         self.Log_print_key = None
         self.Unit = None
         self.Format = None
-        self.EACH = _each89()
+        self.EACH = _each92()
         self._name = "CORE_FORCES"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Format': 'FORMAT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Add_last': 'ADD_LAST', 'Unit': 'UNIT'}
         self._subsections = {'EACH': 'EACH'}

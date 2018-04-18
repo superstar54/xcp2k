@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point45 import _point45
+from _point43 import _point43
 
 
 class _bond_rotation3(InputSection):
@@ -12,11 +12,11 @@ class _bond_rotation3(InputSection):
         self.POINT_list = []
         self._name = "BOND_ROTATION"
         self._keywords = {'P2_bond2': 'P2_BOND2', 'P1_bond2': 'P1_BOND2', 'P1_bond1': 'P1_BOND1', 'P2_bond1': 'P2_BOND1'}
-        self._repeated_subsections = {'POINT': '_point45'}
+        self._repeated_subsections = {'POINT': '_point43'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point45()
+        new_section = _point43()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

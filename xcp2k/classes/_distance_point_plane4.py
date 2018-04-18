@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point61 import _point61
+from _point58 import _point58
 
 
 class _distance_point_plane4(InputSection):
@@ -11,12 +11,12 @@ class _distance_point_plane4(InputSection):
         self.POINT_list = []
         self._name = "DISTANCE_POINT_PLANE"
         self._keywords = {'Atoms_plane': 'ATOMS_PLANE', 'Atom_point': 'ATOM_POINT', 'Pbc': 'PBC'}
-        self._repeated_subsections = {'POINT': '_point61'}
+        self._repeated_subsections = {'POINT': '_point58'}
         self._aliases = {'Points_plane': 'Atoms_plane', 'Point_point': 'Atom_point'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point61()
+        new_section = _point58()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

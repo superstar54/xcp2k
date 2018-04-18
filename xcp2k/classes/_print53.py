@@ -1,15 +1,27 @@
 from xcp2k.inputsection import InputSection
-from _nablavks_cubes1 import _nablavks_cubes1
-from _g_tensor1 import _g_tensor1
-from _response_function_cubes3 import _response_function_cubes3
+from _program_run_info39 import _program_run_info39
+from _wannier_cubes5 import _wannier_cubes5
+from _wannier_centers5 import _wannier_centers5
+from _wannier_spreads5 import _wannier_spreads5
+from _loc_restart5 import _loc_restart5
+from _total_dipole4 import _total_dipole4
+from _molecular_dipoles4 import _molecular_dipoles4
+from _molecular_states4 import _molecular_states4
+from _wannier_states4 import _wannier_states4
 
 
 class _print53(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.NABLAVKS_CUBES = _nablavks_cubes1()
-        self.G_TENSOR = _g_tensor1()
-        self.RESPONSE_FUNCTION_CUBES = _response_function_cubes3()
+        self.PROGRAM_RUN_INFO = _program_run_info39()
+        self.WANNIER_CUBES = _wannier_cubes5()
+        self.WANNIER_CENTERS = _wannier_centers5()
+        self.WANNIER_SPREADS = _wannier_spreads5()
+        self.LOC_RESTART = _loc_restart5()
+        self.TOTAL_DIPOLE = _total_dipole4()
+        self.MOLECULAR_DIPOLES = _molecular_dipoles4()
+        self.MOLECULAR_STATES = _molecular_states4()
+        self.WANNIER_STATES = _wannier_states4()
         self._name = "PRINT"
-        self._subsections = {'RESPONSE_FUNCTION_CUBES': 'RESPONSE_FUNCTION_CUBES', 'G_TENSOR': 'G_TENSOR', 'NABLAVKS_CUBES': 'NABLAVKS_CUBES'}
+        self._subsections = {'MOLECULAR_DIPOLES': 'MOLECULAR_DIPOLES', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'LOC_RESTART': 'LOC_RESTART', 'WANNIER_CENTERS': 'WANNIER_CENTERS', 'TOTAL_DIPOLE': 'TOTAL_DIPOLE', 'WANNIER_STATES': 'WANNIER_STATES', 'WANNIER_CUBES': 'WANNIER_CUBES', 'WANNIER_SPREADS': 'WANNIER_SPREADS', 'MOLECULAR_STATES': 'MOLECULAR_STATES'}
 

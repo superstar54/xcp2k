@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each355 import _each355
+from _each408 import _each408
 
 
 class _compare_forces1(InputSection):
@@ -10,7 +10,7 @@ class _compare_forces1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each355()
+        self.EACH = _each408()
         self._name = "COMPARE_FORCES"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

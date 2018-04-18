@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point22 import _point22
+from _point21 import _point21
 
 
 class _coordination2(InputSection):
@@ -24,13 +24,13 @@ class _coordination2(InputSection):
         self._name = "COORDINATION"
         self._keywords = {'R0_b': 'R0_B', 'R0': 'R0', 'Nn': 'NN', 'Nd': 'ND', 'Nd_b': 'ND_B', 'Nn_b': 'NN_B'}
         self._repeated_keywords = {'Atoms_to': 'ATOMS_TO', 'Kinds_to': 'KINDS_TO', 'Atoms_to_b': 'ATOMS_TO_B', 'Kinds_from': 'KINDS_FROM', 'Atoms_from': 'ATOMS_FROM', 'Kinds_to_b': 'KINDS_TO_B'}
-        self._repeated_subsections = {'POINT': '_point22'}
+        self._repeated_subsections = {'POINT': '_point21'}
         self._aliases = {'Expon_numerator': 'Nn', 'Expon_denominator_b': 'Nd_b', 'R_0': 'R0', 'Expon_numerator_b': 'Nn_b', 'R_0_b': 'R0_b', 'Expon_denominator': 'Nd'}
         self._repeated_aliases = {'Points_to': 'Atoms_to', 'Points_from': 'Atoms_from', 'Points_to_b': 'Atoms_to_b'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point22()
+        new_section = _point21()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each116 import _each116
+from _each128 import _each128
 
 
 class _neighbor_lists1(InputSection):
@@ -14,7 +14,7 @@ class _neighbor_lists1(InputSection):
         self.Sab_orb_full = None
         self.Sab_orb_molecular = None
         self.Sac_kin = None
-        self.EACH = _each116()
+        self.EACH = _each128()
         self._name = "NEIGHBOR_LISTS"
         self._keywords = {'Sab_orb_full': 'SAB_ORB_FULL', 'Sab_orb_molecular': 'SAB_ORB_MOLECULAR', 'Log_print_key': 'LOG_PRINT_KEY', 'Sac_kin': 'SAC_KIN', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Add_last': 'ADD_LAST', 'Unit': 'UNIT'}
         self._subsections = {'EACH': 'EACH'}

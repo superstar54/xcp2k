@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each290 import _each290
+from _each333 import _each333
 
 
 class _program_run_info35(InputSection):
@@ -10,7 +10,7 @@ class _program_run_info35(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each290()
+        self.EACH = _each333()
         self._name = "PROGRAM_RUN_INFO"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

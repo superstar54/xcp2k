@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each297 import _each297
+from _each345 import _each345
 
 
 class _symmetry1(InputSection):
@@ -18,7 +18,7 @@ class _symmetry1(InputSection):
         self.All = None
         self.Rotation_matrices = None
         self.Check_symmetry = None
-        self.EACH = _each297()
+        self.EACH = _each345()
         self._name = "SYMMETRY"
         self._keywords = {'Rotation_matrices': 'ROTATION_MATRICES', 'All': 'ALL', 'Log_print_key': 'LOG_PRINT_KEY', 'Molecule': 'MOLECULE', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Eps_geo': 'EPS_GEO', 'Symmetry_elements': 'SYMMETRY_ELEMENTS', 'Add_last': 'ADD_LAST', 'Standard_orientation': 'STANDARD_ORIENTATION', 'Check_symmetry': 'CHECK_SYMMETRY', 'Filename': 'FILENAME', 'Inertia': 'INERTIA'}
         self._subsections = {'EACH': 'EACH'}

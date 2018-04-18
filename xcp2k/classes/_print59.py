@@ -1,11 +1,15 @@
 from xcp2k.inputsection import InputSection
-from _ms_restart1 import _ms_restart1
+from _nablavks_cubes1 import _nablavks_cubes1
+from _g_tensor1 import _g_tensor1
+from _response_function_cubes3 import _response_function_cubes3
 
 
 class _print59(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.MS_RESTART = _ms_restart1()
+        self.NABLAVKS_CUBES = _nablavks_cubes1()
+        self.G_TENSOR = _g_tensor1()
+        self.RESPONSE_FUNCTION_CUBES = _response_function_cubes3()
         self._name = "PRINT"
-        self._subsections = {'MS_RESTART': 'MS_RESTART'}
+        self._subsections = {'RESPONSE_FUNCTION_CUBES': 'RESPONSE_FUNCTION_CUBES', 'G_TENSOR': 'G_TENSOR', 'NABLAVKS_CUBES': 'NABLAVKS_CUBES'}
 

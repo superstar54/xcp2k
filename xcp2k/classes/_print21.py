@@ -1,11 +1,11 @@
 from xcp2k.inputsection import InputSection
-from _neighbor_lists1 import _neighbor_lists1
+from _run_info2 import _run_info2
 
 
 class _print21(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.NEIGHBOR_LISTS = _neighbor_lists1()
+        self.RUN_INFO = _run_info2()
         self._name = "PRINT"
-        self._subsections = {'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS'}
+        self._subsections = {'RUN_INFO': 'RUN_INFO'}
 

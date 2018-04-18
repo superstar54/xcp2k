@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each260 import _each260
+from _each308 import _each308
 
 
 class _potential1(InputSection):
@@ -11,7 +11,7 @@ class _potential1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Stride = None
-        self.EACH = _each260()
+        self.EACH = _each308()
         self._name = "POTENTIAL"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Stride': 'STRIDE', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

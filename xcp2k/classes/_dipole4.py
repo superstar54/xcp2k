@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each258 import _each258
+from _each306 import _each306
 
 
 class _dipole4(InputSection):
@@ -10,7 +10,7 @@ class _dipole4(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each258()
+        self.EACH = _each306()
         self._name = "DIPOLE"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

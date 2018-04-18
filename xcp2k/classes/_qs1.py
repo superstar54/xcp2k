@@ -1,14 +1,15 @@
 from xcp2k.inputsection import InputSection
 from _distribution1 import _distribution1
 from _dftb1 import _dftb1
-from _scptb1 import _scptb1
 from _se1 import _se1
 from _mulliken_restraint1 import _mulliken_restraint1
 from _ddapc_restraint1 import _ddapc_restraint1
-from _becke_restraint1 import _becke_restraint1
+from _becke_constraint1 import _becke_constraint1
+from _cdft1 import _cdft1
 from _s2_restraint1 import _s2_restraint1
 from _lrigpw1 import _lrigpw1
 from _optimize_lri_basis1 import _optimize_lri_basis1
+from _opt_embed1 import _opt_embed1
 
 
 class _qs1(InputSection):
@@ -38,6 +39,9 @@ class _qs1(InputSection):
         self.Transport = None
         self.Kg_method = None
         self.Map_consistent = None
+        self.Ref_embed_subsys = None
+        self.Cluster_embed_subsys = None
+        self.High_level_embed_subsys = None
         self.Lmaxn1 = None
         self.Lmaxn0 = None
         self.Laddn0 = None
@@ -51,17 +55,18 @@ class _qs1(InputSection):
         self.Core_ppl = None
         self.DISTRIBUTION = _distribution1()
         self.DFTB = _dftb1()
-        self.SCPTB = _scptb1()
         self.SE = _se1()
         self.MULLIKEN_RESTRAINT = _mulliken_restraint1()
         self.DDAPC_RESTRAINT_list = []
-        self.BECKE_RESTRAINT = _becke_restraint1()
+        self.BECKE_CONSTRAINT = _becke_constraint1()
+        self.CDFT = _cdft1()
         self.S2_RESTRAINT = _s2_restraint1()
         self.LRIGPW = _lrigpw1()
         self.OPTIMIZE_LRI_BASIS = _optimize_lri_basis1()
+        self.OPT_EMBED = _opt_embed1()
         self._name = "QS"
-        self._keywords = {'Eps_filter_matrix': 'EPS_FILTER_MATRIX', 'Pw_grid': 'PW_GRID', 'Almo_scf': 'ALMO_SCF', 'Eps_pgf_orb': 'EPS_PGF_ORB', 'Pw_grid_blocked': 'PW_GRID_BLOCKED', 'Ls_scf': 'LS_SCF', 'Method': 'METHOD', 'Map_consistent': 'MAP_CONSISTENT', 'Eps_core_charge': 'EPS_CORE_CHARGE', 'Kg_method': 'KG_METHOD', 'Eps_rho': 'EPS_RHO', 'Eps_cpc': 'EPS_CPC', 'Eps_ppl': 'EPS_PPL', 'Quadrature': 'QUADRATURE', 'Pw_grid_layout': 'PW_GRID_LAYOUT', 'Lmaxn1': 'LMAXN1', 'Laddn0': 'LADDN0', 'Extrapolation': 'EXTRAPOLATION', 'Force_paw': 'FORCE_PAW', 'Eps_kg_orb': 'EPS_KG_ORB', 'Eps_rho_gspace': 'EPS_RHO_GSPACE', 'Max_rad_local': 'MAX_RAD_LOCAL', 'Epsiso': 'EPSISO', 'Alpha0_hard': 'ALPHA0_HARD', 'Core_ppl': 'CORE_PPL', 'Epsfit': 'EPSFIT', 'Extrapolation_order': 'EXTRAPOLATION_ORDER', 'Epsrho0': 'EPSRHO0', 'Eps_rho_rspace': 'EPS_RHO_RSPACE', 'Eps_gvg_rspace': 'EPS_GVG_RSPACE', 'Eps_ppnl': 'EPS_PPNL', 'Lmaxn0': 'LMAXN0', 'Eps_default': 'EPS_DEFAULT', 'Transport': 'TRANSPORT', 'Epssvd': 'EPSSVD'}
-        self._subsections = {'MULLIKEN_RESTRAINT': 'MULLIKEN_RESTRAINT', 'SCPTB': 'SCPTB', 'BECKE_RESTRAINT': 'BECKE_RESTRAINT', 'OPTIMIZE_LRI_BASIS': 'OPTIMIZE_LRI_BASIS', 'S2_RESTRAINT': 'S2_RESTRAINT', 'LRIGPW': 'LRIGPW', 'DFTB': 'DFTB', 'DISTRIBUTION': 'DISTRIBUTION', 'SE': 'SE'}
+        self._keywords = {'Eps_filter_matrix': 'EPS_FILTER_MATRIX', 'Pw_grid': 'PW_GRID', 'Ref_embed_subsys': 'REF_EMBED_SUBSYS', 'Almo_scf': 'ALMO_SCF', 'Eps_pgf_orb': 'EPS_PGF_ORB', 'Cluster_embed_subsys': 'CLUSTER_EMBED_SUBSYS', 'Pw_grid_blocked': 'PW_GRID_BLOCKED', 'Ls_scf': 'LS_SCF', 'Method': 'METHOD', 'Map_consistent': 'MAP_CONSISTENT', 'Eps_core_charge': 'EPS_CORE_CHARGE', 'Kg_method': 'KG_METHOD', 'Eps_rho': 'EPS_RHO', 'Eps_cpc': 'EPS_CPC', 'Eps_ppl': 'EPS_PPL', 'Lmaxn0': 'LMAXN0', 'Pw_grid_layout': 'PW_GRID_LAYOUT', 'Lmaxn1': 'LMAXN1', 'Laddn0': 'LADDN0', 'Extrapolation': 'EXTRAPOLATION', 'Force_paw': 'FORCE_PAW', 'Quadrature': 'QUADRATURE', 'Eps_kg_orb': 'EPS_KG_ORB', 'Eps_rho_gspace': 'EPS_RHO_GSPACE', 'Max_rad_local': 'MAX_RAD_LOCAL', 'Epsiso': 'EPSISO', 'Alpha0_hard': 'ALPHA0_HARD', 'Core_ppl': 'CORE_PPL', 'Epsfit': 'EPSFIT', 'Extrapolation_order': 'EXTRAPOLATION_ORDER', 'Epsrho0': 'EPSRHO0', 'Eps_rho_rspace': 'EPS_RHO_RSPACE', 'Eps_gvg_rspace': 'EPS_GVG_RSPACE', 'Eps_ppnl': 'EPS_PPNL', 'High_level_embed_subsys': 'HIGH_LEVEL_EMBED_SUBSYS', 'Eps_default': 'EPS_DEFAULT', 'Transport': 'TRANSPORT', 'Epssvd': 'EPSSVD'}
+        self._subsections = {'MULLIKEN_RESTRAINT': 'MULLIKEN_RESTRAINT', 'BECKE_CONSTRAINT': 'BECKE_CONSTRAINT', 'OPTIMIZE_LRI_BASIS': 'OPTIMIZE_LRI_BASIS', 'CDFT': 'CDFT', 'S2_RESTRAINT': 'S2_RESTRAINT', 'LRIGPW': 'LRIGPW', 'DFTB': 'DFTB', 'DISTRIBUTION': 'DISTRIBUTION', 'OPT_EMBED': 'OPT_EMBED', 'SE': 'SE'}
         self._repeated_subsections = {'DDAPC_RESTRAINT': '_ddapc_restraint1'}
         self._aliases = {'Wf_interpolation': 'Extrapolation', 'Alpha0': 'Alpha0_hard', 'Eps_iso': 'Epsiso', 'Interpolation': 'Extrapolation', 'Eps_vrho0': 'Epsrho0', 'Lmaxrho1': 'Lmaxn1', 'Lmaxrho0': 'Lmaxn0', 'Eps_fit': 'Epsfit', 'Alpha0_h': 'Alpha0_hard', 'Eps_gvg': 'Eps_gvg_rspace', 'Epsvrho0': 'Epsrho0', 'Eps_svd': 'Epssvd'}
         self._attributes = ['DDAPC_RESTRAINT_list']

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each151 import _each151
+from _each177 import _each177
 
 
 class _diag_sub_scf4(InputSection):
@@ -10,7 +10,7 @@ class _diag_sub_scf4(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each151()
+        self.EACH = _each177()
         self._name = "DIAG_SUB_SCF"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point50 import _point50
+from _point47 import _point47
 
 
 class _xyz_outerdiag3(InputSection):
@@ -12,12 +12,12 @@ class _xyz_outerdiag3(InputSection):
         self.POINT_list = []
         self._name = "XYZ_OUTERDIAG"
         self._keywords = {'Component_b': 'COMPONENT_B', 'Component_a': 'COMPONENT_A', 'Pbc': 'PBC', 'Atoms': 'ATOMS'}
-        self._repeated_subsections = {'POINT': '_point50'}
+        self._repeated_subsections = {'POINT': '_point47'}
         self._aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):
-        new_section = _point50()
+        new_section = _point47()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

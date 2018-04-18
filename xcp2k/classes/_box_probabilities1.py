@@ -6,6 +6,7 @@ class _box_probabilities1(InputSection):
         InputSection.__init__(self)
         self.Pmhmc_box = None
         self.Pmvol_box = None
+        self.Pmclus_box = None
         self._name = "BOX_PROBABILITIES"
-        self._keywords = {'Pmhmc_box': 'PMHMC_BOX', 'Pmvol_box': 'PMVOL_BOX'}
+        self._keywords = {'Pmclus_box': 'PMCLUS_BOX', 'Pmhmc_box': 'PMHMC_BOX', 'Pmvol_box': 'PMVOL_BOX'}
 

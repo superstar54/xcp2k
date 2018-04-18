@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each95 import _each95
+from _each98 import _each98
 
 
 class _program_run_info11(InputSection):
@@ -10,9 +10,11 @@ class _program_run_info11(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each95()
+        self.Mo_overlap_matrix = None
+        self.Mo_overlap_eigenvalues = None
+        self.EACH = _each98()
         self._name = "PROGRAM_RUN_INFO"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
+        self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Mo_overlap_matrix': 'MO_OVERLAP_MATRIX', 'Mo_overlap_eigenvalues': 'MO_OVERLAP_EIGENVALUES', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Add_last': 'ADD_LAST'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

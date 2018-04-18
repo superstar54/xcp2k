@@ -1,5 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _m_sampling1 import _m_sampling1
+from _ceperley1 import _ceperley1
+from _worm1 import _worm1
 from _rdf1 import _rdf1
 from _rho1 import _rho1
 from _coord8 import _coord8
@@ -22,10 +23,9 @@ class _helium1(InputSection):
         self.Solute_interaction = None
         self.Natoms = None
         self.Nbeads = None
+        self.Rng_seed = None
         self.N_inner = None
         self.N_outer = None
-        self.Bisection = None
-        self.Max_perm_cycle = None
         self.Sampling_method = None
         self.Periodic = None
         self.Cell_size = None
@@ -33,8 +33,8 @@ class _helium1(InputSection):
         self.Droplet_radius = None
         self.Density = None
         self.Presample = None
-        self.Drop_unused_envs = None
-        self.M_SAMPLING = _m_sampling1()
+        self.CEPERLEY = _ceperley1()
+        self.WORM = _worm1()
         self.RDF = _rdf1()
         self.RHO = _rho1()
         self.COORD = _coord8()
@@ -44,8 +44,8 @@ class _helium1(InputSection):
         self.RNG_STATE = _rng_state1()
         self.PRINT = _print14()
         self._name = "HELIUM"
-        self._keywords = {'Get_forces': 'GET_FORCES', 'Natoms': 'NATOMS', 'N_inner': 'N_INNER', 'Max_perm_cycle': 'MAX_PERM_CYCLE', 'Nbeads': 'NBEADS', 'Interaction_pot_scan': 'INTERACTION_POT_SCAN', 'N_outer': 'N_OUTER', 'Density': 'DENSITY', 'Sampling_method': 'SAMPLING_METHOD', 'Cell_shape': 'CELL_SHAPE', 'Periodic': 'PERIODIC', 'Num_env': 'NUM_ENV', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Bisection': 'BISECTION', 'Droplet_radius': 'DROPLET_RADIUS', 'Presample': 'PRESAMPLE', 'Helium_only': 'HELIUM_ONLY', 'Cell_size': 'CELL_SIZE', 'Solute_interaction': 'SOLUTE_INTERACTION', 'Drop_unused_envs': 'DROP_UNUSED_ENVS'}
-        self._subsections = {'RNG_STATE': 'RNG_STATE', 'FORCE': 'FORCE', 'COORD': 'COORD', 'RDF': 'RDF', 'PERM': 'PERM', 'RHO': 'RHO', 'PRINT': 'PRINT', 'AVERAGES': 'AVERAGES', 'M_SAMPLING': 'M-SAMPLING'}
+        self._keywords = {'Get_forces': 'GET_FORCES', 'Natoms': 'NATOMS', 'N_inner': 'N_INNER', 'Nbeads': 'NBEADS', 'Interaction_pot_scan': 'INTERACTION_POT_SCAN', 'N_outer': 'N_OUTER', 'Density': 'DENSITY', 'Sampling_method': 'SAMPLING_METHOD', 'Rng_seed': 'RNG_SEED', 'Periodic': 'PERIODIC', 'Num_env': 'NUM_ENV', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Cell_shape': 'CELL_SHAPE', 'Droplet_radius': 'DROPLET_RADIUS', 'Presample': 'PRESAMPLE', 'Helium_only': 'HELIUM_ONLY', 'Cell_size': 'CELL_SIZE', 'Solute_interaction': 'SOLUTE_INTERACTION'}
+        self._subsections = {'RNG_STATE': 'RNG_STATE', 'CEPERLEY': 'CEPERLEY', 'FORCE': 'FORCE', 'WORM': 'WORM', 'COORD': 'COORD', 'RDF': 'RDF', 'PERM': 'PERM', 'RHO': 'RHO', 'PRINT': 'PRINT', 'AVERAGES': 'AVERAGES'}
         self._aliases = {'Inorot': 'N_inner', 'Irot': 'N_outer'}
         self._attributes = ['Section_parameters']
 

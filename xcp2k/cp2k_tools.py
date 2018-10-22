@@ -1,5 +1,3 @@
-
-
 class InputSection(object):
     """Represents a section of a CP2K input file"""
     def __init__(self, name, params=None):
@@ -102,3 +100,4 @@ def capitalize_keys(d):
             upper_key = key.upper()
             result[upper_key] = value
     return result
+

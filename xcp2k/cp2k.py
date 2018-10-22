@@ -33,6 +33,7 @@ import numpy as np
 from cp2k_params import *
 from cp2k_tools import *
 from cp2krc import *
+from scipy.constants import physical_constants, c, h, hbar, e
 #
 #from xcp2k.utilities import print_title, print_text, print_warning, print_error
 from xcp2k.classes._CP2K_INPUT1 import _CP2K_INPUT1
@@ -42,7 +43,7 @@ class CP2K(Calculator):
     """ASE-Calculator for CP2K.
     """
     name = 'cp2k'
-    implemented_properties = ['energy', 'forces', 'stress', 'charges']
+    implemented_properties = ['energy', 'energies', 'forces', 'stress', 'charges']
 
     def __init__(self, restart=None, mode = 0, env = 'SLURM', ignore_bad_restart_file=False,
                  label='cp2k', cpu = 1, atoms=None, command=None,
@@ -279,10 +280,11 @@ class CP2K(Calculator):
 
 
     def read_energy(self):
+        cone = physical_constants['Hartree energy in eV']
         for line in open(join(self.directory, 'cp2k.out'), 'r'):
             if line.rfind('ENERGY|') > -1:
                 E0 = float(line.split()[8])
-                self.results['energy'] = E0*27.2113860217
+                self.results['energy'] = E0*cone
 
             elif line.rfind('Total energy uncorrected') > -1:
                 F = float(line.split()[5])
@@ -294,6 +296,7 @@ class CP2K(Calculator):
         If 'all' is switched on, the forces for all ionic steps
         in the output file will be returned, in other case only the
         forces for the last ionic configuration are returned."""
+        conf = physical_constants['atomic unit of force'][0]/physical_constants['electron volt'][0]*10**(-10)
         lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()
         forces = np.zeros([len(self.atoms), 3])
         for n, line in enumerate(lines):
@@ -301,7 +304,7 @@ class CP2K(Calculator):
                 for iatom in range(len(self.atoms)):
                     data = lines[n + iatom + 1].split()
                     for iforce in range(3):
-                        forces[iatom, iforce] = float(data[3 + iforce])*51.421
+                        forces[iatom, iforce] = float(data[3 + iforce])*conf
         self.results['forces'] = forces
 
     def read_charges(self):

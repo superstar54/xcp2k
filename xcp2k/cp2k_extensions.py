@@ -218,7 +218,7 @@ def create_constraint(self, constraint, atoms, molnames=None):
         if len(fixed) != 0:
             fixed_atoms = constraint.FIXED_ATOMS_add()
             fixed_atoms.Components_to_fix = fixed
-            fixed_atoms.List = iatom
+            fixed_atoms.List = iatom + 1
         
     
     fixed_lists = ''.join('  ' + str(x + 1) for x in sflags_all)

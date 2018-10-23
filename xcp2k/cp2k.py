@@ -280,7 +280,7 @@ class CP2K(Calculator):
 
 
     def read_energy(self):
-        cone = physical_constants['Hartree energy in eV']
+        cone = physical_constants['Hartree energy in eV'][0]
         for line in open(join(self.directory, 'cp2k.out'), 'r'):
             if line.rfind('ENERGY|') > -1:
                 E0 = float(line.split()[8])

@@ -57,6 +57,7 @@ class CP2K(Calculator):
         self.label = None
         self.directory = None
         self.prefix = None
+        self.out = None
 
         self.symmetry = None
 
@@ -231,21 +232,31 @@ class CP2K(Calculator):
         if self.CP2K_INPUT.GLOBAL.Run_type.upper() == 'CELL_OPT':
             atoms_sorted = ase.io.read(self.prefix+'-pos-1.xyz')
             atoms.positions = atoms_sorted.positions
-            lines = open('cp2k.out', 'r').readlines()
-            n = len(lines)
-            for i in range(n):
-                if 'CELL| Volume [angstrom^3]:' in lines[i]:
-                    for j in range(3):
-                        data = lines[i + 1 + j].split()
-                        for icell in range(3):
-                            atoms.cell[j, icell] = float(data[4 + icell])
+            atoms.cell = self.read_cell()
             self.atoms = atoms
+    #
+    def read_cell(self,):
+        #
+        cell = np.zeros([3, 3])
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        lines = open(self.out, 'r').readlines()
+        n = len(lines)
+        for i in range(n):
+            if 'CELL| Volume' in lines[i]:
+                for j in range(3):
+                    data = lines[i + 1 + j].split()
+                    for icell in range(3):
+                        cell[j, icell] = float(data[4 + icell])
+        return cell
             
 
     def read_results(self):
         converged = self.read_convergence()
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
         if not converged:
-            os.system('tail -20 ' + join(self.directory, 'cp2k.out'))
+            os.system('tail -20 ' + self.out)
             raise RuntimeError('CP2K did not converge!\n' +
                                'The last lines of output are printed above ' +
                                'and should give an indication why.')
@@ -268,7 +279,9 @@ class CP2K(Calculator):
 
     def read_convergence(self):
         converged = False
-        lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()[-100:-1]
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        lines = open(self.out, 'r').readlines()[-100:-1]
         for n, line in enumerate(lines):
             if line.rfind('PROGRAM ENDED AT') > -1:
                 converged = True
@@ -280,15 +293,26 @@ class CP2K(Calculator):
 
 
     def read_energy(self):
+        energies = []
+        free_energies = []
         cone = physical_constants['Hartree energy in eV'][0]
-        for line in open(join(self.directory, 'cp2k.out'), 'r'):
+        #
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        # print(self.out)
+        for line in open(self.out, 'r'):
             if line.rfind('ENERGY|') > -1:
-                E0 = float(line.split()[8])
-                self.results['energy'] = E0*cone
+                E0 = float(line.split()[8])*cone
+                energies.append(E0)
+                self.results['energy'] = E0
 
             elif line.rfind('Total energy uncorrected') > -1:
                 F = float(line.split()[5])
+                free_energies.append(F)
                 self.results['free_energy'] = F
+        self.results['energies'] = energies
+        self.results['free_energies'] = free_energies
+
 
     def read_forces(self):
         """Method that reads forces from the output file.
@@ -297,7 +321,9 @@ class CP2K(Calculator):
         in the output file will be returned, in other case only the
         forces for the last ionic configuration are returned."""
         conf = physical_constants['atomic unit of force'][0]/physical_constants['electron volt'][0]*10**(-10)
-        lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        lines = open(self.out, 'r').readlines()
         forces = np.zeros([len(self.atoms), 3])
         for n, line in enumerate(lines):
             if line.rfind('# Atom   Kind   Element') > -1:
@@ -310,7 +336,9 @@ class CP2K(Calculator):
     def read_charges(self):
         """Method that reads charges from the output file.
         """
-        lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        lines = open(self.out, 'r').readlines()
         for n, line in enumerate(lines):
             if line.rfind('Mulliken Population Analysis') > -1:
                 charges = []
@@ -329,7 +357,9 @@ class CP2K(Calculator):
 
 
     def read_stress(self):
-        lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        lines = open(self.out, 'r').readlines()
         stress = None
         for n, line in enumerate(lines):
             if (line.rfind('STRESS TENSOR [GPa]') > -1):

@@ -18,7 +18,7 @@ from ase.utils import basestring
 
 
 class NEB:
-    def __init__(self, images, k=0.1, climb=False, parallel=False,
+    def __init__(self, images, k=0.1, kp = 1.5, climb=False, parallel=False,
                  remove_rotation_and_translation=False, world=None,
                  method='aseneb'):
         """Nudged elastic band.
@@ -62,6 +62,15 @@ class NEB:
         self.natoms = len(images[0])
         self.nimages = len(images)
         self.emax = np.nan
+        self.kp = kp
+
+        # evaluate the distance from initial to final
+        self.tmax = find_mic(images[-1].get_positions() -
+                          images[0].get_positions(),
+                          images[0].get_cell(), images[0].pbc)[0]
+        self.ntmax = np.linalg.norm(self.tmax)*self.kp
+        self.rmin = self.ntmax/(self.nimages-1)*0.95
+        self.rmax = self.ntmax/(self.nimages-1)*1.05
 
         self.remove_rotation_and_translation = remove_rotation_and_translation
 
@@ -136,6 +145,7 @@ class NEB:
         images = self.images
         forces = np.empty(((self.nimages - 2), self.natoms, 3))
         energies = np.empty(self.nimages)
+        
 
         if self.remove_rotation_and_translation:
             # Remove translation and rotation between
@@ -187,6 +197,7 @@ class NEB:
 
         imax = 1 + np.argsort(energies[1:-1])[-1]
         self.emax = energies[imax]
+        self.energies = energies
 
         t1 = find_mic(images[1].get_positions() -
                       images[0].get_positions(),
@@ -240,50 +251,82 @@ class NEB:
                 tt = np.vdot(tangent, tangent)
 
             f = forces[i - 1]
-            # ft = np.vdot(f, tangent)
+            ft = np.vdot(f, tangent)
 
-            # if i == imax and self.climb:
-            #     # imax not affected by the spring forces. The full force
-            #     # with component along the elestic band converted
-            #     # (formula 5 of Paper II)
-            #     if self.method == 'aseneb':
-            #         f -= 2 * ft / tt * tangent
-            #     else:
-            #         f -= 2 * ft * tangent
-            # elif self.method == 'eb':
-            #     f -= ft * tangent
-            #     # Spring forces
-            #     # (formula C1, C5, C6 and C7 of Paper III)
-            #     f1 = -(nt1 - eqlength) * t1 / nt1 * self.k[i - 1]
-            #     f2 = (nt2 - eqlength) * t2 / nt2 * self.k[i]
-            #     if self.climb and abs(i - imax) == 1:
-            #         deltavmax = max(abs(energies[i + 1] - energies[i]),
-            #                         abs(energies[i - 1] - energies[i]))
-            #         deltavmin = min(abs(energies[i + 1] - energies[i]),
-            #                         abs(energies[i - 1] - energies[i]))
-            #         f += (f1 + f2) * deltavmin / deltavmax
-            #     else:
-            #         f += f1 + f2
-            # elif self.method == 'improvedtangent':
-            #     f -= ft * tangent
-            #     # Improved parallel spring force (formula 12 of paper I)
-            #     f += (nt2 * self.k[i] - nt1 * self.k[i - 1]) * tangent
-            # else:
-            #     f -= ft / tt * tangent
-            #     f -= np.vdot(t1 * self.k[i - 1] -
-            #                  t2 * self.k[i], tangent) / tt * tangent
-
+            if i == imax and self.climb:
+                # imax not affected by the spring forces. The full force
+                # with component along the elestic band converted
+                # (formula 5 of Paper II)
+                if self.method == 'aseneb':
+                    f -= 2 * ft / tt * tangent
+                else:
+                    f -= 2 * ft * tangent
+            elif self.method == 'eb':
+                f -= ft * tangent
+                # Spring forces
+                # (formula C1, C5, C6 and C7 of Paper III)
+                f1 = -(nt1 - eqlength) * t1 / nt1 * self.k[i - 1]
+                f2 = (nt2 - eqlength) * t2 / nt2 * self.k[i]
+                if self.climb and abs(i - imax) == 1:
+                    deltavmax = max(abs(energies[i + 1] - energies[i]),
+                                    abs(energies[i - 1] - energies[i]))
+                    deltavmin = min(abs(energies[i + 1] - energies[i]),
+                                    abs(energies[i - 1] - energies[i]))
+                    f += (f1 + f2) * deltavmin / deltavmax
+                else:
+                    f += f1 + f2
+            elif self.method == 'improvedtangent':
+                f -= ft * tangent
+                # Improved parallel spring force (formula 12 of paper I)
+                f += (nt2 * self.k[i] - nt1 * self.k[i - 1]) * tangent
+            else:
+                # f -= ft / tt * tangent
+                df = 0
+                # print(nt1, nt2, self.rmin, self.rmax, df)
+                if nt1<self.rmin:
+                    df += t1*self.k[i - 1]*(self.rmin/nt1)**4
+                    # print('1', df)
+                if nt1>self.rmax:
+                    df -= t1*self.k[i - 1]*(nt1/self.rmax)**4
+                    # print('2', df)
+                if nt2<self.rmin:
+                    df -= t2*self.k[i - 1]*(self.rmin/nt2)**4
+                    # print('3', df)
+                if nt2>self.rmax:
+                    df += t2*self.k[i - 1]*(nt2/self.rmax)**4
+                    # print('4', df, (nt2/self.rmax)**4)
+                # print(t1, t2, df)
+                f += df
             t1 = t2
             nt1 = nt2
 
-        # return forces.reshape((-1, 3))
-        return forces
+        return forces.reshape((-1, 3))
 
     def get_potential_energy(self, force_consistent=False):
         """Return the maximum potential energy along the band.
         Note that the force_consistent keyword is ignored and is only
         present for compatibility with ase.Atoms.get_potential_energy."""
-        return self.emax
+        images = self.images
+        Eb = 0
+        benergies = np.zeros(self.nimages)
+        #
+        for i in range(0, self.nimages - 1):
+            t1  = find_mic(images[i + 1].get_positions() -
+                          images[i].get_positions(),
+                          images[i].get_cell(), images[i].pbc)[0]
+            nt1 = np.linalg.norm(t1)
+            print(nt1, self.rmin, self.rmax)
+            if nt1<self.rmin:
+                benergies[i] += 1/5.0*self.k[i - 1]*(self.rmin/nt1)**5
+            if nt1>self.rmax:
+                benergies[i] += 1/5.0*self.k[i - 1]*(nt1/self.rmax)**5
+        #
+        self.benergies = benergies
+        # print('Energy of Band:', self.benergies)
+        self.Eb = np.sum(self.benergies)
+        self.E = self.Eb + np.sum(self.energies)
+
+        return self.E
 
     def __len__(self):
         return (self.nimages - 2) * self.natoms

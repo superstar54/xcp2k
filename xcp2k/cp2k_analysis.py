@@ -14,23 +14,6 @@ class CP2KAnas(CP2K):
         self._images = None
         self.out = None
 
-
-    def read_energies(self):
-        energies = []
-        free_energies = []
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
-        for line in open(self.out, 'r'):
-            if line.rfind('ENERGY|') > -1:
-                E0 = float(line.split()[8])
-                energies.append(E0*27.2113860217)
-            elif line.rfind('Total energy uncorrected') > -1:
-                F = float(line.split()[5])
-                free_energies.append(F)
-        self.results['energies'] = energies
-        self.results['free_energies'] = free_energies
-
-
     def get_barrier(self, fit=True, raw=False):
         """Returns the barrier estimate from the CP2K, along with the
         Delta E of the elementary reaction. If fit=True, the barrier is

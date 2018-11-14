@@ -53,8 +53,6 @@ def run(self):
     # if you get here, a job is getting submitted
 
     jobname = self.prefix
-    #print(xcp2krc['queue.command'])
-    #print(xcp2krc['queue.script'])
 
     if xcp2krc['env'].upper() == 'SLURM':
         cmdlist = ['sbatch']
@@ -73,27 +71,23 @@ def run(self):
         cmdlist += ['-l', 'nodes=1:ppn={0}'.format(self.cpu)]
         cmdlist += ['-q', 'low']
     
-    print(cmdlist)
-    print(xcp2krc['script'])
+    logger.debug(cmdlist)
+    logger.debug(xcp2krc['script'])
 
     p = Popen(cmdlist,
               stdin=PIPE, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate(xcp2krc['script'])
-
-    print(out)
-    #print(os.environ)
-
     if out == '' or err != '':
         raise Exception('something went wrong in qsub:\n\n{0}'.format(err))
 
-    print(out)
+    logger.debug(out)
     if xcp2krc['env'].upper() == 'SLURM':
         job_id = int(out.split()[3])
     elif xcp2krc['env'].upper() == 'SGE':
         job_id = int(out.split()[2])
     elif xcp2krc['env'].upper() == 'gridview':
         job_id = int(out.split('.')[0]) 
-    print(job_id)
+    logger.debug('jobs_id = ', job_id)
         
 
     if xcp2krc['env'].upper() == 'SLURM':

@@ -73,7 +73,6 @@ for cf in config_files:
     if os.path.exists(cf):
         #read_configuration(cf)
         read_script(cf)
-print(xcp2krc)
 
 
 

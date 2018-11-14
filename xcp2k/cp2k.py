@@ -22,14 +22,16 @@ For more information about cp2k, please visit:
 Author: Xing Wang <xing.wang@psi.ch>
 """
 
-import ase.io
-from ase.calculators.calculator import Calculator, all_changes, Parameters
-from ase.units import Rydberg
+
 import os
+import sys
 from os.path import join, isfile, split, islink
 from warnings import warn
 from subprocess import Popen, PIPE
 import numpy as np
+import ase.io
+from ase.calculators.calculator import Calculator, all_changes, Parameters
+from ase.units import Rydberg
 from cp2k_params import *
 from cp2k_tools import *
 from cp2krc import *
@@ -37,7 +39,15 @@ from scipy.constants import physical_constants, c, h, hbar, e
 #
 #from xcp2k.utilities import print_title, print_text, print_warning, print_error
 from xcp2k.classes._CP2K_INPUT1 import _CP2K_INPUT1
+import logging
 
+logger = logging.getLogger('CP2K')
+handler = logging.StreamHandler()
+formatter = logging.Formatter(
+        '%(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+# logger.setLevel(logging.DEBUG) 
 
 class CP2K(Calculator):
     """ASE-Calculator for CP2K.
@@ -52,6 +62,8 @@ class CP2K(Calculator):
         xcp2krc['env'] = env    # set environment for  job submission
         xcp2krc['ntasks'] = cpu
         xcp2krc['nodes'] = nodes
+        if debug:
+            logger.setLevel(logging.DEBUG)
 
         self.CP2K_INPUT = _CP2K_INPUT1()
         self._debug = debug
@@ -151,8 +163,7 @@ class CP2K(Calculator):
 
     def write(self, label):
         'Write atoms, parameters and calculated results into restart files.'
-        if self._debug:
-            print("Writting restart to: ", label)
+        logger.debug("Writting restart to: ", label)
 
         self.atoms.write(label + '_restart.traj')
         f = open(label + '_params.ase', 'a')
@@ -175,8 +186,7 @@ class CP2K(Calculator):
         if not properties:
             properties = ['energy']
         
-        if self._debug:
-            print("system_changes:", system_changes)
+        logger.debug("system_changes:", system_changes)
 
         if atoms is not None:
             self.atoms = atoms
@@ -210,7 +220,7 @@ class CP2K(Calculator):
 
         if 'ASE_CP2K_COMMAND' in os.environ:
             cp2k = os.environ['ASE_CP2K_COMMAND']
-            #print(cp2k)
+            logger.debug(cp2k)
             exitcode = os.system('%s > %s' % (cp2k, 'cp2k.out'))
         elif 'ASE_CP2K_SCRIPT' in os.environ:
             cp2k = os.environ['ASE_CP2K_SCRIPT']

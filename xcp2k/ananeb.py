@@ -164,9 +164,16 @@ class AnaNEB(CP2K):
             write(ofname, image,  run_povray=True, rotation = rotation, **kwargs)  # set bbox by hand, try and error
             # os.system('povray {0:04d}.ini'.format(i))
             #
+
         if name:
-            os.system('convert -delay 20 temp*png {0}.gif'.format(name))
+            filename = '{0}.gif'.format(name)
         else:
-            os.system('convert -delay 20 temp*png {0}.gif'.format(self.prefix))
+            filename = '{0}.gif'.format(self.prefix)
+        os.system('convert -delay 20 temp*png {0}'.format(filename))
+        os.system('''convert {0}  \
+          \( -clone 0 -set delay 200 \) -swap 0 +delete \
+          \( +clone   -set delay 100 \) +swap   +delete \
+          {0}'''.format(filename))
+
         os.system('rm temp*.ini temp*png  temp*.pov')
 

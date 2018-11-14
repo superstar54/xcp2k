@@ -45,11 +45,13 @@ class CP2K(Calculator):
     name = 'cp2k'
     implemented_properties = ['energy', 'energies', 'forces', 'stress', 'charges']
 
-    def __init__(self, restart=None, mode = 0, env = 'SLURM', ignore_bad_restart_file=False,
-                 label='cp2k', cpu = 1, atoms=None, command=None,
+    def __init__(self, restart=None, mode = 0,  ignore_bad_restart_file=False,
+                 label='cp2k', env = 'SLURM', cpu = 1, nodes = 1, atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
-        XCP2KRC['env'] = env    # set environment for  job submission
+        xc2pkrc['env'] = env    # set environment for  job submission
+        xc2pkrc['--ntasks'] = cpu
+        xc2pkrc['--nodes'] = nodes
 
         self.CP2K_INPUT = _CP2K_INPUT1()
         self._debug = debug
@@ -105,7 +107,6 @@ class CP2K(Calculator):
                     self.reset()
                 else:
                     raise
-        self.cpu = cpu
         #print('Finish construct CP2K-calculator object.')
 
 
@@ -192,16 +193,16 @@ class CP2K(Calculator):
         self.run()
         
         # read new geometry
-        self.update_atoms(atoms)
+        self.update_atoms(self.atoms)
        
         # write Jmol
-        atoms.write(self.prefix + '.in')
+        self.atoms.write(self.prefix + '.in')
 
         os.chdir(olddir)
         # read results
         self.converged = self.read_convergence()
         self.read_results()
-        self.set_results(atoms)
+        self.set_results(self.atoms)
         self.write(self.directory + '/' + self.prefix)
 
     def run(self):

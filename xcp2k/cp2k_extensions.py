@@ -18,7 +18,7 @@ def run(self):
     # mode='run' , we should just run the job. First, we consider how.
     
     #print(os.environ)
-    if XCP2KRC['mode'] == 'run':
+    if xcp2krc['mode'] == 'run':
         # probably running at cmd line, in serial.
         cp2kcmd = os.environ['ASE_CP2K_COMMAND']
         exitcode = os.system(cp2kcmd)
@@ -53,73 +53,72 @@ def run(self):
     # if you get here, a job is getting submitted
 
     jobname = self.prefix
-    #print(XCP2KRC['queue.command'])
-    #print(XCP2KRC['queue.script'])
+    #print(xcp2krc['queue.command'])
+    #print(xcp2krc['queue.script'])
 
-    if XCP2KRC['env'].upper() == 'SLURM':
+    if xcp2krc['env'].upper() == 'SLURM':
         cmdlist = ['sbatch']
+        cmdlist += ['--wait']
+        for key, value 
         cmdlist += ['--job-name', '{0}'.format(jobname)]
-        cmdlist += ['--ntasks-per-node', '{0}'.format(self.cpu)]
-    if XCP2KRC['env'].upper() == 'SGE':
+        cmdlist += ['--nodes', '{0}'.format(xcp2krc['nodes'])]
+        # cmdlist += ['--ntasks', '{0}'.format(self.nodes)]
+        # cmdlist += ['--ntasks-per-node', '{0}'.format(self.cpu)]
+    if xcp2krc['env'].upper() == 'SGE':
         cmdlist = ['qsub']
         cmdlist += ['-N', '{0}'.format(jobname)]
         cmdlist += ['-pe', 'openmpi', '{0}'.format(self.cpu)]
-    if XCP2KRC['env'].upper() == 'gridview':
+    if xcp2krc['env'].upper() == 'gridview':
         cmdlist = ['qsub']
         cmdlist += ['-N', '{0}'.format(jobname)]
         cmdlist += ['-l', 'nodes=1:ppn={0}'.format(self.cpu)]
         cmdlist += ['-q', 'low']
     
-    #print(cmdlist)
-    #print(XCP2KRC['queue.script'])
+    print(cmdlist)
+    print(xcp2krc['queue.script'])
 
     p = Popen(cmdlist,
               stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    out, err = p.communicate(XCP2KRC['queue.script'])
+    out, err = p.communicate(xcp2krc['queue.script'])
 
-    #print(out)
+    print(out)
     #print(os.environ)
 
     if out == '' or err != '':
         raise Exception('something went wrong in qsub:\n\n{0}'.format(err))
 
-    import time
     print(out)
-    if XCP2KRC['env'].upper() == 'SLURM':
+    if xcp2krc['env'].upper() == 'SLURM':
         job_id = int(out.split()[3])
-    elif XCP2KRC['env'].upper() == 'SGE':
+    elif xcp2krc['env'].upper() == 'SGE':
         job_id = int(out.split()[2])
-    elif XCP2KRC['env'].upper() == 'gridview':
+    elif xcp2krc['env'].upper() == 'gridview':
         job_id = int(out.split('.')[0]) 
     print(job_id)
         
 
-    delay = 100 
-    while True:
-        if XCP2KRC['env'].upper() == 'SLURM':
-            output = Popen("sacct -j %i" %(job_id), shell = True,
-                   stdin = PIPE,
-                   stdout = PIPE,
-                   stderr = PIPE).communicate()
-            if "COMPLETED" in output[0] and output[0].split()[15]==self.prefix:
-                break
-            time.sleep(delay)
-        elif XCP2KRC['env'].upper() == 'SGE':
-            output = Popen("qstat -j %i" %(job_id), shell = True,
-                   stdin = PIPE,
-                   stdout = PIPE,
-                   stderr = PIPE).communicate()
-            if "do not exist" in output[1]:
-                break
-            time.sleep(delay)
-        elif XCP2KRC['env'].upper() == 'gridview':
-            output = Popen("qstat -R %i" %(job_id), shell = True,
-                   stdin = PIPE,
-                   stdout = PIPE,
-                   stderr = PIPE).communicate()
-            if "Unknown" in output[1]:
-                break
-            time.sleep(delay)
+    if xcp2krc['env'].upper() == 'SLURM':
+        output = Popen("sacct -j %i" %(job_id), shell = True,
+               stdin = PIPE,
+               stdout = PIPE,
+               stderr = PIPE).communicate()
+        if "COMPLETED" in output[0] and output[0].split()[15]==self.prefix:
+            break
+    elif xcp2krc['env'].upper() == 'SGE':
+        output = Popen("qstat -j %i" %(job_id), shell = True,
+               stdin = PIPE,
+               stdout = PIPE,
+               stderr = PIPE).communicate()
+        if "do not exist" in output[1]:
+            break
+    elif xcp2krc['env'].upper() == 'gridview':
+        output = Popen("qstat -R %i" %(job_id), shell = True,
+               stdin = PIPE,
+               stdout = PIPE,
+               stderr = PIPE).communicate()
+        if "Unknown" in output[1]:
+            break
+    print('jobs failed')
 
 
 CP2K.run = MethodType(run, None, CP2K)

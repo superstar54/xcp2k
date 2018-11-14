@@ -67,14 +67,13 @@ def  read_script(fname):
 
 
 
-if __name__ == '__main__':
-    config_files = [os.path.join(os.environ['HOME'], '.xcp2krc'),
-                '.xcp2krc']
-    for cf in config_files:
-        if os.path.exists(cf):
-            #read_configuration(cf)
-            read_script(cf)
-    print(xcp2krc)
+config_files = [os.path.join(os.environ['HOME'], '.xcp2krc'),
+            '.xcp2krc']
+for cf in config_files:
+    if os.path.exists(cf):
+        #read_configuration(cf)
+        read_script(cf)
+print(xcp2krc)
 
 
 

@@ -49,9 +49,9 @@ class CP2K(Calculator):
                  label='cp2k', env = 'SLURM', cpu = 1, nodes = 1, atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
-        xc2pkrc['env'] = env    # set environment for  job submission
-        xc2pkrc['--ntasks'] = cpu
-        xc2pkrc['--nodes'] = nodes
+        xcp2krc['env'] = env    # set environment for  job submission
+        xcp2krc['ntasks'] = cpu
+        xcp2krc['nodes'] = nodes
 
         self.CP2K_INPUT = _CP2K_INPUT1()
         self._debug = debug

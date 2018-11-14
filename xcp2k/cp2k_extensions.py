@@ -59,7 +59,6 @@ def run(self):
     if xcp2krc['env'].upper() == 'SLURM':
         cmdlist = ['sbatch']
         cmdlist += ['--wait']
-        for key, value 
         cmdlist += ['--job-name', '{0}'.format(jobname)]
         cmdlist += ['--nodes', '{0}'.format(xcp2krc['nodes'])]
         # cmdlist += ['--ntasks', '{0}'.format(self.nodes)]
@@ -75,11 +74,11 @@ def run(self):
         cmdlist += ['-q', 'low']
     
     print(cmdlist)
-    print(xcp2krc['queue.script'])
+    print(xcp2krc['script'])
 
     p = Popen(cmdlist,
               stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    out, err = p.communicate(xcp2krc['queue.script'])
+    out, err = p.communicate(xcp2krc['script'])
 
     print(out)
     #print(os.environ)
@@ -103,21 +102,21 @@ def run(self):
                stdout = PIPE,
                stderr = PIPE).communicate()
         if "COMPLETED" in output[0] and output[0].split()[15]==self.prefix:
-            break
+            return 
     elif xcp2krc['env'].upper() == 'SGE':
         output = Popen("qstat -j %i" %(job_id), shell = True,
                stdin = PIPE,
                stdout = PIPE,
                stderr = PIPE).communicate()
         if "do not exist" in output[1]:
-            break
+            return 
     elif xcp2krc['env'].upper() == 'gridview':
         output = Popen("qstat -R %i" %(job_id), shell = True,
                stdin = PIPE,
                stdout = PIPE,
                stderr = PIPE).communicate()
         if "Unknown" in output[1]:
-            break
+            return 
     print('jobs failed')
 
 

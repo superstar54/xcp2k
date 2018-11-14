@@ -410,4 +410,5 @@ params = {
 ase_params = {
 'CELL_OPT': False,
 'CPU':4,
+'NODES':1,
 }

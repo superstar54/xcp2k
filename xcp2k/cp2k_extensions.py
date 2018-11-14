@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from cp2k import *
+from cp2k import logger
 from types import MethodType
 
-calc = CP2K()
 
 def run(self):
     """Monkey patch to submit job through the queue.
@@ -18,7 +18,7 @@ def run(self):
     # mode='run' , we should just run the job. First, we consider how.
     
     #print(os.environ)
-    if xcp2krc['mode'] == 'run':
+    if self.xcp2krc['mode'] == 'run':
         # probably running at cmd line, in serial.
         cp2kcmd = os.environ['ASE_CP2K_COMMAND']
         exitcode = os.system(cp2kcmd)
@@ -54,57 +54,58 @@ def run(self):
 
     jobname = self.prefix
 
-    if xcp2krc['env'].upper() == 'SLURM':
+    if self.xcp2krc['env'].upper() == 'SLURM':
         cmdlist = ['sbatch']
         cmdlist += ['--wait']
         cmdlist += ['--job-name', '{0}'.format(jobname)]
-        cmdlist += ['--nodes', '{0}'.format(xcp2krc['nodes'])]
-        # cmdlist += ['--ntasks', '{0}'.format(self.nodes)]
+        cmdlist += ['--nodes', '{0}'.format(self.xcp2krc['nodes'])]
+        cmdlist += ['--time', '{0}'.format(self.xcp2krc['time'])]
         # cmdlist += ['--ntasks-per-node', '{0}'.format(self.cpu)]
-    if xcp2krc['env'].upper() == 'SGE':
+    if self.xcp2krc['env'].upper() == 'SGE':
         cmdlist = ['qsub']
         cmdlist += ['-N', '{0}'.format(jobname)]
         cmdlist += ['-pe', 'openmpi', '{0}'.format(self.cpu)]
-    if xcp2krc['env'].upper() == 'gridview':
+    if self.xcp2krc['env'].upper() == 'gridview':
         cmdlist = ['qsub']
         cmdlist += ['-N', '{0}'.format(jobname)]
         cmdlist += ['-l', 'nodes=1:ppn={0}'.format(self.cpu)]
         cmdlist += ['-q', 'low']
     
     logger.debug(cmdlist)
-    logger.debug(xcp2krc['script'])
+    logger.debug(self.xcp2krc['script'])
 
-    p = Popen(cmdlist,
-              stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    out, err = p.communicate(xcp2krc['script'])
-    if out == '' or err != '':
-        raise Exception('something went wrong in qsub:\n\n{0}'.format(err))
-
+    try:
+        p=Popen(cmdlist, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        out, err = p.communicate(self.xcp2krc['script'])
+        if out == '' or err != '':
+            raise Exception('something went wrong in job queue :\n\n{0}'.format(err))
+    except:
+            raise Exception('\n\n something went wrong in job queue.\n\n')
     logger.debug(out)
-    if xcp2krc['env'].upper() == 'SLURM':
+    if self.xcp2krc['env'].upper() == 'SLURM':
         job_id = int(out.split()[3])
-    elif xcp2krc['env'].upper() == 'SGE':
+    elif self.xcp2krc['env'].upper() == 'SGE':
         job_id = int(out.split()[2])
-    elif xcp2krc['env'].upper() == 'gridview':
+    elif self.xcp2krc['env'].upper() == 'gridview':
         job_id = int(out.split('.')[0]) 
     logger.debug('jobs_id = ', job_id)
         
 
-    if xcp2krc['env'].upper() == 'SLURM':
+    if self.xcp2krc['env'].upper() == 'SLURM':
         output = Popen("sacct -j %i" %(job_id), shell = True,
                stdin = PIPE,
                stdout = PIPE,
                stderr = PIPE).communicate()
         if "COMPLETED" in output[0] and output[0].split()[15]==self.prefix:
             return 
-    elif xcp2krc['env'].upper() == 'SGE':
+    elif self.xcp2krc['env'].upper() == 'SGE':
         output = Popen("qstat -j %i" %(job_id), shell = True,
                stdin = PIPE,
                stdout = PIPE,
                stderr = PIPE).communicate()
         if "do not exist" in output[1]:
             return 
-    elif xcp2krc['env'].upper() == 'gridview':
+    elif self.xcp2krc['env'].upper() == 'gridview':
         output = Popen("qstat -R %i" %(job_id), shell = True,
                stdin = PIPE,
                stdout = PIPE,

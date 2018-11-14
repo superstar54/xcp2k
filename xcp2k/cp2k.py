@@ -56,12 +56,14 @@ class CP2K(Calculator):
     implemented_properties = ['energy', 'energies', 'forces', 'stress', 'charges']
 
     def __init__(self, restart=None, mode = 0,  ignore_bad_restart_file=False,
-                 label='cp2k', env = 'SLURM', cpu = 1, nodes = 1, atoms=None, command=None,
+                 label='cp2k', env = 'SLURM', cpu = 1, nodes = 1, time = '1:00:00', atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
-        xcp2krc['env'] = env    # set environment for  job submission
-        xcp2krc['ntasks'] = cpu
-        xcp2krc['nodes'] = nodes
+        self.xcp2krc = xcp2krc
+        self.xcp2krc['env'] = env    # set environment for  job submission
+        self.xcp2krc['ntasks'] = cpu
+        self.xcp2krc['nodes'] = nodes
+        self.xcp2krc['time'] = time
         if debug:
             logger.setLevel(logging.DEBUG)
 
@@ -192,23 +194,24 @@ class CP2K(Calculator):
             self.atoms = atoms
 
         #generate inputfile
+        logger.debug(os.getcwd)
         self.write_input_file()
         if self.mode == 1:
             return
 
-        olddir = os.getcwd()
-        os.chdir(self.directory)
+        cwd = os.getcwd()
+        # os.chdir(self.directory)
+        self.xcp2krc['script'] += '''
+                cd {0}  # this is the current working directory
+                cd {1}  # this is the vasp directory
+                $ASE_CP2K_COMMAND
+            '''.format(cwd, self.directory)
 
-        self.old_directory = self.directory
         self.run()
-        
         # read new geometry
         self.update_atoms(self.atoms)
-       
         # write Jmol
         self.atoms.write(self.prefix + '.in')
-
-        os.chdir(olddir)
         # read results
         self.converged = self.read_convergence()
         self.read_results()

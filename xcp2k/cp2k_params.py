@@ -409,6 +409,7 @@ params = {
 
 ase_params = {
 'CELL_OPT': False,
-'CPU':4,
-'NODES':1,
+'CPU': 4,
+'NODES': 1,
+'TIME': '1:00:00',
 }

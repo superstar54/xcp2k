@@ -1,6 +1,19 @@
 from xcp2k import CP2K
+from ase.data import chemical_symbols
 
-
+#===============================================================================
+#
+nele = 84
+basis = {}
+for i in range(1, nele):
+  ele = chemical_symbols[i]
+  basis[ele] = 'DZVP-MOLOPT-SR-GTH'
+#
+for i in [1, 4, 6, 7, 8, 9, 14, 15, 16]:
+  ele = chemical_symbols[i]
+  basis[ele] = 'DZVP-MOLOPT-GTH'
+# print(basis)  
+#===============================================================================
 
 #===============================================================================
 calc_ot = CP2K()
@@ -15,7 +28,7 @@ SCF = DFT.SCF
 #===============================================================================
 GLOBAL.Run_type = "GEO_OPT"  # energy_force, geo_opt, cell_opt
 # GLOBAL.Print_level = "MEDIUM"
-MOTION.GEO_OPT.Max_force = 1.0E-4
+# MOTION.GEO_OPT.Max_force = 1.0E-4
 
 FORCE_EVAL.Method = "Quickstep"
 FORCE_EVAL.Stress_tensor = 'ANALYTICAL'
@@ -48,9 +61,9 @@ DFT.QS.Extrapolation_order = 3
 
 SCF.Scf_guess = "ATOMIC"
 SCF.Eps_diis = 0.1
-SCF.Eps_scf = 1.0E-8
+SCF.Eps_scf = 1.0E-6
 SCF.Max_scf = 50
-SCF.OUTER_SCF.Eps_scf = 1.0E-8
+SCF.OUTER_SCF.Eps_scf = 1.0E-6
 SCF.OUTER_SCF.Max_scf = 20
 
 SCF.OT.Algorithm = 'IRAC'
@@ -62,20 +75,13 @@ SCF.OT.Safe_diis = False
 SCF.OT.Preconditioner = 'FULL_ALL'
 SCF.OT.Energy_gap = 0.05
 
-KIND = SUBSYS.KIND_add('C')  # Section_parameters can be provided as argument.
-KIND.Element = 'C'
-KIND.Basis_set = "DZVP-MOLOPT-GTH"
-KIND.Potential = 'GTH-PBE'
 
-KIND = SUBSYS.KIND_add('O')  
-KIND.Element = 'O'
-KIND.Basis_set = "DZVP-MOLOPT-GTH"
-KIND.Potential = 'GTH-PBE'
-
-KIND = SUBSYS.KIND_add('H')  
-KIND.Element = 'H'
-KIND.Basis_set = "DZVP-MOLOPT-GTH"
-KIND.Potential = 'GTH-PBE'
+for i in range(1, nele):
+  ele = chemical_symbols[i]
+  KIND = SUBSYS.KIND_add('{0}'.format(ele))  # Section_parameters can be provided as argument.
+  KIND.Element = '{0}'.format(ele)
+  KIND.Basis_set = basis[ele]
+  KIND.Potential = 'GTH-PBE' 
 
 #DFT.PRINT.PDOS.Nlumo = 500
 #DFT.PRINT.PDOS.EACH.Qs_scf = 0

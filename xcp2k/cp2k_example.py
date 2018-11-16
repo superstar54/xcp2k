@@ -41,8 +41,9 @@ DFT.Potential_file_name = "POTENTIAL"
 #DFT.Multiplicity = 1
 #DFT.Uks = True
 
-DFT.MGRID.Ngrids = 4
-DFT.MGRID.Cutoff = 500
+DFT.MGRID.Ngrids = 5
+DFT.MGRID.Cutoff = 800
+DFT.MGRID.Rel_utoff = 60
 
 DFT.XC.XC_FUNCTIONAL.Section_parameters = "PBE"
 # DFT.XC.VDW_POTENTIAL.Potential_type = 'PAIR_POTENTIAL'

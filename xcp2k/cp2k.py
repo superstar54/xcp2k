@@ -73,7 +73,7 @@ class CP2K(Calculator):
 
     """    
     name = 'cp2k'
-    implemented_properties = ['energy', 'energies', 'forces', 'stress', 'charges']
+    implemented_properties = ['energy', 'energies', 'forces', 'stress', 'charges', 'frequencies']
 
     def __init__(self, restart=None, mode = 0,  ignore_bad_restart_file=False,
                   env = 'SLURM', cpu = 1, nodes = 1, time = '1:00:00', atoms=None, command=None,
@@ -208,7 +208,7 @@ class CP2K(Calculator):
         cwd = os.getcwd()
         # print(cwd)
         # os.chdir(self.directory)
-        self.xcp2krc['script'] += '''
+        self.xcp2krc['script_new'] = self.xcp2krc['script'] + '''
                 cd {0}  # this is the current working directory
                 cd {1}  # this is the vasp directory
                 $ASE_CP2K_COMMAND
@@ -383,6 +383,19 @@ class CP2K(Calculator):
             if (line.rfind('TOTAL TIME') > -1):
                 time = float(lines[n + 2].split()[6])
                 self.results['time'] = time
+    #
+    def read_frequency(self):
+        frequencies = []
+        #
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        # print(self.out)
+        for line in open(self.out, 'r'):
+            if line.rfind('VIB|Frequency') > -1:
+                for f in line.split()[2:]:
+                    frequencies.append(float(f))
+        self.results['frequencies'] = frequencies
+
 
     def clean(self):
         """Method which cleans up after a calculation.
@@ -518,11 +531,11 @@ class CP2K(Calculator):
             cmdlist += ['-q', 'low']
         
         logger.debug(cmdlist)
-        logger.debug(self.xcp2krc['script'])    
+        logger.debug(self.xcp2krc['script_new'])    
 
         try:
             p=Popen(cmdlist, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-            out, err = p.communicate(self.xcp2krc['script'])
+            out, err = p.communicate(self.xcp2krc['script_new'])
             if out == '' or err != '':
                 raise Exception('something went wrong in job queue :\n\n{0}'.format(err))
         except Exception as e:

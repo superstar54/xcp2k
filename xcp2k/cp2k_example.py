@@ -1,5 +1,6 @@
 from xcp2k import CP2K
 from ase.data import chemical_symbols
+import copy
 
 #===============================================================================
 #
@@ -16,9 +17,9 @@ for i in [1, 4, 6, 7, 8, 9, 14, 15, 16]:
 #===============================================================================
 
 #===============================================================================
-calc_ot = CP2K()
+calc = CP2K()
 #===============================================================================
-CP2K_INPUT_OT = calc_ot.CP2K_INPUT  # This is the root of the input tree
+CP2K_INPUT_OT = calc.CP2K_INPUT  # This is the root of the input tree
 GLOBAL = CP2K_INPUT_OT.GLOBAL
 MOTION = CP2K_INPUT_OT.MOTION
 FORCE_EVAL = CP2K_INPUT_OT.FORCE_EVAL_add()
@@ -27,7 +28,6 @@ DFT = FORCE_EVAL.DFT
 SCF = DFT.SCF
 #===============================================================================
 GLOBAL.Run_type = "GEO_OPT"  # energy_force, geo_opt, cell_opt
-# GLOBAL.Print_level = "MEDIUM"
 # MOTION.GEO_OPT.Max_force = 1.0E-4
 
 FORCE_EVAL.Method = "Quickstep"
@@ -43,17 +43,11 @@ DFT.Potential_file_name = "POTENTIAL"
 
 DFT.MGRID.Ngrids = 5
 DFT.MGRID.Cutoff = 800
-DFT.MGRID.Rel_utoff = 60
+DFT.MGRID.Rel_cutoff = 60
 
 DFT.XC.XC_FUNCTIONAL.Section_parameters = "PBE"
-# DFT.XC.VDW_POTENTIAL.Potential_type = 'PAIR_POTENTIAL'
-# PAIR_POTENTIAL = DFT.XC.VDW_POTENTIAL.PAIR_POTENTIAL_add()
-# PAIR_POTENTIAL.Parameter_file_name = 'dftd3.dat'
-# PAIR_POTENTIAL.Type = 'DFTD3'
-# PAIR_POTENTIAL.Reference_functional = 'PBE'
-# PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
 
-DFT.QS.Eps_default = 1.0E-10
+
 DFT.QS.Method = 'GPW'
 DFT.QS.Eps_default = 1.0E-12
 DFT.QS.Map_consistent = True
@@ -92,3 +86,28 @@ for i in range(1, nele):
 
 #DFT.PRINT.MO_CUBES.Nhomo = 30
 #DFT.PRINT.MO_CUBES.Nlumo = 30
+
+
+
+#===============================================================================
+CP2K_INPUT_OT_VDW = copy.deepcopy(CP2K_INPUT_OT)
+DFT = CP2K_INPUT_OT_VDW.FORCE_EVAL_list[0].DFT
+DFT.XC.VDW_POTENTIAL.Potential_type = 'PAIR_POTENTIAL'
+PAIR_POTENTIAL = DFT.XC.VDW_POTENTIAL.PAIR_POTENTIAL_add()
+PAIR_POTENTIAL.Parameter_file_name = 'dftd3.dat'
+PAIR_POTENTIAL.Type = 'DFTD3'
+PAIR_POTENTIAL.Reference_functional = 'PBE'
+PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
+
+#===============================================================================
+CP2K_INPUT_Diag = copy.deepcopy(CP2K_INPUT_OT)
+DFT = FORCE_EVAL.DFT
+SCF = DFT.SCF
+SCF.Added_mos = 200
+SCF.SMEAR.Electronic_temperature = 500
+SCF.SMEAR.Method = 'FERMI_DIRAC'
+SCF.DIAGONALIZATION.Algorithm = 'STANDARD'
+SCF.MIXING.Method = 'BROYDEN_MIXING'
+SCF.MIXING.Alpha = 0.1
+SCF.MIXING.Beta = 1.5
+SCF.MIXING.Nbuffer = 8

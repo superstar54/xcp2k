@@ -194,26 +194,23 @@ class CP2K(Calculator):
         if not properties:
             properties = ['energy']
         
-        logger.debug("system_changes:", system_changes)
+        # logger.debug("system_changes:", system_changes)
 
         if atoms is not None:
             self.atoms = atoms
 
         #generate inputfile
-        logger.debug(os.getcwd)
+        logger.debug(os.getcwd())
         self.write_input_file()
         if self.mode == 1:
             return
-
         cwd = os.getcwd()
-        # print(cwd)
         # os.chdir(self.directory)
         self.xcp2krc['script_new'] = self.xcp2krc['script'] + '''
                 cd {0}  # this is the current working directory
                 cd {1}  # this is the vasp directory
                 $ASE_CP2K_COMMAND
             '''.format(cwd, self.directory)
-
         self.run()
         # os.chdir(cwd)
         self.converged = self.read_convergence()
@@ -465,6 +462,7 @@ class CP2K(Calculator):
 
         # if we are in the queue and jasp is called or if we want to use
         # mode='run' , we should just run the job. First, we consider how.
+        logger.debug('run function')
         
         if 'ASE_CP2K_COMMAND' not in os.environ:
             raise RuntimeError('Please set ASE_CP2K_COMMAND in the environment variable')

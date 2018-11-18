@@ -101,7 +101,7 @@ PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
 
 #===============================================================================
 CP2K_INPUT_Diag = copy.deepcopy(CP2K_INPUT_OT)
-DFT = FORCE_EVAL.DFT
+DFT = CP2K_INPUT_Diag.FORCE_EVAL_list[0].DFT
 SCF = DFT.SCF
 SCF.Added_mos = 200
 SCF.SMEAR.Electronic_temperature = 500

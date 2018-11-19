@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each259 import _each259
+from _each268 import _each268
 
 
 class _hirshfeld1(InputSection):
@@ -15,7 +15,7 @@ class _hirshfeld1(InputSection):
         self.Reference_charge = None
         self.User_radius = None
         self.Atomic_radii = None
-        self.EACH = _each259()
+        self.EACH = _each268()
         self._name = "HIRSHFELD"
         self._keywords = {'Reference_charge': 'REFERENCE_CHARGE', 'Log_print_key': 'LOG_PRINT_KEY', 'User_radius': 'USER_RADIUS', 'Shape_function': 'SHAPE_FUNCTION', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Atomic_radii': 'ATOMIC_RADII', 'Add_last': 'ADD_LAST', 'Self_consistent': 'SELF_CONSISTENT'}
         self._subsections = {'EACH': 'EACH'}

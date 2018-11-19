@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
 from _dipole_moments1 import _dipole_moments1
 from _mgrid2 import _mgrid2
-from _print63 import _print63
+from _print67 import _print67
 
 
 class _tddfpt2(InputSection):
@@ -20,7 +20,7 @@ class _tddfpt2(InputSection):
         self.Wfn_restart_file_name = None
         self.DIPOLE_MOMENTS = _dipole_moments1()
         self.MGRID = _mgrid2()
-        self.PRINT = _print63()
+        self.PRINT = _print67()
         self._name = "TDDFPT"
         self._keywords = {'Rks_triplets': 'RKS_TRIPLETS', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Max_kv': 'MAX_KV', 'Max_iter': 'MAX_ITER', 'Orthogonal_eps': 'ORTHOGONAL_EPS', 'Min_amplitude': 'MIN_AMPLITUDE', 'Convergence': 'CONVERGENCE', 'Nstates': 'NSTATES', 'Restart': 'RESTART', 'Nproc_state': 'NPROC_STATE'}
         self._subsections = {'PRINT': 'PRINT', 'DIPOLE_MOMENTS': 'DIPOLE_MOMENTS', 'MGRID': 'MGRID'}

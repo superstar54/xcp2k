@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _periodic13 import _periodic13
+from _periodic12 import _periodic12
 from _bse4 import _bse4
 from _ic4 import _ic4
 
@@ -42,7 +42,7 @@ class _ri_g0w04(InputSection):
         self.Image_charge_model = None
         self.Analytic_continuation = None
         self.Nparam_pade = None
-        self.PERIODIC = _periodic13()
+        self.PERIODIC = _periodic12()
         self.BSE = _bse4()
         self.IC = _ic4()
         self._name = "RI_G0W0"

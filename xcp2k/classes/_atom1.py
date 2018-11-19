@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _print68 import _print68
+from _print74 import _print74
 from _ae_basis1 import _ae_basis1
 from _pp_basis1 import _pp_basis1
 from _method1 import _method1
@@ -20,7 +20,7 @@ class _atom1(InputSection):
         self.Electron_configuration = []
         self.Max_angular_momentum = None
         self.Calculate_states = None
-        self.PRINT = _print68()
+        self.PRINT = _print74()
         self.AE_BASIS = _ae_basis1()
         self.PP_BASIS = _pp_basis1()
         self.METHOD_list = []

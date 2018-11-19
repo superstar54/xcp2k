@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each359 import _each359
+from _each369 import _each369
 
 
 class _current_cubes1(InputSection):
@@ -12,7 +12,7 @@ class _current_cubes1(InputSection):
         self.Log_print_key = None
         self.Stride = None
         self.Append = None
-        self.EACH = _each359()
+        self.EACH = _each369()
         self._name = "CURRENT_CUBES"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Stride': 'STRIDE', 'Add_last': 'ADD_LAST', 'Append': 'APPEND'}
         self._subsections = {'EACH': 'EACH'}

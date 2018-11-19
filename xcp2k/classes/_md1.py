@@ -20,6 +20,7 @@ class _md1(InputSection):
         InputSection.__init__(self)
         self.Ensemble = None
         self.Steps = None
+        self.Max_steps = None
         self.Timestep = None
         self.Step_start_val = None
         self.Time_start_val = None
@@ -51,7 +52,7 @@ class _md1(InputSection):
         self.CASCADE = _cascade1()
         self.INITIAL_VIBRATION = _initial_vibration1()
         self._name = "MD"
-        self._keywords = {'Annealing_cell': 'ANNEALING_CELL', 'Step_start_val': 'STEP_START_VAL', 'Angvel_tol': 'ANGVEL_TOL', 'Temperature': 'TEMPERATURE', 'Angvel_zero': 'ANGVEL_ZERO', 'Econs_start_val': 'ECONS_START_VAL', 'Timestep': 'TIMESTEP', 'Initialization_method': 'INITIALIZATION_METHOD', 'Time_start_val': 'TIME_START_VAL', 'Temp_kind': 'TEMP_KIND', 'Temperature_annealing': 'TEMPERATURE_ANNEALING', 'Temp_tol': 'TEMP_TOL', 'Steps': 'STEPS', 'Displacement_tol': 'DISPLACEMENT_TOL', 'Annealing': 'ANNEALING', 'Comvel_tol': 'COMVEL_TOL', 'Scale_temp_kind': 'SCALE_TEMP_KIND', 'Ensemble': 'ENSEMBLE'}
+        self._keywords = {'Annealing_cell': 'ANNEALING_CELL', 'Step_start_val': 'STEP_START_VAL', 'Scale_temp_kind': 'SCALE_TEMP_KIND', 'Temperature': 'TEMPERATURE', 'Angvel_zero': 'ANGVEL_ZERO', 'Econs_start_val': 'ECONS_START_VAL', 'Timestep': 'TIMESTEP', 'Initialization_method': 'INITIALIZATION_METHOD', 'Time_start_val': 'TIME_START_VAL', 'Temp_kind': 'TEMP_KIND', 'Temperature_annealing': 'TEMPERATURE_ANNEALING', 'Temp_tol': 'TEMP_TOL', 'Angvel_tol': 'ANGVEL_TOL', 'Steps': 'STEPS', 'Displacement_tol': 'DISPLACEMENT_TOL', 'Annealing': 'ANNEALING', 'Comvel_tol': 'COMVEL_TOL', 'Max_steps': 'MAX_STEPS', 'Ensemble': 'ENSEMBLE'}
         self._subsections = {'THERMAL_REGION': 'THERMAL_REGION', 'SHELL': 'SHELL', 'BAROSTAT': 'BAROSTAT', 'THERMOSTAT': 'THERMOSTAT', 'CASCADE': 'CASCADE', 'VELOCITY_SOFTENING': 'VELOCITY_SOFTENING', 'LANGEVIN': 'LANGEVIN', 'RESPA': 'RESPA', 'ADIABATIC_DYNAMICS': 'ADIABATIC_DYNAMICS', 'REFTRAJ': 'REFTRAJ', 'INITIAL_VIBRATION': 'INITIAL_VIBRATION', 'PRINT': 'PRINT', 'AVERAGES': 'AVERAGES', 'MSST': 'MSST'}
         self._aliases = {'Temp_to': 'Temp_tol', 'Temperature_tolerance': 'Temp_tol'}
 

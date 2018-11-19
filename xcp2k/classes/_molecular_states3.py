@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each235 import _each235
+from _each244 import _each244
 from _cubes5 import _cubes5
 
 
@@ -13,7 +13,7 @@ class _molecular_states3(InputSection):
         self.Log_print_key = None
         self.Cube_eval_range = None
         self.Mark_states = []
-        self.EACH = _each235()
+        self.EACH = _each244()
         self.CUBES = _cubes5()
         self._name = "MOLECULAR_STATES"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Cube_eval_range': 'CUBE_EVAL_RANGE', 'Filename': 'FILENAME'}

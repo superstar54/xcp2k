@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each276 import _each276
+from _each286 import _each286
 
 
 class _dielectric_function1(InputSection):
@@ -12,7 +12,7 @@ class _dielectric_function1(InputSection):
         self.Log_print_key = None
         self.Stride = None
         self.Append = None
-        self.EACH = _each276()
+        self.EACH = _each286()
         self._name = "DIELECTRIC_FUNCTION"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Stride': 'STRIDE', 'Add_last': 'ADD_LAST', 'Append': 'APPEND'}
         self._subsections = {'EACH': 'EACH'}

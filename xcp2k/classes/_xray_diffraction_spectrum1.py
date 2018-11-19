@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each267 import _each267
+from _each277 import _each277
 
 
 class _xray_diffraction_spectrum1(InputSection):
@@ -11,7 +11,7 @@ class _xray_diffraction_spectrum1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Q_max = None
-        self.EACH = _each267()
+        self.EACH = _each277()
         self._name = "XRAY_DIFFRACTION_SPECTRUM"
         self._keywords = {'Q_max': 'Q_MAX', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

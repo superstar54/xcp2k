@@ -1,11 +1,27 @@
 from xcp2k.inputsection import InputSection
-from _k_matrix1 import _k_matrix1
+from _program_run_info40 import _program_run_info40
+from _wannier_cubes5 import _wannier_cubes5
+from _wannier_centers5 import _wannier_centers5
+from _wannier_spreads5 import _wannier_spreads5
+from _loc_restart5 import _loc_restart5
+from _total_dipole4 import _total_dipole4
+from _molecular_dipoles4 import _molecular_dipoles4
+from _molecular_states4 import _molecular_states4
+from _wannier_states4 import _wannier_states4
 
 
 class _print56(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.K_MATRIX = _k_matrix1()
+        self.PROGRAM_RUN_INFO = _program_run_info40()
+        self.WANNIER_CUBES = _wannier_cubes5()
+        self.WANNIER_CENTERS = _wannier_centers5()
+        self.WANNIER_SPREADS = _wannier_spreads5()
+        self.LOC_RESTART = _loc_restart5()
+        self.TOTAL_DIPOLE = _total_dipole4()
+        self.MOLECULAR_DIPOLES = _molecular_dipoles4()
+        self.MOLECULAR_STATES = _molecular_states4()
+        self.WANNIER_STATES = _wannier_states4()
         self._name = "PRINT"
-        self._subsections = {'K_MATRIX': 'K_MATRIX'}
+        self._subsections = {'MOLECULAR_DIPOLES': 'MOLECULAR_DIPOLES', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'LOC_RESTART': 'LOC_RESTART', 'WANNIER_CENTERS': 'WANNIER_CENTERS', 'TOTAL_DIPOLE': 'TOTAL_DIPOLE', 'WANNIER_STATES': 'WANNIER_STATES', 'WANNIER_CUBES': 'WANNIER_CUBES', 'WANNIER_SPREADS': 'WANNIER_SPREADS', 'MOLECULAR_STATES': 'MOLECULAR_STATES'}
 

@@ -40,20 +40,20 @@ class _xc_functional2(InputSection):
         self.BECKE88_LR = _becke88_lr2()
         self.LYP = _lyp2()
         self.PADE = _pade2()
-        self.HCTH_list = []
+        self.HCTH = _hcth2()
         self.OPTX = _optx2()
-        self.LIBXC = _libxc2()
-        self.KE_LIBXC = _ke_libxc2()
+        self.LIBXC_list = []
+        self.KE_LIBXC_list = []
         self.CS1 = _cs12()
-        self.XGGA_list = []
-        self.KE_GGA_list = []
+        self.XGGA = _xgga2()
+        self.KE_GGA = _ke_gga2()
         self.P86C = _p86c2()
-        self.PW92_list = []
-        self.PZ81_list = []
+        self.PW92 = _pw922()
+        self.PZ81 = _pz812()
         self.TFW = _tfw2()
         self.TF = _tf2()
         self.VWN = _vwn2()
-        self.XALPHA_list = []
+        self.XALPHA = _xalpha2()
         self.TPSS = _tpss2()
         self.PBE = _pbe2()
         self.XWPBE = _xwpbe2()
@@ -64,55 +64,23 @@ class _xc_functional2(InputSection):
         self.GV09 = _gv092()
         self.BEEF = _beef2()
         self._name = "XC_FUNCTIONAL"
-        self._subsections = {'BECKE88_LR': 'BECKE88_LR', 'BECKE88_LR_ADIABATIC': 'BECKE88_LR_ADIABATIC', 'P86C': 'P86C', 'TPSS': 'TPSS', 'LDA_HOLE_T_C_LR': 'LDA_HOLE_T_C_LR', 'PBE_HOLE_T_C_LR': 'PBE_HOLE_T_C_LR', 'LYP': 'LYP', 'LYP_ADIABATIC': 'LYP_ADIABATIC', 'OPTX': 'OPTX', 'TF': 'TF', 'CS1': 'CS1', 'BECKE88': 'BECKE88', 'BECKE97': 'BECKE97', 'LIBXC': 'LIBXC', 'PADE': 'PADE', 'PBE': 'PBE', 'GV09': 'GV09', 'KE_LIBXC': 'KE_LIBXC', 'BEEF': 'BEEF', 'XWPBE': 'XWPBE', 'VWN': 'VWN', 'BECKE_ROUSSEL': 'BECKE_ROUSSEL', 'TFW': 'TFW'}
-        self._repeated_subsections = {'XALPHA': '_xalpha2', 'HCTH': '_hcth2', 'PZ81': '_pz812', 'KE_GGA': '_ke_gga2', 'PW92': '_pw922', 'XGGA': '_xgga2'}
-        self._attributes = ['Section_parameters', 'HCTH_list', 'XGGA_list', 'KE_GGA_list', 'PW92_list', 'PZ81_list', 'XALPHA_list']
+        self._subsections = {'BECKE88_LR': 'BECKE88_LR', 'BECKE88_LR_ADIABATIC': 'BECKE88_LR_ADIABATIC', 'P86C': 'P86C', 'KE_GGA': 'KE_GGA', 'PW92': 'PW92', 'LDA_HOLE_T_C_LR': 'LDA_HOLE_T_C_LR', 'PBE_HOLE_T_C_LR': 'PBE_HOLE_T_C_LR', 'XALPHA': 'XALPHA', 'LYP': 'LYP', 'LYP_ADIABATIC': 'LYP_ADIABATIC', 'OPTX': 'OPTX', 'TF': 'TF', 'CS1': 'CS1', 'BECKE88': 'BECKE88', 'BECKE_ROUSSEL': 'BECKE_ROUSSEL', 'HCTH': 'HCTH', 'PADE': 'PADE', 'PBE': 'PBE', 'GV09': 'GV09', 'BEEF': 'BEEF', 'PZ81': 'PZ81', 'TPSS': 'TPSS', 'XWPBE': 'XWPBE', 'VWN': 'VWN', 'BECKE97': 'BECKE97', 'TFW': 'TFW', 'XGGA': 'XGGA'}
+        self._repeated_subsections = {'KE_LIBXC': '_ke_libxc2', 'LIBXC': '_libxc2'}
+        self._attributes = ['Section_parameters', 'LIBXC_list', 'KE_LIBXC_list']
 
-    def XALPHA_add(self, section_parameters=None):
-        new_section = _xalpha2()
+    def KE_LIBXC_add(self, section_parameters=None):
+        new_section = _ke_libxc2()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
-        self.XALPHA_list.append(new_section)
+        self.KE_LIBXC_list.append(new_section)
         return new_section
 
-    def HCTH_add(self, section_parameters=None):
-        new_section = _hcth2()
+    def LIBXC_add(self, section_parameters=None):
+        new_section = _libxc2()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
-        self.HCTH_list.append(new_section)
-        return new_section
-
-    def PZ81_add(self, section_parameters=None):
-        new_section = _pz812()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.PZ81_list.append(new_section)
-        return new_section
-
-    def KE_GGA_add(self, section_parameters=None):
-        new_section = _ke_gga2()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.KE_GGA_list.append(new_section)
-        return new_section
-
-    def PW92_add(self, section_parameters=None):
-        new_section = _pw922()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.PW92_list.append(new_section)
-        return new_section
-
-    def XGGA_add(self, section_parameters=None):
-        new_section = _xgga2()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.XGGA_list.append(new_section)
+        self.LIBXC_list.append(new_section)
         return new_section
 

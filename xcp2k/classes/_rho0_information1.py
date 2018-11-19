@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each240 import _each240
+from _each249 import _each249
 
 
 class _rho0_information1(InputSection):
@@ -11,7 +11,7 @@ class _rho0_information1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Unit = None
-        self.EACH = _each240()
+        self.EACH = _each249()
         self._name = "RHO0_INFORMATION"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Unit': 'UNIT', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

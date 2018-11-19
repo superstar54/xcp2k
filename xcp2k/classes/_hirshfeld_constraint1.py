@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info16 import _program_run_info16
+from _program_run_info17 import _program_run_info17
 
 
 class _hirshfeld_constraint1(InputSection):
@@ -14,7 +14,7 @@ class _hirshfeld_constraint1(InputSection):
         self.Reference_charge = None
         self.User_radius = None
         self.Atomic_radii = None
-        self.PROGRAM_RUN_INFO = _program_run_info16()
+        self.PROGRAM_RUN_INFO = _program_run_info17()
         self._name = "HIRSHFELD_CONSTRAINT"
         self._keywords = {'Reference_charge': 'REFERENCE_CHARGE', 'Strength': 'STRENGTH', 'Target': 'TARGET', 'Shape_function': 'SHAPE_FUNCTION', 'Atoms': 'ATOMS', 'Atomic_radii': 'ATOMIC_RADII', 'Self_consistent': 'SELF_CONSISTENT', 'User_radius': 'USER_RADIUS'}
         self._repeated_keywords = {'Coeff': 'COEFF'}

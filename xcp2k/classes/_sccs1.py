@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each274 import _each274
+from _each284 import _each284
 from _density_gradient1 import _density_gradient1
 from _dielectric_function1 import _dielectric_function1
 from _polarisation_potential1 import _polarisation_potential1
@@ -13,7 +13,7 @@ class _sccs1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each274()
+        self.EACH = _each284()
         self.DENSITY_GRADIENT = _density_gradient1()
         self.DIELECTRIC_FUNCTION = _dielectric_function1()
         self.POLARISATION_POTENTIAL = _polarisation_potential1()

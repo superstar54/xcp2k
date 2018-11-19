@@ -6,6 +6,7 @@ from _nose6 import _nose6
 from _gle4 import _gle4
 from _pile1 import _pile1
 from _piglet1 import _piglet1
+from _qtb1 import _qtb1
 from _init1 import _init1
 from _helium1 import _helium1
 from _print15 import _print15
@@ -34,12 +35,13 @@ class _pint1(InputSection):
         self.GLE = _gle4()
         self.PILE = _pile1()
         self.PIGLET = _piglet1()
+        self.QTB = _qtb1()
         self.INIT = _init1()
         self.HELIUM = _helium1()
         self.PRINT = _print15()
         self._name = "PINT"
         self._keywords = {'T_tol': 'T_TOL', 'Fix_centroid_pos': 'FIX_CENTROID_POS', 'Max_step': 'MAX_STEP', 'Temp': 'TEMP', 'Iteration': 'ITERATION', 'Num_steps': 'NUM_STEPS', 'Propagator': 'PROPAGATOR', 'Harm_int': 'HARM_INT', 'P': 'P', 'Nrespa': 'NRESPA', 'Proc_per_replica': 'PROC_PER_REPLICA', 'Dt': 'DT', 'Transformation': 'TRANSFORMATION'}
-        self._subsections = {'BEADS': 'BEADS', 'STAGING': 'STAGING', 'PIGLET': 'PIGLET', 'GLE': 'GLE', 'NORMALMODE': 'NORMALMODE', 'INIT': 'INIT', 'PILE': 'PILE', 'NOSE': 'NOSE', 'PRINT': 'PRINT', 'HELIUM': 'HELIUM'}
+        self._subsections = {'BEADS': 'BEADS', 'STAGING': 'STAGING', 'PIGLET': 'PIGLET', 'GLE': 'GLE', 'NORMALMODE': 'NORMALMODE', 'INIT': 'INIT', 'PILE': 'PILE', 'NOSE': 'NOSE', 'PRINT': 'PRINT', 'QTB': 'QTB', 'HELIUM': 'HELIUM'}
         self._aliases = {'Temp_to': 'T_tol'}
 
 

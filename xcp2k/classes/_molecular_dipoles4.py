@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each354 import _each354
+from _each364 import _each364
 
 
 class _molecular_dipoles4(InputSection):
@@ -13,7 +13,7 @@ class _molecular_dipoles4(InputSection):
         self.Periodic = None
         self.Reference = None
         self.Reference_point = None
-        self.EACH = _each354()
+        self.EACH = _each364()
         self._name = "MOLECULAR_DIPOLES"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Reference': 'REFERENCE', 'Reference_point': 'REFERENCE_POINT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Periodic': 'PERIODIC', 'Add_last': 'ADD_LAST'}
         self._subsections = {'EACH': 'EACH'}

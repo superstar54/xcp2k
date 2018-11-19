@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each114 import _each114
+from _each115 import _each115
 
 
 class _mos_molden1(InputSection):
@@ -11,7 +11,7 @@ class _mos_molden1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Ndigits = None
-        self.EACH = _each114()
+        self.EACH = _each115()
         self._name = "MOS_MOLDEN"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Ndigits': 'NDIGITS', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

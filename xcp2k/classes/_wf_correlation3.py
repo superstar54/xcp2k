@@ -24,6 +24,7 @@ class _wf_correlation3(InputSection):
         self.Calc_cond_num = None
         self.Ri_metric = None
         self.Eri_method = None
+        self.Eri_blksize = None
         self.Minimal_gap = None
         self.MP2_INFO = _mp2_info3()
         self.DIRECT_CANONICAL = _direct_canonical3()
@@ -36,7 +37,7 @@ class _wf_correlation3(InputSection):
         self.INTERACTION_POTENTIAL = _interaction_potential9()
         self.ERI_MME = _eri_mme4()
         self._name = "WF_CORRELATION"
-        self._keywords = {'Minimal_gap': 'MINIMAL_GAP', 'Group_size': 'GROUP_SIZE', 'Row_block': 'ROW_BLOCK', 'Calc_cond_num': 'CALC_COND_NUM', 'Scale_s': 'SCALE_S', 'Scale_t': 'SCALE_T', 'Memory': 'MEMORY', 'Eri_method': 'ERI_METHOD', 'Col_block': 'COL_BLOCK', 'Method': 'METHOD', 'Ri_metric': 'RI_METRIC'}
+        self._keywords = {'Minimal_gap': 'MINIMAL_GAP', 'Group_size': 'GROUP_SIZE', 'Row_block': 'ROW_BLOCK', 'Calc_cond_num': 'CALC_COND_NUM', 'Scale_s': 'SCALE_S', 'Scale_t': 'SCALE_T', 'Memory': 'MEMORY', 'Eri_method': 'ERI_METHOD', 'Col_block': 'COL_BLOCK', 'Method': 'METHOD', 'Eri_blksize': 'ERI_BLKSIZE', 'Ri_metric': 'RI_METRIC'}
         self._subsections = {'MP2_INFO': 'MP2_INFO', 'RI_RPA': 'RI_RPA', 'WFC_GPW': 'WFC_GPW', 'RI_LAPLACE': 'RI_LAPLACE', 'RI_MP2': 'RI_MP2', 'CPHF': 'CPHF', 'INTERACTION_POTENTIAL': 'INTERACTION_POTENTIAL', 'OPT_RI_BASIS': 'OPT_RI_BASIS', 'ERI_MME': 'ERI_MME', 'DIRECT_CANONICAL': 'DIRECT_CANONICAL'}
         self._aliases = {'Row_block_size': 'Row_block', 'Number_proc': 'Group_size', 'Col_block_size': 'Col_block', 'Calc_condition_number': 'Calc_cond_num', 'Ri': 'Ri_metric'}
 

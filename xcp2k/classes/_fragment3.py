@@ -4,7 +4,9 @@ from xcp2k.inputsection import InputSection
 class _fragment3(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.List = []
+        self.Section_parameters = None
+        self.Default_keyword = []
         self._name = "FRAGMENT"
-        self._repeated_keywords = {'List': 'LIST'}
+        self._repeated_default_keywords = {'Default_keyword': 'DEFAULT_KEYWORD'}
+        self._attributes = ['Section_parameters', 'Default_keyword']
 

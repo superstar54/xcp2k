@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each157 import _each157
+from _each154 import _each154
 
 
 class _print30(InputSection):
@@ -11,7 +11,7 @@ class _print30(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Load_balance_info = None
-        self.EACH = _each157()
+        self.EACH = _each154()
         self._name = "PRINT"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Load_balance_info': 'LOAD_BALANCE_INFO', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each255 import _each255
+from _each264 import _each264
 
 
 class _wannier901(InputSection):
@@ -15,7 +15,7 @@ class _wannier901(InputSection):
         self.Added_mos = None
         self.Exclude_bands = []
         self.Wannier_functions = []
-        self.EACH = _each255()
+        self.EACH = _each264()
         self._name = "WANNIER90"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Seed_name': 'SEED_NAME', 'Added_mos': 'ADDED_MOS', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Add_last': 'ADD_LAST', 'Mp_grid': 'MP_GRID'}
         self._repeated_keywords = {'Wannier_functions': 'WANNIER_FUNCTIONS', 'Exclude_bands': 'EXCLUDE_BANDS'}

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each392 import _each392
+from _each404 import _each404
 
 
 class _fit_charge1(InputSection):
@@ -11,7 +11,7 @@ class _fit_charge1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Type_of_density = None
-        self.EACH = _each392()
+        self.EACH = _each404()
         self._name = "FIT_CHARGE"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Type_of_density': 'TYPE_OF_DENSITY', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

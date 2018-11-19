@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
 from _rs_grid5 import _rs_grid5
 from _multipoles3 import _multipoles3
-from _print43 import _print43
+from _print46 import _print46
 
 
 class _ewald3(InputSection):
@@ -17,7 +17,7 @@ class _ewald3(InputSection):
         self.Epsilon = None
         self.RS_GRID_list = []
         self.MULTIPOLES = _multipoles3()
-        self.PRINT = _print43()
+        self.PRINT = _print46()
         self._name = "EWALD"
         self._keywords = {'Gmax': 'GMAX', 'Ns_max': 'NS_MAX', 'Epsilon': 'EPSILON', 'O_spline': 'O_SPLINE', 'Rcut': 'RCUT', 'Ewald_accuracy': 'EWALD_ACCURACY', 'Alpha': 'ALPHA', 'Ewald_type': 'EWALD_TYPE'}
         self._subsections = {'PRINT': 'PRINT', 'MULTIPOLES': 'MULTIPOLES'}

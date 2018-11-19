@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info44 import _program_run_info44
+from _program_run_info45 import _program_run_info45
 from _atom_group3 import _atom_group3
 from _dummy_atoms3 import _dummy_atoms3
 
@@ -29,7 +29,7 @@ class _becke_constraint_b1(InputSection):
         self.Fragment_b_spin_file = None
         self.Flip_fragment_a = None
         self.Flip_fragment_b = None
-        self.PROGRAM_RUN_INFO = _program_run_info44()
+        self.PROGRAM_RUN_INFO = _program_run_info45()
         self.ATOM_GROUP_list = []
         self.DUMMY_ATOMS_list = []
         self._name = "BECKE_CONSTRAINT_B"

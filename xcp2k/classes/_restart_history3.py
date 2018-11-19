@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each168 import _each168
+from _each176 import _each176
 
 
 class _restart_history3(InputSection):
@@ -11,7 +11,7 @@ class _restart_history3(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Backup_copies = None
-        self.EACH = _each168()
+        self.EACH = _each176()
         self._name = "RESTART_HISTORY"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Backup_copies': 'BACKUP_COPIES', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

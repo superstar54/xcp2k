@@ -22,6 +22,7 @@ class BasinHopping(Dynamics):
                  temperature=100 * kB,
                  optimizer=FIRE,
                  fmax=0.1,
+                 steps=200,
                  dr=0.1,
                  logfile='-',
                  trajectory='lowest.traj',
@@ -43,6 +44,7 @@ class BasinHopping(Dynamics):
         self.kT = temperature
         self.optimizer = optimizer
         self.fmax = fmax
+        self.steps = steps
         self.dr = dr
         if adjust_cm:
             self.cm = atoms.get_center_of_mass()
@@ -144,7 +146,7 @@ class BasinHopping(Dynamics):
 
             opt = self.optimizer(self.atoms,
                                  logfile=self.optimizer_logfile)
-            opt.run(fmax=self.fmax)
+            opt.run(fmax=self.fmax, steps = self.steps)
             if self.lm_trajectory is not None:
                 self.lm_trajectory.write(self.atoms)
 

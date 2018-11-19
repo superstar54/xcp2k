@@ -1,25 +1,39 @@
 from xcp2k.inputsection import InputSection
-from _run_info1 import _run_info1
-from _atom_info1 import _atom_info1
-from _fock_gap1 import _fock_gap1
-from _fock_eigenvalues1 import _fock_eigenvalues1
-from _ml_variance1 import _ml_variance1
-from _ml_training_data1 import _ml_training_data1
-from _opt_info1 import _opt_info1
-from _restart7 import _restart7
+from _restart6 import _restart6
+from _restart_history2 import _restart_history2
+from _iteration_info1 import _iteration_info1
+from _program_run_info14 import _program_run_info14
+from _mo_orthonormality1 import _mo_orthonormality1
+from _mo_magnitude1 import _mo_magnitude1
+from _detailed_energy1 import _detailed_energy1
+from _diis_info2 import _diis_info2
+from _total_densities1 import _total_densities1
+from _lanczos1 import _lanczos1
+from _diag_sub_scf2 import _diag_sub_scf2
+from _davidson2 import _davidson2
+from _filter_matrix2 import _filter_matrix2
+from _mos_molden1 import _mos_molden1
 
 
 class _print20(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.RUN_INFO = _run_info1()
-        self.ATOM_INFO = _atom_info1()
-        self.FOCK_GAP = _fock_gap1()
-        self.FOCK_EIGENVALUES = _fock_eigenvalues1()
-        self.ML_VARIANCE = _ml_variance1()
-        self.ML_TRAINING_DATA = _ml_training_data1()
-        self.OPT_INFO = _opt_info1()
-        self.RESTART = _restart7()
+        self.Dm_restart_write = None
+        self.RESTART = _restart6()
+        self.RESTART_HISTORY = _restart_history2()
+        self.ITERATION_INFO = _iteration_info1()
+        self.PROGRAM_RUN_INFO = _program_run_info14()
+        self.MO_ORTHONORMALITY = _mo_orthonormality1()
+        self.MO_MAGNITUDE = _mo_magnitude1()
+        self.DETAILED_ENERGY = _detailed_energy1()
+        self.DIIS_INFO = _diis_info2()
+        self.TOTAL_DENSITIES = _total_densities1()
+        self.LANCZOS = _lanczos1()
+        self.DIAG_SUB_SCF = _diag_sub_scf2()
+        self.DAVIDSON = _davidson2()
+        self.FILTER_MATRIX = _filter_matrix2()
+        self.MOS_MOLDEN = _mos_molden1()
         self._name = "PRINT"
-        self._subsections = {'OPT_INFO': 'OPT_INFO', 'FOCK_EIGENVALUES': 'FOCK_EIGENVALUES', 'ML_TRAINING_DATA': 'ML_TRAINING_DATA', 'RUN_INFO': 'RUN_INFO', 'ML_VARIANCE': 'ML_VARIANCE', 'FOCK_GAP': 'FOCK_GAP', 'ATOM_INFO': 'ATOM_INFO', 'RESTART': 'RESTART'}
+        self._keywords = {'Dm_restart_write': 'DM_RESTART_WRITE'}
+        self._subsections = {'DIIS_INFO': 'DIIS_INFO', 'RESTART_HISTORY': 'RESTART_HISTORY', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'MO_ORTHONORMALITY': 'MO_ORTHONORMALITY', 'DETAILED_ENERGY': 'DETAILED_ENERGY', 'TOTAL_DENSITIES': 'TOTAL_DENSITIES', 'FILTER_MATRIX': 'FILTER_MATRIX', 'DAVIDSON': 'DAVIDSON', 'LANCZOS': 'LANCZOS', 'ITERATION_INFO': 'ITERATION_INFO', 'MO_MAGNITUDE': 'MO_MAGNITUDE', 'MOS_MOLDEN': 'MOS_MOLDEN', 'RESTART': 'RESTART', 'DIAG_SUB_SCF': 'DIAG_SUB_SCF'}
 

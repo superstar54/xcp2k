@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each400 import _each400
+from _each412 import _each412
 
 
 class _total_numbers1(InputSection):
@@ -10,7 +10,7 @@ class _total_numbers1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each400()
+        self.EACH = _each412()
         self._name = "TOTAL_NUMBERS"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each239 import _each239
+from _each248 import _each248
 
 
 class _projectors1(InputSection):
@@ -10,7 +10,7 @@ class _projectors1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each239()
+        self.EACH = _each248()
         self._name = "PROJECTORS"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

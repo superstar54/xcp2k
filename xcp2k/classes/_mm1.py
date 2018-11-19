@@ -3,7 +3,7 @@ from _forcefield1 import _forcefield1
 from _neighbor_lists5 import _neighbor_lists5
 from _poisson2 import _poisson2
 from _periodic_efield2 import _periodic_efield2
-from _print41 import _print41
+from _print44 import _print44
 
 
 class _mm1(InputSection):
@@ -13,7 +13,7 @@ class _mm1(InputSection):
         self.NEIGHBOR_LISTS = _neighbor_lists5()
         self.POISSON = _poisson2()
         self.PERIODIC_EFIELD_list = []
-        self.PRINT = _print41()
+        self.PRINT = _print44()
         self._name = "MM"
         self._subsections = {'PRINT': 'PRINT', 'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS', 'FORCEFIELD': 'FORCEFIELD', 'POISSON': 'POISSON'}
         self._repeated_subsections = {'PERIODIC_EFIELD': '_periodic_efield2'}

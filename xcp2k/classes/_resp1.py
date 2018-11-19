@@ -3,7 +3,7 @@ from _constraint2 import _constraint2
 from _restraint8 import _restraint8
 from _sphere_sampling1 import _sphere_sampling1
 from _slab_sampling1 import _slab_sampling1
-from _print62 import _print62
+from _print66 import _print66
 
 
 class _resp1(InputSection):
@@ -19,7 +19,7 @@ class _resp1(InputSection):
         self.RESTRAINT_list = []
         self.SPHERE_SAMPLING = _sphere_sampling1()
         self.SLAB_SAMPLING_list = []
-        self.PRINT = _print62()
+        self.PRINT = _print66()
         self._name = "RESP"
         self._keywords = {'Restrain_heavies_strength': 'RESTRAIN_HEAVIES_STRENGTH', 'Restrain_heavies_to_zero': 'RESTRAIN_HEAVIES_TO_ZERO', 'Use_repeat_method': 'USE_REPEAT_METHOD', 'Width': 'WIDTH', 'Integer_total_charge': 'INTEGER_TOTAL_CHARGE', 'Stride': 'STRIDE'}
         self._subsections = {'PRINT': 'PRINT', 'SPHERE_SAMPLING': 'SPHERE_SAMPLING'}

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each121 import _each121
+from _each122 import _each122
 
 
 class _ml_variance1(InputSection):
@@ -10,7 +10,7 @@ class _ml_variance1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each121()
+        self.EACH = _each122()
         self._name = "ML_VARIANCE"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

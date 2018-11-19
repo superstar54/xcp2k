@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _fragment3 import _fragment3
+from _fragment5 import _fragment5
 from _configuration1 import _configuration1
 from _fragment_energies1 import _fragment_energies1
-from _print46 import _print46
+from _print49 import _print49
 
 
 class _bsse1(InputSection):
@@ -11,14 +11,14 @@ class _bsse1(InputSection):
         self.FRAGMENT_list = []
         self.CONFIGURATION_list = []
         self.FRAGMENT_ENERGIES_list = []
-        self.PRINT = _print46()
+        self.PRINT = _print49()
         self._name = "BSSE"
         self._subsections = {'PRINT': 'PRINT'}
-        self._repeated_subsections = {'FRAGMENT': '_fragment3', 'FRAGMENT_ENERGIES': '_fragment_energies1', 'CONFIGURATION': '_configuration1'}
+        self._repeated_subsections = {'FRAGMENT': '_fragment5', 'FRAGMENT_ENERGIES': '_fragment_energies1', 'CONFIGURATION': '_configuration1'}
         self._attributes = ['FRAGMENT_list', 'CONFIGURATION_list', 'FRAGMENT_ENERGIES_list']
 
     def FRAGMENT_add(self, section_parameters=None):
-        new_section = _fragment3()
+        new_section = _fragment5()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

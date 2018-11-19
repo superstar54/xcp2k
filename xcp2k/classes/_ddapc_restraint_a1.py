@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info41 import _program_run_info41
+from _program_run_info42 import _program_run_info42
 
 
 class _ddapc_restraint_a1(InputSection):
@@ -11,7 +11,7 @@ class _ddapc_restraint_a1(InputSection):
         self.Atoms = None
         self.Coeff = None
         self.Functional_form = None
-        self.PROGRAM_RUN_INFO = _program_run_info41()
+        self.PROGRAM_RUN_INFO = _program_run_info42()
         self._name = "DDAPC_RESTRAINT_A"
         self._keywords = {'Strength': 'STRENGTH', 'Target': 'TARGET', 'Coeff': 'COEFF', 'Atoms': 'ATOMS', 'Type_of_density': 'TYPE_OF_DENSITY', 'Functional_form': 'FUNCTIONAL_FORM'}
         self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO'}

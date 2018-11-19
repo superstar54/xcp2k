@@ -160,6 +160,7 @@ def main():
                     "build_version = \"" + version.split()[2] + "\"\n"
                     "build_revision = \"" + revision.split()[-1] + "\"")
         config_file.write(contents)
+    print('here')
 
     # Start package setup
     setup(name = 'xcp2k',

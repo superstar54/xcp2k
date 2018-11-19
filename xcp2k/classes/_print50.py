@@ -1,11 +1,13 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info37 import _program_run_info37
+from _neighbor_lists9 import _neighbor_lists9
+from _subcell5 import _subcell5
 
 
 class _print50(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.PROGRAM_RUN_INFO = _program_run_info37()
+        self.NEIGHBOR_LISTS = _neighbor_lists9()
+        self.SUBCELL = _subcell5()
         self._name = "PRINT"
-        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO'}
+        self._subsections = {'SUBCELL': 'SUBCELL', 'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS'}
 

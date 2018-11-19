@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
 from _involved_atoms1 import _involved_atoms1
-from _print66 import _print66
+from _print70 import _print70
 
 
 class _mode_selective1(InputSection):
@@ -19,11 +19,11 @@ class _mode_selective1(InputSection):
         self._name = "MODE_SELECTIVE"
         self._keywords = {'Lowest_frequency': 'LOWEST_FREQUENCY', 'Eps_max_val': 'EPS_MAX_VAL', 'Initial_guess': 'INITIAL_GUESS', 'Atoms': 'ATOMS', 'Range': 'RANGE', 'Frequency': 'FREQUENCY', 'Eps_norm': 'EPS_NORM', 'Restart_file_name': 'RESTART_FILE_NAME'}
         self._subsections = {'INVOLVED_ATOMS': 'INVOLVED_ATOMS'}
-        self._repeated_subsections = {'PRINT': '_print66'}
+        self._repeated_subsections = {'PRINT': '_print70'}
         self._attributes = ['PRINT_list']
 
     def PRINT_add(self, section_parameters=None):
-        new_section = _print66()
+        new_section = _print70()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

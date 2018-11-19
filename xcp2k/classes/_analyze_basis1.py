@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each433 import _each433
+from _each448 import _each448
 
 
 class _analyze_basis1(InputSection):
@@ -12,7 +12,7 @@ class _analyze_basis1(InputSection):
         self.Log_print_key = None
         self.Overlap_condition_number = None
         self.Completeness = None
-        self.EACH = _each433()
+        self.EACH = _each448()
         self._name = "ANALYZE_BASIS"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Completeness': 'COMPLETENESS', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Overlap_condition_number': 'OVERLAP_CONDITION_NUMBER', 'Filename': 'FILENAME', 'Add_last': 'ADD_LAST'}
         self._subsections = {'EACH': 'EACH'}

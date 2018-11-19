@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each414 import _each414
+from _each426 import _each426
 
 
 class _progress_trajectory1(InputSection):
@@ -11,7 +11,7 @@ class _progress_trajectory1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Unit = None
-        self.EACH = _each414()
+        self.EACH = _each426()
         self._name = "PROGRESS_TRAJECTORY"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Unit': 'UNIT', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each413 import _each413
+from _each425 import _each425
 
 
 class _communication_log1(InputSection):
@@ -11,7 +11,7 @@ class _communication_log1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Unit = None
-        self.EACH = _each413()
+        self.EACH = _each425()
         self._name = "COMMUNICATION_LOG"
         self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Unit': 'UNIT', 'Filename': 'FILENAME'}
         self._subsections = {'EACH': 'EACH'}

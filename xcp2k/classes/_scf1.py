@@ -5,7 +5,7 @@ from _outer_scf1 import _outer_scf1
 from _smear1 import _smear1
 from _mixing2 import _mixing2
 from _mom1 import _mom1
-from _print19 import _print19
+from _print20 import _print20
 
 
 class _scf1(InputSection):
@@ -35,7 +35,7 @@ class _scf1(InputSection):
         self.SMEAR = _smear1()
         self.MIXING = _mixing2()
         self.MOM = _mom1()
-        self.PRINT = _print19()
+        self.PRINT = _print20()
         self._name = "SCF"
         self._keywords = {'Roks_scheme': 'ROKS_SCHEME', 'Cholesky': 'CHOLESKY', 'Max_scf_history': 'MAX_SCF_HISTORY', 'Level_shift': 'LEVEL_SHIFT', 'Added_mos': 'ADDED_MOS', 'Max_diis': 'MAX_DIIS', 'Roks_f': 'ROKS_F', 'Ncol_block': 'NCOL_BLOCK', 'Eps_diis': 'EPS_DIIS', 'Max_iter_lumo': 'MAX_ITER_LUMO', 'Eps_scf': 'EPS_SCF', 'Nrow_block': 'NROW_BLOCK', 'Roks_parameters': 'ROKS_PARAMETERS', 'Max_scf': 'MAX_SCF', 'Eps_scf_history': 'EPS_SCF_HISTORY', 'Scf_guess': 'SCF_GUESS', 'Eps_lumo': 'EPS_LUMO', 'Eps_eigval': 'EPS_EIGVAL'}
         self._subsections = {'SMEAR': 'SMEAR', 'PRINT': 'PRINT', 'OUTER_SCF': 'OUTER_SCF', 'MIXING': 'MIXING', 'MOM': 'MOM', 'DIAGONALIZATION': 'DIAGONALIZATION', 'OT': 'OT'}

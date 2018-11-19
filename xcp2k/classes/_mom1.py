@@ -5,6 +5,7 @@ class _mom1(InputSection):
     def __init__(self):
         InputSection.__init__(self)
         self.Section_parameters = None
+        self.Mom_type = None
         self.Start_iter = None
         self.Deocc_alpha = None
         self.Deocc_beta = None
@@ -12,6 +13,6 @@ class _mom1(InputSection):
         self.Occ_beta = None
         self.Proj_formula = None
         self._name = "MOM"
-        self._keywords = {'Deocc_alpha': 'DEOCC_ALPHA', 'Occ_beta': 'OCC_BETA', 'Start_iter': 'START_ITER', 'Proj_formula': 'PROJ_FORMULA', 'Occ_alpha': 'OCC_ALPHA', 'Deocc_beta': 'DEOCC_BETA'}
+        self._keywords = {'Deocc_alpha': 'DEOCC_ALPHA', 'Occ_beta': 'OCC_BETA', 'Mom_type': 'MOM_TYPE', 'Start_iter': 'START_ITER', 'Proj_formula': 'PROJ_FORMULA', 'Occ_alpha': 'OCC_ALPHA', 'Deocc_beta': 'DEOCC_BETA'}
         self._attributes = ['Section_parameters']
 

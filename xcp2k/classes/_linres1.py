@@ -5,7 +5,7 @@ from _nmr1 import _nmr1
 from _spinspin1 import _spinspin1
 from _epr1 import _epr1
 from _polar1 import _polar1
-from _print61 import _print61
+from _print64 import _print64
 
 
 class _linres1(InputSection):
@@ -24,7 +24,7 @@ class _linres1(InputSection):
         self.SPINSPIN = _spinspin1()
         self.EPR = _epr1()
         self.POLAR = _polar1()
-        self.PRINT = _print61()
+        self.PRINT = _print64()
         self._name = "LINRES"
         self._keywords = {'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Max_iter': 'MAX_ITER', 'Eps': 'EPS', 'Preconditioner': 'PRECONDITIONER', 'Energy_gap': 'ENERGY_GAP', 'Restart_every': 'RESTART_EVERY', 'Restart': 'RESTART'}
         self._subsections = {'POLAR': 'POLAR', 'NMR': 'NMR', 'EPR': 'EPR', 'CURRENT': 'CURRENT', 'PRINT': 'PRINT', 'SPINSPIN': 'SPINSPIN', 'LOCALIZE': 'LOCALIZE'}

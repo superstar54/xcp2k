@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each244 import _each244
+from _each253 import _each253
 
 
 class _e_density_cube1(InputSection):
@@ -15,7 +15,7 @@ class _e_density_cube1(InputSection):
         self.Append = None
         self.Xrd_interface = None
         self.Ngauss = None
-        self.EACH = _each244()
+        self.EACH = _each253()
         self._name = "E_DENSITY_CUBE"
         self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Ngauss': 'NGAUSS', 'Xrd_interface': 'XRD_INTERFACE', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Stride': 'STRIDE', 'Add_last': 'ADD_LAST', 'Total_density': 'TOTAL_DENSITY', 'Append': 'APPEND'}
         self._subsections = {'EACH': 'EACH'}

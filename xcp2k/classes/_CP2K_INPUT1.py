@@ -4,13 +4,14 @@ from _test1 import _test1
 from _debug1 import _debug1
 from _motion1 import _motion1
 from _multiple_force_evals1 import _multiple_force_evals1
-from _force_eval2 import _force_eval2
+from _force_eval3 import _force_eval3
 from _farming1 import _farming1
 from _optimize_input1 import _optimize_input1
 from _optimize_basis1 import _optimize_basis1
 from _swarm1 import _swarm1
 from _ext_restart1 import _ext_restart1
 from _vibrational_analysis1 import _vibrational_analysis1
+from _negf1 import _negf1
 from _atom1 import _atom1
 
 
@@ -29,14 +30,15 @@ class _CP2K_INPUT1(InputSection):
         self.SWARM = _swarm1()
         self.EXT_RESTART = _ext_restart1()
         self.VIBRATIONAL_ANALYSIS = _vibrational_analysis1()
+        self.NEGF = _negf1()
         self.ATOM = _atom1()
         self._name = "CP2K_INPUT"
-        self._subsections = {'MULTIPLE_FORCE_EVALS': 'MULTIPLE_FORCE_EVALS', 'SWARM': 'SWARM', 'VIBRATIONAL_ANALYSIS': 'VIBRATIONAL_ANALYSIS', 'GLOBAL': 'GLOBAL', 'OPTIMIZE_BASIS': 'OPTIMIZE_BASIS', 'MOTION': 'MOTION', 'DEBUG': 'DEBUG', 'OPTIMIZE_INPUT': 'OPTIMIZE_INPUT', 'ATOM': 'ATOM', 'TEST': 'TEST', 'FARMING': 'FARMING', 'EXT_RESTART': 'EXT_RESTART'}
-        self._repeated_subsections = {'FORCE_EVAL': '_force_eval2'}
+        self._subsections = {'MULTIPLE_FORCE_EVALS': 'MULTIPLE_FORCE_EVALS', 'SWARM': 'SWARM', 'VIBRATIONAL_ANALYSIS': 'VIBRATIONAL_ANALYSIS', 'GLOBAL': 'GLOBAL', 'OPTIMIZE_BASIS': 'OPTIMIZE_BASIS', 'MOTION': 'MOTION', 'DEBUG': 'DEBUG', 'OPTIMIZE_INPUT': 'OPTIMIZE_INPUT', 'ATOM': 'ATOM', 'TEST': 'TEST', 'FARMING': 'FARMING', 'NEGF': 'NEGF', 'EXT_RESTART': 'EXT_RESTART'}
+        self._repeated_subsections = {'FORCE_EVAL': '_force_eval3'}
         self._attributes = ['FORCE_EVAL_list']
 
     def FORCE_EVAL_add(self, section_parameters=None):
-        new_section = _force_eval2()
+        new_section = _force_eval3()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

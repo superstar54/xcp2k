@@ -7,7 +7,7 @@ from _auxiliary_density_matrix_method1 import _auxiliary_density_matrix_method1
 from _qs1 import _qs1
 from _tddfpt1 import _tddfpt1
 from _mgrid1 import _mgrid1
-from _xc3 import _xc3
+from _xc4 import _xc4
 from _relativistic1 import _relativistic1
 from _sic2 import _sic2
 from _low_spin_roks1 import _low_spin_roks1
@@ -24,7 +24,7 @@ from _density_fitting1 import _density_fitting1
 from _xas1 import _xas1
 from _localize2 import _localize2
 from _real_time_propagation1 import _real_time_propagation1
-from _print39 import _print39
+from _print42 import _print42
 from _sccs2 import _sccs2
 
 
@@ -42,6 +42,7 @@ class _dft1(InputSection):
         self.Plus_u_method = None
         self.Relax_multiplicity = None
         self.Subcells = None
+        self.Auto_basis = []
         self.Surface_dipole_correction = None
         self.Surf_dip_dir = None
         self.SCF = _scf1()
@@ -52,7 +53,7 @@ class _dft1(InputSection):
         self.QS = _qs1()
         self.TDDFPT = _tddfpt1()
         self.MGRID = _mgrid1()
-        self.XC = _xc3()
+        self.XC = _xc4()
         self.RELATIVISTIC = _relativistic1()
         self.SIC = _sic2()
         self.LOW_SPIN_ROKS = _low_spin_roks1()
@@ -69,11 +70,11 @@ class _dft1(InputSection):
         self.XAS = _xas1()
         self.LOCALIZE = _localize2()
         self.REAL_TIME_PROPAGATION = _real_time_propagation1()
-        self.PRINT = _print39()
+        self.PRINT = _print42()
         self.SCCS = _sccs2()
         self._name = "DFT"
         self._keywords = {'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Multiplicity': 'MULTIPLICITY', 'Surf_dip_dir': 'SURF_DIP_DIR', 'Uks': 'UKS', 'Plus_u_method': 'PLUS_U_METHOD', 'Charge': 'CHARGE', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Relax_multiplicity': 'RELAX_MULTIPLICITY', 'Roks': 'ROKS', 'Surface_dipole_correction': 'SURFACE_DIPOLE_CORRECTION', 'Excitations': 'EXCITATIONS', 'Subcells': 'SUBCELLS'}
-        self._repeated_keywords = {'Basis_set_file_name': 'BASIS_SET_FILE_NAME'}
+        self._repeated_keywords = {'Auto_basis': 'AUTO_BASIS', 'Basis_set_file_name': 'BASIS_SET_FILE_NAME'}
         self._subsections = {'KPOINTS': 'KPOINTS', 'ALMO_SCF': 'ALMO_SCF', 'SIC': 'SIC', 'POISSON': 'POISSON', 'EXTERNAL_VXC': 'EXTERNAL_VXC', 'PRINT': 'PRINT', 'AUXILIARY_DENSITY_MATRIX_METHOD': 'AUXILIARY_DENSITY_MATRIX_METHOD', 'LS_SCF': 'LS_SCF', 'EXTERNAL_POTENTIAL': 'EXTERNAL_POTENTIAL', 'SCF': 'SCF', 'RELATIVISTIC': 'RELATIVISTIC', 'EXTERNAL_DENSITY': 'EXTERNAL_DENSITY', 'KG_METHOD': 'KG_METHOD', 'REAL_TIME_PROPAGATION': 'REAL_TIME_PROPAGATION', 'XC': 'XC', 'XAS': 'XAS', 'TDDFPT': 'TDDFPT', 'LOW_SPIN_ROKS': 'LOW_SPIN_ROKS', 'LOCALIZE': 'LOCALIZE', 'MGRID': 'MGRID', 'SCCS': 'SCCS', 'QS': 'QS', 'SCRF': 'SCRF', 'DENSITY_FITTING': 'DENSITY_FITTING', 'TRANSPORT': 'TRANSPORT'}
         self._repeated_subsections = {'PERIODIC_EFIELD': '_periodic_efield1', 'EFIELD': '_efield1'}
         self._aliases = {'Relax_multip': 'Relax_multiplicity', 'Lsd': 'Uks', 'Multip': 'Multiplicity', 'Restart_file_name': 'Wfn_restart_file_name', 'Surf_dip': 'Surface_dipole_correction', 'Surface_dipole': 'Surface_dipole_correction', 'Spin_polarized': 'Uks', 'Restricted_open_kohn_sham': 'Roks', 'Unrestricted_kohn_sham': 'Uks'}

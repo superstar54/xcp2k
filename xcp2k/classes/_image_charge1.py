@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _eri_mme5 import _eri_mme5
+from _eri_mme6 import _eri_mme6
 
 
 class _image_charge1(InputSection):
@@ -12,7 +12,7 @@ class _image_charge1(InputSection):
         self.Restart_image_matrix = None
         self.Image_restart_file_name = None
         self.Image_matrix_method = None
-        self.ERI_MME = _eri_mme5()
+        self.ERI_MME = _eri_mme6()
         self._name = "IMAGE_CHARGE"
         self._keywords = {'Restart_image_matrix': 'RESTART_IMAGE_MATRIX', 'Width': 'WIDTH', 'Ext_potential': 'EXT_POTENTIAL', 'Determ_coeff': 'DETERM_COEFF', 'Image_restart_file_name': 'IMAGE_RESTART_FILE_NAME', 'Image_matrix_method': 'IMAGE_MATRIX_METHOD'}
         self._repeated_keywords = {'Mm_atom_list': 'MM_ATOM_LIST'}

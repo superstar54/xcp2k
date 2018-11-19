@@ -3,7 +3,8 @@ from _ddapc_restraint_a1 import _ddapc_restraint_a1
 from _ddapc_restraint_b1 import _ddapc_restraint_b1
 from _becke_constraint_a1 import _becke_constraint_a1
 from _becke_constraint_b1 import _becke_constraint_b1
-from _program_run_info45 import _program_run_info45
+from _projection1 import _projection1
+from _program_run_info47 import _program_run_info47
 
 
 class _et_coupling1(InputSection):
@@ -14,10 +15,11 @@ class _et_coupling1(InputSection):
         self.DDAPC_RESTRAINT_B_list = []
         self.BECKE_CONSTRAINT_A = _becke_constraint_a1()
         self.BECKE_CONSTRAINT_B = _becke_constraint_b1()
-        self.PROGRAM_RUN_INFO = _program_run_info45()
+        self.PROJECTION = _projection1()
+        self.PROGRAM_RUN_INFO = _program_run_info47()
         self._name = "ET_COUPLING"
         self._keywords = {'Type_of_constraint': 'TYPE_OF_CONSTRAINT'}
-        self._subsections = {'BECKE_CONSTRAINT_B': 'BECKE_CONSTRAINT_B', 'BECKE_CONSTRAINT_A': 'BECKE_CONSTRAINT_A', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO'}
+        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'BECKE_CONSTRAINT_B': 'BECKE_CONSTRAINT_B', 'BECKE_CONSTRAINT_A': 'BECKE_CONSTRAINT_A', 'PROJECTION': 'PROJECTION'}
         self._repeated_subsections = {'DDAPC_RESTRAINT_B': '_ddapc_restraint_b1', 'DDAPC_RESTRAINT_A': '_ddapc_restraint_a1'}
         self._attributes = ['DDAPC_RESTRAINT_A_list', 'DDAPC_RESTRAINT_B_list']
 

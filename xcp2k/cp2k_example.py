@@ -63,7 +63,7 @@ SCF.OUTER_SCF.Max_scf = 20
 
 SCF.OT.Algorithm = 'IRAC'
 SCF.OT.Ortho_irac = 'CHOL'
-SCF.OT.Eps_irac_switch = 1.0E-4
+SCF.OT.Eps_irac_switch = 1.0E-2
 SCF.OT.Minimizer = "CG"
 SCF.OT.N_diis = 7
 SCF.OT.Safe_diis = False

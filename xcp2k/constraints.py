@@ -184,3 +184,17 @@ class Hookean(FixConstraint):
         else:
             return 'Hookean(%d) to plane' % self.index
 
+
+def check_hookean(atoms, k=1.2):
+    constraints = atoms.constraints
+    Flag = True
+    for con in constraints[1:-1]:
+        p1, p2 = atoms.positions[con.indices]
+        displace = find_mic([p2 - p1], atoms.cell, atoms._pbc)[0][0]
+        # print(displace)
+        bondlength = np.linalg.norm(displace)
+        if bondlength > con.threshold*1.2 and con.spring > 0 or bondlength < con.threshold*0.8 and con.spring < 0:
+          print('Hookean not fufill!')
+          print('indices: ', con.indices, '   threshold {0}, bondlength {1}'.format(con.threshold, bondlength))
+          Flag = False
+    return Flag

@@ -76,13 +76,15 @@ class CP2K(Calculator):
     implemented_properties = ['energy', 'energies', 'forces', 'stress', 'charges', 'frequencies']
 
     def __init__(self, restart=None, mode = 0,  ignore_bad_restart_file=False,
-                  env = 'SLURM', cpu = 1, nodes = 1, time = '1:00:00', atoms=None, command=None,
+                  env = 'SLURM', ntasks = None, nodes = None, ntasks_per_node = None, time = '1:00:00', atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
         self.xcp2krc = xcp2krc
         self.xcp2krc['env'] = env    # set environment for  job submission
-        self.xcp2krc['ntasks'] = cpu
+        self.xcp2krc['ntasks'] = ntasks
         self.xcp2krc['nodes'] = nodes
+        self.xcp2krc['ntasks-per-node'] = ntasks_per_node
+
         self.xcp2krc['time'] = time
         if debug:
             logger.setLevel(logging.DEBUG)
@@ -331,10 +333,13 @@ class CP2K(Calculator):
         forces = np.zeros([len(self.atoms), 3])
         for n, line in enumerate(lines):
             if line.rfind('# Atom   Kind   Element') > -1:
-                for iatom in range(len(self.atoms)):
-                    data = lines[n + iatom + 1].split()
-                    for iforce in range(3):
-                        forces[iatom, iforce] = float(data[3 + iforce])*conf
+                try :
+                    for iatom in range(len(self.atoms)):
+                        data = lines[n + iatom + 1].split()
+                        for iforce in range(3):
+                            forces[iatom, iforce] = float(data[3 + iforce])*conf
+                except:
+                    print('read forces error, cp2k run may be interupt')
         self.results['forces'] = forces
 
     def read_charges(self):
@@ -515,7 +520,12 @@ class CP2K(Calculator):
             cmdlist = ['sbatch']
             cmdlist += ['--wait']
             cmdlist += ['--job-name', '{0}'.format(jobname)]
-            cmdlist += ['--nodes', '{0}'.format(self.xcp2krc['nodes'])]
+            if self.xcp2krc['nodes']:
+                cmdlist += ['--nodes', '{0}'.format(self.xcp2krc['nodes'])]
+            if self.xcp2krc['ntasks']:
+                cmdlist += ['--ntasks', '{0}'.format(self.xcp2krc['ntasks'])]
+            if self.xcp2krc['ntasks-per-node']:
+                cmdlist += ['--ntasks-per-node', '{0}'.format(self.xcp2krc['ntasks-per-node'])]
             cmdlist += ['--time', '{0}'.format(self.xcp2krc['time'])]
             # cmdlist += ['--ntasks-per-node', '{0}'.format(self.cpu)]
         if self.xcp2krc['env'].upper() == 'SGE':

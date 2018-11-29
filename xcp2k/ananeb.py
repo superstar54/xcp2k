@@ -13,7 +13,7 @@ class AnaNEB(CP2K):
     def __init__(self, directory = '.', prefix = None, nimages = None, **kwargs):
 
         CP2K.__init__(self, restart=None, mode = 0, env = 'SLURM', ignore_bad_restart_file=False,
-                 label='cp2k', cpu = 1, atoms=None, command=None,
+                  cpu = 1, atoms=None, command=None,
                  debug=False, **kwargs)
 
         self.directory = directory
@@ -69,8 +69,12 @@ class AnaNEB(CP2K):
             self.benergy[i] = self.images[i].calc.results['energy']
         for i in range(len(self.images[i].calc.results['energies'])):
             energies = []
-            for j in range(self.nimages):
-                energies.append(self.images[j].calc.results['energies'][i])
+            try:
+                for j in range(self.nimages):
+                    energies.append(self.images[j].calc.results['energies'][i])
+            except:
+                print('read energies error, cp2k run may be interupt')
+
             benergies.append(energies)
         self.benergies = benergies
     #

@@ -31,8 +31,8 @@ GLOBAL.Run_type = "GEO_OPT"  # energy_force, geo_opt, cell_opt
 
 FORCE_EVAL.Method = "Quickstep"
 FORCE_EVAL.Stress_tensor = 'ANALYTICAL'
-FORCE_EVAL.PRINT.FORCES.Section_parameters = "ON"
-FORCE_EVAL.PRINT.STRESS_TENSOR.Section_parameters = "ON"
+# FORCE_EVAL.PRINT.FORCES.Section_parameters = "ON"
+# FORCE_EVAL.PRINT.STRESS_TENSOR.Section_parameters = "ON"
 
 DFT.Basis_set_file_name = "BASIS_MOLOPT"
 DFT.Potential_file_name = "POTENTIAL"
@@ -41,7 +41,7 @@ DFT.Potential_file_name = "POTENTIAL"
 #DFT.Uks = True
 
 DFT.MGRID.Ngrids = 5
-DFT.MGRID.Cutoff = 800
+DFT.MGRID.Cutoff = 1000
 DFT.MGRID.Rel_cutoff = 60
 
 DFT.XC.XC_FUNCTIONAL.Section_parameters = "PBE"
@@ -89,8 +89,8 @@ SCF.OT.Safe_diis = False
 SCF.OT.Preconditioner = 'FULL_ALL'
 SCF.OT.Energy_gap = 0.05
 #===============================================================================
-CP2K_INPUT_OT_VDW = copy.deepcopy(CP2K_INPUT_OT)
-DFT = CP2K_INPUT_OT_VDW.FORCE_EVAL_list[0].DFT
+CP2K_INPUT_OT_VDW_D3 = copy.deepcopy(CP2K_INPUT_OT)
+DFT = CP2K_INPUT_OT_VDW_D3.FORCE_EVAL_list[0].DFT
 DFT.XC.VDW_POTENTIAL.Potential_type = 'PAIR_POTENTIAL'
 PAIR_POTENTIAL = DFT.XC.VDW_POTENTIAL.PAIR_POTENTIAL_add()
 PAIR_POTENTIAL.Parameter_file_name = 'dftd3.dat'
@@ -100,6 +100,14 @@ PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
 
 # print(CP2K_INPUT_OT.FORCE_EVAL_list[0].DFT.XC.VDW_POTENTIAL.Potential_type)
 # print(CP2K_INPUT_OT_VDW.FORCE_EVAL_list[0].DFT.XC.VDW_POTENTIAL.Potential_type)
+#===============================================================================
+CP2K_INPUT_OT_VDW_RVV10 = copy.deepcopy(CP2K_INPUT_OT)
+DFT = CP2K_INPUT_OT_VDW_RVV10.FORCE_EVAL_list[0].DFT
+DFT.XC.VDW_POTENTIAL.Potential_type = 'NON_LOCAL'
+NON_LOCAL = DFT.XC.VDW_POTENTIAL.NON_LOCAL_add()
+NON_LOCAL.Kernel_file_name = 'rVV10_kernel_table.dat'
+# NON_LOCAL.Parameters = '15.7   0.0093'
+NON_LOCAL.Type = 'RVV10'
 #===============================================================================
 CP2K_INPUT_OT_NEB = copy.deepcopy(CP2K_INPUT_OT)
 DFT = CP2K_INPUT_OT_NEB.FORCE_EVAL_list[0].DFT

@@ -14,6 +14,7 @@ module load daint-mc
 module load cray-python
 module load CP2K
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+ulimit -s unlimited
 
 export PYTHONPATH=~/apps/ase:$PYTHONPATH
 export PYTHONPATH=~/apps/xcp2k:$PYTHONPATH

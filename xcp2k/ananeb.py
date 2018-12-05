@@ -12,9 +12,7 @@ class AnaNEB(CP2K):
 
     def __init__(self, directory = '.', prefix = None, nimages = None, **kwargs):
 
-        CP2K.__init__(self, restart=None, mode = 0, env = 'SLURM', ignore_bad_restart_file=False,
-                  cpu = 1, atoms=None, command=None,
-                 debug=False, **kwargs)
+        CP2K.__init__(self,  **kwargs)
 
         self.directory = directory
         self.prefix = prefix

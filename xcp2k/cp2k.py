@@ -771,4 +771,57 @@ class CP2K(Calculator):
         #    DFT.Basis_set_file_name = "BASIS_MOLOPT"
         #if not DFT.Potential_file_name:
         #   DFT.Potential_file_name = "POTENTIAL"
+    def get_atomic_kinds(self):
+        """Returns number of atomic kind.
+        ['O', 'C']
+
+        """ 
+        kinds = {}
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        # print(self.out)
+        nk = 0
+        for line in open(self.out, 'r'):
+            if line.rfind('Atomic kind:') > -1:
+                nk += 1
+                kind = line.split()[3]
+                na = int(line.split()[-1])
+                kinds[nk] = [kind, na]
+        self.kinds = kinds
+
             
+    def get_fermi_level(self):
+        """Return the Fermi level."""
+        energies = []
+        free_energies = []
+        cone = physical_constants['Hartree energy in eV'][0]
+        #
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        # print(self.out)
+        for line in open(self.out, 'r'):
+            if line.rfind('Fermi Energy') > -1 and line.rfind('eV') > -1:
+                Ef = float(line.split()[-1])
+            if line.rfind('Fermi Energy') > -1 and line.rfind('eV') == -1:
+                Ef = float(line.split()[-1])*cone
+        self.Ef = Ef
+
+    def get_number_of_spins(self):
+        """Returns number of spins.
+        1 if not spin-polarized
+        2 if spin-polarized 
+
+        """ 
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        # print(self.out)
+        for line in open(self.out, 'r'):
+            if line.rfind('DFT| Spin') > -1:
+                method = line.split()[-1]
+                break
+        if method=='UKS':
+            spin=2
+        else:
+            spin=1
+        self.spin = spin
+

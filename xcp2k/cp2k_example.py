@@ -40,9 +40,12 @@ DFT.Potential_file_name = "POTENTIAL"
 #DFT.Multiplicity = 1
 #DFT.Uks = True
 
-DFT.MGRID.Ngrids = 5
-DFT.MGRID.Cutoff = 1000
-DFT.MGRID.Rel_cutoff = 60
+# DFT.MGRID.Ngrids = 5
+# DFT.MGRID.Cutoff = 1000
+# DFT.MGRID.Rel_cutoff = 60
+DFT.MGRID.Ngrids = 4
+DFT.MGRID.Cutoff = 500
+DFT.MGRID.Rel_cutoff = 50
 
 DFT.XC.XC_FUNCTIONAL.Section_parameters = "PBE"
 
@@ -141,3 +144,40 @@ SCF.MIXING.Nbuffer = 8
 
 # print(CP2K_INPUT_OT.FORCE_EVAL_list[0].DFT.SCF.MIXING.Method)
 # print(CP2K_INPUT_DIAG.FORCE_EVAL_list[0].DFT.SCF.MIXING.Method)
+#===============================================================================
+CP2K_INPUT_DIAG_VDW_D3 = copy.deepcopy(CP2K_INPUT_DIAG)
+DFT = CP2K_INPUT_DIAG_VDW_D3.FORCE_EVAL_list[0].DFT
+DFT.XC.VDW_POTENTIAL.Potential_type = 'PAIR_POTENTIAL'
+PAIR_POTENTIAL = DFT.XC.VDW_POTENTIAL.PAIR_POTENTIAL_add()
+PAIR_POTENTIAL.Parameter_file_name = 'dftd3.dat'
+PAIR_POTENTIAL.Type = 'DFTD3'
+PAIR_POTENTIAL.Reference_functional = 'PBE'
+PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
+#===============================================================================
+CP2K_INPUT_DIAG_NEB = copy.deepcopy(CP2K_INPUT_DIAG)
+DFT = CP2K_INPUT_DIAG_NEB.FORCE_EVAL_list[0].DFT
+CP2K_INPUT_DIAG_NEB.GLOBAL.Run_type = "BAND"
+BAND = CP2K_INPUT_DIAG_NEB.MOTION.BAND
+BAND.Nproc_rep = 36
+BAND.Band_type = 'CI-NEB'
+BAND.Number_of_replica = 12
+BAND.CONVERGENCE_CONTROL.Max_force = 0.0050
+BAND.CONVERGENCE_CONTROL.Rms_force = 0.0050
+# BAND.CONVERGENCE_CONTROL.Max_dr = 0.005
+# BAND.CONVERGENCE_CONTROL.Rms_dr = 0.005    
+BAND.Rotate_frames = 'F'
+BAND.Align_frames = 'F'
+BAND.CI_NEB.Nsteps_it = 20  
+OPTIMIZE_BAND = BAND.OPTIMIZE_BAND_add()
+OPTIMIZE_BAND.DIIS.Max_steps = 1000    
+# print(CP2K_INPUT_DIAG.MOTION.BAND.Band_type)
+# print(CP2K_INPUT_DIAG_NEB.MOTION.BAND.Band_type)
+#===============================================================================
+CP2K_INPUT_DIAG_VDW_D3_NEB = copy.deepcopy(CP2K_INPUT_DIAG_NEB)
+DFT = CP2K_INPUT_DIAG_VDW_D3_NEB.FORCE_EVAL_list[0].DFT
+DFT.XC.VDW_POTENTIAL.Potential_type = 'PAIR_POTENTIAL'
+PAIR_POTENTIAL = DFT.XC.VDW_POTENTIAL.PAIR_POTENTIAL_add()
+PAIR_POTENTIAL.Parameter_file_name = 'dftd3.dat'
+PAIR_POTENTIAL.Type = 'DFTD3'
+PAIR_POTENTIAL.Reference_functional = 'PBE'
+PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'

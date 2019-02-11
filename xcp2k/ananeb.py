@@ -111,6 +111,8 @@ class AnaNEB(CP2K):
         ax.set_ylabel('Energy profile [eV]')
         Ef = max(Efit) - E[0]
         Er = max(Efit) - E[-1]
+        self.Ef = Ef
+        self.Er = Er
         dE = E[-1] - E[0]
         ax.set_title('$E_\mathrm{f} \\approx$ %.3f eV; '
                      '$E_\mathrm{r} \\approx$ %.3f eV; '
@@ -140,6 +142,7 @@ class AnaNEB(CP2K):
         R = [atoms.positions for atoms in images]
         E = self.benergy
         F = [atoms.calc.results['forces'] for atoms in images]
+        # print(F)
         A = images[0].cell
         pbc = images[0].pbc
         s, E, Sfit, Efit, lines = fit0(E, F, R, A, pbc)

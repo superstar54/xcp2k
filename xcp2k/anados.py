@@ -61,6 +61,7 @@ class AnaDOS(CP2K):
         else:
             labels = ['', '']
         pdos = {}
+        energies=[[], []]
         for i, kind in self.kinds.items():
             pdos[i] = []
             for j in range(self.spin):
@@ -68,16 +69,19 @@ class AnaDOS(CP2K):
                 print(file, self.kinds)
                 efermi, xmesh, ymesh = self.cp2k_pdos(fpdos = file, natoms = kind[1], sigma = sigma, de=de, output='smeared-{0}'.format(file))
                 pdos[i].append(ymesh)
+                print(ymesh.shape)
+                energies[j] = xmesh
+        self.energies = energies
         self.pdos = pdos
-        self.energies = xmesh
         self.Ef = efermi
         # calculate total dos
         dos = {}
-        totdos = np.zeros([self.spin, len(self.energies)])
+        nd = max(len(energies[0]), len(energies[1]))
+        totdos = np.zeros([self.spin, nd])
         for ele, pdos in self.pdos.items():
-            dos[ele] = np.zeros([self.spin, len(self.energies)])
+            dos[ele] = np.zeros([self.spin, nd])
             for i in range(self.spin):
-                dos[ele][i] = np.sum(pdos[i], axis=1)
+                dos[ele][i][0:len(self.energies[i])] += np.sum(pdos[i], axis=1)
                 totdos[i] += dos[ele][i]
         self.dos = dos
         self.totdos = totdos
@@ -100,7 +104,7 @@ class AnaDOS(CP2K):
         r'\# Projected DOS for atomic kind (?P<element>\w+) at iteration step i = \d+, E\(Fermi\) = [ \t]* (?P<Efermi>[^\t ]+) a\.u\.')
         fhandle = open(fpdos, 'r')
         header = HEADER_MATCH.match(fhandle.readline().rstrip())
-        efermi = float(header.group('Efermi'))
+        efermi = float(header.group('Efermi')) + 0.002
         # header is originally: ['#', 'MO', 'Eigenvalue', '[a.u.]', 'Occupation', 's', 'py', ...]
         header = fhandle.readline().rstrip().split()[1:]  # remove the comment directly
         header[1:3] = [' '.join(header[1:3])]  # rejoin "Eigenvalue" and its unit
@@ -124,8 +128,9 @@ class AnaDOS(CP2K):
             func = np.exp(-(xmesh[mpnt]-data[:, 1])**2/(2.0*sigma**2))*fact
             ymesh[mpnt, :] = func.dot(data[:, 3:])  
 
-        xmesh -= efermi  # put the Fermi energy at 0
+        efermi *= 27.211384
         xmesh *= 27.211384  # convert to eV
+        xmesh -= efermi  # put the Fermi energy at 0
         ymesh /= natoms  # normalize    
 
         fhandle = open(output, 'w')
@@ -135,31 +140,43 @@ class AnaDOS(CP2K):
             fhandle.write(("{:16.8f}" + " {:16.8f}"*ncols + "\n").format(xmesh[mpnt], *ymesh[mpnt, :]))
         return efermi, xmesh, ymesh
 
-    def plot_ele_pdos(self, xlim=[-20, 10]):
+    def plot_ele_pdos(self, xlim=[-20, 10], sef=True, prefix=None):
         """
         orbital: string ['s', 'p', 'd', 'f'] 
         """
-        x = self.energies
         for i, pdos in self.pdos.items():
             ele = self.kinds[i][0]
             plt.figure()
             for i in range(self.spin):
+                if not sef:
+                    x = self.energies[i] + self.Ef
+                else:
+                    x = self.energies[i]
                 y = pdos[i]
                 no = len(y[0, :])
                 for j in range(no):
                     plt.plot(x, y[:, j]*(-1)**i, linewidth=1, color=colors[j])
-            plt.axvline(x=0.0, linewidth=0.5, color='r', linestyle='dashed')
+            if not sef:
+                plt.axvline(x=self.Ef, linewidth=0.5, color='r', linestyle='dashed')
+            else:
+                plt.axvline(x=0.0, linewidth=0.5, color='r', linestyle='dashed')
+
             plt.axhline(y=0.0, linewidth=0.5, color='k', linestyle='dashed')
             plt.xlabel('Energy - E$_f$ (eV)')
             plt.ylabel('DOS')
             plt.title('{0}'.format(ele))
-            plt.xlim([max(xlim[0], self.energies[0]), min(xlim[1], self.energies[-1])])
+            plt.xlim([max(xlim[0], min(self.energies[0])), min(xlim[1], max(self.energies[0]))])
             plt.legend(orbitals[0:no])
             plt.grid(True, 'major', 'x', ls='--', lw=.5, c='k', alpha=.3)
-            plt.savefig('dos-{0}.jpg'.format(ele), dpi = 600)
+            if prefix:
+                plt.savefig('{0}dos-{1}.jpg'.format(prefix, ele), dpi = 600)
+            else:
+                # print(ele)
+                plt.savefig('dos-{0}.jpg'.format(ele), dpi = 600)
+
             plt.close()
     #
-    def plot_total_pdos(self, eles = None, xlim=[-20, 10], output = 'dos-total.jpg'):
+    def plot_total_pdos(self, eles = None, xlim=[-20, 10], ylim = None, sef=True, output = 'dos-total.jpg'):
         """Plots the NEB band on matplotlib axes object 'ax'. If ax=None
         returns a new figure object."""
         plt.figure()
@@ -169,15 +186,24 @@ class AnaDOS(CP2K):
             dos = self.dos
         for j in range(self.spin):
             legend = []
+            if not sef:
+                x = self.energies[j] + self.Ef
+            else:
+                x = self.energies[j]
             for i, y in dos.items():
                 ele = self.kinds[i][0]
                 legend.append(ele)
-                plt.plot(self.energies, y[j]*(-1)**j, linewidth=1, color=colors[i])
-        plt.axvline(x=0.0, linewidth=0.5, color='r', linestyle='dashed')
+                plt.plot(x, y[j][0:len(x)]*(-1)**j, linewidth=1, color=colors[i])
+        if not sef:
+            plt.axvline(x=self.Ef, linewidth=0.5, color='r', linestyle='dashed')
+        else:
+            plt.axvline(x=0.0, linewidth=0.5, color='r', linestyle='dashed')        
         plt.axhline(y=0.0, linewidth=0.5, color='k', linestyle='dashed')
         plt.xlabel('Energy - E$_f$ (eV)')
         plt.ylabel('DOS')
-        plt.xlim([max(xlim[0], self.energies[0]), min(xlim[1], self.energies[-1])])
+        plt.xlim([max(xlim[0], min(self.energies[0])), min(xlim[1], max(self.energies[0]))])
+        if ylim:
+            plt.ylim(ylim)
         plt.legend(legend)
         plt.grid(True, 'major', 'x', ls='--', lw=.5, c='k', alpha=.3)
         plt.savefig(output, dpi = 600)
@@ -216,7 +242,7 @@ class AnaDOS(CP2K):
         data = np.roll(data, roll, axis=[0, 1, 2])
 
         self.cube = [atoms, data]
-    def plot_cube(self, nc = 6, distance = 10, magnification=1, output='cube', view = False, movie=True, elevation=90):
+    def plot_cube(self, nc = 6, distance = 10, magnification=1, output='cube', view = False, cell=True, movie=True, elevation=90):
         """Plot atoms, unit-cell and iso-surfaces using Mayavi. 
 
         Parameters: 
@@ -230,11 +256,12 @@ class AnaDOS(CP2K):
         """ 
 
         # Delay slow imports: 
-        tube_radius = 0.3
+        tube_radius = 0.0
         from mayavi import mlab
         if not view:
             mlab.options.offscreen = True
-            tube_radius=0.0
+        if cell:
+            tube_radius=0.3
         atoms, data = self.cube
         mn = data.min()
         mx = data.max()

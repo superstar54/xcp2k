@@ -209,11 +209,12 @@ class CP2K(Calculator):
         cwd = os.getcwd()
         # os.chdir(self.directory)
         self.xcp2krc['script_new'] = self.xcp2krc['script'] + '''
-                cd {0}  # this is the current working directory
-                cd {1}  # this is the vasp directory
+                # cd {0}  # this is the current working directory
+                # cd {1}  # this is the vasp directory
                 $ASE_CP2K_COMMAND
             '''.format(cwd, self.directory)
         self.run()
+        # print(os.getcwd())
         # os.chdir(cwd)
         self.converged = self.read_convergence()
         # read results
@@ -468,16 +469,11 @@ class CP2K(Calculator):
         # if we are in the queue and jasp is called or if we want to use
         # mode='run' , we should just run the job. First, we consider how.
         logger.debug('run function')
-        
+        # cwd = os.getcwd()
+        # print(cwd)
+
         if 'ASE_CP2K_COMMAND' not in os.environ:
             raise RuntimeError('Please set ASE_CP2K_COMMAND in the environment variable')
-        # check data
-        #if 'CP2K_DATA_DIR' is None:
-        #    pppaths = CP2K_DATA_DIR
-        #elif 'CP2K_DATA_DIR' in os.environ:
-        #    pppaths = os.environ['CP2K_DATA_DIR']
-        #else:
-        #    raise RuntimeError('Please set CP2K_DATA_DIR')
 
         #print(os.environ)
         if self.xcp2krc['mode'] == 'run':
@@ -500,7 +496,10 @@ class CP2K(Calculator):
             # NPROCS = int(os.environ['SLURM_NTASKS'])
             # no question. running in serial.
             cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            exitcode = os.system(cp2kcmd)
+            exitcode = os.system('''# cd {0}  # this is the current working directory
+                # cd {1}  # this is the vasp directory
+                {2} '''.format(cwd, self.directory, cp2kcmd))
+            # exitcode = os.system(cp2kcmd)
             return exitcode
         elif 'PBS_NODEFILE' in os.environ:
             # we are in the queue. determine if we should run serial
@@ -786,7 +785,12 @@ class CP2K(Calculator):
                 nk += 1
                 kind = line.split()[3]
                 na = int(line.split()[-1])
-                kinds[nk] = [kind, na]
+                flag=True
+                for k, e in kinds.items():
+                    if e[0]==kind:
+                        flag=False
+                if flag:
+                    kinds[nk] = [kind, na]
         self.kinds = kinds
 
             

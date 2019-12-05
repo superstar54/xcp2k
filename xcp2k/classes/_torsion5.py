@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point37 import _point37
+from xcp2k.classes._point37 import _point37
 
 
 class _torsion5(InputSection):

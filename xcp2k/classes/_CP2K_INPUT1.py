@@ -1,18 +1,18 @@
 from xcp2k.inputsection import InputSection
-from _global1 import _global1
-from _test1 import _test1
-from _debug1 import _debug1
-from _motion1 import _motion1
-from _multiple_force_evals1 import _multiple_force_evals1
-from _force_eval3 import _force_eval3
-from _farming1 import _farming1
-from _optimize_input1 import _optimize_input1
-from _optimize_basis1 import _optimize_basis1
-from _swarm1 import _swarm1
-from _ext_restart1 import _ext_restart1
-from _vibrational_analysis1 import _vibrational_analysis1
-from _negf1 import _negf1
-from _atom1 import _atom1
+from xcp2k.classes._global1 import _global1
+from xcp2k.classes._test1 import _test1
+from xcp2k.classes._debug1 import _debug1
+from xcp2k.classes._motion1 import _motion1
+from xcp2k.classes._multiple_force_evals1 import _multiple_force_evals1
+from xcp2k.classes._force_eval3 import _force_eval3
+from xcp2k.classes._farming1 import _farming1
+from xcp2k.classes._optimize_input1 import _optimize_input1
+from xcp2k.classes._optimize_basis1 import _optimize_basis1
+from xcp2k.classes._swarm1 import _swarm1
+from xcp2k.classes._ext_restart1 import _ext_restart1
+from xcp2k.classes._vibrational_analysis1 import _vibrational_analysis1
+from xcp2k.classes._negf1 import _negf1
+from xcp2k.classes._atom1 import _atom1
 
 
 class _CP2K_INPUT1(InputSection):
@@ -33,7 +33,7 @@ class _CP2K_INPUT1(InputSection):
         self.NEGF = _negf1()
         self.ATOM = _atom1()
         self._name = "CP2K_INPUT"
-        self._subsections = {'MULTIPLE_FORCE_EVALS': 'MULTIPLE_FORCE_EVALS', 'SWARM': 'SWARM', 'VIBRATIONAL_ANALYSIS': 'VIBRATIONAL_ANALYSIS', 'GLOBAL': 'GLOBAL', 'OPTIMIZE_BASIS': 'OPTIMIZE_BASIS', 'MOTION': 'MOTION', 'DEBUG': 'DEBUG', 'OPTIMIZE_INPUT': 'OPTIMIZE_INPUT', 'ATOM': 'ATOM', 'TEST': 'TEST', 'FARMING': 'FARMING', 'NEGF': 'NEGF', 'EXT_RESTART': 'EXT_RESTART'}
+        self._subsections = {'GLOBAL': 'GLOBAL', 'TEST': 'TEST', 'DEBUG': 'DEBUG', 'MOTION': 'MOTION', 'MULTIPLE_FORCE_EVALS': 'MULTIPLE_FORCE_EVALS', 'FARMING': 'FARMING', 'OPTIMIZE_INPUT': 'OPTIMIZE_INPUT', 'OPTIMIZE_BASIS': 'OPTIMIZE_BASIS', 'SWARM': 'SWARM', 'EXT_RESTART': 'EXT_RESTART', 'VIBRATIONAL_ANALYSIS': 'VIBRATIONAL_ANALYSIS', 'NEGF': 'NEGF', 'ATOM': 'ATOM'}
         self._repeated_subsections = {'FORCE_EVAL': '_force_eval3'}
         self._attributes = ['FORCE_EVAL_list']
 

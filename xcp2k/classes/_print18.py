@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info12 import _program_run_info12
-from _dipole1 import _dipole1
+from xcp2k.classes._program_run_info12 import _program_run_info12
+from xcp2k.classes._dipole1 import _dipole1
 
 
 class _print18(InputSection):

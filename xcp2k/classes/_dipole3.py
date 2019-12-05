@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each294 import _each294
+from xcp2k.classes._each294 import _each294
 
 
 class _dipole3(InputSection):
@@ -15,9 +15,9 @@ class _dipole3(InputSection):
         self.Reference_point = None
         self.EACH = _each294()
         self._name = "DIPOLE"
-        self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Reference': 'REFERENCE', 'Reference_point': 'REFERENCE_POINT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Periodic': 'PERIODIC', 'Add_last': 'ADD_LAST'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Periodic': 'PERIODIC', 'Reference': 'REFERENCE', 'Reference_point': 'REFERENCE_POINT'}
         self._subsections = {'EACH': 'EACH'}
-        self._aliases = {'Ref_point': 'Reference_point', 'Ref': 'Reference'}
+        self._aliases = {'Ref': 'Reference', 'Ref_point': 'Reference_point'}
         self._attributes = ['Section_parameters']
 
 

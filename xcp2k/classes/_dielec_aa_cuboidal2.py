@@ -10,7 +10,7 @@ class _dielec_aa_cuboidal2(InputSection):
         self.Z_xtnt = None
         self.Smoothing_width = None
         self._name = "DIELEC_AA_CUBOIDAL"
-        self._keywords = {'Dielectric_constant': 'DIELECTRIC_CONSTANT', 'Y_xtnt': 'Y_XTNT', 'Smoothing_width': 'SMOOTHING_WIDTH', 'Z_xtnt': 'Z_XTNT', 'X_xtnt': 'X_XTNT'}
+        self._keywords = {'Dielectric_constant': 'DIELECTRIC_CONSTANT', 'X_xtnt': 'X_XTNT', 'Y_xtnt': 'Y_XTNT', 'Z_xtnt': 'Z_XTNT', 'Smoothing_width': 'SMOOTHING_WIDTH'}
         self._aliases = {'Epsilon': 'Dielectric_constant', 'Zeta': 'Smoothing_width'}
 
 

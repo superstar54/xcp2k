@@ -11,7 +11,7 @@ class _msst1(InputSection):
         self.Vshock = None
         self.Gamma = None
         self._name = "MSST"
-        self._keywords = {'Vshock': 'VSHOCK', 'Energy': 'ENERGY', 'Volume': 'VOLUME', 'Pressure': 'PRESSURE', 'Cmass': 'CMASS', 'Gamma': 'GAMMA'}
+        self._keywords = {'Pressure': 'PRESSURE', 'Energy': 'ENERGY', 'Volume': 'VOLUME', 'Cmass': 'CMASS', 'Vshock': 'VSHOCK', 'Gamma': 'GAMMA'}
         self._aliases = {'V_shock': 'Vshock'}
 
 

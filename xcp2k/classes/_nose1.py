@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _coord1 import _coord1
-from _velocity2 import _velocity2
-from _mass2 import _mass2
-from _force1 import _force1
+from xcp2k.classes._coord1 import _coord1
+from xcp2k.classes._velocity2 import _velocity2
+from xcp2k.classes._mass2 import _mass2
+from xcp2k.classes._force1 import _force1
 
 
 class _nose1(InputSection):
@@ -17,9 +17,9 @@ class _nose1(InputSection):
         self.MASS = _mass2()
         self.FORCE = _force1()
         self._name = "NOSE"
-        self._keywords = {'Mts': 'MTS', 'Length': 'LENGTH', 'Yoshida': 'YOSHIDA', 'Timecon': 'TIMECON'}
-        self._subsections = {'VELOCITY': 'VELOCITY', 'MASS': 'MASS', 'COORD': 'COORD', 'FORCE': 'FORCE'}
-        self._aliases = {'Mult_t_steps': 'Mts', 'Multiple_time_steps': 'Mts'}
+        self._keywords = {'Length': 'LENGTH', 'Yoshida': 'YOSHIDA', 'Timecon': 'TIMECON', 'Mts': 'MTS'}
+        self._subsections = {'COORD': 'COORD', 'VELOCITY': 'VELOCITY', 'MASS': 'MASS', 'FORCE': 'FORCE'}
+        self._aliases = {'Multiple_time_steps': 'Mts', 'Mult_t_steps': 'Mts'}
 
 
     @property

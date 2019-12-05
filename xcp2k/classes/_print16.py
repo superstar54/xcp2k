@@ -1,21 +1,21 @@
 from xcp2k.inputsection import InputSection
-from _trajectory1 import _trajectory1
-from _shell_trajectory1 import _shell_trajectory1
-from _core_trajectory1 import _core_trajectory1
-from _cell2 import _cell2
-from _velocities1 import _velocities1
-from _shell_velocities1 import _shell_velocities1
-from _core_velocities1 import _core_velocities1
-from _structure_data1 import _structure_data1
-from _force_mixing_labels1 import _force_mixing_labels1
-from _forces2 import _forces2
-from _shell_forces1 import _shell_forces1
-from _core_forces1 import _core_forces1
-from _mixed_energies1 import _mixed_energies1
-from _stress1 import _stress1
-from _restart5 import _restart5
-from _restart_history1 import _restart_history1
-from _translation_vector1 import _translation_vector1
+from xcp2k.classes._trajectory1 import _trajectory1
+from xcp2k.classes._shell_trajectory1 import _shell_trajectory1
+from xcp2k.classes._core_trajectory1 import _core_trajectory1
+from xcp2k.classes._cell2 import _cell2
+from xcp2k.classes._velocities1 import _velocities1
+from xcp2k.classes._shell_velocities1 import _shell_velocities1
+from xcp2k.classes._core_velocities1 import _core_velocities1
+from xcp2k.classes._structure_data1 import _structure_data1
+from xcp2k.classes._force_mixing_labels1 import _force_mixing_labels1
+from xcp2k.classes._forces2 import _forces2
+from xcp2k.classes._shell_forces1 import _shell_forces1
+from xcp2k.classes._core_forces1 import _core_forces1
+from xcp2k.classes._mixed_energies1 import _mixed_energies1
+from xcp2k.classes._stress1 import _stress1
+from xcp2k.classes._restart5 import _restart5
+from xcp2k.classes._restart_history1 import _restart_history1
+from xcp2k.classes._translation_vector1 import _translation_vector1
 
 
 class _print16(InputSection):
@@ -39,5 +39,5 @@ class _print16(InputSection):
         self.RESTART_HISTORY = _restart_history1()
         self.TRANSLATION_VECTOR = _translation_vector1()
         self._name = "PRINT"
-        self._subsections = {'RESTART_HISTORY': 'RESTART_HISTORY', 'STRESS': 'STRESS', 'CORE_FORCES': 'CORE_FORCES', 'MIXED_ENERGIES': 'MIXED_ENERGIES', 'TRANSLATION_VECTOR': 'TRANSLATION_VECTOR', 'TRAJECTORY': 'TRAJECTORY', 'VELOCITIES': 'VELOCITIES', 'SHELL_FORCES': 'SHELL_FORCES', 'CELL': 'CELL', 'SHELL_TRAJECTORY': 'SHELL_TRAJECTORY', 'FORCE_MIXING_LABELS': 'FORCE_MIXING_LABELS', 'STRUCTURE_DATA': 'STRUCTURE_DATA', 'RESTART': 'RESTART', 'FORCES': 'FORCES', 'SHELL_VELOCITIES': 'SHELL_VELOCITIES', 'CORE_TRAJECTORY': 'CORE_TRAJECTORY', 'CORE_VELOCITIES': 'CORE_VELOCITIES'}
+        self._subsections = {'TRAJECTORY': 'TRAJECTORY', 'SHELL_TRAJECTORY': 'SHELL_TRAJECTORY', 'CORE_TRAJECTORY': 'CORE_TRAJECTORY', 'CELL': 'CELL', 'VELOCITIES': 'VELOCITIES', 'SHELL_VELOCITIES': 'SHELL_VELOCITIES', 'CORE_VELOCITIES': 'CORE_VELOCITIES', 'STRUCTURE_DATA': 'STRUCTURE_DATA', 'FORCE_MIXING_LABELS': 'FORCE_MIXING_LABELS', 'FORCES': 'FORCES', 'SHELL_FORCES': 'SHELL_FORCES', 'CORE_FORCES': 'CORE_FORCES', 'MIXED_ENERGIES': 'MIXED_ENERGIES', 'STRESS': 'STRESS', 'RESTART': 'RESTART', 'RESTART_HISTORY': 'RESTART_HISTORY', 'TRANSLATION_VECTOR': 'TRANSLATION_VECTOR'}
 

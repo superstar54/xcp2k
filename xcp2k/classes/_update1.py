@@ -14,5 +14,5 @@ class _update1(InputSection):
         self.Orig_scale = None
         self.Orig_is_virtual = None
         self._name = "UPDATE"
-        self._keywords = {'Orig_spin_index': 'ORIG_SPIN_INDEX', 'Result_marked_state': 'RESULT_MARKED_STATE', 'Result_scale': 'RESULT_SCALE', 'Orig_is_virtual': 'ORIG_IS_VIRTUAL', 'Orig_mo_index': 'ORIG_MO_INDEX', 'Result_mo_index': 'RESULT_MO_INDEX', 'Result_spin_index': 'RESULT_SPIN_INDEX', 'Orig_marked_state': 'ORIG_MARKED_STATE', 'Orig_scale': 'ORIG_SCALE'}
+        self._keywords = {'Result_mo_index': 'RESULT_MO_INDEX', 'Result_marked_state': 'RESULT_MARKED_STATE', 'Result_spin_index': 'RESULT_SPIN_INDEX', 'Result_scale': 'RESULT_SCALE', 'Orig_mo_index': 'ORIG_MO_INDEX', 'Orig_marked_state': 'ORIG_MARKED_STATE', 'Orig_spin_index': 'ORIG_SPIN_INDEX', 'Orig_scale': 'ORIG_SCALE', 'Orig_is_virtual': 'ORIG_IS_VIRTUAL'}
 

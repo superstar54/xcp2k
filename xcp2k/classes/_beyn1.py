@@ -11,5 +11,5 @@ class _beyn1(InputSection):
         self.One_circle = None
         self.Tasks_per_integration_point = None
         self._name = "BEYN"
-        self._keywords = {'N_rand_cc': 'N_RAND_CC', 'Svd_cutoff': 'SVD_CUTOFF', 'N_points_beyn': 'N_POINTS_BEYN', 'Tasks_per_integration_point': 'TASKS_PER_INTEGRATION_POINT', 'N_rand': 'N_RAND', 'One_circle': 'ONE_CIRCLE'}
+        self._keywords = {'N_rand': 'N_RAND', 'N_rand_cc': 'N_RAND_CC', 'Svd_cutoff': 'SVD_CUTOFF', 'N_points_beyn': 'N_POINTS_BEYN', 'One_circle': 'ONE_CIRCLE', 'Tasks_per_integration_point': 'TASKS_PER_INTEGRATION_POINT'}
 

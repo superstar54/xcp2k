@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _mol_displacements1 import _mol_displacements1
-from _box_displacements1 import _box_displacements1
+from xcp2k.classes._mol_displacements1 import _mol_displacements1
+from xcp2k.classes._box_displacements1 import _box_displacements1
 
 
 class _max_displacements1(InputSection):

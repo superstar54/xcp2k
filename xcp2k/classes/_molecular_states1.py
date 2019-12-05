@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _each196 import _each196
-from _cubes1 import _cubes1
+from xcp2k.classes._each196 import _each196
+from xcp2k.classes._cubes1 import _cubes1
 
 
 class _molecular_states1(InputSection):
@@ -16,8 +16,8 @@ class _molecular_states1(InputSection):
         self.EACH = _each196()
         self.CUBES = _cubes1()
         self._name = "MOLECULAR_STATES"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Cube_eval_range': 'CUBE_EVAL_RANGE', 'Filename': 'FILENAME'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Cube_eval_range': 'CUBE_EVAL_RANGE'}
         self._repeated_keywords = {'Mark_states': 'MARK_STATES'}
-        self._subsections = {'CUBES': 'CUBES', 'EACH': 'EACH'}
+        self._subsections = {'EACH': 'EACH', 'CUBES': 'CUBES'}
         self._attributes = ['Section_parameters']
 

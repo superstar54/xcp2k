@@ -12,5 +12,5 @@ class _almo_optimizer_pcg1(InputSection):
         self.Preconditioner = None
         self.Conjugator = None
         self._name = "ALMO_OPTIMIZER_PCG"
-        self._keywords = {'Lin_search_eps_error': 'LIN_SEARCH_EPS_ERROR', 'Max_iter': 'MAX_ITER', 'Conjugator': 'CONJUGATOR', 'Max_iter_outer_loop': 'MAX_ITER_OUTER_LOOP', 'Eps_error': 'EPS_ERROR', 'Lin_search_step_size_guess': 'LIN_SEARCH_STEP_SIZE_GUESS', 'Preconditioner': 'PRECONDITIONER'}
+        self._keywords = {'Max_iter': 'MAX_ITER', 'Eps_error': 'EPS_ERROR', 'Lin_search_eps_error': 'LIN_SEARCH_EPS_ERROR', 'Lin_search_step_size_guess': 'LIN_SEARCH_STEP_SIZE_GUESS', 'Max_iter_outer_loop': 'MAX_ITER_OUTER_LOOP', 'Preconditioner': 'PRECONDITIONER', 'Conjugator': 'CONJUGATOR'}
 

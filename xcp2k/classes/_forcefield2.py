@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _nonbonded2 import _nonbonded2
-from _nonbonded142 import _nonbonded142
+from xcp2k.classes._nonbonded2 import _nonbonded2
+from xcp2k.classes._nonbonded142 import _nonbonded142
 
 
 class _forcefield2(InputSection):

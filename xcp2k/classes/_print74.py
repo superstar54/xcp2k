@@ -1,20 +1,20 @@
 from xcp2k.inputsection import InputSection
-from _program_banner4 import _program_banner4
-from _method_info1 import _method_info1
-from _basis_set1 import _basis_set1
-from _potential3 import _potential3
-from _fit_density1 import _fit_density1
-from _fit_kgpot1 import _fit_kgpot1
-from _response_basis1 import _response_basis1
-from _geometrical_response_basis1 import _geometrical_response_basis1
-from _scf_info1 import _scf_info1
-from _orbitals1 import _orbitals1
-from _analyze_basis1 import _analyze_basis1
-from _fit_pseudo1 import _fit_pseudo1
-from _fit_basis1 import _fit_basis1
-from _upf_file1 import _upf_file1
-from _separable_gaussian_pseudo1 import _separable_gaussian_pseudo1
-from _admm1 import _admm1
+from xcp2k.classes._program_banner4 import _program_banner4
+from xcp2k.classes._method_info1 import _method_info1
+from xcp2k.classes._basis_set1 import _basis_set1
+from xcp2k.classes._potential3 import _potential3
+from xcp2k.classes._fit_density1 import _fit_density1
+from xcp2k.classes._fit_kgpot1 import _fit_kgpot1
+from xcp2k.classes._response_basis1 import _response_basis1
+from xcp2k.classes._geometrical_response_basis1 import _geometrical_response_basis1
+from xcp2k.classes._scf_info1 import _scf_info1
+from xcp2k.classes._orbitals1 import _orbitals1
+from xcp2k.classes._analyze_basis1 import _analyze_basis1
+from xcp2k.classes._fit_pseudo1 import _fit_pseudo1
+from xcp2k.classes._fit_basis1 import _fit_basis1
+from xcp2k.classes._upf_file1 import _upf_file1
+from xcp2k.classes._separable_gaussian_pseudo1 import _separable_gaussian_pseudo1
+from xcp2k.classes._admm1 import _admm1
 
 
 class _print74(InputSection):
@@ -37,5 +37,5 @@ class _print74(InputSection):
         self.SEPARABLE_GAUSSIAN_PSEUDO = _separable_gaussian_pseudo1()
         self.ADMM = _admm1()
         self._name = "PRINT"
-        self._subsections = {'ADMM': 'ADMM', 'FIT_BASIS': 'FIT_BASIS', 'ANALYZE_BASIS': 'ANALYZE_BASIS', 'PROGRAM_BANNER': 'PROGRAM_BANNER', 'RESPONSE_BASIS': 'RESPONSE_BASIS', 'ORBITALS': 'ORBITALS', 'SEPARABLE_GAUSSIAN_PSEUDO': 'SEPARABLE_GAUSSIAN_PSEUDO', 'FIT_PSEUDO': 'FIT_PSEUDO', 'POTENTIAL': 'POTENTIAL', 'FIT_KGPOT': 'FIT_KGPOT', 'SCF_INFO': 'SCF_INFO', 'BASIS_SET': 'BASIS_SET', 'FIT_DENSITY': 'FIT_DENSITY', 'UPF_FILE': 'UPF_FILE', 'METHOD_INFO': 'METHOD_INFO', 'GEOMETRICAL_RESPONSE_BASIS': 'GEOMETRICAL_RESPONSE_BASIS'}
+        self._subsections = {'PROGRAM_BANNER': 'PROGRAM_BANNER', 'METHOD_INFO': 'METHOD_INFO', 'BASIS_SET': 'BASIS_SET', 'POTENTIAL': 'POTENTIAL', 'FIT_DENSITY': 'FIT_DENSITY', 'FIT_KGPOT': 'FIT_KGPOT', 'RESPONSE_BASIS': 'RESPONSE_BASIS', 'GEOMETRICAL_RESPONSE_BASIS': 'GEOMETRICAL_RESPONSE_BASIS', 'SCF_INFO': 'SCF_INFO', 'ORBITALS': 'ORBITALS', 'ANALYZE_BASIS': 'ANALYZE_BASIS', 'FIT_PSEUDO': 'FIT_PSEUDO', 'FIT_BASIS': 'FIT_BASIS', 'UPF_FILE': 'UPF_FILE', 'SEPARABLE_GAUSSIAN_PSEUDO': 'SEPARABLE_GAUSSIAN_PSEUDO', 'ADMM': 'ADMM'}
 

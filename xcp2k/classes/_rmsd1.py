@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _frame1 import _frame1
+from xcp2k.classes._frame1 import _frame1
 
 
 class _rmsd1(InputSection):
@@ -11,8 +11,8 @@ class _rmsd1(InputSection):
         self.Weights = []
         self.FRAME_list = []
         self._name = "RMSD"
-        self._keywords = {'Align_frames': 'ALIGN_FRAMES', 'Subset_type': 'SUBSET_TYPE'}
-        self._repeated_keywords = {'Weights': 'WEIGHTS', 'Atoms': 'ATOMS'}
+        self._keywords = {'Subset_type': 'SUBSET_TYPE', 'Align_frames': 'ALIGN_FRAMES'}
+        self._repeated_keywords = {'Atoms': 'ATOMS', 'Weights': 'WEIGHTS'}
         self._repeated_subsections = {'FRAME': '_frame1'}
         self._attributes = ['FRAME_list']
 

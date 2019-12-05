@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _link2 import _link2
+from xcp2k.classes._link2 import _link2
 
 
 class _buffer_links1(InputSection):

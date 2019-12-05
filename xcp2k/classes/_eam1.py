@@ -7,7 +7,7 @@ class _eam1(InputSection):
         self.Atoms = None
         self.Parm_file_name = None
         self._name = "EAM"
-        self._keywords = {'Parm_file_name': 'PARM_FILE_NAME', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'Parm_file_name': 'PARM_FILE_NAME'}
         self._aliases = {'Parmfile': 'Parm_file_name'}
 
 

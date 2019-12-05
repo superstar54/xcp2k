@@ -8,5 +8,5 @@ class _m_sampling1(InputSection):
         self.M_value = None
         self.M_ratio = None
         self._name = "M-SAMPLING"
-        self._keywords = {'M_value': 'M-VALUE', 'Distribution_type': 'DISTRIBUTION-TYPE', 'M_ratio': 'M-RATIO'}
+        self._keywords = {'Distribution_type': 'DISTRIBUTION-TYPE', 'M_value': 'M-VALUE', 'M_ratio': 'M-RATIO'}
 

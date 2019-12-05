@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _print62 import _print62
-from _interpolator12 import _interpolator12
+from xcp2k.classes._print62 import _print62
+from xcp2k.classes._interpolator12 import _interpolator12
 
 
 class _epr1(InputSection):

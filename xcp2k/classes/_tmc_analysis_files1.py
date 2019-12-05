@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _charge2 import _charge2
+from xcp2k.classes._charge2 import _charge2
 
 
 class _tmc_analysis_files1(InputSection):
@@ -23,7 +23,7 @@ class _tmc_analysis_files1(InputSection):
         self.End_elem = None
         self.CHARGE_list = []
         self._name = "TMC_ANALYSIS_FILES"
-        self._keywords = {'Deviation': 'DEVIATION', 'Classical_dipole_moments': 'CLASSICAL_DIPOLE_MOMENTS', 'Temperature': 'TEMPERATURE', 'Density': 'DENSITY', 'Nr_temperature': 'NR_TEMPERATURE', 'Directories': 'DIRECTORIES', 'Dipole_analysis': 'DIPOLE_ANALYSIS', 'Cell_file': 'CELL_FILE', 'G_r': 'G_R', 'Start_elem': 'START_ELEM', 'Position_file': 'POSITION_FILE', 'End_elem': 'END_ELEM', 'Force_env_file': 'FORCE_ENV_FILE', 'Dipole_file': 'DIPOLE_FILE', 'Restart': 'RESTART', 'Prefix_ana_files': 'PREFIX_ANA_FILES'}
+        self._keywords = {'Restart': 'RESTART', 'Prefix_ana_files': 'PREFIX_ANA_FILES', 'Density': 'DENSITY', 'G_r': 'G_R', 'Classical_dipole_moments': 'CLASSICAL_DIPOLE_MOMENTS', 'Dipole_analysis': 'DIPOLE_ANALYSIS', 'Deviation': 'DEVIATION', 'Nr_temperature': 'NR_TEMPERATURE', 'Temperature': 'TEMPERATURE', 'Directories': 'DIRECTORIES', 'Force_env_file': 'FORCE_ENV_FILE', 'Position_file': 'POSITION_FILE', 'Cell_file': 'CELL_FILE', 'Dipole_file': 'DIPOLE_FILE', 'Start_elem': 'START_ELEM', 'End_elem': 'END_ELEM'}
         self._repeated_subsections = {'CHARGE': '_charge2'}
         self._attributes = ['CHARGE_list']
 

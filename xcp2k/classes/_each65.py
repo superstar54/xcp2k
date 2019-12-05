@@ -22,5 +22,5 @@ class _each65(InputSection):
         self.Shell_opt = None
         self.Tddft_scf = None
         self._name = "EACH"
-        self._keywords = {'Md': 'MD', 'Bsse': 'BSSE', 'Powell_opt': 'POWELL_OPT', 'Replica_eval': 'REPLICA_EVAL', 'Just_energy': 'JUST_ENERGY', 'Metadynamics': 'METADYNAMICS', 'Geo_opt': 'GEO_OPT', 'Band': 'BAND', 'Xas_scf': 'XAS_SCF', 'Rot_opt': 'ROT_OPT', 'Spline_find_coeffs': 'SPLINE_FIND_COEFFS', 'Shell_opt': 'SHELL_OPT', 'Cell_opt': 'CELL_OPT', 'Qs_scf': 'QS_SCF', 'Ep_lin_solver': 'EP_LIN_SOLVER', 'Tddft_scf': 'TDDFT_SCF', 'Pint': 'PINT'}
+        self._keywords = {'Just_energy': 'JUST_ENERGY', 'Powell_opt': 'POWELL_OPT', 'Qs_scf': 'QS_SCF', 'Xas_scf': 'XAS_SCF', 'Md': 'MD', 'Pint': 'PINT', 'Metadynamics': 'METADYNAMICS', 'Geo_opt': 'GEO_OPT', 'Rot_opt': 'ROT_OPT', 'Cell_opt': 'CELL_OPT', 'Band': 'BAND', 'Ep_lin_solver': 'EP_LIN_SOLVER', 'Spline_find_coeffs': 'SPLINE_FIND_COEFFS', 'Replica_eval': 'REPLICA_EVAL', 'Bsse': 'BSSE', 'Shell_opt': 'SHELL_OPT', 'Tddft_scf': 'TDDFT_SCF'}
 

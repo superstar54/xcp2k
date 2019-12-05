@@ -7,5 +7,5 @@ class _atomic1(InputSection):
         self.Energy = None
         self.Pressure = None
         self._name = "ATOMIC"
-        self._keywords = {'Pressure': 'PRESSURE', 'Energy': 'ENERGY'}
+        self._keywords = {'Energy': 'ENERGY', 'Pressure': 'PRESSURE'}
 

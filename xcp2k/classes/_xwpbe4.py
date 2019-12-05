@@ -9,6 +9,6 @@ class _xwpbe4(InputSection):
         self.Scale_x0 = None
         self.Omega = None
         self._name = "XWPBE"
-        self._keywords = {'Scale_x': 'SCALE_X', 'Omega': 'OMEGA', 'Scale_x0': 'SCALE_X0'}
+        self._keywords = {'Scale_x': 'SCALE_X', 'Scale_x0': 'SCALE_X0', 'Omega': 'OMEGA'}
         self._attributes = ['Section_parameters']
 

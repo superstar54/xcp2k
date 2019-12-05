@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _projectors1 import _projectors1
-from _rho0_information1 import _rho0_information1
+from xcp2k.classes._projectors1 import _projectors1
+from xcp2k.classes._rho0_information1 import _rho0_information1
 
 
 class _gapw1(InputSection):
@@ -9,5 +9,5 @@ class _gapw1(InputSection):
         self.PROJECTORS = _projectors1()
         self.RHO0_INFORMATION = _rho0_information1()
         self._name = "GAPW"
-        self._subsections = {'RHO0_INFORMATION': 'RHO0_INFORMATION', 'PROJECTORS': 'PROJECTORS'}
+        self._subsections = {'PROJECTORS': 'PROJECTORS', 'RHO0_INFORMATION': 'RHO0_INFORMATION'}
 

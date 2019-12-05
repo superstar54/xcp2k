@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _periodic12 import _periodic12
-from _bse4 import _bse4
-from _ic4 import _ic4
+from xcp2k.classes._periodic12 import _periodic12
+from xcp2k.classes._bse4 import _bse4
+from xcp2k.classes._ic4 import _ic4
 
 
 class _ri_g0w04(InputSection):
@@ -46,9 +46,9 @@ class _ri_g0w04(InputSection):
         self.BSE = _bse4()
         self.IC = _ic4()
         self._name = "RI_G0W0"
-        self._keywords = {'Image_charge_model': 'IMAGE_CHARGE_MODEL', 'Hf_like_ev_start': 'HF_LIKE_EV_START', 'Analytic_continuation': 'ANALYTIC_CONTINUATION', 'Stop_crit': 'STOP_CRIT', 'Normalize_sigma': 'NORMALIZE_SIGMA', 'Check_fit': 'CHECK_FIT', 'Omega_max_fit': 'OMEGA_MAX_FIT', 'Neglect_normalization_sigma_x': 'NEGLECT_NORMALIZATION_SIGMA_X', 'Nparam_pade': 'NPARAM_PADE', 'Ri_sigma_x': 'RI_SIGMA_X', 'Ev_sc_iter': 'EV_SC_ITER', 'Atoms': 'ATOMS', 'Scaling': 'SCALING', 'Contour_def_end': 'CONTOUR_DEF_END', 'Crossing_search': 'CROSSING_SEARCH', 'Eps_ev_sc_iter': 'EPS_EV_SC_ITER', 'Bse': 'BSE', 'Fermi_level_offset': 'FERMI_LEVEL_OFFSET', 'Contour_def_start': 'CONTOUR_DEF_START', 'Atom_range': 'ATOM_RANGE', 'Print_gw_details': 'PRINT_GW_DETAILS', 'Periodic': 'PERIODIC', 'Ic_corr_list_beta': 'IC_CORR_LIST_BETA', 'Max_iter_fit': 'MAX_ITER_FIT', 'Mix_exchange': 'MIX_EXCHANGE', 'Eps_charge': 'EPS_CHARGE', 'Ic_corr_list': 'IC_CORR_LIST', 'Print_fit_error': 'PRINT_FIT_ERROR', 'Fraction_exx': 'FRACTION_EXX', 'Numb_poles': 'NUMB_POLES', 'Ev_sc_gw_remove_neg_virt_energies': 'EV_SC_GW_REMOVE_NEG_VIRT_ENERGIES', 'Corr_mos_virt': 'CORR_MOS_VIRT', 'Contour_def_offset': 'CONTOUR_DEF_OFFSET', 'Corr_mos_occ': 'CORR_MOS_OCC', 'Ri_metric': 'RI_METRIC'}
-        self._subsections = {'BSE': 'BSE', 'IC': 'IC', 'PERIODIC': 'PERIODIC'}
-        self._aliases = {'Ic': 'Image_charge_model', 'Fit_error': 'Print_fit_error', 'Cd_offset': 'Contour_def_offset', 'Remove_neg': 'Ev_sc_gw_remove_neg_virt_energies', 'Cd_start': 'Contour_def_start', 'Corr_virt': 'Corr_mos_virt', 'Corr_occ': 'Corr_mos_occ', 'Cd_end': 'Contour_def_end', 'Alpha': 'Fraction_exx', 'A_scaling': 'Scaling', 'Stop_crit_1': 'Stop_crit', 'Ri': 'Ri_metric'}
+        self._keywords = {'Corr_mos_occ': 'CORR_MOS_OCC', 'Corr_mos_virt': 'CORR_MOS_VIRT', 'Scaling': 'SCALING', 'Numb_poles': 'NUMB_POLES', 'Omega_max_fit': 'OMEGA_MAX_FIT', 'Stop_crit': 'STOP_CRIT', 'Print_fit_error': 'PRINT_FIT_ERROR', 'Max_iter_fit': 'MAX_ITER_FIT', 'Check_fit': 'CHECK_FIT', 'Crossing_search': 'CROSSING_SEARCH', 'Fermi_level_offset': 'FERMI_LEVEL_OFFSET', 'Ev_sc_iter': 'EV_SC_ITER', 'Eps_ev_sc_iter': 'EPS_EV_SC_ITER', 'Hf_like_ev_start': 'HF_LIKE_EV_START', 'Ev_sc_gw_remove_neg_virt_energies': 'EV_SC_GW_REMOVE_NEG_VIRT_ENERGIES', 'Print_gw_details': 'PRINT_GW_DETAILS', 'Ri_sigma_x': 'RI_SIGMA_X', 'Normalize_sigma': 'NORMALIZE_SIGMA', 'Neglect_normalization_sigma_x': 'NEGLECT_NORMALIZATION_SIGMA_X', 'Ri_metric': 'RI_METRIC', 'Mix_exchange': 'MIX_EXCHANGE', 'Fraction_exx': 'FRACTION_EXX', 'Contour_def_start': 'CONTOUR_DEF_START', 'Contour_def_end': 'CONTOUR_DEF_END', 'Contour_def_offset': 'CONTOUR_DEF_OFFSET', 'Atoms': 'ATOMS', 'Atom_range': 'ATOM_RANGE', 'Eps_charge': 'EPS_CHARGE', 'Ic_corr_list': 'IC_CORR_LIST', 'Ic_corr_list_beta': 'IC_CORR_LIST_BETA', 'Periodic': 'PERIODIC', 'Bse': 'BSE', 'Image_charge_model': 'IMAGE_CHARGE_MODEL', 'Analytic_continuation': 'ANALYTIC_CONTINUATION', 'Nparam_pade': 'NPARAM_PADE'}
+        self._subsections = {'PERIODIC': 'PERIODIC', 'BSE': 'BSE', 'IC': 'IC'}
+        self._aliases = {'Corr_occ': 'Corr_mos_occ', 'Corr_virt': 'Corr_mos_virt', 'A_scaling': 'Scaling', 'Stop_crit_1': 'Stop_crit', 'Fit_error': 'Print_fit_error', 'Remove_neg': 'Ev_sc_gw_remove_neg_virt_energies', 'Ri': 'Ri_metric', 'Alpha': 'Fraction_exx', 'Cd_start': 'Contour_def_start', 'Cd_end': 'Contour_def_end', 'Cd_offset': 'Contour_def_offset', 'Ic': 'Image_charge_model'}
 
 
     @property

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _dimer1 import _dimer1
+from xcp2k.classes._dimer1 import _dimer1
 
 
 class _transition_state1(InputSection):

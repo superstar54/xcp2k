@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _coord9 import _coord9
-from _velocity9 import _velocity9
+from xcp2k.classes._coord9 import _coord9
+from xcp2k.classes._velocity9 import _velocity9
 
 
 class _replica1(InputSection):
@@ -11,6 +11,6 @@ class _replica1(InputSection):
         self.COORD = _coord9()
         self.VELOCITY = _velocity9()
         self._name = "REPLICA"
-        self._keywords = {'Coord_file_name': 'COORD_FILE_NAME', 'Collective': 'COLLECTIVE'}
-        self._subsections = {'VELOCITY': 'VELOCITY', 'COORD': 'COORD'}
+        self._keywords = {'Collective': 'COLLECTIVE', 'Coord_file_name': 'COORD_FILE_NAME'}
+        self._subsections = {'COORD': 'COORD', 'VELOCITY': 'VELOCITY'}
 

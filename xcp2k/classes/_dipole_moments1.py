@@ -8,5 +8,5 @@ class _dipole_moments1(InputSection):
         self.Reference = None
         self.Reference_point = None
         self._name = "DIPOLE_MOMENTS"
-        self._keywords = {'Reference_point': 'REFERENCE_POINT', 'Reference': 'REFERENCE', 'Dipole_form': 'DIPOLE_FORM'}
+        self._keywords = {'Dipole_form': 'DIPOLE_FORM', 'Reference': 'REFERENCE', 'Reference_point': 'REFERENCE_POINT'}
 

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _cell_ref2 import _cell_ref2
+from xcp2k.classes._cell_ref2 import _cell_ref2
 
 
 class _cell4(InputSection):
@@ -17,7 +17,7 @@ class _cell4(InputSection):
         self.Symmetry = None
         self.CELL_REF = _cell_ref2()
         self._name = "CELL"
-        self._keywords = {'A': 'A', 'Cell_file_format': 'CELL_FILE_FORMAT', 'C': 'C', 'B': 'B', 'Symmetry': 'SYMMETRY', 'Alpha_beta_gamma': 'ALPHA_BETA_GAMMA', 'Multiple_unit_cell': 'MULTIPLE_UNIT_CELL', 'Periodic': 'PERIODIC', 'Abc': 'ABC', 'Cell_file_name': 'CELL_FILE_NAME'}
+        self._keywords = {'A': 'A', 'B': 'B', 'C': 'C', 'Abc': 'ABC', 'Alpha_beta_gamma': 'ALPHA_BETA_GAMMA', 'Cell_file_name': 'CELL_FILE_NAME', 'Cell_file_format': 'CELL_FILE_FORMAT', 'Periodic': 'PERIODIC', 'Multiple_unit_cell': 'MULTIPLE_UNIT_CELL', 'Symmetry': 'SYMMETRY'}
         self._subsections = {'CELL_REF': 'CELL_REF'}
         self._aliases = {'Angles': 'Alpha_beta_gamma'}
 

@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _thermostat_energy6 import _thermostat_energy6
-from _rng_init6 import _rng_init6
-from _s3 import _s3
+from xcp2k.classes._thermostat_energy6 import _thermostat_energy6
+from xcp2k.classes._rng_init6 import _rng_init6
+from xcp2k.classes._s3 import _s3
 
 
 class _gle3(InputSection):
@@ -17,5 +17,5 @@ class _gle3(InputSection):
         self._name = "GLE"
         self._keywords = {'Ndim': 'NDIM', 'A_scale': 'A_SCALE'}
         self._repeated_keywords = {'A_list': 'A_LIST', 'C_list': 'C_LIST'}
-        self._subsections = {'S': 'S', 'THERMOSTAT_ENERGY': 'THERMOSTAT_ENERGY', 'RNG_INIT': 'RNG_INIT'}
+        self._subsections = {'THERMOSTAT_ENERGY': 'THERMOSTAT_ENERGY', 'RNG_INIT': 'RNG_INIT', 'S': 'S'}
 

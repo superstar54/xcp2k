@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _current_cubes1 import _current_cubes1
-from _response_function_cubes1 import _response_function_cubes1
+from xcp2k.classes._current_cubes1 import _current_cubes1
+from xcp2k.classes._response_function_cubes1 import _response_function_cubes1
 
 
 class _print57(InputSection):
@@ -9,5 +9,5 @@ class _print57(InputSection):
         self.CURRENT_CUBES = _current_cubes1()
         self.RESPONSE_FUNCTION_CUBES = _response_function_cubes1()
         self._name = "PRINT"
-        self._subsections = {'RESPONSE_FUNCTION_CUBES': 'RESPONSE_FUNCTION_CUBES', 'CURRENT_CUBES': 'CURRENT_CUBES'}
+        self._subsections = {'CURRENT_CUBES': 'CURRENT_CUBES', 'RESPONSE_FUNCTION_CUBES': 'RESPONSE_FUNCTION_CUBES'}
 

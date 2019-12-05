@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _metadyn1 import _metadyn1
-from _umbrella_integration1 import _umbrella_integration1
-from _alchemical_change1 import _alchemical_change1
-from _free_energy_info1 import _free_energy_info1
+from xcp2k.classes._metadyn1 import _metadyn1
+from xcp2k.classes._umbrella_integration1 import _umbrella_integration1
+from xcp2k.classes._alchemical_change1 import _alchemical_change1
+from xcp2k.classes._free_energy_info1 import _free_energy_info1
 
 
 class _free_energy1(InputSection):
@@ -15,5 +15,5 @@ class _free_energy1(InputSection):
         self.FREE_ENERGY_INFO = _free_energy_info1()
         self._name = "FREE_ENERGY"
         self._keywords = {'Method': 'METHOD'}
-        self._subsections = {'UMBRELLA_INTEGRATION': 'UMBRELLA_INTEGRATION', 'FREE_ENERGY_INFO': 'FREE_ENERGY_INFO', 'ALCHEMICAL_CHANGE': 'ALCHEMICAL_CHANGE', 'METADYN': 'METADYN'}
+        self._subsections = {'METADYN': 'METADYN', 'UMBRELLA_INTEGRATION': 'UMBRELLA_INTEGRATION', 'ALCHEMICAL_CHANGE': 'ALCHEMICAL_CHANGE', 'FREE_ENERGY_INFO': 'FREE_ENERGY_INFO'}
 

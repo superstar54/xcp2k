@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _restraint2 import _restraint2
+from xcp2k.classes._restraint2 import _restraint2
 
 
 class _g3x31(InputSection):
@@ -14,9 +14,9 @@ class _g3x31(InputSection):
         self.Exclude_mm = None
         self.RESTRAINT = _restraint2()
         self._name = "G3X3"
-        self._keywords = {'Distances': 'DISTANCES', 'Exclude_mm': 'EXCLUDE_MM', 'Molecule': 'MOLECULE', 'Atoms': 'ATOMS', 'Molname': 'MOLNAME', 'Exclude_qm': 'EXCLUDE_QM', 'Intermolecular': 'INTERMOLECULAR'}
+        self._keywords = {'Molecule': 'MOLECULE', 'Molname': 'MOLNAME', 'Intermolecular': 'INTERMOLECULAR', 'Atoms': 'ATOMS', 'Distances': 'DISTANCES', 'Exclude_qm': 'EXCLUDE_QM', 'Exclude_mm': 'EXCLUDE_MM'}
         self._subsections = {'RESTRAINT': 'RESTRAINT'}
-        self._aliases = {'Segname': 'Molname', 'Mol': 'Molecule'}
+        self._aliases = {'Mol': 'Molecule', 'Segname': 'Molname'}
 
 
     @property

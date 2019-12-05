@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each265 import _each265
+from xcp2k.classes._each265 import _each265
 
 
 class _moments1(InputSection):
@@ -17,9 +17,9 @@ class _moments1(InputSection):
         self.Magnetic = None
         self.EACH = _each265()
         self._name = "MOMENTS"
-        self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Reference': 'REFERENCE', 'Reference_point': 'REFERENCE_POINT', 'Magnetic': 'MAGNETIC', 'Max_moment': 'MAX_MOMENT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Periodic': 'PERIODIC', 'Add_last': 'ADD_LAST'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Periodic': 'PERIODIC', 'Reference': 'REFERENCE', 'Reference_point': 'REFERENCE_POINT', 'Max_moment': 'MAX_MOMENT', 'Magnetic': 'MAGNETIC'}
         self._subsections = {'EACH': 'EACH'}
-        self._aliases = {'Ref_point': 'Reference_point', 'Ref': 'Reference'}
+        self._aliases = {'Ref': 'Reference', 'Ref_point': 'Reference_point'}
         self._attributes = ['Section_parameters']
 
 

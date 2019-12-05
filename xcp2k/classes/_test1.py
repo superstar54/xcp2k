@@ -1,13 +1,13 @@
 from xcp2k.inputsection import InputSection
-from _grid_information1 import _grid_information1
-from _program_run_info2 import _program_run_info2
-from _rs_pw_transfer1 import _rs_pw_transfer1
-from _eigensolver1 import _eigensolver1
-from _pw_transfer1 import _pw_transfer1
-from _cp_fm_gemm1 import _cp_fm_gemm1
-from _cp_dbcsr1 import _cp_dbcsr1
-from _eri_mme_test1 import _eri_mme_test1
-from _shg_integrals_test1 import _shg_integrals_test1
+from xcp2k.classes._grid_information1 import _grid_information1
+from xcp2k.classes._program_run_info2 import _program_run_info2
+from xcp2k.classes._rs_pw_transfer1 import _rs_pw_transfer1
+from xcp2k.classes._eigensolver1 import _eigensolver1
+from xcp2k.classes._pw_transfer1 import _pw_transfer1
+from xcp2k.classes._cp_fm_gemm1 import _cp_fm_gemm1
+from xcp2k.classes._cp_dbcsr1 import _cp_dbcsr1
+from xcp2k.classes._eri_mme_test1 import _eri_mme_test1
+from xcp2k.classes._shg_integrals_test1 import _shg_integrals_test1
 
 
 class _test1(InputSection):
@@ -34,10 +34,10 @@ class _test1(InputSection):
         self.ERI_MME_TEST = _eri_mme_test1()
         self.SHG_INTEGRALS_TEST = _shg_integrals_test1()
         self._name = "TEST"
-        self._keywords = {'Least_sq_ft': 'LEAST_SQ_FT', 'Dgemm': 'DGEMM', 'Minimax': 'MINIMAX', 'Fft': 'FFT', 'Random_number_generator': 'RANDOM_NUMBER_GENERATOR', 'Mpi': 'MPI', 'Clebsch_gordon': 'CLEBSCH_GORDON', 'Matmul': 'MATMUL', 'Memory': 'MEMORY', 'Copy': 'COPY', 'Eri': 'ERI'}
-        self._subsections = {'SHG_INTEGRALS_TEST': 'SHG_INTEGRALS_TEST', 'RS_PW_TRANSFER': 'RS_PW_TRANSFER', 'ERI_MME_TEST': 'ERI_MME_TEST', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'GRID_INFORMATION': 'GRID_INFORMATION'}
-        self._repeated_subsections = {'EIGENSOLVER': '_eigensolver1', 'PW_TRANSFER': '_pw_transfer1', 'CP_DBCSR': '_cp_dbcsr1', 'CP_FM_GEMM': '_cp_fm_gemm1'}
-        self._aliases = {'Rng': 'Random_number_generator', 'Clebsch': 'Clebsch_gordon'}
+        self._keywords = {'Memory': 'MEMORY', 'Copy': 'COPY', 'Matmul': 'MATMUL', 'Dgemm': 'DGEMM', 'Fft': 'FFT', 'Eri': 'ERI', 'Clebsch_gordon': 'CLEBSCH_GORDON', 'Mpi': 'MPI', 'Random_number_generator': 'RANDOM_NUMBER_GENERATOR', 'Minimax': 'MINIMAX', 'Least_sq_ft': 'LEAST_SQ_FT'}
+        self._subsections = {'GRID_INFORMATION': 'GRID_INFORMATION', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'RS_PW_TRANSFER': 'RS_PW_TRANSFER', 'ERI_MME_TEST': 'ERI_MME_TEST', 'SHG_INTEGRALS_TEST': 'SHG_INTEGRALS_TEST'}
+        self._repeated_subsections = {'EIGENSOLVER': '_eigensolver1', 'PW_TRANSFER': '_pw_transfer1', 'CP_FM_GEMM': '_cp_fm_gemm1', 'CP_DBCSR': '_cp_dbcsr1'}
+        self._aliases = {'Clebsch': 'Clebsch_gordon', 'Rng': 'Random_number_generator'}
         self._attributes = ['EIGENSOLVER_list', 'PW_TRANSFER_list', 'CP_FM_GEMM_list', 'CP_DBCSR_list']
 
     def EIGENSOLVER_add(self, section_parameters=None):
@@ -56,20 +56,20 @@ class _test1(InputSection):
         self.PW_TRANSFER_list.append(new_section)
         return new_section
 
-    def CP_DBCSR_add(self, section_parameters=None):
-        new_section = _cp_dbcsr1()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.CP_DBCSR_list.append(new_section)
-        return new_section
-
     def CP_FM_GEMM_add(self, section_parameters=None):
         new_section = _cp_fm_gemm1()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
         self.CP_FM_GEMM_list.append(new_section)
+        return new_section
+
+    def CP_DBCSR_add(self, section_parameters=None):
+        new_section = _cp_dbcsr1()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.CP_DBCSR_list.append(new_section)
         return new_section
 
 

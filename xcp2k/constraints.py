@@ -100,7 +100,7 @@ class Hookean(FixConstraint):
         elif self._type == 'point':
             p1 = positions[self.index]
             p2 = self.origin
-        displace = find_mic([p2 - p1], atoms.cell, atoms._pbc)[0][0]
+        displace = find_mic([p2 - p1], atoms.cell, atoms.pbc)[0][0]
         bondlength = np.linalg.norm(displace)
         if bondlength > self.threshold and self.spring > 0:
             magnitude = self.spring * (bondlength - self.threshold)
@@ -138,7 +138,7 @@ class Hookean(FixConstraint):
         elif self._type == 'point':
             p1 = positions[self.index]
             p2 = self.origin
-        displace = find_mic([p2 - p1], atoms.cell, atoms._pbc)[0][0]
+        displace = find_mic([p2 - p1], atoms.cell, atoms.pbc)[0][0]
         bondlength = np.linalg.norm(displace)
         if bondlength > self.threshold and self.spring > 0:
             return 0.5 * self.spring * (bondlength - self.threshold)**2
@@ -190,7 +190,7 @@ def check_hookean(atoms, k=1.2):
     Flag = True
     for con in constraints[1:-1]:
         p1, p2 = atoms.positions[con.indices]
-        displace = find_mic([p2 - p1], atoms.cell, atoms._pbc)[0][0]
+        displace = find_mic([p2 - p1], atoms.cell, atoms.pbc)[0][0]
         # print(displace)
         bondlength = np.linalg.norm(displace)
         if bondlength > con.threshold*1.2 and con.spring > 0 or bondlength < con.threshold*0.8 and con.spring < 0:

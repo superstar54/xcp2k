@@ -1,9 +1,9 @@
 from xcp2k.inputsection import InputSection
-from _curvy_steps1 import _curvy_steps1
-from _chebyshev1 import _chebyshev1
-from _rho_mixing1 import _rho_mixing1
-from _pexsi1 import _pexsi1
-from _pao1 import _pao1
+from xcp2k.classes._curvy_steps1 import _curvy_steps1
+from xcp2k.classes._chebyshev1 import _chebyshev1
+from xcp2k.classes._rho_mixing1 import _rho_mixing1
+from xcp2k.classes._pexsi1 import _pexsi1
+from xcp2k.classes._pao1 import _pao1
 
 
 class _ls_scf1(InputSection):
@@ -42,6 +42,6 @@ class _ls_scf1(InputSection):
         self.PEXSI = _pexsi1()
         self.PAO = _pao1()
         self._name = "LS_SCF"
-        self._keywords = {'Matrix_cluster_type': 'MATRIX_CLUSTER_TYPE', 'Eps_lanczos': 'EPS_LANCZOS', 'Purification_method': 'PURIFICATION_METHOD', 'Eps_filter': 'EPS_FILTER', 'Eps_diis': 'EPS_DIIS', 'Eps_scf': 'EPS_SCF', 'Report_all_sparsities': 'REPORT_ALL_SPARSITIES', 'Max_scf': 'MAX_SCF', 'Restart_write': 'RESTART_WRITE', 'Sign_sqrt_order': 'SIGN_SQRT_ORDER', 'Mixing_fraction': 'MIXING_FRACTION', 'Non_monotonic': 'NON_MONOTONIC', 'Max_diis': 'MAX_DIIS', 'Ini_diis': 'INI_DIIS', 'S_preconditioner': 'S_PRECONDITIONER', 'Single_precision_matrices': 'SINGLE_PRECISION_MATRICES', 'Nmixing': 'NMIXING', 'Check_s_inv': 'CHECK_S_INV', 'S_inversion': 'S_INVERSION', 'Mu': 'MU', 'Dynamic_threshold': 'DYNAMIC_THRESHOLD', 'Extrapolation_order': 'EXTRAPOLATION_ORDER', 'Fixed_mu': 'FIXED_MU', 'Perform_mu_scan': 'PERFORM_MU_SCAN', 'Restart_read': 'RESTART_READ', 'Ls_diis': 'LS_DIIS', 'Max_iter_lanczos': 'MAX_ITER_LANCZOS'}
-        self._subsections = {'CHEBYSHEV': 'CHEBYSHEV', 'CURVY_STEPS': 'CURVY_STEPS', 'RHO_MIXING': 'RHO_MIXING', 'PEXSI': 'PEXSI', 'PAO': 'PAO'}
+        self._keywords = {'Ls_diis': 'LS_DIIS', 'Ini_diis': 'INI_DIIS', 'Max_diis': 'MAX_DIIS', 'Nmixing': 'NMIXING', 'Eps_diis': 'EPS_DIIS', 'Max_scf': 'MAX_SCF', 'Eps_scf': 'EPS_SCF', 'Mixing_fraction': 'MIXING_FRACTION', 'Eps_filter': 'EPS_FILTER', 'Eps_lanczos': 'EPS_LANCZOS', 'Max_iter_lanczos': 'MAX_ITER_LANCZOS', 'Mu': 'MU', 'Fixed_mu': 'FIXED_MU', 'Extrapolation_order': 'EXTRAPOLATION_ORDER', 'S_preconditioner': 'S_PRECONDITIONER', 'Purification_method': 'PURIFICATION_METHOD', 'Dynamic_threshold': 'DYNAMIC_THRESHOLD', 'Non_monotonic': 'NON_MONOTONIC', 'Matrix_cluster_type': 'MATRIX_CLUSTER_TYPE', 'Single_precision_matrices': 'SINGLE_PRECISION_MATRICES', 'Restart_write': 'RESTART_WRITE', 'Restart_read': 'RESTART_READ', 'S_inversion': 'S_INVERSION', 'Sign_sqrt_order': 'SIGN_SQRT_ORDER', 'Report_all_sparsities': 'REPORT_ALL_SPARSITIES', 'Perform_mu_scan': 'PERFORM_MU_SCAN', 'Check_s_inv': 'CHECK_S_INV'}
+        self._subsections = {'CURVY_STEPS': 'CURVY_STEPS', 'CHEBYSHEV': 'CHEBYSHEV', 'RHO_MIXING': 'RHO_MIXING', 'PEXSI': 'PEXSI', 'PAO': 'PAO'}
 

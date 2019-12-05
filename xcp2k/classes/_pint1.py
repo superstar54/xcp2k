@@ -1,15 +1,15 @@
 from xcp2k.inputsection import InputSection
-from _normalmode1 import _normalmode1
-from _staging1 import _staging1
-from _beads1 import _beads1
-from _nose6 import _nose6
-from _gle4 import _gle4
-from _pile1 import _pile1
-from _piglet1 import _piglet1
-from _qtb1 import _qtb1
-from _init1 import _init1
-from _helium1 import _helium1
-from _print15 import _print15
+from xcp2k.classes._normalmode1 import _normalmode1
+from xcp2k.classes._staging1 import _staging1
+from xcp2k.classes._beads1 import _beads1
+from xcp2k.classes._nose6 import _nose6
+from xcp2k.classes._gle4 import _gle4
+from xcp2k.classes._pile1 import _pile1
+from xcp2k.classes._piglet1 import _piglet1
+from xcp2k.classes._qtb1 import _qtb1
+from xcp2k.classes._init1 import _init1
+from xcp2k.classes._helium1 import _helium1
+from xcp2k.classes._print15 import _print15
 
 
 class _pint1(InputSection):
@@ -40,8 +40,8 @@ class _pint1(InputSection):
         self.HELIUM = _helium1()
         self.PRINT = _print15()
         self._name = "PINT"
-        self._keywords = {'T_tol': 'T_TOL', 'Fix_centroid_pos': 'FIX_CENTROID_POS', 'Max_step': 'MAX_STEP', 'Temp': 'TEMP', 'Iteration': 'ITERATION', 'Num_steps': 'NUM_STEPS', 'Propagator': 'PROPAGATOR', 'Harm_int': 'HARM_INT', 'P': 'P', 'Nrespa': 'NRESPA', 'Proc_per_replica': 'PROC_PER_REPLICA', 'Dt': 'DT', 'Transformation': 'TRANSFORMATION'}
-        self._subsections = {'BEADS': 'BEADS', 'STAGING': 'STAGING', 'PIGLET': 'PIGLET', 'GLE': 'GLE', 'NORMALMODE': 'NORMALMODE', 'INIT': 'INIT', 'PILE': 'PILE', 'NOSE': 'NOSE', 'PRINT': 'PRINT', 'QTB': 'QTB', 'HELIUM': 'HELIUM'}
+        self._keywords = {'P': 'P', 'Proc_per_replica': 'PROC_PER_REPLICA', 'Num_steps': 'NUM_STEPS', 'Max_step': 'MAX_STEP', 'Iteration': 'ITERATION', 'Temp': 'TEMP', 'T_tol': 'T_TOL', 'Dt': 'DT', 'Harm_int': 'HARM_INT', 'Nrespa': 'NRESPA', 'Transformation': 'TRANSFORMATION', 'Propagator': 'PROPAGATOR', 'Fix_centroid_pos': 'FIX_CENTROID_POS'}
+        self._subsections = {'NORMALMODE': 'NORMALMODE', 'STAGING': 'STAGING', 'BEADS': 'BEADS', 'NOSE': 'NOSE', 'GLE': 'GLE', 'PILE': 'PILE', 'PIGLET': 'PIGLET', 'QTB': 'QTB', 'INIT': 'INIT', 'HELIUM': 'HELIUM', 'PRINT': 'PRINT'}
         self._aliases = {'Temp_to': 'T_tol'}
 
 

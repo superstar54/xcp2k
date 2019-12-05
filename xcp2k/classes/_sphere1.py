@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _center1 import _center1
+from xcp2k.classes._center1 import _center1
 
 
 class _sphere1(InputSection):

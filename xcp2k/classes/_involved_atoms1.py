@@ -7,5 +7,5 @@ class _involved_atoms1(InputSection):
         self.Range = None
         self.Involved_atoms = None
         self._name = "INVOLVED_ATOMS"
-        self._keywords = {'Involved_atoms': 'INVOLVED_ATOMS', 'Range': 'RANGE'}
+        self._keywords = {'Range': 'RANGE', 'Involved_atoms': 'INVOLVED_ATOMS'}
 

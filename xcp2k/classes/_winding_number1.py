@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each60 import _each60
+from xcp2k.classes._each60 import _each60
 
 
 class _winding_number1(InputSection):
@@ -12,7 +12,7 @@ class _winding_number1(InputSection):
         self.Log_print_key = None
         self.EACH = _each60()
         self._name = "WINDING_NUMBER"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

@@ -8,5 +8,5 @@ class _constrain_exponents2(InputSection):
         self.Boundaries = None
         self.Max_var_fraction = None
         self._name = "CONSTRAIN_EXPONENTS"
-        self._keywords = {'Boundaries': 'BOUNDARIES', 'Max_var_fraction': 'MAX_VAR_FRACTION', 'Use_exp': 'USE_EXP'}
+        self._keywords = {'Use_exp': 'USE_EXP', 'Boundaries': 'BOUNDARIES', 'Max_var_fraction': 'MAX_VAR_FRACTION'}
 

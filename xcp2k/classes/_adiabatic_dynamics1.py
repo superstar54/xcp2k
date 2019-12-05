@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _thermostat_fast1 import _thermostat_fast1
-from _thermostat_slow1 import _thermostat_slow1
+from xcp2k.classes._thermostat_fast1 import _thermostat_fast1
+from xcp2k.classes._thermostat_slow1 import _thermostat_slow1
 
 
 class _adiabatic_dynamics1(InputSection):
@@ -14,6 +14,6 @@ class _adiabatic_dynamics1(InputSection):
         self.THERMOSTAT_FAST = _thermostat_fast1()
         self.THERMOSTAT_SLOW = _thermostat_slow1()
         self._name = "ADIABATIC_DYNAMICS"
-        self._keywords = {'Temp_tol_fast': 'TEMP_TOL_FAST', 'Temp_tol_slow': 'TEMP_TOL_SLOW', 'N_resp_fast': 'N_RESP_FAST', 'Temp_fast': 'TEMP_FAST', 'Temp_slow': 'TEMP_SLOW'}
-        self._subsections = {'THERMOSTAT_SLOW': 'THERMOSTAT_SLOW', 'THERMOSTAT_FAST': 'THERMOSTAT_FAST'}
+        self._keywords = {'Temp_fast': 'TEMP_FAST', 'Temp_slow': 'TEMP_SLOW', 'Temp_tol_fast': 'TEMP_TOL_FAST', 'Temp_tol_slow': 'TEMP_TOL_SLOW', 'N_resp_fast': 'N_RESP_FAST'}
+        self._subsections = {'THERMOSTAT_FAST': 'THERMOSTAT_FAST', 'THERMOSTAT_SLOW': 'THERMOSTAT_SLOW'}
 

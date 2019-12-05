@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _colvar4 import _colvar4
+from xcp2k.classes._colvar4 import _colvar4
 
 
 class _combine_colvar1(InputSection):
@@ -13,8 +13,8 @@ class _combine_colvar1(InputSection):
         self.Error_limit = None
         self.COLVAR_list = []
         self._name = "COMBINE_COLVAR"
-        self._keywords = {'Function': 'FUNCTION', 'Error_limit': 'ERROR_LIMIT', 'Variables': 'VARIABLES', 'Dx': 'DX'}
-        self._repeated_keywords = {'Values': 'VALUES', 'Parameters': 'PARAMETERS'}
+        self._keywords = {'Function': 'FUNCTION', 'Variables': 'VARIABLES', 'Dx': 'DX', 'Error_limit': 'ERROR_LIMIT'}
+        self._repeated_keywords = {'Parameters': 'PARAMETERS', 'Values': 'VALUES'}
         self._repeated_subsections = {'COLVAR': '_colvar4'}
         self._attributes = ['COLVAR_list']
 

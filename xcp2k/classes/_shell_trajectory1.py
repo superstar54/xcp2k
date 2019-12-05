@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each82 import _each82
+from xcp2k.classes._each82 import _each82
 
 
 class _shell_trajectory1(InputSection):
@@ -17,9 +17,9 @@ class _shell_trajectory1(InputSection):
         self.Charge_extended = None
         self.EACH = _each82()
         self._name = "SHELL_TRAJECTORY"
-        self._keywords = {'Charge_beta': 'CHARGE_BETA', 'Log_print_key': 'LOG_PRINT_KEY', 'Format': 'FORMAT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Charge_occup': 'CHARGE_OCCUP', 'Add_last': 'ADD_LAST', 'Charge_extended': 'CHARGE_EXTENDED', 'Unit': 'UNIT'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Unit': 'UNIT', 'Format': 'FORMAT', 'Charge_occup': 'CHARGE_OCCUP', 'Charge_beta': 'CHARGE_BETA', 'Charge_extended': 'CHARGE_EXTENDED'}
         self._subsections = {'EACH': 'EACH'}
-        self._aliases = {'Charge_b': 'Charge_beta', 'Charge_o': 'Charge_occup'}
+        self._aliases = {'Charge_o': 'Charge_occup', 'Charge_b': 'Charge_beta'}
         self._attributes = ['Section_parameters']
 
 

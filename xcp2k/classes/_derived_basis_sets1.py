@@ -10,5 +10,5 @@ class _derived_basis_sets1(InputSection):
         self.Remove_set = []
         self._name = "DERIVED_BASIS_SETS"
         self._keywords = {'Basis_set_name': 'BASIS_SET_NAME', 'Reference_set': 'REFERENCE_SET'}
-        self._repeated_keywords = {'Remove_set': 'REMOVE_SET', 'Remove_contraction': 'REMOVE_CONTRACTION'}
+        self._repeated_keywords = {'Remove_contraction': 'REMOVE_CONTRACTION', 'Remove_set': 'REMOVE_SET'}
 

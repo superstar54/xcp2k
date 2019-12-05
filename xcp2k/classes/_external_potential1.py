@@ -12,6 +12,6 @@ class _external_potential1(InputSection):
         self.Dx = None
         self.Error_limit = None
         self._name = "EXTERNAL_POTENTIAL"
-        self._keywords = {'Function': 'FUNCTION', 'Error_limit': 'ERROR_LIMIT', 'Dx': 'DX'}
-        self._repeated_keywords = {'Units': 'UNITS', 'Atoms_list': 'ATOMS_LIST', 'Values': 'VALUES', 'Parameters': 'PARAMETERS'}
+        self._keywords = {'Function': 'FUNCTION', 'Dx': 'DX', 'Error_limit': 'ERROR_LIMIT'}
+        self._repeated_keywords = {'Atoms_list': 'ATOMS_LIST', 'Parameters': 'PARAMETERS', 'Values': 'VALUES', 'Units': 'UNITS'}
 

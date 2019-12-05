@@ -7,5 +7,5 @@ class _andreussi1(InputSection):
         self.Rho_max = None
         self.Rho_min = None
         self._name = "ANDREUSSI"
-        self._keywords = {'Rho_min': 'RHO_MIN', 'Rho_max': 'RHO_MAX'}
+        self._keywords = {'Rho_max': 'RHO_MAX', 'Rho_min': 'RHO_MIN'}
 

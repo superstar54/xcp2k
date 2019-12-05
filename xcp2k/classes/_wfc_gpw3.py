@@ -14,8 +14,8 @@ class _wfc_gpw3(InputSection):
         self.Do_cholesky_subgroups = None
         self.Size_cholesky_subgroup = None
         self._name = "WFC_GPW"
-        self._keywords = {'Cutoff': 'CUTOFF', 'Eps_filter': 'EPS_FILTER', 'Rel_cutoff': 'REL_CUTOFF', 'Do_cholesky_subgroups': 'DO_CHOLESKY_SUBGROUPS', 'Print_level': 'PRINT_LEVEL', 'Multipole_two_cent_int': 'MULTIPOLE_TWO_CENT_INT', 'Eps_pgf_orb_s': 'EPS_PGF_ORB_S', 'Eps_grid': 'EPS_GRID', 'Size_cholesky_subgroup': 'SIZE_CHOLESKY_SUBGROUP'}
-        self._aliases = {'Iolevel': 'Print_level', 'Size_cs': 'Size_cholesky_subgroup', 'Dcs': 'Do_cholesky_subgroups', 'Relative_cutoff': 'Rel_cutoff'}
+        self._keywords = {'Eps_grid': 'EPS_GRID', 'Eps_filter': 'EPS_FILTER', 'Cutoff': 'CUTOFF', 'Rel_cutoff': 'REL_CUTOFF', 'Multipole_two_cent_int': 'MULTIPOLE_TWO_CENT_INT', 'Print_level': 'PRINT_LEVEL', 'Eps_pgf_orb_s': 'EPS_PGF_ORB_S', 'Do_cholesky_subgroups': 'DO_CHOLESKY_SUBGROUPS', 'Size_cholesky_subgroup': 'SIZE_CHOLESKY_SUBGROUP'}
+        self._aliases = {'Relative_cutoff': 'Rel_cutoff', 'Iolevel': 'Print_level', 'Dcs': 'Do_cholesky_subgroups', 'Size_cs': 'Size_cholesky_subgroup'}
 
 
     @property

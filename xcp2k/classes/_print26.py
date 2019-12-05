@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _neighbor_lists1 import _neighbor_lists1
+from xcp2k.classes._neighbor_lists1 import _neighbor_lists1
 
 
 class _print26(InputSection):

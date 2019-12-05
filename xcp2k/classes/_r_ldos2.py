@@ -10,6 +10,6 @@ class _r_ldos2(InputSection):
         self.Zrange = None
         self.Erange = None
         self._name = "R_LDOS"
-        self._keywords = {'Xrange': 'XRANGE', 'Erange': 'ERANGE', 'Yrange': 'YRANGE', 'Zrange': 'ZRANGE'}
+        self._keywords = {'Xrange': 'XRANGE', 'Yrange': 'YRANGE', 'Zrange': 'ZRANGE', 'Erange': 'ERANGE'}
         self._repeated_keywords = {'List': 'LIST'}
 

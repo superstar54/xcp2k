@@ -11,5 +11,5 @@ class _rs_grid1(InputSection):
         self.Memory_factor = None
         self.Halo_reduction_factor = None
         self._name = "RS_GRID"
-        self._keywords = {'Halo_reduction_factor': 'HALO_REDUCTION_FACTOR', 'Max_distributed_level': 'MAX_DISTRIBUTED_LEVEL', 'Lock_distribution': 'LOCK_DISTRIBUTION', 'Distribution_type': 'DISTRIBUTION_TYPE', 'Memory_factor': 'MEMORY_FACTOR', 'Distribution_layout': 'DISTRIBUTION_LAYOUT'}
+        self._keywords = {'Distribution_type': 'DISTRIBUTION_TYPE', 'Distribution_layout': 'DISTRIBUTION_LAYOUT', 'Max_distributed_level': 'MAX_DISTRIBUTED_LEVEL', 'Lock_distribution': 'LOCK_DISTRIBUTION', 'Memory_factor': 'MEMORY_FACTOR', 'Halo_reduction_factor': 'HALO_REDUCTION_FACTOR'}
 

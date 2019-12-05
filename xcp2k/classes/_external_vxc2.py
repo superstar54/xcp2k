@@ -7,5 +7,5 @@ class _external_vxc2(InputSection):
         self.File_vxc = None
         self.Grid_tol = None
         self._name = "EXTERNAL_VXC"
-        self._keywords = {'Grid_tol': 'GRID_TOL', 'File_vxc': 'FILE_VXC'}
+        self._keywords = {'File_vxc': 'FILE_VXC', 'Grid_tol': 'GRID_TOL'}
 

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _define_region5 import _define_region5
+from xcp2k.classes._define_region5 import _define_region5
 
 
 class _msd1(InputSection):
@@ -14,7 +14,7 @@ class _msd1(InputSection):
         self.Displacement_tol = None
         self.DEFINE_REGION_list = []
         self._name = "MSD"
-        self._keywords = {'Displaced_atom': 'DISPLACED_ATOM', 'Msd_per_kind': 'MSD_PER_KIND', 'Msd_per_molkind': 'MSD_PER_MOLKIND', 'Displacement_tol': 'DISPLACEMENT_TOL', 'Ref0_filename': 'REF0_FILENAME', 'Msd_per_region': 'MSD_PER_REGION'}
+        self._keywords = {'Ref0_filename': 'REF0_FILENAME', 'Msd_per_kind': 'MSD_PER_KIND', 'Msd_per_molkind': 'MSD_PER_MOLKIND', 'Msd_per_region': 'MSD_PER_REGION', 'Displaced_atom': 'DISPLACED_ATOM', 'Displacement_tol': 'DISPLACEMENT_TOL'}
         self._repeated_subsections = {'DEFINE_REGION': '_define_region5'}
         self._attributes = ['Section_parameters', 'DEFINE_REGION_list']
 

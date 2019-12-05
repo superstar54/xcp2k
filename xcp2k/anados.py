@@ -104,7 +104,7 @@ class AnaDOS(CP2K):
         r'\# Projected DOS for atomic kind (?P<element>\w+) at iteration step i = \d+, E\(Fermi\) = [ \t]* (?P<Efermi>[^\t ]+) a\.u\.')
         fhandle = open(fpdos, 'r')
         header = HEADER_MATCH.match(fhandle.readline().rstrip())
-        efermi = float(header.group('Efermi')) + 0.002
+        efermi = float(header.group('Efermi')) #+ 0.002
         # header is originally: ['#', 'MO', 'Eigenvalue', '[a.u.]', 'Occupation', 's', 'py', ...]
         header = fhandle.readline().rstrip().split()[1:]  # remove the comment directly
         header[1:3] = [' '.join(header[1:3])]  # rejoin "Eigenvalue" and its unit
@@ -242,7 +242,7 @@ class AnaDOS(CP2K):
         data = np.roll(data, roll, axis=[0, 1, 2])
 
         self.cube = [atoms, data]
-    def plot_cube(self, nc = 6, distance = 10, magnification=1, output='cube', view = False, cell=True, movie=True, elevation=90):
+    def plot_cube(self, nc = 6, distance = 10, magnification=1, output='cube', view = False, cell=True, movie=True, elevation=90, colormap = 'hot'):
         """Plot atoms, unit-cell and iso-surfaces using Mayavi. 
 
         Parameters: 
@@ -296,7 +296,7 @@ class AnaDOS(CP2K):
                                 tube_radius=tube_radius)    
 
         cp = mlab.contour3d(data, contours=contours, transparent=True,
-                            opacity=0.5, colormap='hot')
+                            opacity=0.5, colormap=colormap)
         # Do some tvtk magic in order to allow for non-orthogonal unit cells:
         polydata = cp.actor.actors[0].mapper.input
         pts = np.array(polydata.points) - 1

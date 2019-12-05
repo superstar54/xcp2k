@@ -10,5 +10,5 @@ class _optimization2(InputSection):
         self.Eps_diis = None
         self.N_diis = None
         self._name = "OPTIMIZATION"
-        self._keywords = {'Eps_diis': 'EPS_DIIS', 'Max_iter': 'MAX_ITER', 'Eps_scf': 'EPS_SCF', 'Damping': 'DAMPING', 'N_diis': 'N_DIIS'}
+        self._keywords = {'Max_iter': 'MAX_ITER', 'Eps_scf': 'EPS_SCF', 'Damping': 'DAMPING', 'Eps_diis': 'EPS_DIIS', 'N_diis': 'N_DIIS'}
 

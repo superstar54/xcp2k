@@ -1,12 +1,12 @@
 from xcp2k.inputsection import InputSection
-from _energy5 import _energy5
-from _shell_energy1 import _shell_energy1
-from _temp_kind1 import _temp_kind1
-from _temp_shell_kind1 import _temp_shell_kind1
-from _center_of_mass1 import _center_of_mass1
-from _coefficients1 import _coefficients1
-from _rotational_info2 import _rotational_info2
-from _program_run_info8 import _program_run_info8
+from xcp2k.classes._energy5 import _energy5
+from xcp2k.classes._shell_energy1 import _shell_energy1
+from xcp2k.classes._temp_kind1 import _temp_kind1
+from xcp2k.classes._temp_shell_kind1 import _temp_shell_kind1
+from xcp2k.classes._center_of_mass1 import _center_of_mass1
+from xcp2k.classes._coefficients1 import _coefficients1
+from xcp2k.classes._rotational_info2 import _rotational_info2
+from xcp2k.classes._program_run_info8 import _program_run_info8
 
 
 class _print12(InputSection):
@@ -23,5 +23,5 @@ class _print12(InputSection):
         self.PROGRAM_RUN_INFO = _program_run_info8()
         self._name = "PRINT"
         self._keywords = {'Force_last': 'FORCE_LAST'}
-        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'ENERGY': 'ENERGY', 'SHELL_ENERGY': 'SHELL_ENERGY', 'ROTATIONAL_INFO': 'ROTATIONAL_INFO', 'TEMP_KIND': 'TEMP_KIND', 'TEMP_SHELL_KIND': 'TEMP_SHELL_KIND', 'CENTER_OF_MASS': 'CENTER_OF_MASS', 'COEFFICIENTS': 'COEFFICIENTS'}
+        self._subsections = {'ENERGY': 'ENERGY', 'SHELL_ENERGY': 'SHELL_ENERGY', 'TEMP_KIND': 'TEMP_KIND', 'TEMP_SHELL_KIND': 'TEMP_SHELL_KIND', 'CENTER_OF_MASS': 'CENTER_OF_MASS', 'COEFFICIENTS': 'COEFFICIENTS', 'ROTATIONAL_INFO': 'ROTATIONAL_INFO', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO'}
 

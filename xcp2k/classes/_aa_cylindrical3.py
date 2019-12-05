@@ -19,7 +19,7 @@ class _aa_cylindrical3(InputSection):
         self.Smoothing_width = None
         self.Delta_alpha = None
         self._name = "AA_CYLINDRICAL"
-        self._keywords = {'N_sides': 'N_SIDES', 'Smoothing_width': 'SMOOTHING_WIDTH', 'N_prtn': 'N_PRTN', 'Base_radius': 'BASE_RADIUS', 'V_d': 'V_D', 'Phase': 'PHASE', 'Frequency': 'FREQUENCY', 'Delta_alpha': 'DELTA_ALPHA', 'Parallel_axis': 'PARALLEL_AXIS', 'Oscillating_fraction': 'OSCILLATING_FRACTION', 'Base_center': 'BASE_CENTER', 'Thickness': 'THICKNESS', 'Apx_type': 'APX_TYPE', 'Xtnt': 'XTNT'}
+        self._keywords = {'V_d': 'V_D', 'Oscillating_fraction': 'OSCILLATING_FRACTION', 'Frequency': 'FREQUENCY', 'Phase': 'PHASE', 'Parallel_axis': 'PARALLEL_AXIS', 'Xtnt': 'XTNT', 'Base_center': 'BASE_CENTER', 'Base_radius': 'BASE_RADIUS', 'N_sides': 'N_SIDES', 'Apx_type': 'APX_TYPE', 'N_prtn': 'N_PRTN', 'Thickness': 'THICKNESS', 'Smoothing_width': 'SMOOTHING_WIDTH', 'Delta_alpha': 'DELTA_ALPHA'}
         self._aliases = {'Sigma': 'Smoothing_width'}
 
 

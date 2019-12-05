@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _conv_info5 import _conv_info5
+from xcp2k.classes._conv_info5 import _conv_info5
 
 
 class _interpolator5(InputSection):
@@ -12,7 +12,7 @@ class _interpolator5(InputSection):
         self.Max_iter = None
         self.CONV_INFO = _conv_info5()
         self._name = "INTERPOLATOR"
-        self._keywords = {'Eps_r': 'EPS_R', 'Eps_x': 'EPS_X', 'Max_iter': 'MAX_ITER', 'Precond': 'PRECOND', 'Aint_precond': 'AINT_PRECOND'}
+        self._keywords = {'Aint_precond': 'AINT_PRECOND', 'Precond': 'PRECOND', 'Eps_x': 'EPS_X', 'Eps_r': 'EPS_R', 'Max_iter': 'MAX_ITER'}
         self._subsections = {'CONV_INFO': 'CONV_INFO'}
         self._aliases = {'Maxiter': 'Max_iter'}
 

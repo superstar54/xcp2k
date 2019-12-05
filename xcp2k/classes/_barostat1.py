@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _velocity1 import _velocity1
-from _mass1 import _mass1
-from _thermostat1 import _thermostat1
-from _print7 import _print7
+from xcp2k.classes._velocity1 import _velocity1
+from xcp2k.classes._mass1 import _mass1
+from xcp2k.classes._thermostat1 import _thermostat1
+from xcp2k.classes._print7 import _print7
 
 
 class _barostat1(InputSection):
@@ -18,6 +18,6 @@ class _barostat1(InputSection):
         self.THERMOSTAT = _thermostat1()
         self.PRINT = _print7()
         self._name = "BAROSTAT"
-        self._keywords = {'Pressure': 'PRESSURE', 'Timecon': 'TIMECON', 'Temp_tol': 'TEMP_TOL', 'Temperature': 'TEMPERATURE', 'Virial': 'VIRIAL'}
-        self._subsections = {'PRINT': 'PRINT', 'VELOCITY': 'VELOCITY', 'MASS': 'MASS', 'THERMOSTAT': 'THERMOSTAT'}
+        self._keywords = {'Pressure': 'PRESSURE', 'Timecon': 'TIMECON', 'Temperature': 'TEMPERATURE', 'Temp_tol': 'TEMP_TOL', 'Virial': 'VIRIAL'}
+        self._subsections = {'VELOCITY': 'VELOCITY', 'MASS': 'MASS', 'THERMOSTAT': 'THERMOSTAT', 'PRINT': 'PRINT'}
 

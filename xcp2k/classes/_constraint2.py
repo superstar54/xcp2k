@@ -9,6 +9,6 @@ class _constraint2(InputSection):
         self.Atom_list = []
         self.Atom_coef = None
         self._name = "CONSTRAINT"
-        self._keywords = {'Atom_coef': 'ATOM_COEF', 'Target': 'TARGET', 'Equal_charges': 'EQUAL_CHARGES'}
+        self._keywords = {'Target': 'TARGET', 'Equal_charges': 'EQUAL_CHARGES', 'Atom_coef': 'ATOM_COEF'}
         self._repeated_keywords = {'Atom_list': 'ATOM_LIST'}
 

@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _pair_potential4 import _pair_potential4
-from _non_local4 import _non_local4
+from xcp2k.classes._pair_potential4 import _pair_potential4
+from xcp2k.classes._non_local4 import _non_local4
 
 
 class _vdw_potential4(InputSection):
@@ -11,17 +11,9 @@ class _vdw_potential4(InputSection):
         self.NON_LOCAL_list = []
         self._name = "VDW_POTENTIAL"
         self._keywords = {'Potential_type': 'POTENTIAL_TYPE'}
-        self._repeated_subsections = {'NON_LOCAL': '_non_local4', 'PAIR_POTENTIAL': '_pair_potential4'}
+        self._repeated_subsections = {'PAIR_POTENTIAL': '_pair_potential4', 'NON_LOCAL': '_non_local4'}
         self._aliases = {'Dispersion_functional': 'Potential_type'}
         self._attributes = ['PAIR_POTENTIAL_list', 'NON_LOCAL_list']
-
-    def NON_LOCAL_add(self, section_parameters=None):
-        new_section = _non_local4()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.NON_LOCAL_list.append(new_section)
-        return new_section
 
     def PAIR_POTENTIAL_add(self, section_parameters=None):
         new_section = _pair_potential4()
@@ -29,6 +21,14 @@ class _vdw_potential4(InputSection):
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
         self.PAIR_POTENTIAL_list.append(new_section)
+        return new_section
+
+    def NON_LOCAL_add(self, section_parameters=None):
+        new_section = _non_local4()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.NON_LOCAL_list.append(new_section)
         return new_section
 
 

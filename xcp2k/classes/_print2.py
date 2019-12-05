@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info4 import _program_run_info4
-from _rotational_info1 import _rotational_info1
+from xcp2k.classes._program_run_info4 import _program_run_info4
+from xcp2k.classes._rotational_info1 import _rotational_info1
 
 
 class _print2(InputSection):

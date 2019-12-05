@@ -9,5 +9,5 @@ class _cutoff_calib1(InputSection):
         self.Delta = None
         self.Eps = None
         self._name = "CUTOFF_CALIB"
-        self._keywords = {'Max': 'MAX', 'Delta': 'DELTA', 'Eps': 'EPS', 'Min': 'MIN'}
+        self._keywords = {'Min': 'MIN', 'Max': 'MAX', 'Delta': 'DELTA', 'Eps': 'EPS'}
 

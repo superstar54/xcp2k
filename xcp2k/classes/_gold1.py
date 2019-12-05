@@ -9,5 +9,5 @@ class _gold1(InputSection):
         self.Brent_tol = None
         self.Brent_max_iter = None
         self._name = "GOLD"
-        self._keywords = {'Brent_tol': 'BRENT_TOL', 'Brack_limit': 'BRACK_LIMIT', 'Initial_step': 'INITIAL_STEP', 'Brent_max_iter': 'BRENT_MAX_ITER'}
+        self._keywords = {'Initial_step': 'INITIAL_STEP', 'Brack_limit': 'BRACK_LIMIT', 'Brent_tol': 'BRENT_TOL', 'Brent_max_iter': 'BRENT_MAX_ITER'}
 

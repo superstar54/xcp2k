@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _restraint5 import _restraint5
+from xcp2k.classes._restraint5 import _restraint5
 
 
 class _collective1(InputSection):
@@ -16,7 +16,7 @@ class _collective1(InputSection):
         self.Exclude_mm = None
         self.RESTRAINT = _restraint5()
         self._name = "COLLECTIVE"
-        self._keywords = {'Exclude_mm': 'EXCLUDE_MM', 'Target': 'TARGET', 'Molecule': 'MOLECULE', 'Intermolecular': 'INTERMOLECULAR', 'Target_limit': 'TARGET_LIMIT', 'Molname': 'MOLNAME', 'Colvar': 'COLVAR', 'Exclude_qm': 'EXCLUDE_QM', 'Target_growth': 'TARGET_GROWTH'}
+        self._keywords = {'Colvar': 'COLVAR', 'Molecule': 'MOLECULE', 'Molname': 'MOLNAME', 'Intermolecular': 'INTERMOLECULAR', 'Target': 'TARGET', 'Target_growth': 'TARGET_GROWTH', 'Target_limit': 'TARGET_LIMIT', 'Exclude_qm': 'EXCLUDE_QM', 'Exclude_mm': 'EXCLUDE_MM'}
         self._subsections = {'RESTRAINT': 'RESTRAINT'}
         self._aliases = {'Segname': 'Molname'}
 

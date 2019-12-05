@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _m_sampling1 import _m_sampling1
+from xcp2k.classes._m_sampling1 import _m_sampling1
 
 
 class _ceperley1(InputSection):

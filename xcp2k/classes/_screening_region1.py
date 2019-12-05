@@ -7,5 +7,5 @@ class _screening_region1(InputSection):
         self.List = []
         self.Molname = []
         self._name = "SCREENING_REGION"
-        self._repeated_keywords = {'Molname': 'MOLNAME', 'List': 'LIST'}
+        self._repeated_keywords = {'List': 'LIST', 'Molname': 'MOLNAME'}
 

@@ -14,5 +14,5 @@ class _init1(InputSection):
         self.Velocity_quench = None
         self.Velocity_scale = None
         self._name = "INIT"
-        self._keywords = {'Levy_pos_sample': 'LEVY_POS_SAMPLE', 'Levy_correlated': 'LEVY_CORRELATED', 'Levy_seed': 'LEVY_SEED', 'Centroid_speed': 'CENTROID_SPEED', 'Randomize_pos': 'RANDOMIZE_POS', 'Velocity_scale': 'VELOCITY_SCALE', 'Thermostat_seed': 'THERMOSTAT_SEED', 'Velocity_quench': 'VELOCITY_QUENCH', 'Levy_temp_factor': 'LEVY_TEMP_FACTOR'}
+        self._keywords = {'Levy_pos_sample': 'LEVY_POS_SAMPLE', 'Levy_correlated': 'LEVY_CORRELATED', 'Levy_temp_factor': 'LEVY_TEMP_FACTOR', 'Levy_seed': 'LEVY_SEED', 'Thermostat_seed': 'THERMOSTAT_SEED', 'Randomize_pos': 'RANDOMIZE_POS', 'Centroid_speed': 'CENTROID_SPEED', 'Velocity_quench': 'VELOCITY_QUENCH', 'Velocity_scale': 'VELOCITY_SCALE'}
 

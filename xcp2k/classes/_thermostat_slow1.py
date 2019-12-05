@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _define_region4 import _define_region4
-from _nose5 import _nose5
+from xcp2k.classes._define_region4 import _define_region4
+from xcp2k.classes._nose5 import _nose5
 
 
 class _thermostat_slow1(InputSection):
@@ -11,7 +11,7 @@ class _thermostat_slow1(InputSection):
         self.DEFINE_REGION_list = []
         self.NOSE = _nose5()
         self._name = "THERMOSTAT_SLOW"
-        self._keywords = {'Region': 'REGION', 'Type': 'TYPE'}
+        self._keywords = {'Type': 'TYPE', 'Region': 'REGION'}
         self._subsections = {'NOSE': 'NOSE'}
         self._repeated_subsections = {'DEFINE_REGION': '_define_region4'}
         self._attributes = ['DEFINE_REGION_list']

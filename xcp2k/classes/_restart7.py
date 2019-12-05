@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each125 import _each125
+from xcp2k.classes._each125 import _each125
 
 
 class _restart7(InputSection):
@@ -14,7 +14,7 @@ class _restart7(InputSection):
         self.Write_cycles = None
         self.EACH = _each125()
         self._name = "RESTART"
-        self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Write_cycles': 'WRITE_CYCLES', 'Backup_copies': 'BACKUP_COPIES', 'Add_last': 'ADD_LAST'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Backup_copies': 'BACKUP_COPIES', 'Write_cycles': 'WRITE_CYCLES'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

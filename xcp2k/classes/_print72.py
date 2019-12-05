@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _dos2 import _dos2
+from xcp2k.classes._dos2 import _dos2
 
 
 class _print72(InputSection):

@@ -14,5 +14,5 @@ class _goodwin4(InputSection):
         self.Rmin = None
         self.Rmax = None
         self._name = "GOODWIN"
-        self._keywords = {'Rmin': 'RMIN', 'Vr0': 'VR0', 'D': 'D', 'Mc': 'MC', 'Rmax': 'RMAX', 'M': 'M', 'Dc': 'DC', 'Rcut': 'RCUT', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'Vr0': 'VR0', 'D': 'D', 'Dc': 'DC', 'M': 'M', 'Mc': 'MC', 'Rcut': 'RCUT', 'Rmin': 'RMIN', 'Rmax': 'RMAX'}
 

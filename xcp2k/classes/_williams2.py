@@ -12,5 +12,5 @@ class _williams2(InputSection):
         self.Rmin = None
         self.Rmax = None
         self._name = "WILLIAMS"
-        self._keywords = {'A': 'A', 'C': 'C', 'B': 'B', 'Rmax': 'RMAX', 'Rmin': 'RMIN', 'Rcut': 'RCUT', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'A': 'A', 'B': 'B', 'C': 'C', 'Rcut': 'RCUT', 'Rmin': 'RMIN', 'Rmax': 'RMAX'}
 

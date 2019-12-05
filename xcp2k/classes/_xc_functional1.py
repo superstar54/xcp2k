@@ -1,33 +1,33 @@
 from xcp2k.inputsection import InputSection
-from _becke881 import _becke881
-from _lyp_adiabatic1 import _lyp_adiabatic1
-from _becke88_lr_adiabatic1 import _becke88_lr_adiabatic1
-from _becke88_lr1 import _becke88_lr1
-from _lyp1 import _lyp1
-from _pade1 import _pade1
-from _hcth1 import _hcth1
-from _optx1 import _optx1
-from _libxc1 import _libxc1
-from _ke_libxc1 import _ke_libxc1
-from _cs11 import _cs11
-from _xgga1 import _xgga1
-from _ke_gga1 import _ke_gga1
-from _p86c1 import _p86c1
-from _pw921 import _pw921
-from _pz811 import _pz811
-from _tfw1 import _tfw1
-from _tf1 import _tf1
-from _vwn1 import _vwn1
-from _xalpha1 import _xalpha1
-from _tpss1 import _tpss1
-from _pbe1 import _pbe1
-from _xwpbe1 import _xwpbe1
-from _becke971 import _becke971
-from _becke_roussel1 import _becke_roussel1
-from _lda_hole_t_c_lr1 import _lda_hole_t_c_lr1
-from _pbe_hole_t_c_lr1 import _pbe_hole_t_c_lr1
-from _gv091 import _gv091
-from _beef1 import _beef1
+from xcp2k.classes._becke881 import _becke881
+from xcp2k.classes._lyp_adiabatic1 import _lyp_adiabatic1
+from xcp2k.classes._becke88_lr_adiabatic1 import _becke88_lr_adiabatic1
+from xcp2k.classes._becke88_lr1 import _becke88_lr1
+from xcp2k.classes._lyp1 import _lyp1
+from xcp2k.classes._pade1 import _pade1
+from xcp2k.classes._hcth1 import _hcth1
+from xcp2k.classes._optx1 import _optx1
+from xcp2k.classes._libxc1 import _libxc1
+from xcp2k.classes._ke_libxc1 import _ke_libxc1
+from xcp2k.classes._cs11 import _cs11
+from xcp2k.classes._xgga1 import _xgga1
+from xcp2k.classes._ke_gga1 import _ke_gga1
+from xcp2k.classes._p86c1 import _p86c1
+from xcp2k.classes._pw921 import _pw921
+from xcp2k.classes._pz811 import _pz811
+from xcp2k.classes._tfw1 import _tfw1
+from xcp2k.classes._tf1 import _tf1
+from xcp2k.classes._vwn1 import _vwn1
+from xcp2k.classes._xalpha1 import _xalpha1
+from xcp2k.classes._tpss1 import _tpss1
+from xcp2k.classes._pbe1 import _pbe1
+from xcp2k.classes._xwpbe1 import _xwpbe1
+from xcp2k.classes._becke971 import _becke971
+from xcp2k.classes._becke_roussel1 import _becke_roussel1
+from xcp2k.classes._lda_hole_t_c_lr1 import _lda_hole_t_c_lr1
+from xcp2k.classes._pbe_hole_t_c_lr1 import _pbe_hole_t_c_lr1
+from xcp2k.classes._gv091 import _gv091
+from xcp2k.classes._beef1 import _beef1
 
 
 class _xc_functional1(InputSection):
@@ -64,17 +64,9 @@ class _xc_functional1(InputSection):
         self.GV09 = _gv091()
         self.BEEF = _beef1()
         self._name = "XC_FUNCTIONAL"
-        self._subsections = {'BECKE88_LR': 'BECKE88_LR', 'BECKE88_LR_ADIABATIC': 'BECKE88_LR_ADIABATIC', 'P86C': 'P86C', 'KE_GGA': 'KE_GGA', 'PW92': 'PW92', 'LDA_HOLE_T_C_LR': 'LDA_HOLE_T_C_LR', 'PBE_HOLE_T_C_LR': 'PBE_HOLE_T_C_LR', 'XALPHA': 'XALPHA', 'LYP': 'LYP', 'LYP_ADIABATIC': 'LYP_ADIABATIC', 'OPTX': 'OPTX', 'TF': 'TF', 'CS1': 'CS1', 'BECKE88': 'BECKE88', 'BECKE_ROUSSEL': 'BECKE_ROUSSEL', 'HCTH': 'HCTH', 'PADE': 'PADE', 'PBE': 'PBE', 'GV09': 'GV09', 'BEEF': 'BEEF', 'PZ81': 'PZ81', 'TPSS': 'TPSS', 'XWPBE': 'XWPBE', 'VWN': 'VWN', 'BECKE97': 'BECKE97', 'TFW': 'TFW', 'XGGA': 'XGGA'}
-        self._repeated_subsections = {'KE_LIBXC': '_ke_libxc1', 'LIBXC': '_libxc1'}
+        self._subsections = {'BECKE88': 'BECKE88', 'LYP_ADIABATIC': 'LYP_ADIABATIC', 'BECKE88_LR_ADIABATIC': 'BECKE88_LR_ADIABATIC', 'BECKE88_LR': 'BECKE88_LR', 'LYP': 'LYP', 'PADE': 'PADE', 'HCTH': 'HCTH', 'OPTX': 'OPTX', 'CS1': 'CS1', 'XGGA': 'XGGA', 'KE_GGA': 'KE_GGA', 'P86C': 'P86C', 'PW92': 'PW92', 'PZ81': 'PZ81', 'TFW': 'TFW', 'TF': 'TF', 'VWN': 'VWN', 'XALPHA': 'XALPHA', 'TPSS': 'TPSS', 'PBE': 'PBE', 'XWPBE': 'XWPBE', 'BECKE97': 'BECKE97', 'BECKE_ROUSSEL': 'BECKE_ROUSSEL', 'LDA_HOLE_T_C_LR': 'LDA_HOLE_T_C_LR', 'PBE_HOLE_T_C_LR': 'PBE_HOLE_T_C_LR', 'GV09': 'GV09', 'BEEF': 'BEEF'}
+        self._repeated_subsections = {'LIBXC': '_libxc1', 'KE_LIBXC': '_ke_libxc1'}
         self._attributes = ['Section_parameters', 'LIBXC_list', 'KE_LIBXC_list']
-
-    def KE_LIBXC_add(self, section_parameters=None):
-        new_section = _ke_libxc1()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.KE_LIBXC_list.append(new_section)
-        return new_section
 
     def LIBXC_add(self, section_parameters=None):
         new_section = _libxc1()
@@ -82,5 +74,13 @@ class _xc_functional1(InputSection):
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
         self.LIBXC_list.append(new_section)
+        return new_section
+
+    def KE_LIBXC_add(self, section_parameters=None):
+        new_section = _ke_libxc1()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.KE_LIBXC_list.append(new_section)
         return new_section
 

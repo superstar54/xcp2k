@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _wall1 import _wall1
+from xcp2k.classes._wall1 import _wall1
 
 
 class _metavar1(InputSection):
@@ -12,7 +12,7 @@ class _metavar1(InputSection):
         self.Colvar = None
         self.WALL_list = []
         self._name = "METAVAR"
-        self._keywords = {'Colvar': 'COLVAR', 'Scale': 'SCALE', 'Mass': 'MASS', 'Gamma': 'GAMMA', 'Lambda': 'LAMBDA'}
+        self._keywords = {'Lambda': 'LAMBDA', 'Mass': 'MASS', 'Gamma': 'GAMMA', 'Scale': 'SCALE', 'Colvar': 'COLVAR'}
         self._repeated_subsections = {'WALL': '_wall1'}
         self._aliases = {'Width': 'Scale'}
         self._attributes = ['WALL_list']

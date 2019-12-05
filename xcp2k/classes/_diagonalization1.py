@@ -1,9 +1,9 @@
 from xcp2k.inputsection import InputSection
-from _ot2 import _ot2
-from _krylov1 import _krylov1
-from _diag_sub_scf1 import _diag_sub_scf1
-from _davidson1 import _davidson1
-from _filter_matrix1 import _filter_matrix1
+from xcp2k.classes._ot2 import _ot2
+from xcp2k.classes._krylov1 import _krylov1
+from xcp2k.classes._diag_sub_scf1 import _diag_sub_scf1
+from xcp2k.classes._davidson1 import _davidson1
+from xcp2k.classes._filter_matrix1 import _filter_matrix1
 
 
 class _diagonalization1(InputSection):
@@ -22,7 +22,7 @@ class _diagonalization1(InputSection):
         self.DAVIDSON = _davidson1()
         self.FILTER_MATRIX = _filter_matrix1()
         self._name = "DIAGONALIZATION"
-        self._keywords = {'Algorithm': 'ALGORITHM', 'Eps_jacobi': 'EPS_JACOBI', 'Max_iter': 'MAX_ITER', 'Jacobi_threshold': 'JACOBI_THRESHOLD', 'Eps_iter': 'EPS_ITER', 'Eps_adapt': 'EPS_ADAPT'}
-        self._subsections = {'FILTER_MATRIX': 'FILTER_MATRIX', 'KRYLOV': 'KRYLOV', 'OT': 'OT', 'DAVIDSON': 'DAVIDSON', 'DIAG_SUB_SCF': 'DIAG_SUB_SCF'}
+        self._keywords = {'Algorithm': 'ALGORITHM', 'Jacobi_threshold': 'JACOBI_THRESHOLD', 'Eps_jacobi': 'EPS_JACOBI', 'Eps_adapt': 'EPS_ADAPT', 'Max_iter': 'MAX_ITER', 'Eps_iter': 'EPS_ITER'}
+        self._subsections = {'OT': 'OT', 'KRYLOV': 'KRYLOV', 'DIAG_SUB_SCF': 'DIAG_SUB_SCF', 'DAVIDSON': 'DAVIDSON', 'FILTER_MATRIX': 'FILTER_MATRIX'}
         self._attributes = ['Section_parameters']
 

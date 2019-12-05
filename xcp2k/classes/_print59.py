@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _k_matrix1 import _k_matrix1
+from xcp2k.classes._k_matrix1 import _k_matrix1
 
 
 class _print59(InputSection):

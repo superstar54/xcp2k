@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _force_eval_embed1 import _force_eval_embed1
-from _force_eval2 import _force_eval2
+from xcp2k.classes._force_eval_embed1 import _force_eval_embed1
+from xcp2k.classes._force_eval2 import _force_eval2
 
 
 class _mapping2(InputSection):

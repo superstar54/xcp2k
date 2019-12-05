@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _mao1 import _mao1
+from xcp2k.classes._mao1 import _mao1
 
 
 class _im_time1(InputSection):
@@ -16,9 +16,9 @@ class _im_time1(InputSection):
         self.Ri_g0w0 = None
         self.MAO = _mao1()
         self._name = "IM_TIME"
-        self._keywords = {'Group_size_3c': 'GROUP_SIZE_3C', 'Points_per_magnitude': 'POINTS_PER_MAGNITUDE', 'Group_size_p': 'GROUP_SIZE_P', 'Ri_g0w0': 'RI_G0W0', 'Stabilize_exp': 'STABILIZE_EXP', 'Memory_info': 'MEMORY_INFO', 'Memory_cut': 'MEMORY_CUT', 'Eps_filter_im_time': 'EPS_FILTER_IM_TIME', 'Mao': 'MAO'}
+        self._keywords = {'Memory_cut': 'MEMORY_CUT', 'Memory_info': 'MEMORY_INFO', 'Mao': 'MAO', 'Group_size_3c': 'GROUP_SIZE_3C', 'Group_size_p': 'GROUP_SIZE_P', 'Points_per_magnitude': 'POINTS_PER_MAGNITUDE', 'Eps_filter_im_time': 'EPS_FILTER_IM_TIME', 'Stabilize_exp': 'STABILIZE_EXP', 'Ri_g0w0': 'RI_G0W0'}
         self._subsections = {'MAO': 'MAO'}
-        self._aliases = {'Gw': 'Ri_g0w0', 'Ppm': 'Points_per_magnitude'}
+        self._aliases = {'Ppm': 'Points_per_magnitude', 'Gw': 'Ri_g0w0'}
 
 
     @property

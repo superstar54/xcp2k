@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point11 import _point11
+from xcp2k.classes._point11 import _point11
 
 
 class _qparm1(InputSection):
@@ -15,10 +15,10 @@ class _qparm1(InputSection):
         self.L = None
         self.POINT_list = []
         self._name = "QPARM"
-        self._keywords = {'Include_images': 'INCLUDE_IMAGES', 'Rstart': 'RSTART', 'L': 'L', 'Rcut': 'RCUT'}
-        self._repeated_keywords = {'Atoms_to': 'ATOMS_TO', 'Atoms_from': 'ATOMS_FROM'}
+        self._keywords = {'Rcut': 'RCUT', 'Include_images': 'INCLUDE_IMAGES', 'Rstart': 'RSTART', 'L': 'L'}
+        self._repeated_keywords = {'Atoms_from': 'ATOMS_FROM', 'Atoms_to': 'ATOMS_TO'}
         self._repeated_subsections = {'POINT': '_point11'}
-        self._repeated_aliases = {'Points_to': 'Atoms_to', 'Points_from': 'Atoms_from'}
+        self._repeated_aliases = {'Points_from': 'Atoms_from', 'Points_to': 'Atoms_to'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):

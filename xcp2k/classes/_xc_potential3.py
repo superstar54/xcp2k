@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _saop3 import _saop3
+from xcp2k.classes._saop3 import _saop3
 
 
 class _xc_potential3(InputSection):

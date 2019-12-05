@@ -10,5 +10,5 @@ class _contact1(InputSection):
         self.Injection_sign = None
         self.Injecting_contact = None
         self._name = "CONTACT"
-        self._keywords = {'Start': 'START', 'Bandwidth': 'BANDWIDTH', 'Injection_sign': 'INJECTION_SIGN', 'N_atoms': 'N_ATOMS', 'Injecting_contact': 'INJECTING_CONTACT'}
+        self._keywords = {'Bandwidth': 'BANDWIDTH', 'Start': 'START', 'N_atoms': 'N_ATOMS', 'Injection_sign': 'INJECTION_SIGN', 'Injecting_contact': 'INJECTING_CONTACT'}
 

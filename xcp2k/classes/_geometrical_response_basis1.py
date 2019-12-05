@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each445 import _each445
+from xcp2k.classes._each445 import _each445
 
 
 class _geometrical_response_basis1(InputSection):
@@ -24,7 +24,7 @@ class _geometrical_response_basis1(InputSection):
         self.Name_body = None
         self.EACH = _each445()
         self._name = "GEOMETRICAL_RESPONSE_BASIS"
-        self._keywords = {'Derivatives': 'DERIVATIVES', 'Log_print_key': 'LOG_PRINT_KEY', 'Name_body': 'NAME_BODY', 'Grid_points': 'GRID_POINTS', 'Confinement': 'CONFINEMENT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Quadrature': 'QUADRATURE', 'Extension_basis': 'EXTENSION_BASIS', 'Add_last': 'ADD_LAST', 'Delta_charge': 'DELTA_CHARGE', 'Geo_start_value': 'GEO_START_VALUE', 'Num_gto_polarization': 'NUM_GTO_POLARIZATION', 'Num_gto_core': 'NUM_GTO_CORE', 'Geometrical_factor': 'GEOMETRICAL_FACTOR', 'Num_gto_extended': 'NUM_GTO_EXTENDED'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Delta_charge': 'DELTA_CHARGE', 'Derivatives': 'DERIVATIVES', 'Quadrature': 'QUADRATURE', 'Grid_points': 'GRID_POINTS', 'Num_gto_core': 'NUM_GTO_CORE', 'Num_gto_extended': 'NUM_GTO_EXTENDED', 'Num_gto_polarization': 'NUM_GTO_POLARIZATION', 'Extension_basis': 'EXTENSION_BASIS', 'Geometrical_factor': 'GEOMETRICAL_FACTOR', 'Geo_start_value': 'GEO_START_VALUE', 'Confinement': 'CONFINEMENT', 'Name_body': 'NAME_BODY'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

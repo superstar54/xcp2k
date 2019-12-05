@@ -8,5 +8,5 @@ class _walls1(InputSection):
         self.Type = None
         self.K = None
         self._name = "WALLS"
-        self._keywords = {'K': 'K', 'Type': 'TYPE', 'Wall_skin': 'WALL_SKIN'}
+        self._keywords = {'Wall_skin': 'WALL_SKIN', 'Type': 'TYPE', 'K': 'K'}
 

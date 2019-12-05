@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point36 import _point36
+from xcp2k.classes._point36 import _point36
 
 
 class _angle4(InputSection):

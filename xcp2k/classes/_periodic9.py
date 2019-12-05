@@ -16,9 +16,9 @@ class _periodic9(InputSection):
         self.Contour_def_end = None
         self.Num_omega_points = None
         self._name = "PERIODIC"
-        self._keywords = {'Fraction_aux_mos': 'FRACTION_AUX_MOS', 'Eps_eigenval': 'EPS_EIGENVAL', 'Num_omega_points': 'NUM_OMEGA_POINTS', 'Average_degenerate_levels': 'AVERAGE_DEGENERATE_LEVELS', 'Num_kp_grids': 'NUM_KP_GRIDS', 'Extrapolate_kpoints': 'EXTRAPOLATE_KPOINTS', 'Contour_def_end': 'CONTOUR_DEF_END', 'Mo_coeff_gamma': 'MO_COEFF_GAMMA', 'Eps_kpoint': 'EPS_KPOINT', 'Do_aux_bas_gw': 'DO_AUX_BAS_GW'}
+        self._keywords = {'Num_kp_grids': 'NUM_KP_GRIDS', 'Eps_kpoint': 'EPS_KPOINT', 'Mo_coeff_gamma': 'MO_COEFF_GAMMA', 'Average_degenerate_levels': 'AVERAGE_DEGENERATE_LEVELS', 'Eps_eigenval': 'EPS_EIGENVAL', 'Extrapolate_kpoints': 'EXTRAPOLATE_KPOINTS', 'Do_aux_bas_gw': 'DO_AUX_BAS_GW', 'Fraction_aux_mos': 'FRACTION_AUX_MOS', 'Contour_def_end': 'CONTOUR_DEF_END', 'Num_omega_points': 'NUM_OMEGA_POINTS'}
         self._repeated_keywords = {'Kpoints': 'KPOINTS'}
-        self._aliases = {'Cd_end': 'Contour_def_end', 'Adl': 'Average_degenerate_levels', 'Extrapolate': 'Extrapolate_kpoints'}
+        self._aliases = {'Adl': 'Average_degenerate_levels', 'Extrapolate': 'Extrapolate_kpoints', 'Cd_end': 'Contour_def_end'}
 
 
     @property

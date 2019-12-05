@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _num2pnt4 import _num2pnt4
-from _gold4 import _gold4
+from xcp2k.classes._num2pnt4 import _num2pnt4
+from xcp2k.classes._gold4 import _gold4
 
 
 class _line_search4(InputSection):

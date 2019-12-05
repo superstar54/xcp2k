@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _kpoint_set1 import _kpoint_set1
+from xcp2k.classes._kpoint_set1 import _kpoint_set1
 
 
 class _band_structure1(InputSection):

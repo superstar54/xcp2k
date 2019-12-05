@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _energy2 import _energy2
+from xcp2k.classes._energy2 import _energy2
 
 
 class _print7(InputSection):

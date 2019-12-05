@@ -1,16 +1,16 @@
 from xcp2k.inputsection import InputSection
-from _external_potential1 import _external_potential1
-from _rescale_forces1 import _rescale_forces1
-from _mixed1 import _mixed1
-from _embed1 import _embed1
-from _dft1 import _dft1
-from _mm1 import _mm1
-from _qmmm1 import _qmmm1
-from _eip1 import _eip1
-from _bsse1 import _bsse1
-from _subsys1 import _subsys1
-from _properties1 import _properties1
-from _print68 import _print68
+from xcp2k.classes._external_potential1 import _external_potential1
+from xcp2k.classes._rescale_forces1 import _rescale_forces1
+from xcp2k.classes._mixed1 import _mixed1
+from xcp2k.classes._embed1 import _embed1
+from xcp2k.classes._dft1 import _dft1
+from xcp2k.classes._mm1 import _mm1
+from xcp2k.classes._qmmm1 import _qmmm1
+from xcp2k.classes._eip1 import _eip1
+from xcp2k.classes._bsse1 import _bsse1
+from xcp2k.classes._subsys1 import _subsys1
+from xcp2k.classes._properties1 import _properties1
+from xcp2k.classes._print68 import _print68
 
 
 class _force_eval3(InputSection):
@@ -32,8 +32,8 @@ class _force_eval3(InputSection):
         self.PROPERTIES = _properties1()
         self.PRINT = _print68()
         self._name = "FORCE_EVAL"
-        self._keywords = {'Embed': 'EMBED', 'Method': 'METHOD', 'Stress_tensor': 'STRESS_TENSOR'}
-        self._subsections = {'EIP': 'EIP', 'BSSE': 'BSSE', 'MM': 'MM', 'DFT': 'DFT', 'QMMM': 'QMMM', 'RESCALE_FORCES': 'RESCALE_FORCES', 'PRINT': 'PRINT', 'MIXED': 'MIXED', 'EMBED': 'EMBED', 'SUBSYS': 'SUBSYS', 'PROPERTIES': 'PROPERTIES'}
+        self._keywords = {'Method': 'METHOD', 'Stress_tensor': 'STRESS_TENSOR', 'Embed': 'EMBED'}
+        self._subsections = {'RESCALE_FORCES': 'RESCALE_FORCES', 'MIXED': 'MIXED', 'EMBED': 'EMBED', 'DFT': 'DFT', 'MM': 'MM', 'QMMM': 'QMMM', 'EIP': 'EIP', 'BSSE': 'BSSE', 'SUBSYS': 'SUBSYS', 'PROPERTIES': 'PROPERTIES', 'PRINT': 'PRINT'}
         self._repeated_subsections = {'EXTERNAL_POTENTIAL': '_external_potential1'}
         self._attributes = ['EXTERNAL_POTENTIAL_list']
 

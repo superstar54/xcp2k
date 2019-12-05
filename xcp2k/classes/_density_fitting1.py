@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info21 import _program_run_info21
+from xcp2k.classes._program_run_info21 import _program_run_info21
 
 
 class _density_fitting1(InputSection):
@@ -12,6 +12,6 @@ class _density_fitting1(InputSection):
         self.Gcut = None
         self.PROGRAM_RUN_INFO = _program_run_info21()
         self._name = "DENSITY_FITTING"
-        self._keywords = {'Radii': 'RADII', 'Num_gauss': 'NUM_GAUSS', 'Gcut': 'GCUT', 'Pfactor': 'PFACTOR', 'Min_radius': 'MIN_RADIUS'}
+        self._keywords = {'Num_gauss': 'NUM_GAUSS', 'Pfactor': 'PFACTOR', 'Min_radius': 'MIN_RADIUS', 'Radii': 'RADII', 'Gcut': 'GCUT'}
         self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO'}
 

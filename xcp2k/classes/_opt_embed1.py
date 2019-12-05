@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _embed_dens_diff1 import _embed_dens_diff1
-from _embed_pot_cube1 import _embed_pot_cube1
-from _embed_pot_vector1 import _embed_pot_vector1
+from xcp2k.classes._embed_dens_diff1 import _embed_dens_diff1
+from xcp2k.classes._embed_pot_cube1 import _embed_pot_cube1
+from xcp2k.classes._embed_pot_vector1 import _embed_pot_vector1
 
 
 class _opt_embed1(InputSection):
@@ -26,6 +26,6 @@ class _opt_embed1(InputSection):
         self.EMBED_POT_CUBE = _embed_pot_cube1()
         self.EMBED_POT_VECTOR = _embed_pot_vector1()
         self._name = "OPT_EMBED"
-        self._keywords = {'N_iter': 'N_ITER', 'Dens_conv_max': 'DENS_CONV_MAX', 'Optimizer': 'OPTIMIZER', 'Read_embed_pot_cube': 'READ_EMBED_POT_CUBE', 'Embed_cube_file_name': 'EMBED_CUBE_FILE_NAME', 'Embed_restart_file_name': 'EMBED_RESTART_FILE_NAME', 'Dens_conv_int': 'DENS_CONV_INT', 'Add_const_pot': 'ADD_CONST_POT', 'Embed_spin_cube_file_name': 'EMBED_SPIN_CUBE_FILE_NAME', 'Trust_rad': 'TRUST_RAD', 'Reg_lambda': 'REG_LAMBDA', 'Read_embed_pot': 'READ_EMBED_POT', 'Spin_dens_conv_int': 'SPIN_DENS_CONV_INT', 'Spin_dens_conv_max': 'SPIN_DENS_CONV_MAX', 'Grid_opt': 'GRID_OPT'}
-        self._subsections = {'EMBED_POT_CUBE': 'EMBED_POT_CUBE', 'EMBED_DENS_DIFF': 'EMBED_DENS_DIFF', 'EMBED_POT_VECTOR': 'EMBED_POT_VECTOR'}
+        self._keywords = {'Reg_lambda': 'REG_LAMBDA', 'N_iter': 'N_ITER', 'Trust_rad': 'TRUST_RAD', 'Dens_conv_max': 'DENS_CONV_MAX', 'Dens_conv_int': 'DENS_CONV_INT', 'Spin_dens_conv_max': 'SPIN_DENS_CONV_MAX', 'Spin_dens_conv_int': 'SPIN_DENS_CONV_INT', 'Optimizer': 'OPTIMIZER', 'Grid_opt': 'GRID_OPT', 'Add_const_pot': 'ADD_CONST_POT', 'Read_embed_pot': 'READ_EMBED_POT', 'Read_embed_pot_cube': 'READ_EMBED_POT_CUBE', 'Embed_restart_file_name': 'EMBED_RESTART_FILE_NAME', 'Embed_cube_file_name': 'EMBED_CUBE_FILE_NAME', 'Embed_spin_cube_file_name': 'EMBED_SPIN_CUBE_FILE_NAME'}
+        self._subsections = {'EMBED_DENS_DIFF': 'EMBED_DENS_DIFF', 'EMBED_POT_CUBE': 'EMBED_POT_CUBE', 'EMBED_POT_VECTOR': 'EMBED_POT_VECTOR'}
 

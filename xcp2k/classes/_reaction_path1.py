@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _colvar2 import _colvar2
-from _frame3 import _frame3
-from _map1 import _map1
+from xcp2k.classes._colvar2 import _colvar2
+from xcp2k.classes._frame3 import _frame3
+from xcp2k.classes._map1 import _map1
 
 
 class _reaction_path1(InputSection):
@@ -21,19 +21,11 @@ class _reaction_path1(InputSection):
         self.FRAME_list = []
         self.MAP = _map1()
         self._name = "REACTION_PATH"
-        self._keywords = {'Rmsd': 'RMSD', 'Variable': 'VARIABLE', 'Range': 'RANGE', 'Step_size': 'STEP_SIZE', 'Align_frames': 'ALIGN_FRAMES', 'Distances_rmsd': 'DISTANCES_RMSD', 'Subset_type': 'SUBSET_TYPE', 'Lambda': 'LAMBDA'}
-        self._repeated_keywords = {'Function': 'FUNCTION', 'Atoms': 'ATOMS'}
+        self._keywords = {'Distances_rmsd': 'DISTANCES_RMSD', 'Rmsd': 'RMSD', 'Subset_type': 'SUBSET_TYPE', 'Align_frames': 'ALIGN_FRAMES', 'Variable': 'VARIABLE', 'Lambda': 'LAMBDA', 'Step_size': 'STEP_SIZE', 'Range': 'RANGE'}
+        self._repeated_keywords = {'Atoms': 'ATOMS', 'Function': 'FUNCTION'}
         self._subsections = {'MAP': 'MAP'}
-        self._repeated_subsections = {'FRAME': '_frame3', 'COLVAR': '_colvar2'}
+        self._repeated_subsections = {'COLVAR': '_colvar2', 'FRAME': '_frame3'}
         self._attributes = ['COLVAR_list', 'FRAME_list']
-
-    def FRAME_add(self, section_parameters=None):
-        new_section = _frame3()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.FRAME_list.append(new_section)
-        return new_section
 
     def COLVAR_add(self, section_parameters=None):
         new_section = _colvar2()
@@ -41,5 +33,13 @@ class _reaction_path1(InputSection):
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
         self.COLVAR_list.append(new_section)
+        return new_section
+
+    def FRAME_add(self, section_parameters=None):
+        new_section = _frame3()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.FRAME_list.append(new_section)
         return new_section
 

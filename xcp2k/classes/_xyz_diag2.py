@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point29 import _point29
+from xcp2k.classes._point29 import _point29
 
 
 class _xyz_diag2(InputSection):
@@ -11,7 +11,7 @@ class _xyz_diag2(InputSection):
         self.Absolute_position = None
         self.POINT_list = []
         self._name = "XYZ_DIAG"
-        self._keywords = {'Absolute_position': 'ABSOLUTE_POSITION', 'Component': 'COMPONENT', 'Pbc': 'PBC', 'Atom': 'ATOM'}
+        self._keywords = {'Atom': 'ATOM', 'Component': 'COMPONENT', 'Pbc': 'PBC', 'Absolute_position': 'ABSOLUTE_POSITION'}
         self._repeated_subsections = {'POINT': '_point29'}
         self._aliases = {'Point': 'Atom'}
         self._attributes = ['POINT_list']

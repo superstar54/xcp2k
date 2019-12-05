@@ -9,5 +9,5 @@ class _center1(InputSection):
         self.Weight_type = None
         self.Fixed = None
         self._name = "CENTER"
-        self._keywords = {'Fixed': 'FIXED', 'Xyz': 'XYZ', 'Atom_list': 'ATOM_LIST', 'Weight_type': 'WEIGHT_TYPE'}
+        self._keywords = {'Xyz': 'XYZ', 'Atom_list': 'ATOM_LIST', 'Weight_type': 'WEIGHT_TYPE', 'Fixed': 'FIXED'}
 

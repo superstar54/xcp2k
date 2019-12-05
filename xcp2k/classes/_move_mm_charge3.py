@@ -10,7 +10,7 @@ class _move_mm_charge3(InputSection):
         self.Radius = None
         self.Corr_radius = None
         self._name = "MOVE_MM_CHARGE"
-        self._keywords = {'Corr_radius': 'CORR_RADIUS', 'Alpha': 'ALPHA', 'Radius': 'RADIUS', 'Atom_index_2': 'ATOM_INDEX_2', 'Atom_index_1': 'ATOM_INDEX_1'}
+        self._keywords = {'Atom_index_1': 'ATOM_INDEX_1', 'Atom_index_2': 'ATOM_INDEX_2', 'Alpha': 'ALPHA', 'Radius': 'RADIUS', 'Corr_radius': 'CORR_RADIUS'}
         self._aliases = {'Mm1': 'Atom_index_1', 'Mm2': 'Atom_index_2'}
 
 

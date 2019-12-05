@@ -98,8 +98,8 @@ class BasinHopping(Dynamics):
 
             accept = np.exp((Eo - En) / self.kT) > np.random.uniform()
             if accept:
-                ro = rn.copy()
-                #ro = self.atoms.get_positions()
+                # ro = rn.copy()
+                ro = self.atoms.get_positions()
                 Eo = En
 
     def log(self, step, En, Emin):
@@ -117,11 +117,11 @@ class BasinHopping(Dynamics):
         disp = np.random.uniform(-1., 1., (len(atoms), 3))
         rn = ro + self.dr * disp
         # exchange two atoms
-        from numpy.random import randint
-        ind = randint(0,12,  size=2)
-        postemp = rn[ind[0]].copy()
-        rn[ind[0]] = rn[ind[1]]
-        rn[ind[1]] = postemp
+        # from numpy.random import randint
+        # ind = randint(0,12,  size=2)
+        # postemp = rn[ind[0]].copy()
+        # rn[ind[0]] = rn[ind[1]]
+        # rn[ind[1]] = postemp
         #
         atoms.set_positions(rn)
         if self.cm is not None:

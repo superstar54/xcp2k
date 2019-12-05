@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _cdft_opt3 import _cdft_opt3
+from xcp2k.classes._cdft_opt3 import _cdft_opt3
 
 
 class _outer_scf3(InputSection):
@@ -16,7 +16,7 @@ class _outer_scf3(InputSection):
         self.Step_size = None
         self.CDFT_OPT = _cdft_opt3()
         self._name = "OUTER_SCF"
-        self._keywords = {'Optimizer': 'OPTIMIZER', 'Diis_buffer_length': 'DIIS_BUFFER_LENGTH', 'Max_scf': 'MAX_SCF', 'Step_size': 'STEP_SIZE', 'Eps_scf': 'EPS_SCF', 'Extrapolation_order': 'EXTRAPOLATION_ORDER', 'Bisect_trust_count': 'BISECT_TRUST_COUNT', 'Type': 'TYPE'}
+        self._keywords = {'Type': 'TYPE', 'Optimizer': 'OPTIMIZER', 'Bisect_trust_count': 'BISECT_TRUST_COUNT', 'Eps_scf': 'EPS_SCF', 'Diis_buffer_length': 'DIIS_BUFFER_LENGTH', 'Extrapolation_order': 'EXTRAPOLATION_ORDER', 'Max_scf': 'MAX_SCF', 'Step_size': 'STEP_SIZE'}
         self._subsections = {'CDFT_OPT': 'CDFT_OPT'}
         self._attributes = ['Section_parameters']
 

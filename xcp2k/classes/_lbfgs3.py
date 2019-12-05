@@ -10,5 +10,5 @@ class _lbfgs3(InputSection):
         self.Wanted_rel_f_error = None
         self.Trust_radius = None
         self._name = "LBFGS"
-        self._keywords = {'Wanted_proj_gradient': 'WANTED_PROJ_GRADIENT', 'Trust_radius': 'TRUST_RADIUS', 'Max_f_per_iter': 'MAX_F_PER_ITER', 'Max_h_rank': 'MAX_H_RANK', 'Wanted_rel_f_error': 'WANTED_REL_F_ERROR'}
+        self._keywords = {'Max_h_rank': 'MAX_H_RANK', 'Max_f_per_iter': 'MAX_F_PER_ITER', 'Wanted_proj_gradient': 'WANTED_PROJ_GRADIENT', 'Wanted_rel_f_error': 'WANTED_REL_F_ERROR', 'Trust_radius': 'TRUST_RADIUS'}
 

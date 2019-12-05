@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _print63 import _print63
-from _interpolator13 import _interpolator13
+from xcp2k.classes._print63 import _print63
+from xcp2k.classes._interpolator13 import _interpolator13
 
 
 class _polar1(InputSection):

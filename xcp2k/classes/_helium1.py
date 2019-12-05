@@ -1,14 +1,14 @@
 from xcp2k.inputsection import InputSection
-from _ceperley1 import _ceperley1
-from _worm1 import _worm1
-from _rdf1 import _rdf1
-from _rho1 import _rho1
-from _coord8 import _coord8
-from _perm1 import _perm1
-from _averages2 import _averages2
-from _force6 import _force6
-from _rng_state1 import _rng_state1
-from _print14 import _print14
+from xcp2k.classes._ceperley1 import _ceperley1
+from xcp2k.classes._worm1 import _worm1
+from xcp2k.classes._rdf1 import _rdf1
+from xcp2k.classes._rho1 import _rho1
+from xcp2k.classes._coord8 import _coord8
+from xcp2k.classes._perm1 import _perm1
+from xcp2k.classes._averages2 import _averages2
+from xcp2k.classes._force6 import _force6
+from xcp2k.classes._rng_state1 import _rng_state1
+from xcp2k.classes._print14 import _print14
 
 
 class _helium1(InputSection):
@@ -44,8 +44,8 @@ class _helium1(InputSection):
         self.RNG_STATE = _rng_state1()
         self.PRINT = _print14()
         self._name = "HELIUM"
-        self._keywords = {'Get_forces': 'GET_FORCES', 'Natoms': 'NATOMS', 'N_inner': 'N_INNER', 'Nbeads': 'NBEADS', 'Interaction_pot_scan': 'INTERACTION_POT_SCAN', 'N_outer': 'N_OUTER', 'Density': 'DENSITY', 'Sampling_method': 'SAMPLING_METHOD', 'Rng_seed': 'RNG_SEED', 'Periodic': 'PERIODIC', 'Num_env': 'NUM_ENV', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Cell_shape': 'CELL_SHAPE', 'Droplet_radius': 'DROPLET_RADIUS', 'Presample': 'PRESAMPLE', 'Helium_only': 'HELIUM_ONLY', 'Cell_size': 'CELL_SIZE', 'Solute_interaction': 'SOLUTE_INTERACTION'}
-        self._subsections = {'RNG_STATE': 'RNG_STATE', 'CEPERLEY': 'CEPERLEY', 'FORCE': 'FORCE', 'WORM': 'WORM', 'COORD': 'COORD', 'RDF': 'RDF', 'PERM': 'PERM', 'RHO': 'RHO', 'PRINT': 'PRINT', 'AVERAGES': 'AVERAGES'}
+        self._keywords = {'Helium_only': 'HELIUM_ONLY', 'Interaction_pot_scan': 'INTERACTION_POT_SCAN', 'Num_env': 'NUM_ENV', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Get_forces': 'GET_FORCES', 'Solute_interaction': 'SOLUTE_INTERACTION', 'Natoms': 'NATOMS', 'Nbeads': 'NBEADS', 'Rng_seed': 'RNG_SEED', 'N_inner': 'N_INNER', 'N_outer': 'N_OUTER', 'Sampling_method': 'SAMPLING_METHOD', 'Periodic': 'PERIODIC', 'Cell_size': 'CELL_SIZE', 'Cell_shape': 'CELL_SHAPE', 'Droplet_radius': 'DROPLET_RADIUS', 'Density': 'DENSITY', 'Presample': 'PRESAMPLE'}
+        self._subsections = {'CEPERLEY': 'CEPERLEY', 'WORM': 'WORM', 'RDF': 'RDF', 'RHO': 'RHO', 'COORD': 'COORD', 'PERM': 'PERM', 'AVERAGES': 'AVERAGES', 'FORCE': 'FORCE', 'RNG_STATE': 'RNG_STATE', 'PRINT': 'PRINT'}
         self._aliases = {'Inorot': 'N_inner', 'Irot': 'N_outer'}
         self._attributes = ['Section_parameters']
 

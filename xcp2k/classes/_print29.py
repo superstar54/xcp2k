@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _neighbor_lists3 import _neighbor_lists3
-from _subcell1 import _subcell1
-from _ewald_info1 import _ewald_info1
+from xcp2k.classes._neighbor_lists3 import _neighbor_lists3
+from xcp2k.classes._subcell1 import _subcell1
+from xcp2k.classes._ewald_info1 import _ewald_info1
 
 
 class _print29(InputSection):
@@ -11,5 +11,5 @@ class _print29(InputSection):
         self.SUBCELL = _subcell1()
         self.EWALD_INFO = _ewald_info1()
         self._name = "PRINT"
-        self._subsections = {'SUBCELL': 'SUBCELL', 'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS', 'EWALD_INFO': 'EWALD_INFO'}
+        self._subsections = {'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS', 'SUBCELL': 'SUBCELL', 'EWALD_INFO': 'EWALD_INFO'}
 

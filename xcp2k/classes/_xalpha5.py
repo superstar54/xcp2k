@@ -8,6 +8,6 @@ class _xalpha5(InputSection):
         self.Xa = None
         self.Scale_x = None
         self._name = "XALPHA"
-        self._keywords = {'Scale_x': 'SCALE_X', 'Xa': 'XA'}
+        self._keywords = {'Xa': 'XA', 'Scale_x': 'SCALE_X'}
         self._attributes = ['Section_parameters']
 

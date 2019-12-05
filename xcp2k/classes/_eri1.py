@@ -11,5 +11,5 @@ class _eri1(InputSection):
         self.Cutoff_radius = None
         self.Eps_integral = None
         self._name = "ERI"
-        self._keywords = {'Periodicity': 'PERIODICITY', 'Eps_integral': 'EPS_INTEGRAL', 'Operator': 'OPERATOR', 'Cutoff_radius': 'CUTOFF_RADIUS', 'Operator_parameter': 'OPERATOR_PARAMETER', 'Method': 'METHOD'}
+        self._keywords = {'Method': 'METHOD', 'Operator': 'OPERATOR', 'Operator_parameter': 'OPERATOR_PARAMETER', 'Periodicity': 'PERIODICITY', 'Cutoff_radius': 'CUTOFF_RADIUS', 'Eps_integral': 'EPS_INTEGRAL'}
 

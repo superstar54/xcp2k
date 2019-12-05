@@ -10,8 +10,8 @@ class _eri_gpw1(InputSection):
         self.Store_wfn = None
         self.Print_level = None
         self._name = "ERI_GPW"
-        self._keywords = {'Eps_grid': 'EPS_GRID', 'Print_level': 'PRINT_LEVEL', 'Store_wfn': 'STORE_WFN', 'Rel_cutoff': 'REL_CUTOFF', 'Cutoff': 'CUTOFF'}
-        self._aliases = {'Iolevel': 'Print_level', 'Store_wavefunction': 'Store_wfn', 'Relative_cutoff': 'Rel_cutoff'}
+        self._keywords = {'Eps_grid': 'EPS_GRID', 'Cutoff': 'CUTOFF', 'Rel_cutoff': 'REL_CUTOFF', 'Store_wfn': 'STORE_WFN', 'Print_level': 'PRINT_LEVEL'}
+        self._aliases = {'Relative_cutoff': 'Rel_cutoff', 'Store_wavefunction': 'Store_wfn', 'Iolevel': 'Print_level'}
 
 
     @property

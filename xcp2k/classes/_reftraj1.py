@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _msd1 import _msd1
-from _print10 import _print10
+from xcp2k.classes._msd1 import _msd1
+from xcp2k.classes._print10 import _print10
 
 
 class _reftraj1(InputSection):
@@ -16,6 +16,6 @@ class _reftraj1(InputSection):
         self.MSD = _msd1()
         self.PRINT = _print10()
         self._name = "REFTRAJ"
-        self._keywords = {'Last_snapshot': 'LAST_SNAPSHOT', 'Stride': 'STRIDE', 'Variable_volume': 'VARIABLE_VOLUME', 'Traj_file_name': 'TRAJ_FILE_NAME', 'Eval_energy_forces': 'EVAL_ENERGY_FORCES', 'Cell_file_name': 'CELL_FILE_NAME', 'First_snapshot': 'FIRST_SNAPSHOT'}
-        self._subsections = {'PRINT': 'PRINT', 'MSD': 'MSD'}
+        self._keywords = {'Traj_file_name': 'TRAJ_FILE_NAME', 'Cell_file_name': 'CELL_FILE_NAME', 'Variable_volume': 'VARIABLE_VOLUME', 'First_snapshot': 'FIRST_SNAPSHOT', 'Last_snapshot': 'LAST_SNAPSHOT', 'Stride': 'STRIDE', 'Eval_energy_forces': 'EVAL_ENERGY_FORCES'}
+        self._subsections = {'MSD': 'MSD', 'PRINT': 'PRINT'}
 

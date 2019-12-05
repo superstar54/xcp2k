@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _lbfgs2 import _lbfgs2
-from _cg2 import _cg2
-from _bfgs2 import _bfgs2
-from _print2 import _print2
+from xcp2k.classes._lbfgs2 import _lbfgs2
+from xcp2k.classes._cg2 import _cg2
+from xcp2k.classes._bfgs2 import _bfgs2
+from xcp2k.classes._print2 import _print2
 
 
 class _rot_opt1(InputSection):
@@ -20,8 +20,8 @@ class _rot_opt1(InputSection):
         self.BFGS = _bfgs2()
         self.PRINT_list = []
         self._name = "ROT_OPT"
-        self._keywords = {'Max_dr': 'MAX_DR', 'Optimizer': 'OPTIMIZER', 'Step_start_val': 'STEP_START_VAL', 'Max_iter': 'MAX_ITER', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR', 'Rms_force': 'RMS_FORCE'}
-        self._subsections = {'BFGS': 'BFGS', 'CG': 'CG', 'LBFGS': 'LBFGS'}
+        self._keywords = {'Optimizer': 'OPTIMIZER', 'Max_iter': 'MAX_ITER', 'Max_dr': 'MAX_DR', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR', 'Rms_force': 'RMS_FORCE', 'Step_start_val': 'STEP_START_VAL'}
+        self._subsections = {'LBFGS': 'LBFGS', 'CG': 'CG', 'BFGS': 'BFGS'}
         self._repeated_subsections = {'PRINT': '_print2'}
         self._aliases = {'Minimizer': 'Optimizer'}
         self._attributes = ['PRINT_list']

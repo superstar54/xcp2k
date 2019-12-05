@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _rot_opt1 import _rot_opt1
-from _dimer_vector1 import _dimer_vector1
+from xcp2k.classes._rot_opt1 import _rot_opt1
+from xcp2k.classes._dimer_vector1 import _dimer_vector1
 
 
 class _dimer1(InputSection):
@@ -14,6 +14,6 @@ class _dimer1(InputSection):
         self.ROT_OPT = _rot_opt1()
         self.DIMER_VECTOR = _dimer_vector1()
         self._name = "DIMER"
-        self._keywords = {'Interpolate_gradient': 'INTERPOLATE_GRADIENT', 'Beta': 'BETA', 'Dr': 'DR', 'K_dimer': 'K-DIMER', 'Angle_tolerance': 'ANGLE_TOLERANCE'}
+        self._keywords = {'Dr': 'DR', 'Interpolate_gradient': 'INTERPOLATE_GRADIENT', 'Angle_tolerance': 'ANGLE_TOLERANCE', 'K_dimer': 'K-DIMER', 'Beta': 'BETA'}
         self._subsections = {'ROT_OPT': 'ROT_OPT', 'DIMER_VECTOR': 'DIMER_VECTOR'}
 

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each91 import _each91
+from xcp2k.classes._each91 import _each91
 
 
 class _shell_forces1(InputSection):
@@ -14,7 +14,7 @@ class _shell_forces1(InputSection):
         self.Format = None
         self.EACH = _each91()
         self._name = "SHELL_FORCES"
-        self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Format': 'FORMAT', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Add_last': 'ADD_LAST', 'Unit': 'UNIT'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Unit': 'UNIT', 'Format': 'FORMAT'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

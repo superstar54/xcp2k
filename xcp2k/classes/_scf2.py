@@ -1,11 +1,11 @@
 from xcp2k.inputsection import InputSection
-from _ot3 import _ot3
-from _diagonalization2 import _diagonalization2
-from _outer_scf3 import _outer_scf3
-from _smear2 import _smear2
-from _mixing4 import _mixing4
-from _mom2 import _mom2
-from _print36 import _print36
+from xcp2k.classes._ot3 import _ot3
+from xcp2k.classes._diagonalization2 import _diagonalization2
+from xcp2k.classes._outer_scf3 import _outer_scf3
+from xcp2k.classes._smear2 import _smear2
+from xcp2k.classes._mixing4 import _mixing4
+from xcp2k.classes._mom2 import _mom2
+from xcp2k.classes._print36 import _print36
 
 
 class _scf2(InputSection):
@@ -37,9 +37,9 @@ class _scf2(InputSection):
         self.MOM = _mom2()
         self.PRINT = _print36()
         self._name = "SCF"
-        self._keywords = {'Roks_scheme': 'ROKS_SCHEME', 'Cholesky': 'CHOLESKY', 'Max_scf_history': 'MAX_SCF_HISTORY', 'Level_shift': 'LEVEL_SHIFT', 'Added_mos': 'ADDED_MOS', 'Max_diis': 'MAX_DIIS', 'Roks_f': 'ROKS_F', 'Ncol_block': 'NCOL_BLOCK', 'Eps_diis': 'EPS_DIIS', 'Max_iter_lumo': 'MAX_ITER_LUMO', 'Eps_scf': 'EPS_SCF', 'Nrow_block': 'NROW_BLOCK', 'Roks_parameters': 'ROKS_PARAMETERS', 'Max_scf': 'MAX_SCF', 'Eps_scf_history': 'EPS_SCF_HISTORY', 'Scf_guess': 'SCF_GUESS', 'Eps_lumo': 'EPS_LUMO', 'Eps_eigval': 'EPS_EIGVAL'}
-        self._subsections = {'SMEAR': 'SMEAR', 'PRINT': 'PRINT', 'OUTER_SCF': 'OUTER_SCF', 'MIXING': 'MIXING', 'MOM': 'MOM', 'DIAGONALIZATION': 'DIAGONALIZATION', 'OT': 'OT'}
-        self._aliases = {'Max_iter_lumos': 'Max_iter_lumo', 'F_roks': 'Roks_f', 'Max_scf_hist': 'Max_scf_history', 'Eps_lumos': 'Eps_lumo', 'Roks_parameter': 'Roks_parameters', 'Eps_scf_hist': 'Eps_scf_history', 'Max_diis_buffer_size': 'Max_diis', 'Lshift': 'Level_shift'}
+        self._keywords = {'Max_iter_lumo': 'MAX_ITER_LUMO', 'Eps_lumo': 'EPS_LUMO', 'Max_scf': 'MAX_SCF', 'Max_scf_history': 'MAX_SCF_HISTORY', 'Max_diis': 'MAX_DIIS', 'Level_shift': 'LEVEL_SHIFT', 'Eps_scf': 'EPS_SCF', 'Eps_scf_history': 'EPS_SCF_HISTORY', 'Cholesky': 'CHOLESKY', 'Eps_eigval': 'EPS_EIGVAL', 'Eps_diis': 'EPS_DIIS', 'Scf_guess': 'SCF_GUESS', 'Nrow_block': 'NROW_BLOCK', 'Ncol_block': 'NCOL_BLOCK', 'Added_mos': 'ADDED_MOS', 'Roks_scheme': 'ROKS_SCHEME', 'Roks_f': 'ROKS_F', 'Roks_parameters': 'ROKS_PARAMETERS'}
+        self._subsections = {'OT': 'OT', 'DIAGONALIZATION': 'DIAGONALIZATION', 'OUTER_SCF': 'OUTER_SCF', 'SMEAR': 'SMEAR', 'MIXING': 'MIXING', 'MOM': 'MOM', 'PRINT': 'PRINT'}
+        self._aliases = {'Max_iter_lumos': 'Max_iter_lumo', 'Eps_lumos': 'Eps_lumo', 'Max_scf_hist': 'Max_scf_history', 'Max_diis_buffer_size': 'Max_diis', 'Lshift': 'Level_shift', 'Eps_scf_hist': 'Eps_scf_history', 'F_roks': 'Roks_f', 'Roks_parameter': 'Roks_parameters'}
 
 
     @property

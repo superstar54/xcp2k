@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _damping1 import _damping1
+from xcp2k.classes._damping1 import _damping1
 
 
 class _dipole2(InputSection):
@@ -9,7 +9,7 @@ class _dipole2(InputSection):
         self.Apol = None
         self.DAMPING_list = []
         self._name = "DIPOLE"
-        self._keywords = {'Apol': 'APOL', 'Atom': 'ATOM'}
+        self._keywords = {'Atom': 'ATOM', 'Apol': 'APOL'}
         self._repeated_subsections = {'DAMPING': '_damping1'}
         self._attributes = ['DAMPING_list']
 

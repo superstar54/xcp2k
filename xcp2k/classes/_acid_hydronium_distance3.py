@@ -19,6 +19,6 @@ class _acid_hydronium_distance3(InputSection):
         self.Lambda = None
         self.Lambda = None
         self._name = "ACID_HYDRONIUM_DISTANCE"
-        self._keywords = {'Pwoh': 'PWOH', 'Qwoh': 'QWOH', 'Qaoh': 'QAOH', 'Rwoh': 'RWOH', 'Nc': 'NC', 'Raoh': 'RAOH', 'Pcut': 'PCUT', 'Paoh': 'PAOH', 'Lambda': 'LAMBDA', 'Qcut': 'QCUT'}
+        self._keywords = {'Pwoh': 'PWOH', 'Qwoh': 'QWOH', 'Rwoh': 'RWOH', 'Paoh': 'PAOH', 'Qaoh': 'QAOH', 'Raoh': 'RAOH', 'Pcut': 'PCUT', 'Qcut': 'QCUT', 'Nc': 'NC', 'Lambda': 'LAMBDA'}
         self._repeated_keywords = {'Oxygens_water': 'OXYGENS_WATER', 'Oxygens_acid': 'OXYGENS_ACID', 'Hydrogens': 'HYDROGENS'}
 

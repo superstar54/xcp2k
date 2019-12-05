@@ -1,10 +1,10 @@
 from xcp2k.inputsection import InputSection
-from _define_region1 import _define_region1
-from _nose2 import _nose2
-from _csvr2 import _csvr2
-from _gle2 import _gle2
-from _ad_langevin2 import _ad_langevin2
-from _print8 import _print8
+from xcp2k.classes._define_region1 import _define_region1
+from xcp2k.classes._nose2 import _nose2
+from xcp2k.classes._csvr2 import _csvr2
+from xcp2k.classes._gle2 import _gle2
+from xcp2k.classes._ad_langevin2 import _ad_langevin2
+from xcp2k.classes._print8 import _print8
 
 
 class _thermostat2(InputSection):
@@ -19,8 +19,8 @@ class _thermostat2(InputSection):
         self.AD_LANGEVIN = _ad_langevin2()
         self.PRINT = _print8()
         self._name = "THERMOSTAT"
-        self._keywords = {'Region': 'REGION', 'Type': 'TYPE'}
-        self._subsections = {'PRINT': 'PRINT', 'AD_LANGEVIN': 'AD_LANGEVIN', 'NOSE': 'NOSE', 'CSVR': 'CSVR', 'GLE': 'GLE'}
+        self._keywords = {'Type': 'TYPE', 'Region': 'REGION'}
+        self._subsections = {'NOSE': 'NOSE', 'CSVR': 'CSVR', 'GLE': 'GLE', 'AD_LANGEVIN': 'AD_LANGEVIN', 'PRINT': 'PRINT'}
         self._repeated_subsections = {'DEFINE_REGION': '_define_region1'}
         self._attributes = ['DEFINE_REGION_list']
 

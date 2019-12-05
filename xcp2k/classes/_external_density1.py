@@ -9,5 +9,5 @@ class _external_density1(InputSection):
         self.Zmp_constraint = None
         self.Fermi_amaldi = None
         self._name = "EXTERNAL_DENSITY"
-        self._keywords = {'Fermi_amaldi': 'FERMI_AMALDI', 'Zmp_constraint': 'ZMP_CONSTRAINT', 'File_density': 'FILE_DENSITY', 'Lambda': 'LAMBDA'}
+        self._keywords = {'File_density': 'FILE_DENSITY', 'Lambda': 'LAMBDA', 'Zmp_constraint': 'ZMP_CONSTRAINT', 'Fermi_amaldi': 'FERMI_AMALDI'}
 

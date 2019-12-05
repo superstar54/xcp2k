@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point23 import _point23
+from xcp2k.classes._point23 import _point23
 
 
 class _gyration_radius2(InputSection):
@@ -10,7 +10,7 @@ class _gyration_radius2(InputSection):
         self.Kinds = []
         self.POINT_list = []
         self._name = "GYRATION_RADIUS"
-        self._repeated_keywords = {'Kinds': 'KINDS', 'Atoms': 'ATOMS'}
+        self._repeated_keywords = {'Atoms': 'ATOMS', 'Kinds': 'KINDS'}
         self._repeated_subsections = {'POINT': '_point23'}
         self._repeated_aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']

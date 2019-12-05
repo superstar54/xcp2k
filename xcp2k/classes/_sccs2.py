@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _andreussi1 import _andreussi1
-from _fattebert_gygi1 import _fattebert_gygi1
+from xcp2k.classes._andreussi1 import _andreussi1
+from xcp2k.classes._fattebert_gygi1 import _fattebert_gygi1
 
 
 class _sccs2(InputSection):
@@ -21,9 +21,9 @@ class _sccs2(InputSection):
         self.ANDREUSSI = _andreussi1()
         self.FATTEBERT_GYGI = _fattebert_gygi1()
         self._name = "SCCS"
-        self._keywords = {'Derivative_method': 'DERIVATIVE_METHOD', 'Max_iter': 'MAX_ITER', 'Mixing': 'MIXING', 'Beta': 'BETA', 'Eps_scf': 'EPS_SCF', 'Eps_sccs': 'EPS_SCCS', 'Dielectric_constant': 'DIELECTRIC_CONSTANT', 'Alpha': 'ALPHA', 'Method': 'METHOD', 'Gamma': 'GAMMA', 'Delta_rho': 'DELTA_RHO'}
+        self._keywords = {'Alpha': 'ALPHA', 'Beta': 'BETA', 'Delta_rho': 'DELTA_RHO', 'Derivative_method': 'DERIVATIVE_METHOD', 'Dielectric_constant': 'DIELECTRIC_CONSTANT', 'Eps_sccs': 'EPS_SCCS', 'Eps_scf': 'EPS_SCF', 'Gamma': 'GAMMA', 'Max_iter': 'MAX_ITER', 'Method': 'METHOD', 'Mixing': 'MIXING'}
         self._subsections = {'ANDREUSSI': 'ANDREUSSI', 'FATTEBERT_GYGI': 'FATTEBERT-GYGI'}
-        self._aliases = {'Tau_pol': 'Eps_sccs', 'Eps_iter': 'Eps_sccs', 'Surface_tension': 'Gamma', 'Eta': 'Mixing', 'Epsilon_solvent': 'Dielectric_constant'}
+        self._aliases = {'Epsilon_solvent': 'Dielectric_constant', 'Eps_iter': 'Eps_sccs', 'Tau_pol': 'Eps_sccs', 'Surface_tension': 'Gamma', 'Eta': 'Mixing'}
         self._attributes = ['Section_parameters']
 
 

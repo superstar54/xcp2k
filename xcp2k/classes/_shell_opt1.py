@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _lbfgs4 import _lbfgs4
-from _cg4 import _cg4
-from _bfgs4 import _bfgs4
-from _print5 import _print5
+from xcp2k.classes._lbfgs4 import _lbfgs4
+from xcp2k.classes._cg4 import _cg4
+from xcp2k.classes._bfgs4 import _bfgs4
+from xcp2k.classes._print5 import _print5
 
 
 class _shell_opt1(InputSection):
@@ -20,8 +20,8 @@ class _shell_opt1(InputSection):
         self.BFGS = _bfgs4()
         self.PRINT_list = []
         self._name = "SHELL_OPT"
-        self._keywords = {'Max_dr': 'MAX_DR', 'Optimizer': 'OPTIMIZER', 'Step_start_val': 'STEP_START_VAL', 'Max_iter': 'MAX_ITER', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR', 'Rms_force': 'RMS_FORCE'}
-        self._subsections = {'BFGS': 'BFGS', 'CG': 'CG', 'LBFGS': 'LBFGS'}
+        self._keywords = {'Optimizer': 'OPTIMIZER', 'Max_iter': 'MAX_ITER', 'Max_dr': 'MAX_DR', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR', 'Rms_force': 'RMS_FORCE', 'Step_start_val': 'STEP_START_VAL'}
+        self._subsections = {'LBFGS': 'LBFGS', 'CG': 'CG', 'BFGS': 'BFGS'}
         self._repeated_subsections = {'PRINT': '_print5'}
         self._aliases = {'Minimizer': 'Optimizer'}
         self._attributes = ['PRINT_list']

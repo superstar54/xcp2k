@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _dipole_moments1 import _dipole_moments1
-from _mgrid2 import _mgrid2
-from _print67 import _print67
+from xcp2k.classes._dipole_moments1 import _dipole_moments1
+from xcp2k.classes._mgrid2 import _mgrid2
+from xcp2k.classes._print67 import _print67
 
 
 class _tddfpt2(InputSection):
@@ -22,8 +22,8 @@ class _tddfpt2(InputSection):
         self.MGRID = _mgrid2()
         self.PRINT = _print67()
         self._name = "TDDFPT"
-        self._keywords = {'Rks_triplets': 'RKS_TRIPLETS', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Max_kv': 'MAX_KV', 'Max_iter': 'MAX_ITER', 'Orthogonal_eps': 'ORTHOGONAL_EPS', 'Min_amplitude': 'MIN_AMPLITUDE', 'Convergence': 'CONVERGENCE', 'Nstates': 'NSTATES', 'Restart': 'RESTART', 'Nproc_state': 'NPROC_STATE'}
-        self._subsections = {'PRINT': 'PRINT', 'DIPOLE_MOMENTS': 'DIPOLE_MOMENTS', 'MGRID': 'MGRID'}
+        self._keywords = {'Nstates': 'NSTATES', 'Max_iter': 'MAX_ITER', 'Max_kv': 'MAX_KV', 'Nproc_state': 'NPROC_STATE', 'Convergence': 'CONVERGENCE', 'Min_amplitude': 'MIN_AMPLITUDE', 'Orthogonal_eps': 'ORTHOGONAL_EPS', 'Restart': 'RESTART', 'Rks_triplets': 'RKS_TRIPLETS', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME'}
+        self._subsections = {'DIPOLE_MOMENTS': 'DIPOLE_MOMENTS', 'MGRID': 'MGRID', 'PRINT': 'PRINT'}
         self._aliases = {'Restart_file_name': 'Wfn_restart_file_name'}
         self._attributes = ['Section_parameters']
 

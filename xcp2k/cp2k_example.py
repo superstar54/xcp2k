@@ -31,8 +31,8 @@ GLOBAL.Run_type = "GEO_OPT"  # energy_force, geo_opt, cell_opt
 
 FORCE_EVAL.Method = "Quickstep"
 FORCE_EVAL.Stress_tensor = 'ANALYTICAL'
-# FORCE_EVAL.PRINT.FORCES.Section_parameters = "ON"
-# FORCE_EVAL.PRINT.STRESS_TENSOR.Section_parameters = "ON"
+FORCE_EVAL.PRINT.FORCES.Section_parameters = "ON"
+FORCE_EVAL.PRINT.STRESS_TENSOR.Section_parameters = "ON"
 
 DFT.Basis_set_file_name = "BASIS_MOLOPT"
 DFT.Potential_file_name = "POTENTIAL"
@@ -119,15 +119,16 @@ BAND = CP2K_INPUT_OT_NEB.MOTION.BAND
 BAND.Nproc_rep = 36
 BAND.Band_type = 'CI-NEB'
 BAND.Number_of_replica = 12
-BAND.CONVERGENCE_CONTROL.Max_force = 0.0050
+BAND.CONVERGENCE_CONTROL.Max_force = 0.0030
 BAND.CONVERGENCE_CONTROL.Rms_force = 0.0050
-# BAND.CONVERGENCE_CONTROL.Max_dr = 0.005
-# BAND.CONVERGENCE_CONTROL.Rms_dr = 0.005    
+BAND.CONVERGENCE_CONTROL.Max_dr = 0.002
+BAND.CONVERGENCE_CONTROL.Rms_dr = 0.005    
 BAND.Rotate_frames = 'F'
 BAND.Align_frames = 'F'
-BAND.CI_NEB.Nsteps_it = 20  
+BAND.CI_NEB.Nsteps_it = 5
 OPTIMIZE_BAND = BAND.OPTIMIZE_BAND_add()
-OPTIMIZE_BAND.DIIS.Max_steps = 1000    
+OPTIMIZE_BAND.DIIS.Max_steps = 1000  
+OPTIMIZE_BAND.Optimize_end_points = 'F'
 # print(CP2K_INPUT_OT.MOTION.BAND.Band_type)
 # print(CP2K_INPUT_OT_NEB.MOTION.BAND.Band_type)
 #===============================================================================

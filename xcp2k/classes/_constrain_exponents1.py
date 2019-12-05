@@ -7,5 +7,5 @@ class _constrain_exponents1(InputSection):
         self.Scale = None
         self.Fermi_exp = None
         self._name = "CONSTRAIN_EXPONENTS"
-        self._keywords = {'Fermi_exp': 'FERMI_EXP', 'Scale': 'SCALE'}
+        self._keywords = {'Scale': 'SCALE', 'Fermi_exp': 'FERMI_EXP'}
 

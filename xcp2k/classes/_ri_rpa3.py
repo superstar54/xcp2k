@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _hf6 import _hf6
-from _ri_g0w03 import _ri_g0w03
-from _im_time3 import _im_time3
-from _ri_axk3 import _ri_axk3
+from xcp2k.classes._hf6 import _hf6
+from xcp2k.classes._ri_g0w03 import _ri_g0w03
+from xcp2k.classes._im_time3 import _im_time3
+from xcp2k.classes._ri_axk3 import _ri_axk3
 
 
 class _ri_rpa3(InputSection):
@@ -21,10 +21,10 @@ class _ri_rpa3(InputSection):
         self.IM_TIME = _im_time3()
         self.RI_AXK = _ri_axk3()
         self._name = "RI_RPA"
-        self._keywords = {'Admm': 'ADMM', 'Minimax_quadrature': 'MINIMAX_QUADRATURE', 'Im_time': 'IM_TIME', 'Ri_axk': 'RI_AXK', 'Quadrature_points': 'QUADRATURE_POINTS', 'Mm_style': 'MM_STYLE', 'Size_freq_integ_group': 'SIZE_FREQ_INTEG_GROUP', 'Ri_g0w0': 'RI_G0W0'}
-        self._subsections = {'RI_AXK': 'RI_AXK', 'RI_G0W0': 'RI_G0W0', 'IM_TIME': 'IM_TIME'}
+        self._keywords = {'Quadrature_points': 'QUADRATURE_POINTS', 'Size_freq_integ_group': 'SIZE_FREQ_INTEG_GROUP', 'Mm_style': 'MM_STYLE', 'Minimax_quadrature': 'MINIMAX_QUADRATURE', 'Ri_g0w0': 'RI_G0W0', 'Ri_axk': 'RI_AXK', 'Admm': 'ADMM', 'Im_time': 'IM_TIME'}
+        self._subsections = {'RI_G0W0': 'RI_G0W0', 'IM_TIME': 'IM_TIME', 'RI_AXK': 'RI_AXK'}
         self._repeated_subsections = {'HF': '_hf6'}
-        self._aliases = {'Gw': 'Ri_g0w0', 'Minimax': 'Minimax_quadrature', 'Rpa_group_size': 'Size_freq_integ_group', 'Imag_time': 'Im_time', 'Axk': 'Ri_axk', 'Rpa_num_quad_points': 'Quadrature_points'}
+        self._aliases = {'Rpa_num_quad_points': 'Quadrature_points', 'Rpa_group_size': 'Size_freq_integ_group', 'Minimax': 'Minimax_quadrature', 'Gw': 'Ri_g0w0', 'Axk': 'Ri_axk', 'Imag_time': 'Im_time'}
         self._attributes = ['HF_list']
 
     def HF_add(self, section_parameters=None):

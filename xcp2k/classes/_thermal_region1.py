@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _define_region6 import _define_region6
-from _print11 import _print11
+from xcp2k.classes._define_region6 import _define_region6
+from xcp2k.classes._print11 import _print11
 
 
 class _thermal_region1(InputSection):

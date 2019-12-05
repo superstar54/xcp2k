@@ -9,5 +9,5 @@ class _sic1(InputSection):
         self.Sic_method = None
         self.Orbital_set = None
         self._name = "SIC"
-        self._keywords = {'Sic_scaling_a': 'SIC_SCALING_A', 'Orbital_set': 'ORBITAL_SET', 'Sic_scaling_b': 'SIC_SCALING_B', 'Sic_method': 'SIC_METHOD'}
+        self._keywords = {'Sic_scaling_a': 'SIC_SCALING_A', 'Sic_scaling_b': 'SIC_SCALING_B', 'Sic_method': 'SIC_METHOD', 'Orbital_set': 'ORBITAL_SET'}
 

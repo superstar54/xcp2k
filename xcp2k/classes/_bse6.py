@@ -8,7 +8,7 @@ class _bse6(InputSection):
         self.Threshold_min_trans = None
         self.Max_iter = None
         self._name = "BSE"
-        self._keywords = {'Threshold_min_trans': 'THRESHOLD_MIN_TRANS', 'Max_iter': 'MAX_ITER', 'Num_z_vectors': 'NUM_Z_VECTORS'}
+        self._keywords = {'Num_z_vectors': 'NUM_Z_VECTORS', 'Threshold_min_trans': 'THRESHOLD_MIN_TRANS', 'Max_iter': 'MAX_ITER'}
         self._aliases = {'Eps': 'Threshold_min_trans'}
 
 

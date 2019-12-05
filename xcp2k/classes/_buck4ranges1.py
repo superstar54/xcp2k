@@ -17,6 +17,6 @@ class _buck4ranges1(InputSection):
         self.Rmin = None
         self.Rmax = None
         self._name = "BUCK4RANGES"
-        self._keywords = {'A': 'A', 'C': 'C', 'B': 'B', 'R1': 'R1', 'R2': 'R2', 'R3': 'R3', 'Rmax': 'RMAX', 'Rmin': 'RMIN', 'Rcut': 'RCUT', 'Atoms': 'ATOMS'}
-        self._repeated_keywords = {'Poly2': 'POLY2', 'Poly1': 'POLY1'}
+        self._keywords = {'Atoms': 'ATOMS', 'A': 'A', 'B': 'B', 'C': 'C', 'R1': 'R1', 'R2': 'R2', 'R3': 'R3', 'Rcut': 'RCUT', 'Rmin': 'RMIN', 'Rmax': 'RMAX'}
+        self._repeated_keywords = {'Poly1': 'POLY1', 'Poly2': 'POLY2'}
 

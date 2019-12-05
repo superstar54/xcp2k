@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _charge1 import _charge1
+from xcp2k.classes._charge1 import _charge1
 
 
 class _tmc_analysis1(InputSection):
@@ -14,7 +14,7 @@ class _tmc_analysis1(InputSection):
         self.Deviation = None
         self.CHARGE_list = []
         self._name = "TMC_ANALYSIS"
-        self._keywords = {'Deviation': 'DEVIATION', 'Classical_dipole_moments': 'CLASSICAL_DIPOLE_MOMENTS', 'Density': 'DENSITY', 'Dipole_analysis': 'DIPOLE_ANALYSIS', 'G_r': 'G_R', 'Restart': 'RESTART', 'Prefix_ana_files': 'PREFIX_ANA_FILES'}
+        self._keywords = {'Restart': 'RESTART', 'Prefix_ana_files': 'PREFIX_ANA_FILES', 'Density': 'DENSITY', 'G_r': 'G_R', 'Classical_dipole_moments': 'CLASSICAL_DIPOLE_MOMENTS', 'Dipole_analysis': 'DIPOLE_ANALYSIS', 'Deviation': 'DEVIATION'}
         self._repeated_subsections = {'CHARGE': '_charge1'}
         self._attributes = ['CHARGE_list']
 

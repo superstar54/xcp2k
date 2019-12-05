@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _subcell4 import _subcell4
-from _neighbor_lists7 import _neighbor_lists7
+from xcp2k.classes._subcell4 import _subcell4
+from xcp2k.classes._neighbor_lists7 import _neighbor_lists7
 
 
 class _print45(InputSection):

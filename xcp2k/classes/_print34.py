@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _current1 import _current1
+from xcp2k.classes._current1 import _current1
 
 
 class _print34(InputSection):

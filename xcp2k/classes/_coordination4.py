@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point55 import _point55
+from xcp2k.classes._point55 import _point55
 
 
 class _coordination4(InputSection):
@@ -22,11 +22,11 @@ class _coordination4(InputSection):
         self.Nd_b = None
         self.POINT_list = []
         self._name = "COORDINATION"
-        self._keywords = {'R0_b': 'R0_B', 'R0': 'R0', 'Nn': 'NN', 'Nd': 'ND', 'Nd_b': 'ND_B', 'Nn_b': 'NN_B'}
-        self._repeated_keywords = {'Atoms_to': 'ATOMS_TO', 'Kinds_to': 'KINDS_TO', 'Atoms_to_b': 'ATOMS_TO_B', 'Kinds_from': 'KINDS_FROM', 'Atoms_from': 'ATOMS_FROM', 'Kinds_to_b': 'KINDS_TO_B'}
+        self._keywords = {'R0': 'R0', 'Nn': 'NN', 'Nd': 'ND', 'R0_b': 'R0_B', 'Nn_b': 'NN_B', 'Nd_b': 'ND_B'}
+        self._repeated_keywords = {'Atoms_from': 'ATOMS_FROM', 'Atoms_to': 'ATOMS_TO', 'Atoms_to_b': 'ATOMS_TO_B', 'Kinds_from': 'KINDS_FROM', 'Kinds_to': 'KINDS_TO', 'Kinds_to_b': 'KINDS_TO_B'}
         self._repeated_subsections = {'POINT': '_point55'}
-        self._aliases = {'Expon_numerator': 'Nn', 'Expon_denominator_b': 'Nd_b', 'R_0': 'R0', 'Expon_numerator_b': 'Nn_b', 'R_0_b': 'R0_b', 'Expon_denominator': 'Nd'}
-        self._repeated_aliases = {'Points_to': 'Atoms_to', 'Points_from': 'Atoms_from', 'Points_to_b': 'Atoms_to_b'}
+        self._aliases = {'R_0': 'R0', 'Expon_numerator': 'Nn', 'Expon_denominator': 'Nd', 'R_0_b': 'R0_b', 'Expon_numerator_b': 'Nn_b', 'Expon_denominator_b': 'Nd_b'}
+        self._repeated_aliases = {'Points_from': 'Atoms_from', 'Points_to': 'Atoms_to', 'Points_to_b': 'Atoms_to_b'}
         self._attributes = ['POINT_list']
 
     def POINT_add(self, section_parameters=None):

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _print61 import _print61
+from xcp2k.classes._print61 import _print61
 
 
 class _load_balance10(InputSection):

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each233 import _each233
+from xcp2k.classes._each233 import _each233
 
 
 class _mo1(InputSection):
@@ -18,9 +18,9 @@ class _mo1(InputSection):
         self.Mo_index_range = None
         self.EACH = _each233()
         self._name = "MO"
-        self._keywords = {'Eigenvectors': 'EIGENVECTORS', 'Occupation_numbers': 'OCCUPATION_NUMBERS', 'Cartesian': 'CARTESIAN', 'Mo_index_range': 'MO_INDEX_RANGE', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Ndigits': 'NDIGITS', 'Eigenvalues': 'EIGENVALUES'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Cartesian': 'CARTESIAN', 'Eigenvalues': 'EIGENVALUES', 'Eigenvectors': 'EIGENVECTORS', 'Occupation_numbers': 'OCCUPATION_NUMBERS', 'Ndigits': 'NDIGITS', 'Mo_index_range': 'MO_INDEX_RANGE'}
         self._subsections = {'EACH': 'EACH'}
-        self._aliases = {'Range': 'Mo_index_range', 'Eigvals': 'Eigenvalues', 'Occnums': 'Occupation_numbers', 'Mo_range': 'Mo_index_range', 'Eigvecs': 'Eigenvectors'}
+        self._aliases = {'Eigvals': 'Eigenvalues', 'Eigvecs': 'Eigenvectors', 'Occnums': 'Occupation_numbers', 'Mo_range': 'Mo_index_range', 'Range': 'Mo_index_range'}
         self._attributes = ['Section_parameters']
 
 

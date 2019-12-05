@@ -12,5 +12,5 @@ class _distribution1(InputSection):
         self.Basic_cluster_optimization = None
         self.Symmetric = None
         self._name = "DISTRIBUTION"
-        self._keywords = {'Basic_cluster_optimization': 'BASIC_CLUSTER_OPTIMIZATION', 'Skip_optimization': 'SKIP_OPTIMIZATION', 'Basic_optimization': 'BASIC_OPTIMIZATION', 'Symmetric': 'SYMMETRIC', 'Cost_model': 'COST_MODEL', 'Basic_spatial_optimization': 'BASIC_SPATIAL_OPTIMIZATION', 'Num2d_molecular_distribution': '2D_MOLECULAR_DISTRIBUTION'}
+        self._keywords = {'Cost_model': 'COST_MODEL', 'Num2d_molecular_distribution': '2D_MOLECULAR_DISTRIBUTION', 'Skip_optimization': 'SKIP_OPTIMIZATION', 'Basic_optimization': 'BASIC_OPTIMIZATION', 'Basic_spatial_optimization': 'BASIC_SPATIAL_OPTIMIZATION', 'Basic_cluster_optimization': 'BASIC_CLUSTER_OPTIMIZATION', 'Symmetric': 'SYMMETRIC'}
 

@@ -1,12 +1,12 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info49 import _program_run_info49
-from _forces4 import _forces4
-from _grid_information3 import _grid_information3
-from _total_numbers1 import _total_numbers1
-from _distribution2 import _distribution2
-from _distribution2d1 import _distribution2d1
-from _distribution1d1 import _distribution1d1
-from _stress_tensor1 import _stress_tensor1
+from xcp2k.classes._program_run_info49 import _program_run_info49
+from xcp2k.classes._forces4 import _forces4
+from xcp2k.classes._grid_information3 import _grid_information3
+from xcp2k.classes._total_numbers1 import _total_numbers1
+from xcp2k.classes._distribution2 import _distribution2
+from xcp2k.classes._distribution2d1 import _distribution2d1
+from xcp2k.classes._distribution1d1 import _distribution1d1
+from xcp2k.classes._stress_tensor1 import _stress_tensor1
 
 
 class _print68(InputSection):
@@ -21,5 +21,5 @@ class _print68(InputSection):
         self.DISTRIBUTION1D = _distribution1d1()
         self.STRESS_TENSOR = _stress_tensor1()
         self._name = "PRINT"
-        self._subsections = {'TOTAL_NUMBERS': 'TOTAL_NUMBERS', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'GRID_INFORMATION': 'GRID_INFORMATION', 'DISTRIBUTION1D': 'DISTRIBUTION1D', 'STRESS_TENSOR': 'STRESS_TENSOR', 'FORCES': 'FORCES', 'DISTRIBUTION': 'DISTRIBUTION', 'DISTRIBUTION2D': 'DISTRIBUTION2D'}
+        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'FORCES': 'FORCES', 'GRID_INFORMATION': 'GRID_INFORMATION', 'TOTAL_NUMBERS': 'TOTAL_NUMBERS', 'DISTRIBUTION': 'DISTRIBUTION', 'DISTRIBUTION2D': 'DISTRIBUTION2D', 'DISTRIBUTION1D': 'DISTRIBUTION1D', 'STRESS_TENSOR': 'STRESS_TENSOR'}
 

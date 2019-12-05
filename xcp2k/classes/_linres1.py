@@ -1,11 +1,11 @@
 from xcp2k.inputsection import InputSection
-from _localize4 import _localize4
-from _current3 import _current3
-from _nmr1 import _nmr1
-from _spinspin1 import _spinspin1
-from _epr1 import _epr1
-from _polar1 import _polar1
-from _print64 import _print64
+from xcp2k.classes._localize4 import _localize4
+from xcp2k.classes._current3 import _current3
+from xcp2k.classes._nmr1 import _nmr1
+from xcp2k.classes._spinspin1 import _spinspin1
+from xcp2k.classes._epr1 import _epr1
+from xcp2k.classes._polar1 import _polar1
+from xcp2k.classes._print64 import _print64
 
 
 class _linres1(InputSection):
@@ -26,8 +26,8 @@ class _linres1(InputSection):
         self.POLAR = _polar1()
         self.PRINT = _print64()
         self._name = "LINRES"
-        self._keywords = {'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Max_iter': 'MAX_ITER', 'Eps': 'EPS', 'Preconditioner': 'PRECONDITIONER', 'Energy_gap': 'ENERGY_GAP', 'Restart_every': 'RESTART_EVERY', 'Restart': 'RESTART'}
-        self._subsections = {'POLAR': 'POLAR', 'NMR': 'NMR', 'EPR': 'EPR', 'CURRENT': 'CURRENT', 'PRINT': 'PRINT', 'SPINSPIN': 'SPINSPIN', 'LOCALIZE': 'LOCALIZE'}
+        self._keywords = {'Eps': 'EPS', 'Max_iter': 'MAX_ITER', 'Restart_every': 'RESTART_EVERY', 'Preconditioner': 'PRECONDITIONER', 'Energy_gap': 'ENERGY_GAP', 'Restart': 'RESTART', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME'}
+        self._subsections = {'LOCALIZE': 'LOCALIZE', 'CURRENT': 'CURRENT', 'NMR': 'NMR', 'SPINSPIN': 'SPINSPIN', 'EPR': 'EPR', 'POLAR': 'POLAR', 'PRINT': 'PRINT'}
         self._aliases = {'Restart_file_name': 'Wfn_restart_file_name'}
 
 

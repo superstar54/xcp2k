@@ -23,8 +23,8 @@ class _mixing3(InputSection):
         self.Max_gvec_exp = None
         self.Gmix_p = None
         self._name = "MIXING"
-        self._keywords = {'Regularization': 'REGULARIZATION', 'Max_step': 'MAX_STEP', 'R_factor': 'R_FACTOR', 'Pulay_beta': 'PULAY_BETA', 'Broy_w0': 'BROY_W0', 'Max_gvec_exp': 'MAX_GVEC_EXP', 'Nbuffer': 'NBUFFER', 'Broy_wref': 'BROY_WREF', 'Nskip': 'NSKIP', 'Beta': 'BETA', 'Pulay_alpha': 'PULAY_ALPHA', 'N_simple_mix': 'N_SIMPLE_MIX', 'Broy_wmax': 'BROY_WMAX', 'Alpha': 'ALPHA', 'Nmixing': 'NMIXING', 'Gmix_p': 'GMIX_P', 'Method': 'METHOD'}
-        self._aliases = {'Nskip_mixing': 'Nskip', 'Nsimplemix': 'N_simple_mix', 'Nmultisecant': 'Nbuffer', 'Npulay': 'Nbuffer', 'Nbroyden': 'Nbuffer'}
+        self._keywords = {'Method': 'METHOD', 'Alpha': 'ALPHA', 'Beta': 'BETA', 'Pulay_alpha': 'PULAY_ALPHA', 'Pulay_beta': 'PULAY_BETA', 'Nmixing': 'NMIXING', 'Nbuffer': 'NBUFFER', 'Broy_w0': 'BROY_W0', 'Broy_wref': 'BROY_WREF', 'Broy_wmax': 'BROY_WMAX', 'Regularization': 'REGULARIZATION', 'Max_step': 'MAX_STEP', 'R_factor': 'R_FACTOR', 'Nskip': 'NSKIP', 'N_simple_mix': 'N_SIMPLE_MIX', 'Max_gvec_exp': 'MAX_GVEC_EXP', 'Gmix_p': 'GMIX_P'}
+        self._aliases = {'Npulay': 'Nbuffer', 'Nbroyden': 'Nbuffer', 'Nmultisecant': 'Nbuffer', 'Nskip_mixing': 'Nskip', 'Nsimplemix': 'N_simple_mix'}
         self._attributes = ['Section_parameters']
 
 

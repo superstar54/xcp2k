@@ -7,5 +7,5 @@ class _charge3(InputSection):
         self.Atom = None
         self.Charge = None
         self._name = "CHARGE"
-        self._keywords = {'Charge': 'CHARGE', 'Atom': 'ATOM'}
+        self._keywords = {'Atom': 'ATOM', 'Charge': 'CHARGE'}
 

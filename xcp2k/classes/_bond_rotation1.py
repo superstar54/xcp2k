@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point9 import _point9
+from xcp2k.classes._point9 import _point9
 
 
 class _bond_rotation1(InputSection):
@@ -11,7 +11,7 @@ class _bond_rotation1(InputSection):
         self.P2_bond2 = None
         self.POINT_list = []
         self._name = "BOND_ROTATION"
-        self._keywords = {'P2_bond2': 'P2_BOND2', 'P1_bond2': 'P1_BOND2', 'P1_bond1': 'P1_BOND1', 'P2_bond1': 'P2_BOND1'}
+        self._keywords = {'P1_bond1': 'P1_BOND1', 'P2_bond1': 'P2_BOND1', 'P1_bond2': 'P1_BOND2', 'P2_bond2': 'P2_BOND2'}
         self._repeated_subsections = {'POINT': '_point9'}
         self._attributes = ['POINT_list']
 

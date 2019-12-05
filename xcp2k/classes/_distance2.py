@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point18 import _point18
+from xcp2k.classes._point18 import _point18
 
 
 class _distance2(InputSection):
@@ -9,7 +9,7 @@ class _distance2(InputSection):
         self.Axis = None
         self.POINT_list = []
         self._name = "DISTANCE"
-        self._keywords = {'Axis': 'AXIS', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'Axis': 'AXIS'}
         self._repeated_subsections = {'POINT': '_point18'}
         self._aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']

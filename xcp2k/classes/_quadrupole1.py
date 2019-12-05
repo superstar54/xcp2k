@@ -7,5 +7,5 @@ class _quadrupole1(InputSection):
         self.Atom = None
         self.Cpol = None
         self._name = "QUADRUPOLE"
-        self._keywords = {'Cpol': 'CPOL', 'Atom': 'ATOM'}
+        self._keywords = {'Atom': 'ATOM', 'Cpol': 'CPOL'}
 

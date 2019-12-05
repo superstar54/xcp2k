@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point32 import _point32
+from xcp2k.classes._point32 import _point32
 
 
 class _hbp2(InputSection):
@@ -12,7 +12,7 @@ class _hbp2(InputSection):
         self.Points = self.Atoms
         self.POINT_list = []
         self._name = "HBP"
-        self._keywords = {'Npoints': 'NPOINTS', 'Shift': 'SHIFT', 'Rcut': 'RCUT'}
+        self._keywords = {'Rcut': 'RCUT', 'Shift': 'SHIFT', 'Npoints': 'NPOINTS'}
         self._repeated_keywords = {'Atoms': 'ATOMS'}
         self._repeated_subsections = {'POINT': '_point32'}
         self._repeated_aliases = {'Points': 'Atoms'}

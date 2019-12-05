@@ -18,7 +18,7 @@ class _aa_planar1(InputSection):
         self.Smoothing_width = None
         self.Periodic_region = None
         self._name = "AA_PLANAR"
-        self._keywords = {'Y_xtnt': 'Y_XTNT', 'Z_xtnt': 'Z_XTNT', 'X_xtnt': 'X_XTNT', 'Smoothing_width': 'SMOOTHING_WIDTH', 'N_prtn': 'N_PRTN', 'Thickness': 'THICKNESS', 'V_d': 'V_D', 'Parallel_plane': 'PARALLEL_PLANE', 'Frequency': 'FREQUENCY', 'Intercept': 'INTERCEPT', 'Phase': 'PHASE', 'Oscillating_fraction': 'OSCILLATING_FRACTION', 'Periodic_region': 'PERIODIC_REGION'}
+        self._keywords = {'V_d': 'V_D', 'Oscillating_fraction': 'OSCILLATING_FRACTION', 'Frequency': 'FREQUENCY', 'Phase': 'PHASE', 'Parallel_plane': 'PARALLEL_PLANE', 'Intercept': 'INTERCEPT', 'X_xtnt': 'X_XTNT', 'Y_xtnt': 'Y_XTNT', 'Z_xtnt': 'Z_XTNT', 'N_prtn': 'N_PRTN', 'Thickness': 'THICKNESS', 'Smoothing_width': 'SMOOTHING_WIDTH', 'Periodic_region': 'PERIODIC_REGION'}
         self._aliases = {'Sigma': 'Smoothing_width'}
 
 

@@ -9,5 +9,5 @@ class _adiabatic_rescaling1(InputSection):
         self.Omega = None
         self.Functional_model = None
         self._name = "ADIABATIC_RESCALING"
-        self._keywords = {'Functional_model': 'FUNCTIONAL_MODEL', 'Omega': 'OMEGA', 'Functional_type': 'FUNCTIONAL_TYPE', 'Lambda': 'LAMBDA'}
+        self._keywords = {'Functional_type': 'FUNCTIONAL_TYPE', 'Lambda': 'LAMBDA', 'Omega': 'OMEGA', 'Functional_model': 'FUNCTIONAL_MODEL'}
 

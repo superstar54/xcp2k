@@ -10,7 +10,7 @@ class _move_type2(InputSection):
         self.Init_acc_prob = None
         self.Atoms = []
         self._name = "MOVE_TYPE"
-        self._keywords = {'Init_acc_prob': 'INIT_ACC_PROB', 'Prob': 'PROB', 'Size': 'SIZE'}
+        self._keywords = {'Size': 'SIZE', 'Prob': 'PROB', 'Init_acc_prob': 'INIT_ACC_PROB'}
         self._repeated_keywords = {'Atoms': 'ATOMS'}
         self._attributes = ['Section_parameters']
 

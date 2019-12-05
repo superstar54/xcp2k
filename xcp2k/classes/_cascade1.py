@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _atom_list1 import _atom_list1
+from xcp2k.classes._atom_list1 import _atom_list1
 
 
 class _cascade1(InputSection):

@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _dos1 import _dos1
-from _print_specific_e_density_cube1 import _print_specific_e_density_cube1
+from xcp2k.classes._dos1 import _dos1
+from xcp2k.classes._print_specific_e_density_cube1 import _print_specific_e_density_cube1
 
 
 class _chebyshev1(InputSection):

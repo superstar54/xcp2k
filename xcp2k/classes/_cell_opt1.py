@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _lbfgs3 import _lbfgs3
-from _cg3 import _cg3
-from _bfgs3 import _bfgs3
-from _print4 import _print4
+from xcp2k.classes._lbfgs3 import _lbfgs3
+from xcp2k.classes._cg3 import _cg3
+from xcp2k.classes._bfgs3 import _bfgs3
+from xcp2k.classes._print4 import _print4
 
 
 class _cell_opt1(InputSection):
@@ -26,8 +26,8 @@ class _cell_opt1(InputSection):
         self.BFGS = _bfgs3()
         self.PRINT_list = []
         self._name = "CELL_OPT"
-        self._keywords = {'Max_dr': 'MAX_DR', 'Constraint': 'CONSTRAINT', 'Optimizer': 'OPTIMIZER', 'Step_start_val': 'STEP_START_VAL', 'Keep_symmetry': 'KEEP_SYMMETRY', 'Max_iter': 'MAX_ITER', 'External_pressure': 'EXTERNAL_PRESSURE', 'Keep_angles': 'KEEP_ANGLES', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR', 'Pressure_tolerance': 'PRESSURE_TOLERANCE', 'Rms_force': 'RMS_FORCE', 'Type': 'TYPE'}
-        self._subsections = {'BFGS': 'BFGS', 'CG': 'CG', 'LBFGS': 'LBFGS'}
+        self._keywords = {'Optimizer': 'OPTIMIZER', 'Max_iter': 'MAX_ITER', 'Max_dr': 'MAX_DR', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR', 'Rms_force': 'RMS_FORCE', 'Step_start_val': 'STEP_START_VAL', 'Type': 'TYPE', 'External_pressure': 'EXTERNAL_PRESSURE', 'Keep_angles': 'KEEP_ANGLES', 'Keep_symmetry': 'KEEP_SYMMETRY', 'Constraint': 'CONSTRAINT', 'Pressure_tolerance': 'PRESSURE_TOLERANCE'}
+        self._subsections = {'LBFGS': 'LBFGS', 'CG': 'CG', 'BFGS': 'BFGS'}
         self._repeated_subsections = {'PRINT': '_print4'}
         self._aliases = {'Minimizer': 'Optimizer'}
         self._attributes = ['PRINT_list']

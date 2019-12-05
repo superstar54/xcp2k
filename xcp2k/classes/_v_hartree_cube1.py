@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each255 import _each255
+from xcp2k.classes._each255 import _each255
 
 
 class _v_hartree_cube1(InputSection):
@@ -14,7 +14,7 @@ class _v_hartree_cube1(InputSection):
         self.Append = None
         self.EACH = _each255()
         self._name = "V_HARTREE_CUBE"
-        self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Stride': 'STRIDE', 'Add_last': 'ADD_LAST', 'Append': 'APPEND'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Stride': 'STRIDE', 'Append': 'APPEND'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

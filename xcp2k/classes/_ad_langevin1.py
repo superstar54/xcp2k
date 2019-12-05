@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _chi1 import _chi1
-from _mass3 import _mass3
+from xcp2k.classes._chi1 import _chi1
+from xcp2k.classes._mass3 import _mass3
 
 
 class _ad_langevin1(InputSection):

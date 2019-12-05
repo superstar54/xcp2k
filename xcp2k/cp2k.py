@@ -27,13 +27,15 @@ import os
 from os.path import join, isfile, split, islink
 import numpy as np
 import ase.io
+from ase import Atoms, Atom
 from ase.calculators.calculator import Calculator, all_changes, Parameters
 from ase.units import Rydberg
-from cp2k_params import *
-from cp2k_tools import *
-from cp2krc import *
+from xcp2k.cp2k_params import *
+from xcp2k.cp2k_tools import *
+from xcp2k.cp2krc import *
 from scipy.constants import physical_constants, c, h, hbar, e
 from xcp2k.classes._CP2K_INPUT1 import _CP2K_INPUT1
+from xcp2k.inputparser import CP2KInputParser
 import logging
 import traceback
 
@@ -75,7 +77,7 @@ class CP2K(Calculator):
     name = 'cp2k'
     implemented_properties = ['energy', 'energies', 'forces', 'stress', 'charges', 'frequencies']
 
-    def __init__(self, restart=None, mode = 0,  ignore_bad_restart_file=False,
+    def __init__(self, restart=None, mode = 0,  directory = '.', ignore_bad_restart_file=False,
                   env = 'SLURM', ntasks = None, nodes = None, ntasks_per_node = None, time = '1:00:00', atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
@@ -92,9 +94,10 @@ class CP2K(Calculator):
         self.CP2K_INPUT = _CP2K_INPUT1()
         self._debug = debug
         self.mode = mode
-        self.directory = None
+        self.directory = directory
         self.prefix = None
         self.out = None
+        self.inp = None
 
         self.symmetry = None
 
@@ -107,6 +110,7 @@ class CP2K(Calculator):
         if atoms is not None:
             atoms.calc = self
             self.atoms = atoms
+            self.natoms = len(atoms)
 
         self.params = params
         self.ase_params = ase_params
@@ -200,6 +204,7 @@ class CP2K(Calculator):
 
         if atoms is not None:
             self.atoms = atoms
+        self.natoms = len(atoms)
 
         #generate inputfile
         logger.debug(os.getcwd())
@@ -209,8 +214,8 @@ class CP2K(Calculator):
         cwd = os.getcwd()
         # os.chdir(self.directory)
         self.xcp2krc['script_new'] = self.xcp2krc['script'] + '''
-                # cd {0}  # this is the current working directory
-                # cd {1}  # this is the vasp directory
+                cd {0}  # this is the current working directory
+                cd {1}  # this is the vasp directory
                 $ASE_CP2K_COMMAND
             '''.format(cwd, self.directory)
         self.run()
@@ -225,7 +230,54 @@ class CP2K(Calculator):
         # write Jmol
         self.atoms.write(join(self.directory, self.prefix+'.in'))
         self.write(self.directory + '/' + self.prefix)
+    def read_inp(self, ):
+        #
+        if self.inp is None:
+            self.inp = join(self.directory, 'cp2k.inp')
+        inputparser = CP2KInputParser()
+        inpcalc = inputparser.parse(self, self.inp)
+        # print(inpcalc.CP2K_INPUT)
+        self.prefix = inpcalc.CP2K_INPUT.GLOBAL.Project_name
+        # print(inpcalc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.COORD.Default_keyword)
+        self.natoms = len(inpcalc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.COORD.Default_keyword)
+        self.inpcalc = inpcalc
+        # print(inputparser)
+        # print(calc.CP2K_INPUT)
         
+
+        # for section in root_section:
+            # print(section)
+
+
+    # def read_inp(self, ):
+        
+    #     lines = open(self.inp, 'r').readlines()
+    #     n = len(lines)
+    #     for i in range(n):
+    #         
+    #     #
+    #     eles = []
+    #     poss = []
+    #     natoms = 0
+    #     for n, line in enumerate(lines):
+    #         if line.rfind('MODULE QUICKSTEP:  ATOMIC COORDINATES IN angstrom') > -1:
+    #             # print(lines[n+4+natoms])
+    #             while(len(lines[n+4+natoms])>1):
+    #                 datas = lines[n+4+natoms].split()
+    #                 eles.append(datas[2])
+    #                 pos = []
+    #                 for ip in range(3):
+    #                     pos.append(float(datas[4 + ip]))
+    #                 poss.append(pos)
+    #                 natoms += 1
+    #             n += natoms
+    #     self.natoms = natoms
+    #     # print(eles)
+    #     # print(poss)
+    #     self.initial_atoms = Atoms(eles, poss)
+    #     # print(self.natoms)
+    #     # print(self.initial_atoms)
+    #     # self.re
 
 
     def update_atoms(self, atoms):
@@ -239,6 +291,7 @@ class CP2K(Calculator):
         if self.CP2K_INPUT.GLOBAL.Run_type.upper() == 'CELL_OPT':
             xyzfile = join(self.directory, self.prefix+'-pos-1.xyz')
             atoms_sorted = ase.io.read(xyzfile)
+            atoms.positions = atoms_sorted.positions
             atoms.cell = self.read_cell()
             self.atoms = atoms
     #
@@ -256,18 +309,19 @@ class CP2K(Calculator):
                     for icell in range(3):
                         cell[j, icell] = float(data[4 + icell])
         return cell
-            
-
+    #
     def read_results(self):
         converged = self.read_convergence()
         if self.out is None:
             self.out = join(self.directory, 'cp2k.out')
         if not converged:
             os.system('tail -20 ' + self.out)
-            raise RuntimeError('CP2K did not converge!\n' +
-                               'The last lines of output are printed above ' +
-                               'and should give an indication why.')
+            # raise RuntimeError('CP2K did not converge!\n' +
+            #                    'The last lines of output are printed above ' +
+            #                    'and should give an indication why.')
+        self.read_inp()
         self.read_energy()
+        self.read_geometry()
         self.read_forces()
         #self.read_charges()
         #self.read_fermi()
@@ -331,11 +385,11 @@ class CP2K(Calculator):
         if self.out is None:
             self.out = join(self.directory, 'cp2k.out')
         lines = open(self.out, 'r').readlines()
-        forces = np.zeros([len(self.atoms), 3])
+        forces = np.zeros([self.natoms, 3])
         for n, line in enumerate(lines):
             if line.rfind('# Atom   Kind   Element') > -1:
                 try :
-                    for iatom in range(len(self.atoms)):
+                    for iatom in range(self.natoms):
                         data = lines[n + iatom + 1].split()
                         for iforce in range(3):
                             forces[iatom, iforce] = float(data[3 + iforce])*conf
@@ -343,27 +397,39 @@ class CP2K(Calculator):
                     print('read forces error, cp2k run may be interupt')
         self.results['forces'] = forces
 
-    def read_charges(self):
+    def read_charges_moments(self):
         """Method that reads charges from the output file.
         """
         if self.out is None:
             self.out = join(self.directory, 'cp2k.out')
         lines = open(self.out, 'r').readlines()
+        self.get_number_of_spins()
+        index = 4
+        if self.spin == 2:
+            index = 5
         for n, line in enumerate(lines):
             if line.rfind('Mulliken Population Analysis') > -1:
                 charges = []
-                for iatom in range(len(self.atoms)):
+                moments = []
+                for iatom in range(self.natoms):
                     data = lines[n + iatom + 3].split()
-                    charges.append([iatom, data[1], float(data[4])])
-        self.results['charges'] = charges
-        
+                    charges.append([iatom, data[1], float(data[index])])
+                    if self.spin == 2:
+                        moments.append([iatom, data[1], float(data[index + 1])])
+        self.results['charges-M'] = charges
+        self.results['moments-M'] = moments
+        #
         for n, line in enumerate(lines):
             if line.rfind('Hirshfeld Charges') > -1:
                 charges = []
-                for iatom in range(len(self.atoms)):
+                moments = []
+                for iatom in range(self.natoms):
                     data = lines[n + iatom + 3].split()
-                    charges.append([iatom, data[1], float(data[5])])
-        self.results['charges'] = charges
+                    charges.append([iatom, data[1], float(data[index + 1])])
+                    if self.spin == 2:
+                        moments.append([iatom, data[1], float(data[index])])
+        self.results['charges-H'] = charges
+        self.results['moments-H'] = moments
 
 
     def read_stress(self):
@@ -469,7 +535,7 @@ class CP2K(Calculator):
         # if we are in the queue and jasp is called or if we want to use
         # mode='run' , we should just run the job. First, we consider how.
         logger.debug('run function')
-        # cwd = os.getcwd()
+        cwd = os.getcwd()
         # print(cwd)
 
         if 'ASE_CP2K_COMMAND' not in os.environ:
@@ -496,8 +562,8 @@ class CP2K(Calculator):
             # NPROCS = int(os.environ['SLURM_NTASKS'])
             # no question. running in serial.
             cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            exitcode = os.system('''# cd {0}  # this is the current working directory
-                # cd {1}  # this is the vasp directory
+            exitcode = os.system(''' cd {0}  # this is the current working directory
+                 cd {1}  # this is the vasp directory
                 {2} '''.format(cwd, self.directory, cp2kcmd))
             # exitcode = os.system(cp2kcmd)
             return exitcode
@@ -636,7 +702,10 @@ class CP2K(Calculator):
         atom_list = []
         for i_atom, atom in enumerate(atoms):
             if symbol:
-                new_atom = [atom.symbol, atom.position[0], atom.position[1], atom.position[2]]
+                if hasattr(atoms, 'labels'):
+                    new_atom = [atoms.labels[i_atom], atom.position[0], atom.position[1], atom.position[2]]
+                else:
+                    new_atom = [atom.symbol, atom.position[0], atom.position[1], atom.position[2]]
             else:
                 new_atom = [atom.position[0], atom.position[1], atom.position[2]]
             if molnames is not None:
@@ -657,15 +726,15 @@ class CP2K(Calculator):
         """
         #write constraint
         from ase.constraints import FixAtoms, FixScaled
-        
-        sflags = np.zeros((len(self.atoms), 3), dtype=bool)
+        self.natoms = len(atoms)
+        sflags = np.zeros((self.natoms, 3), dtype=bool)
         sflags_all = []
         if self.atoms.constraints:
             for constr in self.atoms.constraints:
                 if isinstance(constr, FixScaled):
                     sflags[constr.a] = constr.mask
                 elif isinstance(constr, FixAtoms):
-                    sflags_all = constr.index
+                    sflags_all = sflags_all + constr.index.tolist()
         # this is the same like "kind" module
         for iatom, atom in enumerate(self.atoms):
             fixed = ''.join([a for a, b in zip('XYZ', sflags[iatom]) if b])
@@ -809,6 +878,20 @@ class CP2K(Calculator):
             if line.rfind('Fermi Energy') > -1 and line.rfind('eV') == -1:
                 Ef = float(line.split()[-1])*cone
         self.Ef = Ef
+    #
+    def read_bandgap(self,):
+        """Return the Fermi level."""
+        #
+        if self.out is None:
+            self.out = join(self.directory, 'cp2k.out')
+        # print(self.out)
+        bandgap = 10000000
+        for line in open(self.out, 'r'):
+            if line.rfind('HOMO - LUMO gap') > -1:
+                tempe = float(line.split()[-1])
+                if tempe < bandgap:
+                    bandgap = tempe
+        self.bandgap = bandgap
 
     def get_number_of_spins(self):
         """Returns number of spins.
@@ -828,4 +911,31 @@ class CP2K(Calculator):
         else:
             spin=1
         self.spin = spin
-
+    def is_cp2k(self, path):
+        '''
+        check cp2k 
+        '''
+        import os
+        dirs = os.listdir(path)
+        # print(dirs)
+        flag = True
+        for file in ['cp2k.inp', 'cp2k.out']:
+            if file not in dirs:
+                flag = False
+                break
+        return flag
+    def read_geometry(self, prefix = None):
+        atoms = None
+        if prefix:
+            self.prefix = prefix
+        filename = '{0}.in'.format(self.prefix)
+        filename1 = '{0}-pos-1.xyz'.format(self.prefix)
+        if os.path.isfile(filename):
+            atoms = ase.io.read(filename)
+            atoms.wrap()
+        elif os.path.isfile(filename1):
+            atoms = ase.io.read(filename1)
+            atoms.wrap()
+            atoms.cell = self.read_cell()
+        self.results['geometry'] = atoms
+        return atoms

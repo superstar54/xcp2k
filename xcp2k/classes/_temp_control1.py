@@ -8,5 +8,5 @@ class _temp_control1(InputSection):
         self.Temp_tol = None
         self.Temp_tol_steps = None
         self._name = "TEMP_CONTROL"
-        self._keywords = {'Temp_tol': 'TEMP_TOL', 'Temp_tol_steps': 'TEMP_TOL_STEPS', 'Temperature': 'TEMPERATURE'}
+        self._keywords = {'Temperature': 'TEMPERATURE', 'Temp_tol': 'TEMP_TOL', 'Temp_tol_steps': 'TEMP_TOL_STEPS'}
 

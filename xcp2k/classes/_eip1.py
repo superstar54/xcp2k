@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _print48 import _print48
+from xcp2k.classes._print48 import _print48
 
 
 class _eip1(InputSection):

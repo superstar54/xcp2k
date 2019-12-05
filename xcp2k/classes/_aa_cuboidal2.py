@@ -15,7 +15,7 @@ class _aa_cuboidal2(InputSection):
         self.Smoothing_width = None
         self.Periodic_region = None
         self._name = "AA_CUBOIDAL"
-        self._keywords = {'Y_xtnt': 'Y_XTNT', 'Z_xtnt': 'Z_XTNT', 'X_xtnt': 'X_XTNT', 'Smoothing_width': 'SMOOTHING_WIDTH', 'N_prtn': 'N_PRTN', 'V_d': 'V_D', 'Phase': 'PHASE', 'Frequency': 'FREQUENCY', 'Oscillating_fraction': 'OSCILLATING_FRACTION', 'Periodic_region': 'PERIODIC_REGION'}
+        self._keywords = {'V_d': 'V_D', 'Oscillating_fraction': 'OSCILLATING_FRACTION', 'Frequency': 'FREQUENCY', 'Phase': 'PHASE', 'X_xtnt': 'X_XTNT', 'Y_xtnt': 'Y_XTNT', 'Z_xtnt': 'Z_XTNT', 'N_prtn': 'N_PRTN', 'Smoothing_width': 'SMOOTHING_WIDTH', 'Periodic_region': 'PERIODIC_REGION'}
         self._aliases = {'Sigma': 'Smoothing_width'}
 
 

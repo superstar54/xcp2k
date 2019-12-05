@@ -1,11 +1,11 @@
 from xcp2k.inputsection import InputSection
-from _linear1 import _linear1
-from _mixed_cdft1 import _mixed_cdft1
-from _coupling1 import _coupling1
-from _restraint7 import _restraint7
-from _generic1 import _generic1
-from _mapping1 import _mapping1
-from _print18 import _print18
+from xcp2k.classes._linear1 import _linear1
+from xcp2k.classes._mixed_cdft1 import _mixed_cdft1
+from xcp2k.classes._coupling1 import _coupling1
+from xcp2k.classes._restraint7 import _restraint7
+from xcp2k.classes._generic1 import _generic1
+from xcp2k.classes._mapping1 import _mapping1
+from xcp2k.classes._print18 import _print18
 
 
 class _mixed1(InputSection):
@@ -22,8 +22,8 @@ class _mixed1(InputSection):
         self.MAPPING_list = []
         self.PRINT = _print18()
         self._name = "MIXED"
-        self._keywords = {'Group_partition': 'GROUP_PARTITION', 'Mixing_type': 'MIXING_TYPE', 'Ngroups': 'NGROUPS'}
-        self._subsections = {'LINEAR': 'LINEAR', 'GENERIC': 'GENERIC', 'RESTRAINT': 'RESTRAINT', 'MIXED_CDFT': 'MIXED_CDFT', 'PRINT': 'PRINT', 'COUPLING': 'COUPLING'}
+        self._keywords = {'Mixing_type': 'MIXING_TYPE', 'Group_partition': 'GROUP_PARTITION', 'Ngroups': 'NGROUPS'}
+        self._subsections = {'LINEAR': 'LINEAR', 'MIXED_CDFT': 'MIXED_CDFT', 'COUPLING': 'COUPLING', 'RESTRAINT': 'RESTRAINT', 'GENERIC': 'GENERIC', 'PRINT': 'PRINT'}
         self._repeated_subsections = {'MAPPING': '_mapping1'}
         self._aliases = {'Ngroup': 'Ngroups'}
         self._attributes = ['MAPPING_list']

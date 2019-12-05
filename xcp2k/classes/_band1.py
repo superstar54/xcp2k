@@ -1,14 +1,14 @@
 from xcp2k.inputsection import InputSection
-from _convergence_control2 import _convergence_control2
-from _ci_neb1 import _ci_neb1
-from _string_method1 import _string_method1
-from _optimize_band1 import _optimize_band1
-from _replica1 import _replica1
-from _program_run_info10 import _program_run_info10
-from _convergence_info1 import _convergence_info1
-from _replica_info1 import _replica_info1
-from _energy8 import _energy8
-from _banner1 import _banner1
+from xcp2k.classes._convergence_control2 import _convergence_control2
+from xcp2k.classes._ci_neb1 import _ci_neb1
+from xcp2k.classes._string_method1 import _string_method1
+from xcp2k.classes._optimize_band1 import _optimize_band1
+from xcp2k.classes._replica1 import _replica1
+from xcp2k.classes._program_run_info10 import _program_run_info10
+from xcp2k.classes._convergence_info1 import _convergence_info1
+from xcp2k.classes._replica_info1 import _replica_info1
+from xcp2k.classes._energy8 import _energy8
+from xcp2k.classes._banner1 import _banner1
 
 
 class _band1(InputSection):
@@ -34,8 +34,8 @@ class _band1(InputSection):
         self.ENERGY = _energy8()
         self.BANNER = _banner1()
         self._name = "BAND"
-        self._keywords = {'Align_frames': 'ALIGN_FRAMES', 'Nproc_rep': 'NPROC_REP', 'Pot_type': 'POT_TYPE', 'Number_of_replica': 'NUMBER_OF_REPLICA', 'Use_colvars': 'USE_COLVARS', 'Band_type': 'BAND_TYPE', 'Rotate_frames': 'ROTATE_FRAMES', 'K_spring': 'K_SPRING', 'Proc_dist_type': 'PROC_DIST_TYPE'}
-        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'REPLICA_INFO': 'REPLICA_INFO', 'STRING_METHOD': 'STRING_METHOD', 'ENERGY': 'ENERGY', 'CONVERGENCE_INFO': 'CONVERGENCE_INFO', 'CI_NEB': 'CI_NEB', 'CONVERGENCE_CONTROL': 'CONVERGENCE_CONTROL', 'BANNER': 'BANNER'}
+        self._keywords = {'Nproc_rep': 'NPROC_REP', 'Proc_dist_type': 'PROC_DIST_TYPE', 'Band_type': 'BAND_TYPE', 'Number_of_replica': 'NUMBER_OF_REPLICA', 'Use_colvars': 'USE_COLVARS', 'Pot_type': 'POT_TYPE', 'Rotate_frames': 'ROTATE_FRAMES', 'Align_frames': 'ALIGN_FRAMES', 'K_spring': 'K_SPRING'}
+        self._subsections = {'CONVERGENCE_CONTROL': 'CONVERGENCE_CONTROL', 'CI_NEB': 'CI_NEB', 'STRING_METHOD': 'STRING_METHOD', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'CONVERGENCE_INFO': 'CONVERGENCE_INFO', 'REPLICA_INFO': 'REPLICA_INFO', 'ENERGY': 'ENERGY', 'BANNER': 'BANNER'}
         self._repeated_subsections = {'OPTIMIZE_BAND': '_optimize_band1', 'REPLICA': '_replica1'}
         self._aliases = {'K': 'K_spring'}
         self._attributes = ['OPTIMIZE_BAND_list', 'REPLICA_list']

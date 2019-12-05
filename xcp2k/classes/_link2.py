@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _move_mm_charge2 import _move_mm_charge2
-from _add_mm_charge2 import _add_mm_charge2
+from xcp2k.classes._move_mm_charge2 import _move_mm_charge2
+from xcp2k.classes._add_mm_charge2 import _add_mm_charge2
 
 
 class _link2(InputSection):
@@ -18,18 +18,10 @@ class _link2(InputSection):
         self.MOVE_MM_CHARGE_list = []
         self.ADD_MM_CHARGE_list = []
         self._name = "LINK"
-        self._keywords = {'Qm_kind': 'QM_KIND', 'Fist_scale_factor': 'FIST_SCALE_FACTOR', 'Corr_radius': 'CORR_RADIUS', 'Qmmm_scale_factor': 'QMMM_SCALE_FACTOR', 'Qm_index': 'QM_INDEX', 'Alpha_imomm': 'ALPHA_IMOMM', 'Radius': 'RADIUS', 'Mm_index': 'MM_INDEX', 'Link_type': 'LINK_TYPE'}
-        self._repeated_subsections = {'ADD_MM_CHARGE': '_add_mm_charge2', 'MOVE_MM_CHARGE': '_move_mm_charge2'}
-        self._aliases = {'Ltype': 'Link_type', 'Qmmm_charge_scale': 'Qmmm_scale_factor', 'Mm': 'Mm_index', 'Qm': 'Qm_index', 'Fist_scale_charge': 'Fist_scale_factor', 'Fist_charge_scale': 'Fist_scale_factor', 'Link': 'Link_type', 'Alpha': 'Alpha_imomm', 'Fist_charge_factor': 'Fist_scale_factor', 'Type': 'Link_type', 'Qmmm_charge_factor': 'Qmmm_scale_factor', 'Qmmm_scale_charge': 'Qmmm_scale_factor'}
+        self._keywords = {'Qm_index': 'QM_INDEX', 'Qm_kind': 'QM_KIND', 'Mm_index': 'MM_INDEX', 'Radius': 'RADIUS', 'Corr_radius': 'CORR_RADIUS', 'Link_type': 'LINK_TYPE', 'Alpha_imomm': 'ALPHA_IMOMM', 'Qmmm_scale_factor': 'QMMM_SCALE_FACTOR', 'Fist_scale_factor': 'FIST_SCALE_FACTOR'}
+        self._repeated_subsections = {'MOVE_MM_CHARGE': '_move_mm_charge2', 'ADD_MM_CHARGE': '_add_mm_charge2'}
+        self._aliases = {'Qm': 'Qm_index', 'Mm': 'Mm_index', 'Link': 'Link_type', 'Type': 'Link_type', 'Ltype': 'Link_type', 'Alpha': 'Alpha_imomm', 'Qmmm_charge_scale': 'Qmmm_scale_factor', 'Qmmm_charge_factor': 'Qmmm_scale_factor', 'Qmmm_scale_charge': 'Qmmm_scale_factor', 'Fist_charge_scale': 'Fist_scale_factor', 'Fist_charge_factor': 'Fist_scale_factor', 'Fist_scale_charge': 'Fist_scale_factor'}
         self._attributes = ['MOVE_MM_CHARGE_list', 'ADD_MM_CHARGE_list']
-
-    def ADD_MM_CHARGE_add(self, section_parameters=None):
-        new_section = _add_mm_charge2()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.ADD_MM_CHARGE_list.append(new_section)
-        return new_section
 
     def MOVE_MM_CHARGE_add(self, section_parameters=None):
         new_section = _move_mm_charge2()
@@ -37,6 +29,14 @@ class _link2(InputSection):
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
         self.MOVE_MM_CHARGE_list.append(new_section)
+        return new_section
+
+    def ADD_MM_CHARGE_add(self, section_parameters=None):
+        new_section = _add_mm_charge2()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.ADD_MM_CHARGE_list.append(new_section)
         return new_section
 
 

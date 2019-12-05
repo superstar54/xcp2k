@@ -17,5 +17,5 @@ class _lrigpw2(InputSection):
         self.Shg_lri_integrals = None
         self.Ri_sinv = None
         self._name = "LRIGPW"
-        self._keywords = {'Debug_lri_integrals': 'DEBUG_LRI_INTEGRALS', 'Max_condition_num': 'MAX_CONDITION_NUM', 'Ppl_ri': 'PPL_RI', 'Distant_pair_approximation': 'DISTANT_PAIR_APPROXIMATION', 'Distant_pair_radii': 'DISTANT_PAIR_RADII', 'Exact_1c_terms': 'EXACT_1C_TERMS', 'Shg_lri_integrals': 'SHG_LRI_INTEGRALS', 'Eps_o3_int': 'EPS_O3_INT', 'Ri_sinv': 'RI_SINV', 'Distant_pair_method': 'DISTANT_PAIR_METHOD', 'Ri_statistic': 'RI_STATISTIC', 'Lri_overlap_matrix': 'LRI_OVERLAP_MATRIX'}
+        self._keywords = {'Lri_overlap_matrix': 'LRI_OVERLAP_MATRIX', 'Max_condition_num': 'MAX_CONDITION_NUM', 'Eps_o3_int': 'EPS_O3_INT', 'Debug_lri_integrals': 'DEBUG_LRI_INTEGRALS', 'Exact_1c_terms': 'EXACT_1C_TERMS', 'Ppl_ri': 'PPL_RI', 'Ri_statistic': 'RI_STATISTIC', 'Distant_pair_approximation': 'DISTANT_PAIR_APPROXIMATION', 'Distant_pair_method': 'DISTANT_PAIR_METHOD', 'Distant_pair_radii': 'DISTANT_PAIR_RADII', 'Shg_lri_integrals': 'SHG_LRI_INTEGRALS', 'Ri_sinv': 'RI_SINV'}
 

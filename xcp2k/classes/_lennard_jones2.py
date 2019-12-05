@@ -11,5 +11,5 @@ class _lennard_jones2(InputSection):
         self.Rmin = None
         self.Rmax = None
         self._name = "LENNARD-JONES"
-        self._keywords = {'Rmin': 'RMIN', 'Epsilon': 'EPSILON', 'Rmax': 'RMAX', 'Rcut': 'RCUT', 'Atoms': 'ATOMS', 'Sigma': 'SIGMA'}
+        self._keywords = {'Atoms': 'ATOMS', 'Epsilon': 'EPSILON', 'Sigma': 'SIGMA', 'Rcut': 'RCUT', 'Rmin': 'RMIN', 'Rmax': 'RMAX'}
 

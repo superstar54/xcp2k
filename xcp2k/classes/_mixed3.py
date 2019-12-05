@@ -12,6 +12,6 @@ class _mixed3(InputSection):
         self.Dx = None
         self.Error_limit = None
         self._name = "MIXED"
-        self._keywords = {'Energy_function': 'ENERGY_FUNCTION', 'Error_limit': 'ERROR_LIMIT', 'Variables': 'VARIABLES', 'Dx': 'DX'}
-        self._repeated_keywords = {'Units': 'UNITS', 'Values': 'VALUES', 'Parameters': 'PARAMETERS'}
+        self._keywords = {'Energy_function': 'ENERGY_FUNCTION', 'Variables': 'VARIABLES', 'Dx': 'DX', 'Error_limit': 'ERROR_LIMIT'}
+        self._repeated_keywords = {'Parameters': 'PARAMETERS', 'Values': 'VALUES', 'Units': 'UNITS'}
 

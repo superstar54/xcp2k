@@ -9,5 +9,5 @@ class _pexsi2(InputSection):
         self.Verbosity = None
         self.Np_symb_fact = None
         self._name = "PEXSI"
-        self._keywords = {'Ordering': 'ORDERING', 'Np_symb_fact': 'NP_SYMB_FACT', 'Verbosity': 'VERBOSITY', 'Row_ordering': 'ROW_ORDERING'}
+        self._keywords = {'Ordering': 'ORDERING', 'Row_ordering': 'ROW_ORDERING', 'Verbosity': 'VERBOSITY', 'Np_symb_fact': 'NP_SYMB_FACT'}
 

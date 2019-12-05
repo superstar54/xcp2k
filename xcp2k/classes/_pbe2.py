@@ -9,6 +9,6 @@ class _pbe2(InputSection):
         self.Scale_x = None
         self.Scale_c = None
         self._name = "PBE"
-        self._keywords = {'Scale_x': 'SCALE_X', 'Scale_c': 'SCALE_C', 'Parametrization': 'PARAMETRIZATION'}
+        self._keywords = {'Parametrization': 'PARAMETRIZATION', 'Scale_x': 'SCALE_X', 'Scale_c': 'SCALE_C'}
         self._attributes = ['Section_parameters']
 

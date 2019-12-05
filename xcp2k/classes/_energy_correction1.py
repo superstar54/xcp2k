@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _xc2 import _xc2
+from xcp2k.classes._xc2 import _xc2
 
 
 class _energy_correction1(InputSection):
@@ -16,7 +16,7 @@ class _energy_correction1(InputSection):
         self.Eps_default = None
         self.XC = _xc2()
         self._name = "ENERGY_CORRECTION"
-        self._keywords = {'Algorithm': 'ALGORITHM', 'Mao_max_iter': 'MAO_MAX_ITER', 'Mao_eps_grad': 'MAO_EPS_GRAD', 'Harris_basis': 'HARRIS_BASIS', 'Energy_functional': 'ENERGY_FUNCTIONAL', 'Eps_default': 'EPS_DEFAULT', 'Factorization': 'FACTORIZATION', 'Mao': 'MAO'}
+        self._keywords = {'Energy_functional': 'ENERGY_FUNCTIONAL', 'Harris_basis': 'HARRIS_BASIS', 'Mao': 'MAO', 'Mao_max_iter': 'MAO_MAX_ITER', 'Mao_eps_grad': 'MAO_EPS_GRAD', 'Algorithm': 'ALGORITHM', 'Factorization': 'FACTORIZATION', 'Eps_default': 'EPS_DEFAULT'}
         self._subsections = {'XC': 'XC'}
         self._attributes = ['Section_parameters']
 

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point10 import _point10
+from xcp2k.classes._point10 import _point10
 
 
 class _distance_function1(InputSection):
@@ -10,7 +10,7 @@ class _distance_function1(InputSection):
         self.Pbc = None
         self.POINT_list = []
         self._name = "DISTANCE_FUNCTION"
-        self._keywords = {'Coefficient': 'COEFFICIENT', 'Pbc': 'PBC', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'Coefficient': 'COEFFICIENT', 'Pbc': 'PBC'}
         self._repeated_subsections = {'POINT': '_point10'}
         self._aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']

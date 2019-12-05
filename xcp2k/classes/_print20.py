@@ -1,18 +1,18 @@
 from xcp2k.inputsection import InputSection
-from _restart6 import _restart6
-from _restart_history2 import _restart_history2
-from _iteration_info1 import _iteration_info1
-from _program_run_info14 import _program_run_info14
-from _mo_orthonormality1 import _mo_orthonormality1
-from _mo_magnitude1 import _mo_magnitude1
-from _detailed_energy1 import _detailed_energy1
-from _diis_info2 import _diis_info2
-from _total_densities1 import _total_densities1
-from _lanczos1 import _lanczos1
-from _diag_sub_scf2 import _diag_sub_scf2
-from _davidson2 import _davidson2
-from _filter_matrix2 import _filter_matrix2
-from _mos_molden1 import _mos_molden1
+from xcp2k.classes._restart6 import _restart6
+from xcp2k.classes._restart_history2 import _restart_history2
+from xcp2k.classes._iteration_info1 import _iteration_info1
+from xcp2k.classes._program_run_info14 import _program_run_info14
+from xcp2k.classes._mo_orthonormality1 import _mo_orthonormality1
+from xcp2k.classes._mo_magnitude1 import _mo_magnitude1
+from xcp2k.classes._detailed_energy1 import _detailed_energy1
+from xcp2k.classes._diis_info2 import _diis_info2
+from xcp2k.classes._total_densities1 import _total_densities1
+from xcp2k.classes._lanczos1 import _lanczos1
+from xcp2k.classes._diag_sub_scf2 import _diag_sub_scf2
+from xcp2k.classes._davidson2 import _davidson2
+from xcp2k.classes._filter_matrix2 import _filter_matrix2
+from xcp2k.classes._mos_molden1 import _mos_molden1
 
 
 class _print20(InputSection):
@@ -35,5 +35,5 @@ class _print20(InputSection):
         self.MOS_MOLDEN = _mos_molden1()
         self._name = "PRINT"
         self._keywords = {'Dm_restart_write': 'DM_RESTART_WRITE'}
-        self._subsections = {'DIIS_INFO': 'DIIS_INFO', 'RESTART_HISTORY': 'RESTART_HISTORY', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'MO_ORTHONORMALITY': 'MO_ORTHONORMALITY', 'DETAILED_ENERGY': 'DETAILED_ENERGY', 'TOTAL_DENSITIES': 'TOTAL_DENSITIES', 'FILTER_MATRIX': 'FILTER_MATRIX', 'DAVIDSON': 'DAVIDSON', 'LANCZOS': 'LANCZOS', 'ITERATION_INFO': 'ITERATION_INFO', 'MO_MAGNITUDE': 'MO_MAGNITUDE', 'MOS_MOLDEN': 'MOS_MOLDEN', 'RESTART': 'RESTART', 'DIAG_SUB_SCF': 'DIAG_SUB_SCF'}
+        self._subsections = {'RESTART': 'RESTART', 'RESTART_HISTORY': 'RESTART_HISTORY', 'ITERATION_INFO': 'ITERATION_INFO', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'MO_ORTHONORMALITY': 'MO_ORTHONORMALITY', 'MO_MAGNITUDE': 'MO_MAGNITUDE', 'DETAILED_ENERGY': 'DETAILED_ENERGY', 'DIIS_INFO': 'DIIS_INFO', 'TOTAL_DENSITIES': 'TOTAL_DENSITIES', 'LANCZOS': 'LANCZOS', 'DIAG_SUB_SCF': 'DIAG_SUB_SCF', 'DAVIDSON': 'DAVIDSON', 'FILTER_MATRIX': 'FILTER_MATRIX', 'MOS_MOLDEN': 'MOS_MOLDEN'}
 

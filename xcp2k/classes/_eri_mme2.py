@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _eri_mme_info2 import _eri_mme_info2
-from _cutoff_calib2 import _cutoff_calib2
+from xcp2k.classes._eri_mme_info2 import _eri_mme_info2
+from xcp2k.classes._cutoff_calib2 import _cutoff_calib2
 
 
 class _eri_mme2(InputSection):
@@ -17,6 +17,6 @@ class _eri_mme2(InputSection):
         self.ERI_MME_INFO = _eri_mme_info2()
         self.CUTOFF_CALIB = _cutoff_calib2()
         self._name = "ERI_MME"
-        self._keywords = {'Cutoff': 'CUTOFF', 'Sum_precision': 'SUM_PRECISION', 'Do_calibrate_cutoff': 'DO_CALIBRATE_CUTOFF', 'Debug_tolerance': 'DEBUG_TOLERANCE', 'N_minimax': 'N_MINIMAX', 'Debug_nsum_max': 'DEBUG_NSUM_MAX', 'Debug': 'DEBUG', 'Print_calib': 'PRINT_CALIB'}
-        self._subsections = {'CUTOFF_CALIB': 'CUTOFF_CALIB', 'ERI_MME_INFO': 'ERI_MME_INFO'}
+        self._keywords = {'N_minimax': 'N_MINIMAX', 'Cutoff': 'CUTOFF', 'Sum_precision': 'SUM_PRECISION', 'Do_calibrate_cutoff': 'DO_CALIBRATE_CUTOFF', 'Print_calib': 'PRINT_CALIB', 'Debug': 'DEBUG', 'Debug_tolerance': 'DEBUG_TOLERANCE', 'Debug_nsum_max': 'DEBUG_NSUM_MAX'}
+        self._subsections = {'ERI_MME_INFO': 'ERI_MME_INFO', 'CUTOFF_CALIB': 'CUTOFF_CALIB'}
 

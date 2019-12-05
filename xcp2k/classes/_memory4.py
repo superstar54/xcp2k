@@ -10,7 +10,7 @@ class _memory4(InputSection):
         self.Max_disk_space = None
         self.Treat_forces_in_core = None
         self._name = "MEMORY"
-        self._keywords = {'Eps_storage_scaling': 'EPS_STORAGE_SCALING', 'Storage_location': 'STORAGE_LOCATION', 'Treat_forces_in_core': 'TREAT_FORCES_IN_CORE', 'Max_memory': 'MAX_MEMORY', 'Max_disk_space': 'MAX_DISK_SPACE'}
+        self._keywords = {'Eps_storage_scaling': 'EPS_STORAGE_SCALING', 'Max_memory': 'MAX_MEMORY', 'Storage_location': 'STORAGE_LOCATION', 'Max_disk_space': 'MAX_DISK_SPACE', 'Treat_forces_in_core': 'TREAT_FORCES_IN_CORE'}
         self._aliases = {'Eps_storage': 'Eps_storage_scaling'}
 
 

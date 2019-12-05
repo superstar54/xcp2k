@@ -8,5 +8,5 @@ class _move_updates1(InputSection):
         self.Iuptrans = None
         self.Iupcltrans = None
         self._name = "MOVE_UPDATES"
-        self._keywords = {'Iuptrans': 'IUPTRANS', 'Iupvolume': 'IUPVOLUME', 'Iupcltrans': 'IUPCLTRANS'}
+        self._keywords = {'Iupvolume': 'IUPVOLUME', 'Iuptrans': 'IUPTRANS', 'Iupcltrans': 'IUPCLTRANS'}
 

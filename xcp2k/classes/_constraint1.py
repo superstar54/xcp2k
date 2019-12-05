@@ -1,14 +1,14 @@
 from xcp2k.inputsection import InputSection
-from _hbonds1 import _hbonds1
-from _g3x31 import _g3x31
-from _g4x61 import _g4x61
-from _virtual_site1 import _virtual_site1
-from _collective1 import _collective1
-from _fixed_atoms1 import _fixed_atoms1
-from _fix_atom_restart1 import _fix_atom_restart1
-from _colvar_restart1 import _colvar_restart1
-from _constraint_info1 import _constraint_info1
-from _lagrange_multipliers1 import _lagrange_multipliers1
+from xcp2k.classes._hbonds1 import _hbonds1
+from xcp2k.classes._g3x31 import _g3x31
+from xcp2k.classes._g4x61 import _g4x61
+from xcp2k.classes._virtual_site1 import _virtual_site1
+from xcp2k.classes._collective1 import _collective1
+from xcp2k.classes._fixed_atoms1 import _fixed_atoms1
+from xcp2k.classes._fix_atom_restart1 import _fix_atom_restart1
+from xcp2k.classes._colvar_restart1 import _colvar_restart1
+from xcp2k.classes._constraint_info1 import _constraint_info1
+from xcp2k.classes._lagrange_multipliers1 import _lagrange_multipliers1
 
 
 class _constraint1(InputSection):
@@ -28,10 +28,10 @@ class _constraint1(InputSection):
         self.CONSTRAINT_INFO = _constraint_info1()
         self.LAGRANGE_MULTIPLIERS = _lagrange_multipliers1()
         self._name = "CONSTRAINT"
-        self._keywords = {'Shake_tolerance': 'SHAKE_TOLERANCE', 'Constraint_init': 'CONSTRAINT_INIT', 'Roll_tolerance': 'ROLL_TOLERANCE'}
-        self._subsections = {'CONSTRAINT_INFO': 'CONSTRAINT_INFO', 'FIX_ATOM_RESTART': 'FIX_ATOM_RESTART', 'HBONDS': 'HBONDS', 'LAGRANGE_MULTIPLIERS': 'LAGRANGE_MULTIPLIERS', 'COLVAR_RESTART': 'COLVAR_RESTART'}
-        self._repeated_subsections = {'G3X3': '_g3x31', 'COLLECTIVE': '_collective1', 'G4X6': '_g4x61', 'FIXED_ATOMS': '_fixed_atoms1', 'VIRTUAL_SITE': '_virtual_site1'}
-        self._aliases = {'Roll_tol': 'Roll_tolerance', 'Shake_tol': 'Shake_tolerance', 'Roll': 'Roll_tolerance', 'Shake': 'Shake_tolerance'}
+        self._keywords = {'Shake_tolerance': 'SHAKE_TOLERANCE', 'Roll_tolerance': 'ROLL_TOLERANCE', 'Constraint_init': 'CONSTRAINT_INIT'}
+        self._subsections = {'HBONDS': 'HBONDS', 'FIX_ATOM_RESTART': 'FIX_ATOM_RESTART', 'COLVAR_RESTART': 'COLVAR_RESTART', 'CONSTRAINT_INFO': 'CONSTRAINT_INFO', 'LAGRANGE_MULTIPLIERS': 'LAGRANGE_MULTIPLIERS'}
+        self._repeated_subsections = {'G3X3': '_g3x31', 'G4X6': '_g4x61', 'VIRTUAL_SITE': '_virtual_site1', 'COLLECTIVE': '_collective1', 'FIXED_ATOMS': '_fixed_atoms1'}
+        self._aliases = {'Shake_tol': 'Shake_tolerance', 'Shake': 'Shake_tolerance', 'Roll_tol': 'Roll_tolerance', 'Roll': 'Roll_tolerance'}
         self._attributes = ['G3X3_list', 'G4X6_list', 'VIRTUAL_SITE_list', 'COLLECTIVE_list', 'FIXED_ATOMS_list']
 
     def G3X3_add(self, section_parameters=None):
@@ -42,14 +42,6 @@ class _constraint1(InputSection):
         self.G3X3_list.append(new_section)
         return new_section
 
-    def COLLECTIVE_add(self, section_parameters=None):
-        new_section = _collective1()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.COLLECTIVE_list.append(new_section)
-        return new_section
-
     def G4X6_add(self, section_parameters=None):
         new_section = _g4x61()
         if section_parameters is not None:
@@ -58,20 +50,28 @@ class _constraint1(InputSection):
         self.G4X6_list.append(new_section)
         return new_section
 
-    def FIXED_ATOMS_add(self, section_parameters=None):
-        new_section = _fixed_atoms1()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.FIXED_ATOMS_list.append(new_section)
-        return new_section
-
     def VIRTUAL_SITE_add(self, section_parameters=None):
         new_section = _virtual_site1()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
         self.VIRTUAL_SITE_list.append(new_section)
+        return new_section
+
+    def COLLECTIVE_add(self, section_parameters=None):
+        new_section = _collective1()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.COLLECTIVE_list.append(new_section)
+        return new_section
+
+    def FIXED_ATOMS_add(self, section_parameters=None):
+        new_section = _fixed_atoms1()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.FIXED_ATOMS_list.append(new_section)
         return new_section
 
 

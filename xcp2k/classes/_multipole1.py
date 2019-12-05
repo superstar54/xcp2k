@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _interpolator2 import _interpolator2
-from _check_spline1 import _check_spline1
-from _program_run_info18 import _program_run_info18
+from xcp2k.classes._interpolator2 import _interpolator2
+from xcp2k.classes._check_spline1 import _check_spline1
+from xcp2k.classes._program_run_info18 import _program_run_info18
 
 
 class _multipole1(InputSection):
@@ -15,6 +15,6 @@ class _multipole1(InputSection):
         self.CHECK_SPLINE = _check_spline1()
         self.PROGRAM_RUN_INFO = _program_run_info18()
         self._name = "MULTIPOLE"
-        self._keywords = {'Analytical_gterm': 'ANALYTICAL_GTERM', 'Ngrids': 'NGRIDS', 'Rcut': 'RCUT', 'Ewald_precision': 'EWALD_PRECISION'}
-        self._subsections = {'CHECK_SPLINE': 'CHECK_SPLINE', 'INTERPOLATOR': 'INTERPOLATOR', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO'}
+        self._keywords = {'Rcut': 'RCUT', 'Ewald_precision': 'EWALD_PRECISION', 'Analytical_gterm': 'ANALYTICAL_GTERM', 'Ngrids': 'NGRIDS'}
+        self._subsections = {'INTERPOLATOR': 'INTERPOLATOR', 'CHECK_SPLINE': 'CHECK_SPLINE', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO'}
 

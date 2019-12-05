@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each174 import _each174
+from xcp2k.classes._each174 import _each174
 
 
 class _program_run_info21(InputSection):
@@ -13,7 +13,7 @@ class _program_run_info21(InputSection):
         self.Condition_number = None
         self.EACH = _each174()
         self._name = "PROGRAM_RUN_INFO"
-        self._keywords = {'Condition_number': 'CONDITION_NUMBER', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Condition_number': 'CONDITION_NUMBER'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

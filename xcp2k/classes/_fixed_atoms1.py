@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _restraint6 import _restraint6
+from xcp2k.classes._restraint6 import _restraint6
 
 
 class _fixed_atoms1(InputSection):
@@ -15,8 +15,8 @@ class _fixed_atoms1(InputSection):
         self.Exclude_mm = None
         self.RESTRAINT = _restraint6()
         self._name = "FIXED_ATOMS"
-        self._keywords = {'Components_to_fix': 'COMPONENTS_TO_FIX', 'Exclude_qm': 'EXCLUDE_QM', 'Mm_subsys': 'MM_SUBSYS', 'Exclude_mm': 'EXCLUDE_MM', 'Qm_subsys': 'QM_SUBSYS'}
-        self._repeated_keywords = {'Molname': 'MOLNAME', 'List': 'LIST'}
+        self._keywords = {'Components_to_fix': 'COMPONENTS_TO_FIX', 'Mm_subsys': 'MM_SUBSYS', 'Qm_subsys': 'QM_SUBSYS', 'Exclude_qm': 'EXCLUDE_QM', 'Exclude_mm': 'EXCLUDE_MM'}
+        self._repeated_keywords = {'List': 'LIST', 'Molname': 'MOLNAME'}
         self._subsections = {'RESTRAINT': 'RESTRAINT'}
         self._aliases = {'Protein': 'Mm_subsys'}
         self._repeated_aliases = {'Segname': 'Molname'}

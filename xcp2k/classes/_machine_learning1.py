@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _training_set1 import _training_set1
+from xcp2k.classes._training_set1 import _training_set1
 
 
 class _machine_learning1(InputSection):
@@ -13,6 +13,6 @@ class _machine_learning1(InputSection):
         self.Gp_scale = None
         self.TRAINING_SET = _training_set1()
         self._name = "MACHINE_LEARNING"
-        self._keywords = {'Descriptor': 'DESCRIPTOR', 'Prior': 'PRIOR', 'Gp_noise_var': 'GP_NOISE_VAR', 'Tolerance': 'TOLERANCE', 'Method': 'METHOD', 'Gp_scale': 'GP_SCALE'}
+        self._keywords = {'Method': 'METHOD', 'Prior': 'PRIOR', 'Descriptor': 'DESCRIPTOR', 'Tolerance': 'TOLERANCE', 'Gp_noise_var': 'GP_NOISE_VAR', 'Gp_scale': 'GP_SCALE'}
         self._subsections = {'TRAINING_SET': 'TRAINING_SET'}
 

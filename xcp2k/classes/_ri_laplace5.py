@@ -7,7 +7,7 @@ class _ri_laplace5(InputSection):
         self.Quadrature_points = None
         self.Size_integ_group = None
         self._name = "RI_LAPLACE"
-        self._keywords = {'Size_integ_group': 'SIZE_INTEG_GROUP', 'Quadrature_points': 'QUADRATURE_POINTS'}
+        self._keywords = {'Quadrature_points': 'QUADRATURE_POINTS', 'Size_integ_group': 'SIZE_INTEG_GROUP'}
         self._aliases = {'Laplace_num_quad_points': 'Quadrature_points', 'Laplace_group_size': 'Size_integ_group'}
 
 

@@ -9,6 +9,6 @@ class _ke_libxc4(InputSection):
         self.Scale = None
         self.Parameters = None
         self._name = "KE_LIBXC"
-        self._keywords = {'Scale': 'SCALE', 'Functional': 'FUNCTIONAL', 'Parameters': 'PARAMETERS'}
+        self._keywords = {'Functional': 'FUNCTIONAL', 'Scale': 'SCALE', 'Parameters': 'PARAMETERS'}
         self._attributes = ['Section_parameters']
 

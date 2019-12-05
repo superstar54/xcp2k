@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _print40 import _print40
+from xcp2k.classes._print40 import _print40
 
 
 class _real_time_propagation1(InputSection):
@@ -24,6 +24,6 @@ class _real_time_propagation1(InputSection):
         self.Mcweeny_eps = None
         self.PRINT = _print40()
         self._name = "REAL_TIME_PROPAGATION"
-        self._keywords = {'Density_propagation': 'DENSITY_PROPAGATION', 'Hfx_balance_in_core': 'HFX_BALANCE_IN_CORE', 'Aspc_order': 'ASPC_ORDER', 'Apply_delta_pulse': 'APPLY_DELTA_PULSE', 'Delta_pulse_scale': 'DELTA_PULSE_SCALE', 'Delta_pulse_direction': 'DELTA_PULSE_DIRECTION', 'Mcweeny_eps': 'MCWEENY_EPS', 'Max_iter': 'MAX_ITER', 'Mat_exp': 'MAT_EXP', 'Accuracy_refinement': 'ACCURACY_REFINEMENT', 'Eps_iter': 'EPS_ITER', 'Periodic': 'PERIODIC', 'Sc_check_start': 'SC_CHECK_START', 'Initial_wfn': 'INITIAL_WFN', 'Mcweeny_max_iter': 'MCWEENY_MAX_ITER', 'Exp_accuracy': 'EXP_ACCURACY', 'Propagator': 'PROPAGATOR'}
+        self._keywords = {'Max_iter': 'MAX_ITER', 'Eps_iter': 'EPS_ITER', 'Aspc_order': 'ASPC_ORDER', 'Mat_exp': 'MAT_EXP', 'Density_propagation': 'DENSITY_PROPAGATION', 'Sc_check_start': 'SC_CHECK_START', 'Exp_accuracy': 'EXP_ACCURACY', 'Propagator': 'PROPAGATOR', 'Initial_wfn': 'INITIAL_WFN', 'Apply_delta_pulse': 'APPLY_DELTA_PULSE', 'Periodic': 'PERIODIC', 'Delta_pulse_direction': 'DELTA_PULSE_DIRECTION', 'Delta_pulse_scale': 'DELTA_PULSE_SCALE', 'Hfx_balance_in_core': 'HFX_BALANCE_IN_CORE', 'Mcweeny_max_iter': 'MCWEENY_MAX_ITER', 'Accuracy_refinement': 'ACCURACY_REFINEMENT', 'Mcweeny_eps': 'MCWEENY_EPS'}
         self._subsections = {'PRINT': 'PRINT'}
 

@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _conv_info8 import _conv_info8
-from _spl_coeffs1 import _spl_coeffs1
+from xcp2k.classes._conv_info8 import _conv_info8
+from xcp2k.classes._spl_coeffs1 import _spl_coeffs1
 
 
 class _interpolator8(InputSection):
@@ -16,7 +16,7 @@ class _interpolator8(InputSection):
         self.CONV_INFO = _conv_info8()
         self.SPL_COEFFS = _spl_coeffs1()
         self._name = "INTERPOLATOR"
-        self._keywords = {'Kind': 'KIND', 'Eps_r': 'EPS_R', 'Max_iter': 'MAX_ITER', 'Eps_x': 'EPS_X', 'Aint_precond': 'AINT_PRECOND', 'Safe_computation': 'SAFE_COMPUTATION', 'Precond': 'PRECOND'}
+        self._keywords = {'Kind': 'KIND', 'Safe_computation': 'SAFE_COMPUTATION', 'Aint_precond': 'AINT_PRECOND', 'Precond': 'PRECOND', 'Eps_x': 'EPS_X', 'Eps_r': 'EPS_R', 'Max_iter': 'MAX_ITER'}
         self._subsections = {'CONV_INFO': 'CONV_INFO', 'SPL_COEFFS': 'SPL_COEFFS'}
         self._aliases = {'Maxiter': 'Max_iter'}
 

@@ -14,6 +14,6 @@ class _external_potential2(InputSection):
         self.Read_from_cube = None
         self.Scaling_factor = None
         self._name = "EXTERNAL_POTENTIAL"
-        self._keywords = {'Function': 'FUNCTION', 'Error_limit': 'ERROR_LIMIT', 'Static': 'STATIC', 'Dx': 'DX', 'Read_from_cube': 'READ_FROM_CUBE', 'Scaling_factor': 'SCALING_FACTOR'}
-        self._repeated_keywords = {'Units': 'UNITS', 'Values': 'VALUES', 'Parameters': 'PARAMETERS'}
+        self._keywords = {'Function': 'FUNCTION', 'Static': 'STATIC', 'Dx': 'DX', 'Error_limit': 'ERROR_LIMIT', 'Read_from_cube': 'READ_FROM_CUBE', 'Scaling_factor': 'SCALING_FACTOR'}
+        self._repeated_keywords = {'Parameters': 'PARAMETERS', 'Values': 'VALUES', 'Units': 'UNITS'}
 

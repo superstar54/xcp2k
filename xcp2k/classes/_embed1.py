@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _mapping2 import _mapping2
-from _print19 import _print19
+from xcp2k.classes._mapping2 import _mapping2
+from xcp2k.classes._print19 import _print19
 
 
 class _embed1(InputSection):
@@ -12,7 +12,7 @@ class _embed1(InputSection):
         self.MAPPING_list = []
         self.PRINT = _print19()
         self._name = "EMBED"
-        self._keywords = {'Dfet': 'DFET', 'Ngroups': 'NGROUPS', 'Group_partition': 'GROUP_PARTITION'}
+        self._keywords = {'Dfet': 'DFET', 'Group_partition': 'GROUP_PARTITION', 'Ngroups': 'NGROUPS'}
         self._subsections = {'PRINT': 'PRINT'}
         self._repeated_subsections = {'MAPPING': '_mapping2'}
         self._aliases = {'Ngroup': 'Ngroups'}

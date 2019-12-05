@@ -8,5 +8,5 @@ class _memory5(InputSection):
         self.Max_memory = None
         self.Compress = None
         self._name = "MEMORY"
-        self._keywords = {'Compress': 'COMPRESS', 'Max_memory': 'MAX_MEMORY', 'Eps_storage': 'EPS_STORAGE'}
+        self._keywords = {'Eps_storage': 'EPS_STORAGE', 'Max_memory': 'MAX_MEMORY', 'Compress': 'COMPRESS'}
 

@@ -10,7 +10,7 @@ class _ic2(InputSection):
         self.Gw_eigenvalues = None
         self.Gw_eigenvalues_beta = None
         self._name = "IC"
-        self._keywords = {'Optimize_homo_lumo': 'OPTIMIZE_HOMO_LUMO', 'Gw_eigenvalues': 'GW_EIGENVALUES', 'Eps_dist': 'EPS_DIST', 'Print_ic_list': 'PRINT_IC_LIST', 'Gw_eigenvalues_beta': 'GW_EIGENVALUES_BETA'}
+        self._keywords = {'Print_ic_list': 'PRINT_IC_LIST', 'Eps_dist': 'EPS_DIST', 'Optimize_homo_lumo': 'OPTIMIZE_HOMO_LUMO', 'Gw_eigenvalues': 'GW_EIGENVALUES', 'Gw_eigenvalues_beta': 'GW_EIGENVALUES_BETA'}
         self._aliases = {'Optimize': 'Optimize_homo_lumo'}
 
 

@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _plane2 import _plane2
-from _point25 import _point25
+from xcp2k.classes._plane2 import _plane2
+from xcp2k.classes._point25 import _point25
 
 
 class _angle_plane_plane2(InputSection):

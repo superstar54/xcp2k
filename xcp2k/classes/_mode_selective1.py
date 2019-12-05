@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _involved_atoms1 import _involved_atoms1
-from _print70 import _print70
+from xcp2k.classes._involved_atoms1 import _involved_atoms1
+from xcp2k.classes._print70 import _print70
 
 
 class _mode_selective1(InputSection):
@@ -17,7 +17,7 @@ class _mode_selective1(InputSection):
         self.INVOLVED_ATOMS = _involved_atoms1()
         self.PRINT_list = []
         self._name = "MODE_SELECTIVE"
-        self._keywords = {'Lowest_frequency': 'LOWEST_FREQUENCY', 'Eps_max_val': 'EPS_MAX_VAL', 'Initial_guess': 'INITIAL_GUESS', 'Atoms': 'ATOMS', 'Range': 'RANGE', 'Frequency': 'FREQUENCY', 'Eps_norm': 'EPS_NORM', 'Restart_file_name': 'RESTART_FILE_NAME'}
+        self._keywords = {'Frequency': 'FREQUENCY', 'Range': 'RANGE', 'Lowest_frequency': 'LOWEST_FREQUENCY', 'Atoms': 'ATOMS', 'Eps_max_val': 'EPS_MAX_VAL', 'Eps_norm': 'EPS_NORM', 'Initial_guess': 'INITIAL_GUESS', 'Restart_file_name': 'RESTART_FILE_NAME'}
         self._subsections = {'INVOLVED_ATOMS': 'INVOLVED_ATOMS'}
         self._repeated_subsections = {'PRINT': '_print70'}
         self._attributes = ['PRINT_list']

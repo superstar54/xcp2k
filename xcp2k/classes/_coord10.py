@@ -8,7 +8,7 @@ class _coord10(InputSection):
         self.Scaled = None
         self.Default_keyword = []
         self._name = "COORD"
-        self._keywords = {'Scaled': 'SCALED', 'Unit': 'UNIT'}
+        self._keywords = {'Unit': 'UNIT', 'Scaled': 'SCALED'}
         self._repeated_default_keywords = {'Default_keyword': 'DEFAULT_KEYWORD'}
         self._attributes = ['Default_keyword']
 

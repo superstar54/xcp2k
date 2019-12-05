@@ -9,7 +9,7 @@ class _quip1(InputSection):
         self.Init_args = None
         self.Calc_args = None
         self._name = "QUIP"
-        self._keywords = {'Init_args': 'INIT_ARGS', 'Calc_args': 'CALC_ARGS', 'Parm_file_name': 'PARM_FILE_NAME', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'Parm_file_name': 'PARM_FILE_NAME', 'Init_args': 'INIT_ARGS', 'Calc_args': 'CALC_ARGS'}
         self._aliases = {'Parmfile': 'Parm_file_name'}
 
 

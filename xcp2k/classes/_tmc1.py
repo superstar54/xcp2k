@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _move_type1 import _move_type1
-from _nmc_moves1 import _nmc_moves1
-from _tmc_analysis1 import _tmc_analysis1
-from _tmc_analysis_files1 import _tmc_analysis_files1
+from xcp2k.classes._move_type1 import _move_type1
+from xcp2k.classes._nmc_moves1 import _nmc_moves1
+from xcp2k.classes._tmc_analysis1 import _tmc_analysis1
+from xcp2k.classes._tmc_analysis_files1 import _tmc_analysis_files1
 
 
 class _tmc1(InputSection):
@@ -44,8 +44,8 @@ class _tmc1(InputSection):
         self.TMC_ANALYSIS = _tmc_analysis1()
         self.TMC_ANALYSIS_FILES = _tmc_analysis_files1()
         self._name = "TMC"
-        self._keywords = {'Print_cell': 'PRINT_CELL', 'Temperature': 'TEMPERATURE', 'Group_anlysis_nr': 'GROUP_ANLYSIS_NR', 'Num_mc_elem': 'NUM_MC_ELEM', 'Volume_isotropic': 'VOLUME_ISOTROPIC', 'Print_only_acc': 'PRINT_ONLY_ACC', 'Esimate_acc_prob': 'ESIMATE_ACC_PROB', 'Group_cc_size': 'GROUP_CC_SIZE', 'Info_out_step_size': 'INFO_OUT_STEP_SIZE', 'Pressure': 'PRESSURE', 'Rnd_deterministic': 'RND_DETERMINISTIC', 'Move_center_of_mass': 'MOVE_CENTER_OF_MASS', 'Num_mv_elem_in_cell': 'NUM_MV_ELEM_IN_CELL', 'Restart_out': 'RESTART_OUT', 'Task_type': 'TASK_TYPE', 'Print_forces': 'PRINT_FORCES', 'Group_energy_size': 'GROUP_ENERGY_SIZE', 'Print_energies': 'PRINT_ENERGIES', 'Print_dipole': 'PRINT_DIPOLE', 'All_conf_file_name': 'ALL_CONF_FILE_NAME', 'Print_coords': 'PRINT_COORDS', 'Group_energy_nr': 'GROUP_ENERGY_NR', 'Sub_box': 'SUB_BOX', 'Print_test_output': 'PRINT_TEST_OUTPUT', 'Nr_temperature': 'NR_TEMPERATURE', 'Speculative_canceling': 'SPECULATIVE_CANCELING', 'Result_list_in_memory': 'RESULT_LIST_IN_MEMORY', 'Dot_tree': 'DOT_TREE', 'Energy_file_name': 'ENERGY_FILE_NAME', 'Restart_in': 'RESTART_IN', 'Use_scf_energy_info': 'USE_SCF_ENERGY_INFO'}
-        self._subsections = {'TMC_ANALYSIS_FILES': 'TMC_ANALYSIS_FILES', 'TMC_ANALYSIS': 'TMC_ANALYSIS'}
+        self._keywords = {'Group_energy_size': 'GROUP_ENERGY_SIZE', 'Group_energy_nr': 'GROUP_ENERGY_NR', 'Group_cc_size': 'GROUP_CC_SIZE', 'Group_anlysis_nr': 'GROUP_ANLYSIS_NR', 'Num_mc_elem': 'NUM_MC_ELEM', 'Rnd_deterministic': 'RND_DETERMINISTIC', 'Task_type': 'TASK_TYPE', 'Nr_temperature': 'NR_TEMPERATURE', 'Temperature': 'TEMPERATURE', 'Num_mv_elem_in_cell': 'NUM_MV_ELEM_IN_CELL', 'Sub_box': 'SUB_BOX', 'Pressure': 'PRESSURE', 'Volume_isotropic': 'VOLUME_ISOTROPIC', 'Move_center_of_mass': 'MOVE_CENTER_OF_MASS', 'Esimate_acc_prob': 'ESIMATE_ACC_PROB', 'Speculative_canceling': 'SPECULATIVE_CANCELING', 'Use_scf_energy_info': 'USE_SCF_ENERGY_INFO', 'Result_list_in_memory': 'RESULT_LIST_IN_MEMORY', 'Info_out_step_size': 'INFO_OUT_STEP_SIZE', 'Restart_in': 'RESTART_IN', 'Restart_out': 'RESTART_OUT', 'Energy_file_name': 'ENERGY_FILE_NAME', 'Print_only_acc': 'PRINT_ONLY_ACC', 'Print_coords': 'PRINT_COORDS', 'Print_forces': 'PRINT_FORCES', 'Print_dipole': 'PRINT_DIPOLE', 'Print_cell': 'PRINT_CELL', 'Print_energies': 'PRINT_ENERGIES', 'Dot_tree': 'DOT_TREE', 'All_conf_file_name': 'ALL_CONF_FILE_NAME', 'Print_test_output': 'PRINT_TEST_OUTPUT'}
+        self._subsections = {'TMC_ANALYSIS': 'TMC_ANALYSIS', 'TMC_ANALYSIS_FILES': 'TMC_ANALYSIS_FILES'}
         self._repeated_subsections = {'MOVE_TYPE': '_move_type1', 'NMC_MOVES': '_nmc_moves1'}
         self._attributes = ['MOVE_TYPE_list', 'NMC_MOVES_list']
 

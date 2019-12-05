@@ -1,15 +1,15 @@
 from xcp2k.inputsection import InputSection
-from _wannier_cubes2 import _wannier_cubes2
-from _wannier_centers2 import _wannier_centers2
-from _wannier_spreads2 import _wannier_spreads2
-from _loc_restart2 import _loc_restart2
-from _iteration_info3 import _iteration_info3
-from _program_run_info24 import _program_run_info24
-from _xes_spectrum1 import _xes_spectrum1
-from _xas_spectrum1 import _xas_spectrum1
-from _pdos1 import _pdos1
-from _restart9 import _restart9
-from _cls_function_cubes1 import _cls_function_cubes1
+from xcp2k.classes._wannier_cubes2 import _wannier_cubes2
+from xcp2k.classes._wannier_centers2 import _wannier_centers2
+from xcp2k.classes._wannier_spreads2 import _wannier_spreads2
+from xcp2k.classes._loc_restart2 import _loc_restart2
+from xcp2k.classes._iteration_info3 import _iteration_info3
+from xcp2k.classes._program_run_info24 import _program_run_info24
+from xcp2k.classes._xes_spectrum1 import _xes_spectrum1
+from xcp2k.classes._xas_spectrum1 import _xas_spectrum1
+from xcp2k.classes._pdos1 import _pdos1
+from xcp2k.classes._restart9 import _restart9
+from xcp2k.classes._cls_function_cubes1 import _cls_function_cubes1
 
 
 class _print38(InputSection):
@@ -27,5 +27,5 @@ class _print38(InputSection):
         self.RESTART = _restart9()
         self.CLS_FUNCTION_CUBES = _cls_function_cubes1()
         self._name = "PRINT"
-        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'XAS_SPECTRUM': 'XAS_SPECTRUM', 'LOC_RESTART': 'LOC_RESTART', 'PDOS': 'PDOS', 'WANNIER_CENTERS': 'WANNIER_CENTERS', 'XES_SPECTRUM': 'XES_SPECTRUM', 'WANNIER_CUBES': 'WANNIER_CUBES', 'CLS_FUNCTION_CUBES': 'CLS_FUNCTION_CUBES', 'ITERATION_INFO': 'ITERATION_INFO', 'WANNIER_SPREADS': 'WANNIER_SPREADS', 'RESTART': 'RESTART'}
+        self._subsections = {'WANNIER_CUBES': 'WANNIER_CUBES', 'WANNIER_CENTERS': 'WANNIER_CENTERS', 'WANNIER_SPREADS': 'WANNIER_SPREADS', 'LOC_RESTART': 'LOC_RESTART', 'ITERATION_INFO': 'ITERATION_INFO', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'XES_SPECTRUM': 'XES_SPECTRUM', 'XAS_SPECTRUM': 'XAS_SPECTRUM', 'PDOS': 'PDOS', 'RESTART': 'RESTART', 'CLS_FUNCTION_CUBES': 'CLS_FUNCTION_CUBES'}
 

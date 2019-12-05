@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _update1 import _update1
+from xcp2k.classes._update1 import _update1
 
 
 class _wfn_mix1(InputSection):

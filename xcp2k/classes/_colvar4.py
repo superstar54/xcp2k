@@ -1,29 +1,29 @@
 from xcp2k.inputsection import InputSection
-from _distance4 import _distance4
-from _angle5 import _angle5
-from _torsion6 import _torsion6
-from _coordination4 import _coordination4
-from _population4 import _population4
-from _gyration_radius4 import _gyration_radius4
-from _distance_point_plane4 import _distance_point_plane4
-from _angle_plane_plane4 import _angle_plane_plane4
-from _bond_rotation4 import _bond_rotation4
-from _distance_function4 import _distance_function4
-from _qparm4 import _qparm4
-from _hydronium_shell4 import _hydronium_shell4
-from _hydronium_distance4 import _hydronium_distance4
-from _acid_hydronium_distance4 import _acid_hydronium_distance4
-from _acid_hydronium_shell4 import _acid_hydronium_shell4
-from _rmsd4 import _rmsd4
-from _xyz_diag4 import _xyz_diag4
-from _xyz_outerdiag4 import _xyz_outerdiag4
-from _u4 import _u4
-from _wc4 import _wc4
-from _hbp4 import _hbp4
-from _ring_puckering4 import _ring_puckering4
-from _conditioned_distance4 import _conditioned_distance4
-from _print53 import _print53
-from _colvar_func_info3 import _colvar_func_info3
+from xcp2k.classes._distance4 import _distance4
+from xcp2k.classes._angle5 import _angle5
+from xcp2k.classes._torsion6 import _torsion6
+from xcp2k.classes._coordination4 import _coordination4
+from xcp2k.classes._population4 import _population4
+from xcp2k.classes._gyration_radius4 import _gyration_radius4
+from xcp2k.classes._distance_point_plane4 import _distance_point_plane4
+from xcp2k.classes._angle_plane_plane4 import _angle_plane_plane4
+from xcp2k.classes._bond_rotation4 import _bond_rotation4
+from xcp2k.classes._distance_function4 import _distance_function4
+from xcp2k.classes._qparm4 import _qparm4
+from xcp2k.classes._hydronium_shell4 import _hydronium_shell4
+from xcp2k.classes._hydronium_distance4 import _hydronium_distance4
+from xcp2k.classes._acid_hydronium_distance4 import _acid_hydronium_distance4
+from xcp2k.classes._acid_hydronium_shell4 import _acid_hydronium_shell4
+from xcp2k.classes._rmsd4 import _rmsd4
+from xcp2k.classes._xyz_diag4 import _xyz_diag4
+from xcp2k.classes._xyz_outerdiag4 import _xyz_outerdiag4
+from xcp2k.classes._u4 import _u4
+from xcp2k.classes._wc4 import _wc4
+from xcp2k.classes._hbp4 import _hbp4
+from xcp2k.classes._ring_puckering4 import _ring_puckering4
+from xcp2k.classes._conditioned_distance4 import _conditioned_distance4
+from xcp2k.classes._print53 import _print53
+from xcp2k.classes._colvar_func_info3 import _colvar_func_info3
 
 
 class _colvar4(InputSection):
@@ -55,7 +55,7 @@ class _colvar4(InputSection):
         self.PRINT_list = []
         self.COLVAR_FUNC_INFO = _colvar_func_info3()
         self._name = "COLVAR"
-        self._subsections = {'GYRATION_RADIUS': 'GYRATION_RADIUS', 'ANGLE': 'ANGLE', 'CONDITIONED_DISTANCE': 'CONDITIONED_DISTANCE', 'ANGLE_PLANE_PLANE': 'ANGLE_PLANE_PLANE', 'DISTANCE_POINT_PLANE': 'DISTANCE_POINT_PLANE', 'BOND_ROTATION': 'BOND_ROTATION', 'XYZ_OUTERDIAG': 'XYZ_OUTERDIAG', 'ACID_HYDRONIUM_DISTANCE': 'ACID_HYDRONIUM_DISTANCE', 'HBP': 'HBP', 'HYDRONIUM_SHELL': 'HYDRONIUM_SHELL', 'RMSD': 'RMSD', 'COORDINATION': 'COORDINATION', 'QPARM': 'QPARM', 'POPULATION': 'POPULATION', 'DISTANCE_FUNCTION': 'DISTANCE_FUNCTION', 'HYDRONIUM_DISTANCE': 'HYDRONIUM_DISTANCE', 'ACID_HYDRONIUM_SHELL': 'ACID_HYDRONIUM_SHELL', 'U': 'U', 'WC': 'WC', 'DISTANCE': 'DISTANCE', 'RING_PUCKERING': 'RING_PUCKERING', 'XYZ_DIAG': 'XYZ_DIAG', 'COLVAR_FUNC_INFO': 'COLVAR_FUNC_INFO', 'TORSION': 'TORSION'}
+        self._subsections = {'DISTANCE': 'DISTANCE', 'ANGLE': 'ANGLE', 'TORSION': 'TORSION', 'COORDINATION': 'COORDINATION', 'POPULATION': 'POPULATION', 'GYRATION_RADIUS': 'GYRATION_RADIUS', 'DISTANCE_POINT_PLANE': 'DISTANCE_POINT_PLANE', 'ANGLE_PLANE_PLANE': 'ANGLE_PLANE_PLANE', 'BOND_ROTATION': 'BOND_ROTATION', 'DISTANCE_FUNCTION': 'DISTANCE_FUNCTION', 'QPARM': 'QPARM', 'HYDRONIUM_SHELL': 'HYDRONIUM_SHELL', 'HYDRONIUM_DISTANCE': 'HYDRONIUM_DISTANCE', 'ACID_HYDRONIUM_DISTANCE': 'ACID_HYDRONIUM_DISTANCE', 'ACID_HYDRONIUM_SHELL': 'ACID_HYDRONIUM_SHELL', 'RMSD': 'RMSD', 'XYZ_DIAG': 'XYZ_DIAG', 'XYZ_OUTERDIAG': 'XYZ_OUTERDIAG', 'U': 'U', 'WC': 'WC', 'HBP': 'HBP', 'RING_PUCKERING': 'RING_PUCKERING', 'CONDITIONED_DISTANCE': 'CONDITIONED_DISTANCE', 'COLVAR_FUNC_INFO': 'COLVAR_FUNC_INFO'}
         self._repeated_subsections = {'PRINT': '_print53'}
         self._attributes = ['PRINT_list']
 

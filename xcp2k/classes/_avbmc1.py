@@ -9,5 +9,5 @@ class _avbmc1(InputSection):
         self.Avbmc_rmin = None
         self.Avbmc_rmax = None
         self._name = "AVBMC"
-        self._keywords = {'Avbmc_atom': 'AVBMC_ATOM', 'Pbias': 'PBIAS', 'Avbmc_rmin': 'AVBMC_RMIN', 'Avbmc_rmax': 'AVBMC_RMAX'}
+        self._keywords = {'Pbias': 'PBIAS', 'Avbmc_atom': 'AVBMC_ATOM', 'Avbmc_rmin': 'AVBMC_RMIN', 'Avbmc_rmax': 'AVBMC_RMAX'}
 

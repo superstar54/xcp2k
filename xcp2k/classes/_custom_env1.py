@@ -7,5 +7,5 @@ class _custom_env1(InputSection):
         self.Efield_file_name = None
         self.Timestep = None
         self._name = "CUSTOM_ENV"
-        self._keywords = {'Timestep': 'TIMESTEP', 'Efield_file_name': 'EFIELD_FILE_NAME'}
+        self._keywords = {'Efield_file_name': 'EFIELD_FILE_NAME', 'Timestep': 'TIMESTEP'}
 

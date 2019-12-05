@@ -9,6 +9,6 @@ class _point11(InputSection):
         self.Weights = []
         self.Xyz = None
         self._name = "POINT"
-        self._keywords = {'Xyz': 'XYZ', 'Type': 'TYPE'}
-        self._repeated_keywords = {'Weights': 'WEIGHTS', 'Atoms': 'ATOMS'}
+        self._keywords = {'Type': 'TYPE', 'Xyz': 'XYZ'}
+        self._repeated_keywords = {'Atoms': 'ATOMS', 'Weights': 'WEIGHTS'}
 

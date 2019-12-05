@@ -12,8 +12,8 @@ class _convergence_control1(InputSection):
         self.Sw_confidence_limit = None
         self.Vn_confidence_limit = None
         self._name = "CONVERGENCE_CONTROL"
-        self._keywords = {'Eps_conv': 'EPS_CONV', 'Sw_confidence_limit': 'SW_CONFIDENCE_LIMIT', 'Vn_confidence_limit': 'VN_CONFIDENCE_LIMIT', 'Coarse_grained_points': 'COARSE_GRAINED_POINTS', 'K_confidence_limit': 'K_CONFIDENCE_LIMIT', 'Max_coarse_grained_width': 'MAX_COARSE_GRAINED_WIDTH', 'Coarse_grained_width': 'COARSE_GRAINED_WIDTH'}
-        self._aliases = {'Max_cg_width': 'Max_coarse_grained_width', 'Cg_width': 'Coarse_grained_width', 'Cg_points': 'Coarse_grained_points'}
+        self._keywords = {'Coarse_grained_width': 'COARSE_GRAINED_WIDTH', 'Max_coarse_grained_width': 'MAX_COARSE_GRAINED_WIDTH', 'Coarse_grained_points': 'COARSE_GRAINED_POINTS', 'Eps_conv': 'EPS_CONV', 'K_confidence_limit': 'K_CONFIDENCE_LIMIT', 'Sw_confidence_limit': 'SW_CONFIDENCE_LIMIT', 'Vn_confidence_limit': 'VN_CONFIDENCE_LIMIT'}
+        self._aliases = {'Cg_width': 'Coarse_grained_width', 'Max_cg_width': 'Max_coarse_grained_width', 'Cg_points': 'Coarse_grained_points'}
 
 
     @property

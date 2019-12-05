@@ -9,5 +9,5 @@ class _convergence_control2(InputSection):
         self.Rms_dr = None
         self.Rms_force = None
         self._name = "CONVERGENCE_CONTROL"
-        self._keywords = {'Max_dr': 'MAX_DR', 'Rms_force': 'RMS_FORCE', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR'}
+        self._keywords = {'Max_dr': 'MAX_DR', 'Max_force': 'MAX_FORCE', 'Rms_dr': 'RMS_DR', 'Rms_force': 'RMS_FORCE'}
 

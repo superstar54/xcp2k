@@ -13,5 +13,5 @@ class _averages2(InputSection):
         self.Iweight = None
         self._name = "AVERAGES"
         self._keywords = {'Iweight': 'IWEIGHT'}
-        self._repeated_keywords = {'Moment_of_inertia': 'MOMENT_OF_INERTIA', 'Winding_number_2': 'WINDING_NUMBER_2', 'Projected_area': 'PROJECTED_AREA', 'Rdf': 'RDF', 'Rho': 'RHO', 'Projected_area_2': 'PROJECTED_AREA_2'}
+        self._repeated_keywords = {'Projected_area': 'PROJECTED_AREA', 'Projected_area_2': 'PROJECTED_AREA_2', 'Winding_number_2': 'WINDING_NUMBER_2', 'Moment_of_inertia': 'MOMENT_OF_INERTIA', 'Rdf': 'RDF', 'Rho': 'RHO'}
 

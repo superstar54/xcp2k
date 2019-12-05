@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _basis1 import _basis1
+from xcp2k.classes._basis1 import _basis1
 
 
 class _shg_integrals_test1(InputSection):
@@ -24,7 +24,7 @@ class _shg_integrals_test1(InputSection):
         self.Test_overlap_abb = None
         self.BASIS_list = []
         self._name = "SHG_INTEGRALS_TEST"
-        self._keywords = {'Test_coulomb': 'TEST_COULOMB', 'Test_vgauss': 'TEST_VGAUSS', 'Check_accuracy': 'CHECK_ACCURACY', 'Abc': 'ABC', 'Nab_min': 'NAB_MIN', 'Test_overlap_abb': 'TEST_OVERLAP_ABB', 'Accuracy_level': 'ACCURACY_LEVEL', 'M': 'M', 'Nrep': 'NREP', 'Test_ra2m': 'TEST_RA2M', 'Test_verfc': 'TEST_VERFC', 'Test_overlap': 'TEST_OVERLAP', 'Test_verf': 'TEST_VERF', 'Test_gauss': 'TEST_GAUSS', 'Calculate_derivatives': 'CALCULATE_DERIVATIVES', 'Test_overlap_aba': 'TEST_OVERLAP_ABA'}
+        self._keywords = {'Abc': 'ABC', 'Nab_min': 'NAB_MIN', 'Nrep': 'NREP', 'Check_accuracy': 'CHECK_ACCURACY', 'Accuracy_level': 'ACCURACY_LEVEL', 'Calculate_derivatives': 'CALCULATE_DERIVATIVES', 'Test_overlap': 'TEST_OVERLAP', 'Test_coulomb': 'TEST_COULOMB', 'Test_verf': 'TEST_VERF', 'Test_verfc': 'TEST_VERFC', 'Test_vgauss': 'TEST_VGAUSS', 'Test_gauss': 'TEST_GAUSS', 'Test_ra2m': 'TEST_RA2M', 'M': 'M', 'Test_overlap_aba': 'TEST_OVERLAP_ABA', 'Test_overlap_abb': 'TEST_OVERLAP_ABB'}
         self._repeated_subsections = {'BASIS': '_basis1'}
         self._attributes = ['Section_parameters', 'BASIS_list']
 

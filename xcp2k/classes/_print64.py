@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info41 import _program_run_info41
-from _restart12 import _restart12
+from xcp2k.classes._program_run_info41 import _program_run_info41
+from xcp2k.classes._restart12 import _restart12
 
 
 class _print64(InputSection):

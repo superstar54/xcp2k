@@ -1,11 +1,11 @@
 from xcp2k.inputsection import InputSection
-from _pao_potential1 import _pao_potential1
-from _pao_descriptor1 import _pao_descriptor1
-from _basis2 import _basis2
-from _potential2 import _potential2
-from _kg_potential1 import _kg_potential1
-from _dft_plus_u1 import _dft_plus_u1
-from _bs1 import _bs1
+from xcp2k.classes._pao_potential1 import _pao_potential1
+from xcp2k.classes._pao_descriptor1 import _pao_descriptor1
+from xcp2k.classes._basis2 import _basis2
+from xcp2k.classes._potential2 import _potential2
+from xcp2k.classes._kg_potential1 import _kg_potential1
+from xcp2k.classes._dft_plus_u1 import _dft_plus_u1
+from xcp2k.classes._bs1 import _bs1
 
 
 class _kind1(InputSection):
@@ -50,20 +50,12 @@ class _kind1(InputSection):
         self.DFT_PLUS_U = _dft_plus_u1()
         self.BS = _bs1()
         self._name = "KIND"
-        self._keywords = {'Floating_basis_center': 'FLOATING_BASIS_CENTER', 'Gpw_type': 'GPW_TYPE', 'Dftb3_param': 'DFTB3_PARAM', 'Pao_basis_size': 'PAO_BASIS_SIZE', 'Kg_potential_file_name': 'KG_POTENTIAL_FILE_NAME', 'Potential': 'POTENTIAL', 'Se_p_orbitals_on_h': 'SE_P_ORBITALS_ON_H', 'Elec_conf': 'ELEC_CONF', 'Core_correction': 'CORE_CORRECTION', 'Kg_potential': 'KG_POTENTIAL', 'Lmax_dftb': 'LMAX_DFTB', 'Lri_basis_set': 'LRI_BASIS_SET', 'Potential_type': 'POTENTIAL_TYPE', 'Hard_exp_radius': 'HARD_EXP_RADIUS', 'Mao': 'MAO', 'Ghost': 'GHOST', 'Max_rad_local': 'MAX_RAD_LOCAL', 'Radial_grid': 'RADIAL_GRID', 'Aux_basis_set': 'AUX_BASIS_SET', 'Ri_aux_basis_set': 'RI_AUX_BASIS_SET', 'No_optimize': 'NO_OPTIMIZE', 'Element': 'ELEMENT', 'Mass': 'MASS', 'Rho0_exp_radius': 'RHO0_EXP_RADIUS', 'Aux_fit_basis_set': 'AUX_FIT_BASIS_SET', 'Mm_radius': 'MM_RADIUS', 'Magnetization': 'MAGNETIZATION', 'Lebedev_grid': 'LEBEDEV_GRID', 'Potential_file_name': 'POTENTIAL_FILE_NAME'}
+        self._keywords = {'Aux_basis_set': 'AUX_BASIS_SET', 'Ri_aux_basis_set': 'RI_AUX_BASIS_SET', 'Lri_basis_set': 'LRI_BASIS_SET', 'Aux_fit_basis_set': 'AUX_FIT_BASIS_SET', 'Elec_conf': 'ELEC_CONF', 'Core_correction': 'CORE_CORRECTION', 'Magnetization': 'MAGNETIZATION', 'Element': 'ELEMENT', 'Mass': 'MASS', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Potential_type': 'POTENTIAL_TYPE', 'Potential': 'POTENTIAL', 'Kg_potential_file_name': 'KG_POTENTIAL_FILE_NAME', 'Kg_potential': 'KG_POTENTIAL', 'Hard_exp_radius': 'HARD_EXP_RADIUS', 'Max_rad_local': 'MAX_RAD_LOCAL', 'Rho0_exp_radius': 'RHO0_EXP_RADIUS', 'Lebedev_grid': 'LEBEDEV_GRID', 'Radial_grid': 'RADIAL_GRID', 'Mm_radius': 'MM_RADIUS', 'Dftb3_param': 'DFTB3_PARAM', 'Lmax_dftb': 'LMAX_DFTB', 'Mao': 'MAO', 'Se_p_orbitals_on_h': 'SE_P_ORBITALS_ON_H', 'Gpw_type': 'GPW_TYPE', 'Ghost': 'GHOST', 'Floating_basis_center': 'FLOATING_BASIS_CENTER', 'No_optimize': 'NO_OPTIMIZE', 'Pao_basis_size': 'PAO_BASIS_SIZE'}
         self._repeated_keywords = {'Basis_set': 'BASIS_SET'}
-        self._subsections = {'BS': 'BS', 'POTENTIAL': 'POTENTIAL', 'KG_POTENTIAL': 'KG_POTENTIAL', 'DFT_PLUS_U': 'DFT_PLUS_U'}
-        self._repeated_subsections = {'PAO_DESCRIPTOR': '_pao_descriptor1', 'PAO_POTENTIAL': '_pao_potential1', 'BASIS': '_basis2'}
-        self._aliases = {'Atomic_weight': 'Mass', 'Ri_aux_basis': 'Ri_aux_basis_set', 'Weight': 'Mass', 'Aux_basis': 'Aux_basis_set', 'Lri_basis': 'Lri_basis_set', 'Pot': 'Potential', 'Kg_pot': 'Kg_potential', 'Auxiliary_basis_set': 'Aux_basis_set', 'Ri_mp2_basis_set': 'Ri_aux_basis_set', 'Aux_fit_basis': 'Aux_fit_basis_set', 'Ri_rpa_basis_set': 'Ri_aux_basis_set', 'Auxiliary_fit_basis_set': 'Aux_fit_basis_set', 'Atomic_mass': 'Mass', 'Element_symbol': 'Element'}
+        self._subsections = {'POTENTIAL': 'POTENTIAL', 'KG_POTENTIAL': 'KG_POTENTIAL', 'DFT_PLUS_U': 'DFT_PLUS_U', 'BS': 'BS'}
+        self._repeated_subsections = {'PAO_POTENTIAL': '_pao_potential1', 'PAO_DESCRIPTOR': '_pao_descriptor1', 'BASIS': '_basis2'}
+        self._aliases = {'Auxiliary_basis_set': 'Aux_basis_set', 'Aux_basis': 'Aux_basis_set', 'Ri_mp2_basis_set': 'Ri_aux_basis_set', 'Ri_rpa_basis_set': 'Ri_aux_basis_set', 'Ri_aux_basis': 'Ri_aux_basis_set', 'Lri_basis': 'Lri_basis_set', 'Auxiliary_fit_basis_set': 'Aux_fit_basis_set', 'Aux_fit_basis': 'Aux_fit_basis_set', 'Element_symbol': 'Element', 'Atomic_mass': 'Mass', 'Atomic_weight': 'Mass', 'Weight': 'Mass', 'Pot': 'Potential', 'Kg_pot': 'Kg_potential'}
         self._attributes = ['Section_parameters', 'PAO_POTENTIAL_list', 'PAO_DESCRIPTOR_list', 'BASIS_list']
-
-    def PAO_DESCRIPTOR_add(self, section_parameters=None):
-        new_section = _pao_descriptor1()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.PAO_DESCRIPTOR_list.append(new_section)
-        return new_section
 
     def PAO_POTENTIAL_add(self, section_parameters=None):
         new_section = _pao_potential1()
@@ -71,6 +63,14 @@ class _kind1(InputSection):
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
         self.PAO_POTENTIAL_list.append(new_section)
+        return new_section
+
+    def PAO_DESCRIPTOR_add(self, section_parameters=None):
+        new_section = _pao_descriptor1()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.PAO_DESCRIPTOR_list.append(new_section)
         return new_section
 
     def BASIS_add(self, section_parameters=None):

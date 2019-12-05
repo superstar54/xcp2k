@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each387 import _each387
+from xcp2k.classes._each387 import _each387
 
 
 class _response_function_cubes3(InputSection):
@@ -16,7 +16,7 @@ class _response_function_cubes3(InputSection):
         self.Append = None
         self.EACH = _each387()
         self._name = "RESPONSE_FUNCTION_CUBES"
-        self._keywords = {'Log_print_key': 'LOG_PRINT_KEY', 'Cubes_lu_bounds': 'CUBES_LU_BOUNDS', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Stride': 'STRIDE', 'Add_last': 'ADD_LAST', 'Append': 'APPEND'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Stride': 'STRIDE', 'Cubes_lu_bounds': 'CUBES_LU_BOUNDS', 'Append': 'APPEND'}
         self._repeated_keywords = {'Cubes_list': 'CUBES_LIST'}
         self._subsections = {'EACH': 'EACH'}
         self._aliases = {'Cubes_lu': 'Cubes_lu_bounds'}

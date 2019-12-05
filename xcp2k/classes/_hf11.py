@@ -1,10 +1,10 @@
 from xcp2k.inputsection import InputSection
-from _hf_info11 import _hf_info11
-from _periodic17 import _periodic17
-from _screening12 import _screening12
-from _interaction_potential16 import _interaction_potential16
-from _load_balance11 import _load_balance11
-from _memory12 import _memory12
+from xcp2k.classes._hf_info11 import _hf_info11
+from xcp2k.classes._periodic17 import _periodic17
+from xcp2k.classes._screening12 import _screening12
+from xcp2k.classes._interaction_potential16 import _interaction_potential16
+from xcp2k.classes._load_balance11 import _load_balance11
+from xcp2k.classes._memory12 import _memory12
 
 
 class _hf11(InputSection):
@@ -21,6 +21,6 @@ class _hf11(InputSection):
         self.LOAD_BALANCE = _load_balance11()
         self.MEMORY = _memory12()
         self._name = "HF"
-        self._keywords = {'Pw_hfx': 'PW_HFX', 'Treat_lsd_in_core': 'TREAT_LSD_IN_CORE', 'Fraction': 'FRACTION', 'Pw_hfx_blocksize': 'PW_HFX_BLOCKSIZE'}
-        self._subsections = {'INTERACTION_POTENTIAL': 'INTERACTION_POTENTIAL', 'PERIODIC': 'PERIODIC', 'SCREENING': 'SCREENING', 'MEMORY': 'MEMORY', 'LOAD_BALANCE': 'LOAD_BALANCE', 'HF_INFO': 'HF_INFO'}
+        self._keywords = {'Fraction': 'FRACTION', 'Treat_lsd_in_core': 'TREAT_LSD_IN_CORE', 'Pw_hfx': 'PW_HFX', 'Pw_hfx_blocksize': 'PW_HFX_BLOCKSIZE'}
+        self._subsections = {'HF_INFO': 'HF_INFO', 'PERIODIC': 'PERIODIC', 'SCREENING': 'SCREENING', 'INTERACTION_POTENTIAL': 'INTERACTION_POTENTIAL', 'LOAD_BALANCE': 'LOAD_BALANCE', 'MEMORY': 'MEMORY'}
 

@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _qm_kind2 import _qm_kind2
-from _link1 import _link1
+from xcp2k.classes._qm_kind2 import _qm_kind2
+from xcp2k.classes._link1 import _link1
 
 
 class _buffer_non_adaptive1(InputSection):

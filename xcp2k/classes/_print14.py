@@ -1,20 +1,20 @@
 from xcp2k.inputsection import InputSection
-from _energy6 import _energy6
-from _projected_area_2_avg1 import _projected_area_2_avg1
-from _winding_number_2_avg1 import _winding_number_2_avg1
-from _moment_of_inertia_avg1 import _moment_of_inertia_avg1
-from _rdf2 import _rdf2
-from _rho2 import _rho2
-from _projected_area1 import _projected_area1
-from _winding_number1 import _winding_number1
-from _moment_of_inertia1 import _moment_of_inertia1
-from _plength1 import _plength1
-from _action1 import _action1
-from _coordinates1 import _coordinates1
-from _perm2 import _perm2
-from _forces1 import _forces1
-from _accepts1 import _accepts1
-from _forces_inst1 import _forces_inst1
+from xcp2k.classes._energy6 import _energy6
+from xcp2k.classes._projected_area_2_avg1 import _projected_area_2_avg1
+from xcp2k.classes._winding_number_2_avg1 import _winding_number_2_avg1
+from xcp2k.classes._moment_of_inertia_avg1 import _moment_of_inertia_avg1
+from xcp2k.classes._rdf2 import _rdf2
+from xcp2k.classes._rho2 import _rho2
+from xcp2k.classes._projected_area1 import _projected_area1
+from xcp2k.classes._winding_number1 import _winding_number1
+from xcp2k.classes._moment_of_inertia1 import _moment_of_inertia1
+from xcp2k.classes._plength1 import _plength1
+from xcp2k.classes._action1 import _action1
+from xcp2k.classes._coordinates1 import _coordinates1
+from xcp2k.classes._perm2 import _perm2
+from xcp2k.classes._forces1 import _forces1
+from xcp2k.classes._accepts1 import _accepts1
+from xcp2k.classes._forces_inst1 import _forces_inst1
 
 
 class _print14(InputSection):
@@ -37,5 +37,5 @@ class _print14(InputSection):
         self.ACCEPTS = _accepts1()
         self.FORCES_INST = _forces_inst1()
         self._name = "PRINT"
-        self._subsections = {'FORCES_INST': 'FORCES_INST', 'MOMENT_OF_INERTIA_AVG': 'MOMENT_OF_INERTIA_AVG', 'FORCES': 'FORCES', 'MOMENT_OF_INERTIA': 'MOMENT_OF_INERTIA', 'ACCEPTS': 'ACCEPTS', 'ENERGY': 'ENERGY', 'PERM': 'PERM', 'WINDING_NUMBER': 'WINDING_NUMBER', 'PROJECTED_AREA': 'PROJECTED_AREA', 'WINDING_NUMBER_2_AVG': 'WINDING_NUMBER_2_AVG', 'RDF': 'RDF', 'COORDINATES': 'COORDINATES', 'RHO': 'RHO', 'ACTION': 'ACTION', 'PROJECTED_AREA_2_AVG': 'PROJECTED_AREA_2_AVG', 'PLENGTH': 'PLENGTH'}
+        self._subsections = {'ENERGY': 'ENERGY', 'PROJECTED_AREA_2_AVG': 'PROJECTED_AREA_2_AVG', 'WINDING_NUMBER_2_AVG': 'WINDING_NUMBER_2_AVG', 'MOMENT_OF_INERTIA_AVG': 'MOMENT_OF_INERTIA_AVG', 'RDF': 'RDF', 'RHO': 'RHO', 'PROJECTED_AREA': 'PROJECTED_AREA', 'WINDING_NUMBER': 'WINDING_NUMBER', 'MOMENT_OF_INERTIA': 'MOMENT_OF_INERTIA', 'PLENGTH': 'PLENGTH', 'ACTION': 'ACTION', 'COORDINATES': 'COORDINATES', 'PERM': 'PERM', 'FORCES': 'FORCES', 'ACCEPTS': 'ACCEPTS', 'FORCES_INST': 'FORCES_INST'}
 

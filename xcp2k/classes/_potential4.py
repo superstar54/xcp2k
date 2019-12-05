@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _gth_potential1 import _gth_potential1
-from _ecp1 import _ecp1
+from xcp2k.classes._gth_potential1 import _gth_potential1
+from xcp2k.classes._ecp1 import _ecp1
 
 
 class _potential4(InputSection):
@@ -14,7 +14,7 @@ class _potential4(InputSection):
         self.GTH_POTENTIAL = _gth_potential1()
         self.ECP = _ecp1()
         self._name = "POTENTIAL"
-        self._keywords = {'Pseudo_type': 'PSEUDO_TYPE', 'Confinement': 'CONFINEMENT', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Potential_name': 'POTENTIAL_NAME', 'Confinement_type': 'CONFINEMENT_TYPE'}
+        self._keywords = {'Confinement_type': 'CONFINEMENT_TYPE', 'Confinement': 'CONFINEMENT', 'Pseudo_type': 'PSEUDO_TYPE', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Potential_name': 'POTENTIAL_NAME'}
         self._subsections = {'GTH_POTENTIAL': 'GTH_POTENTIAL', 'ECP': 'ECP'}
         self._aliases = {'Pot_name': 'Potential_name'}
 

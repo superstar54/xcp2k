@@ -1,13 +1,13 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info40 import _program_run_info40
-from _wannier_cubes5 import _wannier_cubes5
-from _wannier_centers5 import _wannier_centers5
-from _wannier_spreads5 import _wannier_spreads5
-from _loc_restart5 import _loc_restart5
-from _total_dipole4 import _total_dipole4
-from _molecular_dipoles4 import _molecular_dipoles4
-from _molecular_states4 import _molecular_states4
-from _wannier_states4 import _wannier_states4
+from xcp2k.classes._program_run_info40 import _program_run_info40
+from xcp2k.classes._wannier_cubes5 import _wannier_cubes5
+from xcp2k.classes._wannier_centers5 import _wannier_centers5
+from xcp2k.classes._wannier_spreads5 import _wannier_spreads5
+from xcp2k.classes._loc_restart5 import _loc_restart5
+from xcp2k.classes._total_dipole4 import _total_dipole4
+from xcp2k.classes._molecular_dipoles4 import _molecular_dipoles4
+from xcp2k.classes._molecular_states4 import _molecular_states4
+from xcp2k.classes._wannier_states4 import _wannier_states4
 
 
 class _print56(InputSection):
@@ -23,5 +23,5 @@ class _print56(InputSection):
         self.MOLECULAR_STATES = _molecular_states4()
         self.WANNIER_STATES = _wannier_states4()
         self._name = "PRINT"
-        self._subsections = {'MOLECULAR_DIPOLES': 'MOLECULAR_DIPOLES', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'LOC_RESTART': 'LOC_RESTART', 'WANNIER_CENTERS': 'WANNIER_CENTERS', 'TOTAL_DIPOLE': 'TOTAL_DIPOLE', 'WANNIER_STATES': 'WANNIER_STATES', 'WANNIER_CUBES': 'WANNIER_CUBES', 'WANNIER_SPREADS': 'WANNIER_SPREADS', 'MOLECULAR_STATES': 'MOLECULAR_STATES'}
+        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'WANNIER_CUBES': 'WANNIER_CUBES', 'WANNIER_CENTERS': 'WANNIER_CENTERS', 'WANNIER_SPREADS': 'WANNIER_SPREADS', 'LOC_RESTART': 'LOC_RESTART', 'TOTAL_DIPOLE': 'TOTAL_DIPOLE', 'MOLECULAR_DIPOLES': 'MOLECULAR_DIPOLES', 'MOLECULAR_STATES': 'MOLECULAR_STATES', 'WANNIER_STATES': 'WANNIER_STATES'}
 

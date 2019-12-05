@@ -1,28 +1,11 @@
-import sys
-from subprocess import Popen, PIPE
-import os
-from os.path import join, isfile, split, islink
-import numpy as np
-from ase.calculators.calculator import Calculator, all_changes, Parameters
-from ase.units import Rydberg
-from cp2krc import *
-import multiprocessing
-#----------------------------------------------------------
-def run(job):
-    cwd = os.getcwd()
-    if not os.path.exists(job):
-        os.makedirs(job) 
-    os.chdir(job)
-    os.chdir(cwd)
-#----------------------------------------------------------
-
-n = 20
-pool = multiprocessing.Pool(n)
-results = []
-for job in range(n):
-    print('job = ', job)
-    results.append(pool.apply_async(run, (str(job))))
-for r in results:
-    r.get()
-pool.close()
-pool.join()
+from ase import Atoms
+from ase.build import fcc111, add_adsorbate, bulk
+from ase.io import read, write
+adsorbate = Atoms('CO')
+adsorbate[1].z = 1.1
+a = 3.61
+slab = fcc111('Cu', (2, 2, 3), a=a, vacuum=7.0)
+slab2 = fcc111('Pt', (2, 2, 3), a=a, vacuum=7.0)
+add_adsorbate(slab, adsorbate, 1.8, 'ontop')
+images = [slab, slab2]
+write('movie.gif', images, interval=500)

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each227 import _each227
+from xcp2k.classes._each227 import _each227
 
 
 class _basis_set_file1(InputSection):
@@ -12,7 +12,7 @@ class _basis_set_file1(InputSection):
         self.Log_print_key = None
         self.EACH = _each227()
         self._name = "BASIS_SET_FILE"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

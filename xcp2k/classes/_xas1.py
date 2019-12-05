@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _scf2 import _scf2
-from _localize1 import _localize1
-from _print38 import _print38
+from xcp2k.classes._scf2 import _scf2
+from xcp2k.classes._localize1 import _localize1
+from xcp2k.classes._print38 import _print38
 
 
 class _xas1(InputSection):
@@ -29,10 +29,10 @@ class _xas1(InputSection):
         self.LOCALIZE = _localize1()
         self.PRINT = _print38()
         self._name = "XAS"
-        self._keywords = {'Xes_empty_homo': 'XES_EMPTY_HOMO', 'Spin_channel': 'SPIN_CHANNEL', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Ngauss': 'NGAUSS', 'Added_mos': 'ADDED_MOS', 'Xes_core': 'XES_CORE', 'Dipole_form': 'DIPOLE_FORM', 'State_type': 'STATE_TYPE', 'Xas_core': 'XAS_CORE', 'Restart': 'RESTART', 'Max_iter_added': 'MAX_ITER_ADDED', 'State_search': 'STATE_SEARCH', 'Eps_added': 'EPS_ADDED', 'Method': 'METHOD', 'Xas_tot_el': 'XAS_TOT_EL'}
+        self._keywords = {'Method': 'METHOD', 'Xas_core': 'XAS_CORE', 'Xas_tot_el': 'XAS_TOT_EL', 'Xes_core': 'XES_CORE', 'Xes_empty_homo': 'XES_EMPTY_HOMO', 'Dipole_form': 'DIPOLE_FORM', 'State_type': 'STATE_TYPE', 'State_search': 'STATE_SEARCH', 'Spin_channel': 'SPIN_CHANNEL', 'Added_mos': 'ADDED_MOS', 'Max_iter_added': 'MAX_ITER_ADDED', 'Eps_added': 'EPS_ADDED', 'Ngauss': 'NGAUSS', 'Restart': 'RESTART', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME'}
         self._repeated_keywords = {'Atoms_list': 'ATOMS_LIST'}
-        self._subsections = {'PRINT': 'PRINT', 'LOCALIZE': 'LOCALIZE', 'SCF': 'SCF'}
-        self._aliases = {'Dip_form': 'Dipole_form', 'Xas_method': 'Method', 'Type': 'State_type', 'Restart_file_name': 'Wfn_restart_file_name'}
+        self._subsections = {'SCF': 'SCF', 'LOCALIZE': 'LOCALIZE', 'PRINT': 'PRINT'}
+        self._aliases = {'Xas_method': 'Method', 'Dip_form': 'Dipole_form', 'Type': 'State_type', 'Restart_file_name': 'Wfn_restart_file_name'}
         self._repeated_aliases = {'At_list': 'Atoms_list'}
         self._attributes = ['Section_parameters']
 

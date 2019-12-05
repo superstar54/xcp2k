@@ -1,9 +1,9 @@
 from xcp2k.inputsection import InputSection
-from _mt3 import _mt3
-from _wavelet3 import _wavelet3
-from _multipole4 import _multipole4
-from _ewald3 import _ewald3
-from _implicit3 import _implicit3
+from xcp2k.classes._mt3 import _mt3
+from xcp2k.classes._wavelet3 import _wavelet3
+from xcp2k.classes._multipole4 import _multipole4
+from xcp2k.classes._ewald3 import _ewald3
+from xcp2k.classes._implicit3 import _implicit3
 
 
 class _poisson3(InputSection):
@@ -17,9 +17,9 @@ class _poisson3(InputSection):
         self.EWALD = _ewald3()
         self.IMPLICIT = _implicit3()
         self._name = "POISSON"
-        self._keywords = {'Periodic': 'PERIODIC', 'Poisson_solver': 'POISSON_SOLVER'}
-        self._subsections = {'MULTIPOLE': 'MULTIPOLE', 'MT': 'MT', 'EWALD': 'EWALD', 'WAVELET': 'WAVELET', 'IMPLICIT': 'IMPLICIT'}
-        self._aliases = {'Psolver': 'Poisson_solver', 'Poisson': 'Poisson_solver'}
+        self._keywords = {'Poisson_solver': 'POISSON_SOLVER', 'Periodic': 'PERIODIC'}
+        self._subsections = {'MT': 'MT', 'WAVELET': 'WAVELET', 'MULTIPOLE': 'MULTIPOLE', 'EWALD': 'EWALD', 'IMPLICIT': 'IMPLICIT'}
+        self._aliases = {'Poisson': 'Poisson_solver', 'Psolver': 'Poisson_solver'}
 
 
     @property

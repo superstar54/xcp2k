@@ -1,19 +1,19 @@
 from xcp2k.inputsection import InputSection
-from _dipole4 import _dipole4
-from _pgf1 import _pgf1
-from _potential1 import _potential1
-from _mm_potential1 import _mm_potential1
-from _qmmm_matrix1 import _qmmm_matrix1
-from _program_banner3 import _program_banner3
-from _program_run_info34 import _program_run_info34
-from _periodic_info1 import _periodic_info1
-from _grid_information2 import _grid_information2
-from _derivatives3 import _derivatives3
-from _qmmm_charges1 import _qmmm_charges1
-from _qmmm_link_info1 import _qmmm_link_info1
-from _qs_derivatives1 import _qs_derivatives1
-from _image_charge_info1 import _image_charge_info1
-from _image_charge_restart1 import _image_charge_restart1
+from xcp2k.classes._dipole4 import _dipole4
+from xcp2k.classes._pgf1 import _pgf1
+from xcp2k.classes._potential1 import _potential1
+from xcp2k.classes._mm_potential1 import _mm_potential1
+from xcp2k.classes._qmmm_matrix1 import _qmmm_matrix1
+from xcp2k.classes._program_banner3 import _program_banner3
+from xcp2k.classes._program_run_info34 import _program_run_info34
+from xcp2k.classes._periodic_info1 import _periodic_info1
+from xcp2k.classes._grid_information2 import _grid_information2
+from xcp2k.classes._derivatives3 import _derivatives3
+from xcp2k.classes._qmmm_charges1 import _qmmm_charges1
+from xcp2k.classes._qmmm_link_info1 import _qmmm_link_info1
+from xcp2k.classes._qs_derivatives1 import _qs_derivatives1
+from xcp2k.classes._image_charge_info1 import _image_charge_info1
+from xcp2k.classes._image_charge_restart1 import _image_charge_restart1
 
 
 class _print47(InputSection):
@@ -35,5 +35,5 @@ class _print47(InputSection):
         self.IMAGE_CHARGE_INFO = _image_charge_info1()
         self.IMAGE_CHARGE_RESTART = _image_charge_restart1()
         self._name = "PRINT"
-        self._subsections = {'PGF': 'PGF', 'DERIVATIVES': 'DERIVATIVES', 'IMAGE_CHARGE_RESTART': 'IMAGE_CHARGE_RESTART', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'PROGRAM_BANNER': 'PROGRAM_BANNER', 'DIPOLE': 'DIPOLE', 'QMMM_CHARGES': 'QMMM_CHARGES', 'QMMM_MATRIX': 'QMMM_MATRIX', 'QMMM_LINK_INFO': 'QMMM_LINK_INFO', 'POTENTIAL': 'POTENTIAL', 'IMAGE_CHARGE_INFO': 'IMAGE_CHARGE_INFO', 'GRID_INFORMATION': 'GRID_INFORMATION', 'MM_POTENTIAL': 'MM_POTENTIAL', 'PERIODIC_INFO': 'PERIODIC_INFO', 'QS_DERIVATIVES': 'QS_DERIVATIVES'}
+        self._subsections = {'DIPOLE': 'DIPOLE', 'PGF': 'PGF', 'POTENTIAL': 'POTENTIAL', 'MM_POTENTIAL': 'MM_POTENTIAL', 'QMMM_MATRIX': 'QMMM_MATRIX', 'PROGRAM_BANNER': 'PROGRAM_BANNER', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'PERIODIC_INFO': 'PERIODIC_INFO', 'GRID_INFORMATION': 'GRID_INFORMATION', 'DERIVATIVES': 'DERIVATIVES', 'QMMM_CHARGES': 'QMMM_CHARGES', 'QMMM_LINK_INFO': 'QMMM_LINK_INFO', 'QS_DERIVATIVES': 'QS_DERIVATIVES', 'IMAGE_CHARGE_INFO': 'IMAGE_CHARGE_INFO', 'IMAGE_CHARGE_RESTART': 'IMAGE_CHARGE_RESTART'}
 

@@ -10,8 +10,8 @@ class _define_region5(InputSection):
         self.Mm_subsys = None
         self.Qm_subsys = None
         self._name = "DEFINE_REGION"
-        self._keywords = {'Qm_subsys': 'QM_SUBSYS', 'Mm_subsys': 'MM_SUBSYS'}
-        self._repeated_keywords = {'Molname': 'MOLNAME', 'List': 'LIST'}
+        self._keywords = {'Mm_subsys': 'MM_SUBSYS', 'Qm_subsys': 'QM_SUBSYS'}
+        self._repeated_keywords = {'List': 'LIST', 'Molname': 'MOLNAME'}
         self._aliases = {'Protein': 'Mm_subsys'}
         self._repeated_aliases = {'Segname': 'Molname'}
 

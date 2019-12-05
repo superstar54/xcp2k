@@ -14,8 +14,8 @@ class _mgrid2(InputSection):
         self.Skip_load_balance_distributed = None
         self.Multigrid_cutoff = None
         self._name = "MGRID"
-        self._keywords = {'Cutoff': 'CUTOFF', 'Skip_load_balance_distributed': 'SKIP_LOAD_BALANCE_DISTRIBUTED', 'Multigrid_set': 'MULTIGRID_SET', 'Ngrids': 'NGRIDS', 'Progression_factor': 'PROGRESSION_FACTOR', 'Rel_cutoff': 'REL_CUTOFF', 'Multigrid_cutoff': 'MULTIGRID_CUTOFF', 'Commensurate': 'COMMENSURATE', 'Realspace': 'REALSPACE'}
-        self._aliases = {'Cutoff_list': 'Multigrid_cutoff', 'Relative_cutoff': 'Rel_cutoff'}
+        self._keywords = {'Ngrids': 'NGRIDS', 'Cutoff': 'CUTOFF', 'Progression_factor': 'PROGRESSION_FACTOR', 'Commensurate': 'COMMENSURATE', 'Realspace': 'REALSPACE', 'Rel_cutoff': 'REL_CUTOFF', 'Multigrid_set': 'MULTIGRID_SET', 'Skip_load_balance_distributed': 'SKIP_LOAD_BALANCE_DISTRIBUTED', 'Multigrid_cutoff': 'MULTIGRID_CUTOFF'}
+        self._aliases = {'Relative_cutoff': 'Rel_cutoff', 'Cutoff_list': 'Multigrid_cutoff'}
 
 
     @property

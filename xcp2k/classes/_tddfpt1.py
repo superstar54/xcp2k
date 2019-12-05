@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _xc3 import _xc3
-from _sic1 import _sic1
+from xcp2k.classes._xc3 import _xc3
+from xcp2k.classes._sic1 import _sic1
 
 
 class _tddfpt1(InputSection):
@@ -22,9 +22,9 @@ class _tddfpt1(InputSection):
         self.XC = _xc3()
         self.SIC = _sic1()
         self._name = "TDDFPT"
-        self._keywords = {'Kernel': 'KERNEL', 'Nlumo': 'NLUMO', 'Lsd_singlets': 'LSD_SINGLETS', 'Nreortho': 'NREORTHO', 'Max_kv': 'MAX_KV', 'Invert_s': 'INVERT_S', 'Restarts': 'RESTARTS', 'Preconditioner': 'PRECONDITIONER', 'Diag_method': 'DIAG_METHOD', 'Convergence': 'CONVERGENCE', 'Nev': 'NEV', 'Oe_corr': 'OE_CORR', 'Res_etype': 'RES_ETYPE'}
-        self._subsections = {'SIC': 'SIC', 'XC': 'XC'}
-        self._aliases = {'Res_e_type': 'Res_etype', 'Reortho': 'Nreortho', 'Reorthogonalitazions': 'Nreortho', 'Conv': 'Convergence', 'Restricted_excitations_type': 'Res_etype', 'Max_vectors': 'Max_kv', 'N_reortho': 'Nreortho', 'Invert_overlap': 'Invert_s', 'Diagonalization_method': 'Diag_method', 'Orbital_eigenvalues_correction': 'Oe_corr', 'Do_kernel': 'Kernel', 'Precond': 'Preconditioner', 'Ev': 'Nev', 'N_ev': 'Nev', 'Method': 'Diag_method', 'N_restarts': 'Restarts'}
+        self._keywords = {'Max_kv': 'MAX_KV', 'Restarts': 'RESTARTS', 'Nev': 'NEV', 'Nlumo': 'NLUMO', 'Nreortho': 'NREORTHO', 'Kernel': 'KERNEL', 'Lsd_singlets': 'LSD_SINGLETS', 'Invert_s': 'INVERT_S', 'Preconditioner': 'PRECONDITIONER', 'Res_etype': 'RES_ETYPE', 'Diag_method': 'DIAG_METHOD', 'Oe_corr': 'OE_CORR', 'Convergence': 'CONVERGENCE'}
+        self._subsections = {'XC': 'XC', 'SIC': 'SIC'}
+        self._aliases = {'Max_vectors': 'Max_kv', 'N_restarts': 'Restarts', 'N_ev': 'Nev', 'Ev': 'Nev', 'N_reortho': 'Nreortho', 'Reortho': 'Nreortho', 'Reorthogonalitazions': 'Nreortho', 'Do_kernel': 'Kernel', 'Invert_overlap': 'Invert_s', 'Precond': 'Preconditioner', 'Restricted_excitations_type': 'Res_etype', 'Res_e_type': 'Res_etype', 'Diagonalization_method': 'Diag_method', 'Method': 'Diag_method', 'Orbital_eigenvalues_correction': 'Oe_corr', 'Conv': 'Convergence'}
 
 
     @property

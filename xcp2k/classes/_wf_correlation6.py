@@ -1,14 +1,14 @@
 from xcp2k.inputsection import InputSection
-from _mp2_info6 import _mp2_info6
-from _direct_canonical6 import _direct_canonical6
-from _wfc_gpw6 import _wfc_gpw6
-from _ri_mp26 import _ri_mp26
-from _opt_ri_basis6 import _opt_ri_basis6
-from _ri_rpa6 import _ri_rpa6
-from _ri_laplace6 import _ri_laplace6
-from _cphf6 import _cphf6
-from _interaction_potential18 import _interaction_potential18
-from _eri_mme8 import _eri_mme8
+from xcp2k.classes._mp2_info6 import _mp2_info6
+from xcp2k.classes._direct_canonical6 import _direct_canonical6
+from xcp2k.classes._wfc_gpw6 import _wfc_gpw6
+from xcp2k.classes._ri_mp26 import _ri_mp26
+from xcp2k.classes._opt_ri_basis6 import _opt_ri_basis6
+from xcp2k.classes._ri_rpa6 import _ri_rpa6
+from xcp2k.classes._ri_laplace6 import _ri_laplace6
+from xcp2k.classes._cphf6 import _cphf6
+from xcp2k.classes._interaction_potential18 import _interaction_potential18
+from xcp2k.classes._eri_mme8 import _eri_mme8
 
 
 class _wf_correlation6(InputSection):
@@ -37,9 +37,9 @@ class _wf_correlation6(InputSection):
         self.INTERACTION_POTENTIAL = _interaction_potential18()
         self.ERI_MME = _eri_mme8()
         self._name = "WF_CORRELATION"
-        self._keywords = {'Minimal_gap': 'MINIMAL_GAP', 'Group_size': 'GROUP_SIZE', 'Row_block': 'ROW_BLOCK', 'Calc_cond_num': 'CALC_COND_NUM', 'Scale_s': 'SCALE_S', 'Scale_t': 'SCALE_T', 'Memory': 'MEMORY', 'Eri_method': 'ERI_METHOD', 'Col_block': 'COL_BLOCK', 'Method': 'METHOD', 'Eri_blksize': 'ERI_BLKSIZE', 'Ri_metric': 'RI_METRIC'}
-        self._subsections = {'MP2_INFO': 'MP2_INFO', 'RI_RPA': 'RI_RPA', 'WFC_GPW': 'WFC_GPW', 'RI_LAPLACE': 'RI_LAPLACE', 'RI_MP2': 'RI_MP2', 'CPHF': 'CPHF', 'INTERACTION_POTENTIAL': 'INTERACTION_POTENTIAL', 'OPT_RI_BASIS': 'OPT_RI_BASIS', 'ERI_MME': 'ERI_MME', 'DIRECT_CANONICAL': 'DIRECT_CANONICAL'}
-        self._aliases = {'Row_block_size': 'Row_block', 'Number_proc': 'Group_size', 'Col_block_size': 'Col_block', 'Calc_condition_number': 'Calc_cond_num', 'Ri': 'Ri_metric'}
+        self._keywords = {'Method': 'METHOD', 'Memory': 'MEMORY', 'Scale_s': 'SCALE_S', 'Scale_t': 'SCALE_T', 'Group_size': 'GROUP_SIZE', 'Row_block': 'ROW_BLOCK', 'Col_block': 'COL_BLOCK', 'Calc_cond_num': 'CALC_COND_NUM', 'Ri_metric': 'RI_METRIC', 'Eri_method': 'ERI_METHOD', 'Eri_blksize': 'ERI_BLKSIZE', 'Minimal_gap': 'MINIMAL_GAP'}
+        self._subsections = {'MP2_INFO': 'MP2_INFO', 'DIRECT_CANONICAL': 'DIRECT_CANONICAL', 'WFC_GPW': 'WFC_GPW', 'RI_MP2': 'RI_MP2', 'OPT_RI_BASIS': 'OPT_RI_BASIS', 'RI_RPA': 'RI_RPA', 'RI_LAPLACE': 'RI_LAPLACE', 'CPHF': 'CPHF', 'INTERACTION_POTENTIAL': 'INTERACTION_POTENTIAL', 'ERI_MME': 'ERI_MME'}
+        self._aliases = {'Number_proc': 'Group_size', 'Row_block_size': 'Row_block', 'Col_block_size': 'Col_block', 'Calc_condition_number': 'Calc_cond_num', 'Ri': 'Ri_metric'}
 
 
     @property

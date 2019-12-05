@@ -10,5 +10,5 @@ class _non_local3(InputSection):
         self.Cutoff = None
         self.Parameters = None
         self._name = "NON_LOCAL"
-        self._keywords = {'Verbose_output': 'VERBOSE_OUTPUT', 'Kernel_file_name': 'KERNEL_FILE_NAME', 'Type': 'TYPE', 'Parameters': 'PARAMETERS', 'Cutoff': 'CUTOFF'}
+        self._keywords = {'Type': 'TYPE', 'Verbose_output': 'VERBOSE_OUTPUT', 'Kernel_file_name': 'KERNEL_FILE_NAME', 'Cutoff': 'CUTOFF', 'Parameters': 'PARAMETERS'}
 

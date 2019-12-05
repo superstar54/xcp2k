@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _ub1 import _ub1
+from xcp2k.classes._ub1 import _ub1
 
 
 class _bend1(InputSection):
@@ -18,6 +18,6 @@ class _bend1(InputSection):
         self.Legendre = None
         self.UB = _ub1()
         self._name = "BEND"
-        self._keywords = {'Kbs32': 'KBS32', 'Kind': 'KIND', 'Legendre': 'LEGENDRE', 'Kss': 'KSS', 'Cb': 'CB', 'K': 'K', 'Theta0': 'THETA0', 'Atoms': 'ATOMS', 'R032': 'R032', 'Kbs12': 'KBS12', 'R012': 'R012'}
+        self._keywords = {'Atoms': 'ATOMS', 'Kind': 'KIND', 'K': 'K', 'Cb': 'CB', 'R012': 'R012', 'R032': 'R032', 'Kbs12': 'KBS12', 'Kbs32': 'KBS32', 'Kss': 'KSS', 'Theta0': 'THETA0', 'Legendre': 'LEGENDRE'}
         self._subsections = {'UB': 'UB'}
 

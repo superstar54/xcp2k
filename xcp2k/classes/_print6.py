@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _thermostat_info1 import _thermostat_info1
-from _temperature1 import _temperature1
-from _energy1 import _energy1
+from xcp2k.classes._thermostat_info1 import _thermostat_info1
+from xcp2k.classes._temperature1 import _temperature1
+from xcp2k.classes._energy1 import _energy1
 
 
 class _print6(InputSection):
@@ -11,5 +11,5 @@ class _print6(InputSection):
         self.TEMPERATURE = _temperature1()
         self.ENERGY = _energy1()
         self._name = "PRINT"
-        self._subsections = {'ENERGY': 'ENERGY', 'THERMOSTAT_INFO': 'THERMOSTAT_INFO', 'TEMPERATURE': 'TEMPERATURE'}
+        self._subsections = {'THERMOSTAT_INFO': 'THERMOSTAT_INFO', 'TEMPERATURE': 'TEMPERATURE', 'ENERGY': 'ENERGY'}
 

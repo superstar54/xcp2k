@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point31 import _point31
+from xcp2k.classes._point31 import _point31
 
 
 class _wc2(InputSection):

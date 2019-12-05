@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _msd_kind1 import _msd_kind1
-from _msd_molecule1 import _msd_molecule1
-from _displaced_atom1 import _displaced_atom1
+from xcp2k.classes._msd_kind1 import _msd_kind1
+from xcp2k.classes._msd_molecule1 import _msd_molecule1
+from xcp2k.classes._displaced_atom1 import _displaced_atom1
 
 
 class _print10(InputSection):

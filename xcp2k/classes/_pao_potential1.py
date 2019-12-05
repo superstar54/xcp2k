@@ -9,5 +9,5 @@ class _pao_potential1(InputSection):
         self.Weight = None
         self.Max_projector = None
         self._name = "PAO_POTENTIAL"
-        self._keywords = {'Max_projector': 'MAX_PROJECTOR', 'Beta': 'BETA', 'Weight': 'WEIGHT', 'Maxl': 'MAXL'}
+        self._keywords = {'Maxl': 'MAXL', 'Beta': 'BETA', 'Weight': 'WEIGHT', 'Max_projector': 'MAX_PROJECTOR'}
 

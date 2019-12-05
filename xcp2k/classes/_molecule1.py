@@ -8,8 +8,8 @@ class _molecule1(InputSection):
         self.Conn_file_name = None
         self.Conn_file_format = None
         self._name = "MOLECULE"
-        self._keywords = {'Conn_file_name': 'CONN_FILE_NAME', 'Nmol': 'NMOL', 'Conn_file_format': 'CONN_FILE_FORMAT'}
-        self._aliases = {'Connectivity': 'Conn_file_format', 'Conn_file': 'Conn_file_name'}
+        self._keywords = {'Nmol': 'NMOL', 'Conn_file_name': 'CONN_FILE_NAME', 'Conn_file_format': 'CONN_FILE_FORMAT'}
+        self._aliases = {'Conn_file': 'Conn_file_name', 'Connectivity': 'Conn_file_format'}
 
 
     @property

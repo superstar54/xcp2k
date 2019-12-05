@@ -1,10 +1,10 @@
 from xcp2k.inputsection import InputSection
-from _energy7 import _energy7
-from _action2 import _action2
-from _centroid_pos1 import _centroid_pos1
-from _centroid_vel1 import _centroid_vel1
-from _centroid_gyr1 import _centroid_gyr1
-from _com1 import _com1
+from xcp2k.classes._energy7 import _energy7
+from xcp2k.classes._action2 import _action2
+from xcp2k.classes._centroid_pos1 import _centroid_pos1
+from xcp2k.classes._centroid_vel1 import _centroid_vel1
+from xcp2k.classes._centroid_gyr1 import _centroid_gyr1
+from xcp2k.classes._com1 import _com1
 
 
 class _print15(InputSection):
@@ -19,5 +19,5 @@ class _print15(InputSection):
         self.COM = _com1()
         self._name = "PRINT"
         self._keywords = {'Imaginary_time_stride': 'IMAGINARY_TIME_STRIDE'}
-        self._subsections = {'CENTROID_VEL': 'CENTROID_VEL', 'ENERGY': 'ENERGY', 'CENTROID_POS': 'CENTROID_POS', 'ACTION': 'ACTION', 'COM': 'COM', 'CENTROID_GYR': 'CENTROID_GYR'}
+        self._subsections = {'ENERGY': 'ENERGY', 'ACTION': 'ACTION', 'CENTROID_POS': 'CENTROID_POS', 'CENTROID_VEL': 'CENTROID_VEL', 'CENTROID_GYR': 'CENTROID_GYR', 'COM': 'COM'}
 

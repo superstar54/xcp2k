@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info46 import _program_run_info46
-from _block1 import _block1
+from xcp2k.classes._program_run_info46 import _program_run_info46
+from xcp2k.classes._block1 import _block1
 
 
 class _projection1(InputSection):

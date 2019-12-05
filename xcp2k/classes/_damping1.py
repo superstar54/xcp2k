@@ -10,5 +10,5 @@ class _damping1(InputSection):
         self.Bij = None
         self.Cij = None
         self._name = "DAMPING"
-        self._keywords = {'Bij': 'BIJ', 'Type': 'TYPE', 'Order': 'ORDER', 'Cij': 'CIJ', 'Atom': 'ATOM'}
+        self._keywords = {'Atom': 'ATOM', 'Type': 'TYPE', 'Order': 'ORDER', 'Bij': 'BIJ', 'Cij': 'CIJ'}
 

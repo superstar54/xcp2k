@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _rng_init8 import _rng_init8
+from xcp2k.classes._rng_init8 import _rng_init8
 
 
 class _pile1(InputSection):

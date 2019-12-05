@@ -1,31 +1,31 @@
 from xcp2k.inputsection import InputSection
-from _scf1 import _scf1
-from _ls_scf1 import _ls_scf1
-from _almo_scf1 import _almo_scf1
-from _kg_method1 import _kg_method1
-from _auxiliary_density_matrix_method1 import _auxiliary_density_matrix_method1
-from _qs1 import _qs1
-from _tddfpt1 import _tddfpt1
-from _mgrid1 import _mgrid1
-from _xc4 import _xc4
-from _relativistic1 import _relativistic1
-from _sic2 import _sic2
-from _low_spin_roks1 import _low_spin_roks1
-from _efield1 import _efield1
-from _periodic_efield1 import _periodic_efield1
-from _external_potential2 import _external_potential2
-from _transport1 import _transport1
-from _external_density1 import _external_density1
-from _external_vxc1 import _external_vxc1
-from _poisson1 import _poisson1
-from _kpoints1 import _kpoints1
-from _scrf1 import _scrf1
-from _density_fitting1 import _density_fitting1
-from _xas1 import _xas1
-from _localize2 import _localize2
-from _real_time_propagation1 import _real_time_propagation1
-from _print42 import _print42
-from _sccs2 import _sccs2
+from xcp2k.classes._scf1 import _scf1
+from xcp2k.classes._ls_scf1 import _ls_scf1
+from xcp2k.classes._almo_scf1 import _almo_scf1
+from xcp2k.classes._kg_method1 import _kg_method1
+from xcp2k.classes._auxiliary_density_matrix_method1 import _auxiliary_density_matrix_method1
+from xcp2k.classes._qs1 import _qs1
+from xcp2k.classes._tddfpt1 import _tddfpt1
+from xcp2k.classes._mgrid1 import _mgrid1
+from xcp2k.classes._xc4 import _xc4
+from xcp2k.classes._relativistic1 import _relativistic1
+from xcp2k.classes._sic2 import _sic2
+from xcp2k.classes._low_spin_roks1 import _low_spin_roks1
+from xcp2k.classes._efield1 import _efield1
+from xcp2k.classes._periodic_efield1 import _periodic_efield1
+from xcp2k.classes._external_potential2 import _external_potential2
+from xcp2k.classes._transport1 import _transport1
+from xcp2k.classes._external_density1 import _external_density1
+from xcp2k.classes._external_vxc1 import _external_vxc1
+from xcp2k.classes._poisson1 import _poisson1
+from xcp2k.classes._kpoints1 import _kpoints1
+from xcp2k.classes._scrf1 import _scrf1
+from xcp2k.classes._density_fitting1 import _density_fitting1
+from xcp2k.classes._xas1 import _xas1
+from xcp2k.classes._localize2 import _localize2
+from xcp2k.classes._real_time_propagation1 import _real_time_propagation1
+from xcp2k.classes._print42 import _print42
+from xcp2k.classes._sccs2 import _sccs2
 
 
 class _dft1(InputSection):
@@ -73,20 +73,12 @@ class _dft1(InputSection):
         self.PRINT = _print42()
         self.SCCS = _sccs2()
         self._name = "DFT"
-        self._keywords = {'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Multiplicity': 'MULTIPLICITY', 'Surf_dip_dir': 'SURF_DIP_DIR', 'Uks': 'UKS', 'Plus_u_method': 'PLUS_U_METHOD', 'Charge': 'CHARGE', 'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Relax_multiplicity': 'RELAX_MULTIPLICITY', 'Roks': 'ROKS', 'Surface_dipole_correction': 'SURFACE_DIPOLE_CORRECTION', 'Excitations': 'EXCITATIONS', 'Subcells': 'SUBCELLS'}
-        self._repeated_keywords = {'Auto_basis': 'AUTO_BASIS', 'Basis_set_file_name': 'BASIS_SET_FILE_NAME'}
-        self._subsections = {'KPOINTS': 'KPOINTS', 'ALMO_SCF': 'ALMO_SCF', 'SIC': 'SIC', 'POISSON': 'POISSON', 'EXTERNAL_VXC': 'EXTERNAL_VXC', 'PRINT': 'PRINT', 'AUXILIARY_DENSITY_MATRIX_METHOD': 'AUXILIARY_DENSITY_MATRIX_METHOD', 'LS_SCF': 'LS_SCF', 'EXTERNAL_POTENTIAL': 'EXTERNAL_POTENTIAL', 'SCF': 'SCF', 'RELATIVISTIC': 'RELATIVISTIC', 'EXTERNAL_DENSITY': 'EXTERNAL_DENSITY', 'KG_METHOD': 'KG_METHOD', 'REAL_TIME_PROPAGATION': 'REAL_TIME_PROPAGATION', 'XC': 'XC', 'XAS': 'XAS', 'TDDFPT': 'TDDFPT', 'LOW_SPIN_ROKS': 'LOW_SPIN_ROKS', 'LOCALIZE': 'LOCALIZE', 'MGRID': 'MGRID', 'SCCS': 'SCCS', 'QS': 'QS', 'SCRF': 'SCRF', 'DENSITY_FITTING': 'DENSITY_FITTING', 'TRANSPORT': 'TRANSPORT'}
-        self._repeated_subsections = {'PERIODIC_EFIELD': '_periodic_efield1', 'EFIELD': '_efield1'}
-        self._aliases = {'Relax_multip': 'Relax_multiplicity', 'Lsd': 'Uks', 'Multip': 'Multiplicity', 'Restart_file_name': 'Wfn_restart_file_name', 'Surf_dip': 'Surface_dipole_correction', 'Surface_dipole': 'Surface_dipole_correction', 'Spin_polarized': 'Uks', 'Restricted_open_kohn_sham': 'Roks', 'Unrestricted_kohn_sham': 'Uks'}
+        self._keywords = {'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Uks': 'UKS', 'Roks': 'ROKS', 'Multiplicity': 'MULTIPLICITY', 'Charge': 'CHARGE', 'Excitations': 'EXCITATIONS', 'Plus_u_method': 'PLUS_U_METHOD', 'Relax_multiplicity': 'RELAX_MULTIPLICITY', 'Subcells': 'SUBCELLS', 'Surface_dipole_correction': 'SURFACE_DIPOLE_CORRECTION', 'Surf_dip_dir': 'SURF_DIP_DIR'}
+        self._repeated_keywords = {'Basis_set_file_name': 'BASIS_SET_FILE_NAME', 'Auto_basis': 'AUTO_BASIS'}
+        self._subsections = {'SCF': 'SCF', 'LS_SCF': 'LS_SCF', 'ALMO_SCF': 'ALMO_SCF', 'KG_METHOD': 'KG_METHOD', 'AUXILIARY_DENSITY_MATRIX_METHOD': 'AUXILIARY_DENSITY_MATRIX_METHOD', 'QS': 'QS', 'TDDFPT': 'TDDFPT', 'MGRID': 'MGRID', 'XC': 'XC', 'RELATIVISTIC': 'RELATIVISTIC', 'SIC': 'SIC', 'LOW_SPIN_ROKS': 'LOW_SPIN_ROKS', 'EXTERNAL_POTENTIAL': 'EXTERNAL_POTENTIAL', 'TRANSPORT': 'TRANSPORT', 'EXTERNAL_DENSITY': 'EXTERNAL_DENSITY', 'EXTERNAL_VXC': 'EXTERNAL_VXC', 'POISSON': 'POISSON', 'KPOINTS': 'KPOINTS', 'SCRF': 'SCRF', 'DENSITY_FITTING': 'DENSITY_FITTING', 'XAS': 'XAS', 'LOCALIZE': 'LOCALIZE', 'REAL_TIME_PROPAGATION': 'REAL_TIME_PROPAGATION', 'PRINT': 'PRINT', 'SCCS': 'SCCS'}
+        self._repeated_subsections = {'EFIELD': '_efield1', 'PERIODIC_EFIELD': '_periodic_efield1'}
+        self._aliases = {'Restart_file_name': 'Wfn_restart_file_name', 'Unrestricted_kohn_sham': 'Uks', 'Lsd': 'Uks', 'Spin_polarized': 'Uks', 'Restricted_open_kohn_sham': 'Roks', 'Multip': 'Multiplicity', 'Relax_multip': 'Relax_multiplicity', 'Surface_dipole': 'Surface_dipole_correction', 'Surf_dip': 'Surface_dipole_correction'}
         self._attributes = ['EFIELD_list', 'PERIODIC_EFIELD_list']
-
-    def PERIODIC_EFIELD_add(self, section_parameters=None):
-        new_section = _periodic_efield1()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.PERIODIC_EFIELD_list.append(new_section)
-        return new_section
 
     def EFIELD_add(self, section_parameters=None):
         new_section = _efield1()
@@ -94,6 +86,14 @@ class _dft1(InputSection):
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
         self.EFIELD_list.append(new_section)
+        return new_section
+
+    def PERIODIC_EFIELD_add(self, section_parameters=None):
+        new_section = _periodic_efield1()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.PERIODIC_EFIELD_list.append(new_section)
         return new_section
 
 

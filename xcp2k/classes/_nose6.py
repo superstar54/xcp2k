@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _coord7 import _coord7
-from _velocity8 import _velocity8
+from xcp2k.classes._coord7 import _coord7
+from xcp2k.classes._velocity8 import _velocity8
 
 
 class _nose6(InputSection):
@@ -11,5 +11,5 @@ class _nose6(InputSection):
         self.VELOCITY = _velocity8()
         self._name = "NOSE"
         self._keywords = {'Nnos': 'NNOS'}
-        self._subsections = {'VELOCITY': 'VELOCITY', 'COORD': 'COORD'}
+        self._subsections = {'COORD': 'COORD', 'VELOCITY': 'VELOCITY'}
 

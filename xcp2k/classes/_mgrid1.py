@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _rs_grid2 import _rs_grid2
-from _interpolator1 import _interpolator1
+from xcp2k.classes._rs_grid2 import _rs_grid2
+from xcp2k.classes._interpolator1 import _interpolator1
 
 
 class _mgrid1(InputSection):
@@ -18,10 +18,10 @@ class _mgrid1(InputSection):
         self.RS_GRID_list = []
         self.INTERPOLATOR = _interpolator1()
         self._name = "MGRID"
-        self._keywords = {'Cutoff': 'CUTOFF', 'Skip_load_balance_distributed': 'SKIP_LOAD_BALANCE_DISTRIBUTED', 'Multigrid_set': 'MULTIGRID_SET', 'Ngrids': 'NGRIDS', 'Progression_factor': 'PROGRESSION_FACTOR', 'Rel_cutoff': 'REL_CUTOFF', 'Multigrid_cutoff': 'MULTIGRID_CUTOFF', 'Commensurate': 'COMMENSURATE', 'Realspace': 'REALSPACE'}
+        self._keywords = {'Ngrids': 'NGRIDS', 'Cutoff': 'CUTOFF', 'Progression_factor': 'PROGRESSION_FACTOR', 'Commensurate': 'COMMENSURATE', 'Realspace': 'REALSPACE', 'Rel_cutoff': 'REL_CUTOFF', 'Multigrid_set': 'MULTIGRID_SET', 'Skip_load_balance_distributed': 'SKIP_LOAD_BALANCE_DISTRIBUTED', 'Multigrid_cutoff': 'MULTIGRID_CUTOFF'}
         self._subsections = {'INTERPOLATOR': 'INTERPOLATOR'}
         self._repeated_subsections = {'RS_GRID': '_rs_grid2'}
-        self._aliases = {'Cutoff_list': 'Multigrid_cutoff', 'Relative_cutoff': 'Rel_cutoff'}
+        self._aliases = {'Relative_cutoff': 'Rel_cutoff', 'Cutoff_list': 'Multigrid_cutoff'}
         self._attributes = ['RS_GRID_list']
 
     def RS_GRID_add(self, section_parameters=None):

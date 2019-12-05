@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each410 import _each410
+from xcp2k.classes._each410 import _each410
 
 
 class _forces4(InputSection):
@@ -13,7 +13,7 @@ class _forces4(InputSection):
         self.Ndigits = None
         self.EACH = _each410()
         self._name = "FORCES"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Ndigits': 'NDIGITS', 'Filename': 'FILENAME'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Ndigits': 'NDIGITS'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

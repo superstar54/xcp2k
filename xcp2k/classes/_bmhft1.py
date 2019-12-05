@@ -14,5 +14,5 @@ class _bmhft1(InputSection):
         self.Rmin = None
         self.Rmax = None
         self._name = "BMHFT"
-        self._keywords = {'Map_atoms': 'MAP_ATOMS', 'A': 'A', 'C': 'C', 'B': 'B', 'D': 'D', 'Rmax': 'RMAX', 'Rmin': 'RMIN', 'Rcut': 'RCUT', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'Map_atoms': 'MAP_ATOMS', 'Rcut': 'RCUT', 'A': 'A', 'B': 'B', 'C': 'C', 'D': 'D', 'Rmin': 'RMIN', 'Rmax': 'RMAX'}
 

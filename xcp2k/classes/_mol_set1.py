@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _molecule1 import _molecule1
-from _merge_molecules1 import _merge_molecules1
+from xcp2k.classes._molecule1 import _molecule1
+from xcp2k.classes._merge_molecules1 import _merge_molecules1
 
 
 class _mol_set1(InputSection):

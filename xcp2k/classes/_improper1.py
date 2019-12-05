@@ -9,5 +9,5 @@ class _improper1(InputSection):
         self.K = None
         self.Phi0 = None
         self._name = "IMPROPER"
-        self._keywords = {'Kind': 'KIND', 'Phi0': 'PHI0', 'K': 'K', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'Kind': 'KIND', 'K': 'K', 'Phi0': 'PHI0'}
 

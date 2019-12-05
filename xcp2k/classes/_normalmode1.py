@@ -8,5 +8,5 @@ class _normalmode1(InputSection):
         self.Q_bead = None
         self.Modefactor = None
         self._name = "NORMALMODE"
-        self._keywords = {'Q_centroid': 'Q_CENTROID', 'Modefactor': 'MODEFACTOR', 'Q_bead': 'Q_BEAD'}
+        self._keywords = {'Q_centroid': 'Q_CENTROID', 'Q_bead': 'Q_BEAD', 'Modefactor': 'MODEFACTOR'}
 

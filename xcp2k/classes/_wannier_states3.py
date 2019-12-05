@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _each246 import _each246
-from _cubes6 import _cubes6
+from xcp2k.classes._each246 import _each246
+from xcp2k.classes._cubes6 import _cubes6
 
 
 class _wannier_states3(InputSection):
@@ -16,8 +16,8 @@ class _wannier_states3(InputSection):
         self.EACH = _each246()
         self.CUBES = _cubes6()
         self._name = "WANNIER_STATES"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Cube_eval_range': 'CUBE_EVAL_RANGE', 'Filename': 'FILENAME'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Cube_eval_range': 'CUBE_EVAL_RANGE'}
         self._repeated_keywords = {'Mark_states': 'MARK_STATES'}
-        self._subsections = {'CUBES': 'CUBES', 'EACH': 'EACH'}
+        self._subsections = {'EACH': 'EACH', 'CUBES': 'CUBES'}
         self._attributes = ['Section_parameters']
 

@@ -9,5 +9,5 @@ class _ipbv1(InputSection):
         self.Rmin = None
         self.Rmax = None
         self._name = "IPBV"
-        self._keywords = {'Rmin': 'RMIN', 'Rmax': 'RMAX', 'Rcut': 'RCUT', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'Rcut': 'RCUT', 'Rmin': 'RMIN', 'Rmax': 'RMAX'}
 

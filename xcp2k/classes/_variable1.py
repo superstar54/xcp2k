@@ -8,5 +8,5 @@ class _variable1(InputSection):
         self.Fixed = None
         self.Label = None
         self._name = "VARIABLE"
-        self._keywords = {'Fixed': 'FIXED', 'Value': 'VALUE', 'Label': 'LABEL'}
+        self._keywords = {'Value': 'VALUE', 'Fixed': 'FIXED', 'Label': 'LABEL'}
 

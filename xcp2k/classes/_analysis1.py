@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _print23 import _print23
+from xcp2k.classes._print23 import _print23
 
 
 class _analysis1(InputSection):

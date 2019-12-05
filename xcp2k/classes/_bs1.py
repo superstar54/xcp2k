@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _alpha1 import _alpha1
-from _beta1 import _beta1
+from xcp2k.classes._alpha1 import _alpha1
+from xcp2k.classes._beta1 import _beta1
 
 
 class _bs1(InputSection):

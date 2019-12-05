@@ -77,6 +77,7 @@ def parse_input(inp):
         elif line[0] == '&':
             parts = line.split(' ', 1)
             name = parts[0][1:]
+            # print(name)
             if len(parts) > 1:
                 s = InputSection(name=name, params=parts[1].strip())
             else:
@@ -85,7 +86,8 @@ def parse_input(inp):
             section_stack.append(s)
         else:
             section_stack[-1].keywords.append(line)
-
+    # print(root_section.keywords)
+    # print(root_section.subsections[0].keywords)
     return root_section
 
 

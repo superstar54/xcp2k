@@ -14,8 +14,8 @@ def make_title(title, width=80):
     """Styles a title to be printed into console.
     """
     space = width-len(title)-4
-    pre_space = space/2-1
-    post_space = space-pre_space
+    pre_space = int(space/2-1)
+    post_space = int(space-pre_space)
     line = "|" + str((pre_space)*"=") + " "
     line += title
     line += " " + str((post_space)*"=") + "|"
@@ -27,12 +27,12 @@ def print_subtitle(title, width=80):
     """Styles a title to be printed into console.
     """
     space = width-len(title)-4
-    pre_space = space/2-1
-    post_space = space-pre_space
+    pre_space = int(space/2-1)
+    post_space = int(space-pre_space)
     line = "|" + str((pre_space)*"-") + " "
     line += title
     line += " " + str((post_space)*"-") + "|"
-    print line
+    print(line)
 
 
 #===============================================================================
@@ -58,14 +58,14 @@ def make_message(message, width=80, spaces=0):
 def print_title(title, width=80):
     """Prints styled title into console.
     """
-    print make_title(title, width=width)
+    print(make_title(title, width=width))
 
 
 #===============================================================================
 def print_message(title, message, width=80):
     """Returns a styled warning message to be printed into console.
     """
-    print make_title(title) + "\n" + make_message(message) + "\n"
+    print(make_title(title) + "\n" + make_message(message) + "\n")
 
 
 #===============================================================================
@@ -91,11 +91,11 @@ def print_text(text, spaces=0, width=80):
 def print_warning(message, width=80):
     """Returns a styled warning message to be printed into console.
     """
-    print "\n        " + make_title("WARNING", width=64) + "\n" + make_message(message, width=64, spaces=8) + "\n"
+    print("\n        " + make_title("WARNING", width=64) + "\n" + make_message(message, width=64, spaces=8) + "\n")
 
 
 #===============================================================================
 def print_error(message, width=80):
     """Returns a styled warning message to be printed into console.
     """
-    print "\n        " + make_title("ERROR", width=64) + "\n" + make_message(message, width=64, spaces=8) + "\n"
+    print("\n        " + make_title("ERROR", width=64) + "\n" + make_message(message, width=64, spaces=8) + "\n")

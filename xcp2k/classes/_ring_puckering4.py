@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point67 import _point67
+from xcp2k.classes._point67 import _point67
 
 
 class _ring_puckering4(InputSection):
@@ -9,7 +9,7 @@ class _ring_puckering4(InputSection):
         self.Coordinate = None
         self.POINT_list = []
         self._name = "RING_PUCKERING"
-        self._keywords = {'Coordinate': 'COORDINATE', 'Atoms': 'ATOMS'}
+        self._keywords = {'Atoms': 'ATOMS', 'Coordinate': 'COORDINATE'}
         self._repeated_subsections = {'POINT': '_point67'}
         self._aliases = {'Points': 'Atoms'}
         self._attributes = ['POINT_list']

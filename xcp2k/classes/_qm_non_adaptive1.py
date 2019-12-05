@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _qm_kind1 import _qm_kind1
+from xcp2k.classes._qm_kind1 import _qm_kind1
 
 
 class _qm_non_adaptive1(InputSection):

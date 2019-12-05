@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _reflective1 import _reflective1
-from _quadratic1 import _quadratic1
-from _quartic1 import _quartic1
-from _gaussian1 import _gaussian1
+from xcp2k.classes._reflective1 import _reflective1
+from xcp2k.classes._quadratic1 import _quadratic1
+from xcp2k.classes._quartic1 import _quartic1
+from xcp2k.classes._gaussian1 import _gaussian1
 
 
 class _wall1(InputSection):
@@ -15,6 +15,6 @@ class _wall1(InputSection):
         self.QUARTIC = _quartic1()
         self.GAUSSIAN = _gaussian1()
         self._name = "WALL"
-        self._keywords = {'Position': 'POSITION', 'Type': 'TYPE'}
-        self._subsections = {'REFLECTIVE': 'REFLECTIVE', 'QUADRATIC': 'QUADRATIC', 'GAUSSIAN': 'GAUSSIAN', 'QUARTIC': 'QUARTIC'}
+        self._keywords = {'Type': 'TYPE', 'Position': 'POSITION'}
+        self._subsections = {'REFLECTIVE': 'REFLECTIVE', 'QUADRATIC': 'QUADRATIC', 'QUARTIC': 'QUARTIC', 'GAUSSIAN': 'GAUSSIAN'}
 

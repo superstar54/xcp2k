@@ -12,7 +12,7 @@ class _smear2(InputSection):
         self.Window_size = None
         self.Fixed_magnetic_moment = None
         self._name = "SMEAR"
-        self._keywords = {'Window_size': 'WINDOW_SIZE', 'Electronic_temperature': 'ELECTRONIC_TEMPERATURE', 'Eps_fermi_dirac': 'EPS_FERMI_DIRAC', 'List': 'LIST', 'Fixed_magnetic_moment': 'FIXED_MAGNETIC_MOMENT', 'Method': 'METHOD'}
+        self._keywords = {'Method': 'METHOD', 'List': 'LIST', 'Electronic_temperature': 'ELECTRONIC_TEMPERATURE', 'Eps_fermi_dirac': 'EPS_FERMI_DIRAC', 'Window_size': 'WINDOW_SIZE', 'Fixed_magnetic_moment': 'FIXED_MAGNETIC_MOMENT'}
         self._aliases = {'Elec_temp': 'Electronic_temperature', 'Telec': 'Electronic_temperature'}
         self._attributes = ['Section_parameters']
 

@@ -10,5 +10,5 @@ class _job1(InputSection):
         self.Job_id = None
         self.Dependencies = None
         self._name = "JOB"
-        self._keywords = {'Directory': 'DIRECTORY', 'Output_file_name': 'OUTPUT_FILE_NAME', 'Dependencies': 'DEPENDENCIES', 'Job_id': 'JOB_ID', 'Input_file_name': 'INPUT_FILE_NAME'}
+        self._keywords = {'Directory': 'DIRECTORY', 'Input_file_name': 'INPUT_FILE_NAME', 'Output_file_name': 'OUTPUT_FILE_NAME', 'Job_id': 'JOB_ID', 'Dependencies': 'DEPENDENCIES'}
 

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _print22 import _print22
+from xcp2k.classes._print22 import _print22
 
 
 class _line_search5(InputSection):
@@ -12,7 +12,7 @@ class _line_search5(InputSection):
         self.Eps_step_size = None
         self.PRINT_list = []
         self._name = "LINE_SEARCH"
-        self._keywords = {'Eps_step_size': 'EPS_STEP_SIZE', 'Max_step_size': 'MAX_STEP_SIZE', 'Method': 'METHOD', 'Initial_step_size': 'INITIAL_STEP_SIZE', 'Tiny_step_size': 'TINY_STEP_SIZE'}
+        self._keywords = {'Method': 'METHOD', 'Initial_step_size': 'INITIAL_STEP_SIZE', 'Max_step_size': 'MAX_STEP_SIZE', 'Tiny_step_size': 'TINY_STEP_SIZE', 'Eps_step_size': 'EPS_STEP_SIZE'}
         self._repeated_subsections = {'PRINT': '_print22'}
         self._attributes = ['PRINT_list']
 

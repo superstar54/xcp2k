@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _coord11 import _coord11
+from xcp2k.classes._coord11 import _coord11
 
 
 class _frame1(InputSection):

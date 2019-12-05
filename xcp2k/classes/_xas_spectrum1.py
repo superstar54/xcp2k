@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each207 import _each207
+from xcp2k.classes._each207 import _each207
 
 
 class _xas_spectrum1(InputSection):
@@ -12,7 +12,7 @@ class _xas_spectrum1(InputSection):
         self.Log_print_key = None
         self.EACH = _each207()
         self._name = "XAS_SPECTRUM"
-        self._keywords = {'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _print69 import _print69
-from _global_opt1 import _global_opt1
+from xcp2k.classes._print69 import _print69
+from xcp2k.classes._global_opt1 import _global_opt1
 
 
 class _swarm1(InputSection):
@@ -13,7 +13,7 @@ class _swarm1(InputSection):
         self.PRINT_list = []
         self.GLOBAL_OPT = _global_opt1()
         self._name = "SWARM"
-        self._keywords = {'Number_of_workers': 'NUMBER_OF_WORKERS', 'Max_iter': 'MAX_ITER', 'Behavior': 'BEHAVIOR', 'Replay_communication_log': 'REPLAY_COMMUNICATION_LOG'}
+        self._keywords = {'Behavior': 'BEHAVIOR', 'Number_of_workers': 'NUMBER_OF_WORKERS', 'Replay_communication_log': 'REPLAY_COMMUNICATION_LOG', 'Max_iter': 'MAX_ITER'}
         self._subsections = {'GLOBAL_OPT': 'GLOBAL_OPT'}
         self._repeated_subsections = {'PRINT': '_print69'}
         self._attributes = ['PRINT_list']

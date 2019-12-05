@@ -8,5 +8,5 @@ class _plane2(InputSection):
         self.Atoms = None
         self.Normal_vector = None
         self._name = "PLANE"
-        self._keywords = {'Def_type': 'DEF_TYPE', 'Normal_vector': 'NORMAL_VECTOR', 'Atoms': 'ATOMS'}
+        self._keywords = {'Def_type': 'DEF_TYPE', 'Atoms': 'ATOMS', 'Normal_vector': 'NORMAL_VECTOR'}
 

@@ -7,5 +7,5 @@ class _multiple_force_evals1(InputSection):
         self.Force_eval_order = None
         self.Multiple_subsys = None
         self._name = "MULTIPLE_FORCE_EVALS"
-        self._keywords = {'Multiple_subsys': 'MULTIPLE_SUBSYS', 'Force_eval_order': 'FORCE_EVAL_ORDER'}
+        self._keywords = {'Force_eval_order': 'FORCE_EVAL_ORDER', 'Multiple_subsys': 'MULTIPLE_SUBSYS'}
 

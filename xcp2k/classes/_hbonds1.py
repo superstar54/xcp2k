@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _restraint1 import _restraint1
+from xcp2k.classes._restraint1 import _restraint1
 
 
 class _hbonds1(InputSection):
@@ -13,7 +13,7 @@ class _hbonds1(InputSection):
         self.Targets = None
         self.RESTRAINT = _restraint1()
         self._name = "HBONDS"
-        self._keywords = {'Exclude_mm': 'EXCLUDE_MM', 'Molecule': 'MOLECULE', 'Exclude_qm': 'EXCLUDE_QM', 'Molname': 'MOLNAME', 'Targets': 'TARGETS', 'Atom_type': 'ATOM_TYPE'}
+        self._keywords = {'Atom_type': 'ATOM_TYPE', 'Molecule': 'MOLECULE', 'Molname': 'MOLNAME', 'Exclude_qm': 'EXCLUDE_QM', 'Exclude_mm': 'EXCLUDE_MM', 'Targets': 'TARGETS'}
         self._subsections = {'RESTRAINT': 'RESTRAINT'}
         self._aliases = {'Segname': 'Molname'}
 

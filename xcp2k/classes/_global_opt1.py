@@ -1,8 +1,8 @@
 from xcp2k.inputsection import InputSection
-from _progress_trajectory1 import _progress_trajectory1
-from _history2 import _history2
-from _minima_hopping1 import _minima_hopping1
-from _minima_crawling1 import _minima_crawling1
+from xcp2k.classes._progress_trajectory1 import _progress_trajectory1
+from xcp2k.classes._history2 import _history2
+from xcp2k.classes._minima_hopping1 import _minima_hopping1
+from xcp2k.classes._minima_crawling1 import _minima_crawling1
 
 
 class _global_opt1(InputSection):
@@ -19,6 +19,6 @@ class _global_opt1(InputSection):
         self.MINIMA_HOPPING = _minima_hopping1()
         self.MINIMA_CRAWLING = _minima_crawling1()
         self._name = "GLOBAL_OPT"
-        self._keywords = {'Md_bumps_max': 'MD_BUMPS_MAX', 'Bump_steps_upwards': 'BUMP_STEPS_UPWARDS', 'Fragmentation_threshold': 'FRAGMENTATION_THRESHOLD', 'Bump_steps_downwards': 'BUMP_STEPS_DOWNWARDS', 'E_target': 'E_TARGET', 'Method': 'METHOD'}
-        self._subsections = {'MINIMA_CRAWLING': 'MINIMA_CRAWLING', 'PROGRESS_TRAJECTORY': 'PROGRESS_TRAJECTORY', 'MINIMA_HOPPING': 'MINIMA_HOPPING', 'HISTORY': 'HISTORY'}
+        self._keywords = {'Method': 'METHOD', 'E_target': 'E_TARGET', 'Md_bumps_max': 'MD_BUMPS_MAX', 'Bump_steps_upwards': 'BUMP_STEPS_UPWARDS', 'Bump_steps_downwards': 'BUMP_STEPS_DOWNWARDS', 'Fragmentation_threshold': 'FRAGMENTATION_THRESHOLD'}
+        self._subsections = {'PROGRESS_TRAJECTORY': 'PROGRESS_TRAJECTORY', 'HISTORY': 'HISTORY', 'MINIMA_HOPPING': 'MINIMA_HOPPING', 'MINIMA_CRAWLING': 'MINIMA_CRAWLING'}
 

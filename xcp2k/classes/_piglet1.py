@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _rng_init9 import _rng_init9
-from _extra_dof1 import _extra_dof1
+from xcp2k.classes._rng_init9 import _rng_init9
+from xcp2k.classes._extra_dof1 import _extra_dof1
 
 
 class _piglet1(InputSection):
@@ -13,5 +13,5 @@ class _piglet1(InputSection):
         self.EXTRA_DOF = _extra_dof1()
         self._name = "PIGLET"
         self._keywords = {'Nextra_dof': 'NEXTRA_DOF', 'Matrices_file_name': 'MATRICES_FILE_NAME', 'Smatrix_init': 'SMATRIX_INIT'}
-        self._subsections = {'EXTRA_DOF': 'EXTRA_DOF', 'RNG_INIT': 'RNG_INIT'}
+        self._subsections = {'RNG_INIT': 'RNG_INIT', 'EXTRA_DOF': 'EXTRA_DOF'}
 

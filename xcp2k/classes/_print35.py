@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info19 import _program_run_info19
+from xcp2k.classes._program_run_info19 import _program_run_info19
 
 
 class _print35(InputSection):

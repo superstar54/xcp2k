@@ -11,5 +11,5 @@ class _relativistic1(InputSection):
         self.Z_cutoff = None
         self.Potential = None
         self._name = "RELATIVISTIC"
-        self._keywords = {'Zora_type': 'ZORA_TYPE', 'Dkh_order': 'DKH_ORDER', 'Transformation': 'TRANSFORMATION', 'Potential': 'POTENTIAL', 'Z_cutoff': 'Z_CUTOFF', 'Method': 'METHOD'}
+        self._keywords = {'Method': 'METHOD', 'Dkh_order': 'DKH_ORDER', 'Zora_type': 'ZORA_TYPE', 'Transformation': 'TRANSFORMATION', 'Z_cutoff': 'Z_CUTOFF', 'Potential': 'POTENTIAL'}
 

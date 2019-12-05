@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _point7 import _point7
+from xcp2k.classes._point7 import _point7
 
 
 class _distance_point_plane1(InputSection):
@@ -10,7 +10,7 @@ class _distance_point_plane1(InputSection):
         self.Atom_point = None
         self.POINT_list = []
         self._name = "DISTANCE_POINT_PLANE"
-        self._keywords = {'Atoms_plane': 'ATOMS_PLANE', 'Atom_point': 'ATOM_POINT', 'Pbc': 'PBC'}
+        self._keywords = {'Pbc': 'PBC', 'Atoms_plane': 'ATOMS_PLANE', 'Atom_point': 'ATOM_POINT'}
         self._repeated_subsections = {'POINT': '_point7'}
         self._aliases = {'Points_plane': 'Atoms_plane', 'Point_point': 'Atom_point'}
         self._attributes = ['POINT_list']

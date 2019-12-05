@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _outer_scf2 import _outer_scf2
-from _hirshfeld_constraint1 import _hirshfeld_constraint1
+from xcp2k.classes._outer_scf2 import _outer_scf2
+from xcp2k.classes._hirshfeld_constraint1 import _hirshfeld_constraint1
 
 
 class _cdft1(InputSection):
@@ -17,6 +17,6 @@ class _cdft1(InputSection):
         self.OUTER_SCF = _outer_scf2()
         self.HIRSHFELD_CONSTRAINT = _hirshfeld_constraint1()
         self._name = "CDFT"
-        self._keywords = {'Counter': 'COUNTER', 'Reuse_precond': 'REUSE_PRECOND', 'Max_reuse': 'MAX_REUSE', 'Precond_freq': 'PRECOND_FREQ', 'Purge_freq': 'PURGE_FREQ', 'Purge_history': 'PURGE_HISTORY', 'Type_of_constraint': 'TYPE_OF_CONSTRAINT', 'Purge_offset': 'PURGE_OFFSET'}
-        self._subsections = {'HIRSHFELD_CONSTRAINT': 'HIRSHFELD_CONSTRAINT', 'OUTER_SCF': 'OUTER_SCF'}
+        self._keywords = {'Type_of_constraint': 'TYPE_OF_CONSTRAINT', 'Reuse_precond': 'REUSE_PRECOND', 'Precond_freq': 'PRECOND_FREQ', 'Max_reuse': 'MAX_REUSE', 'Purge_history': 'PURGE_HISTORY', 'Purge_freq': 'PURGE_FREQ', 'Purge_offset': 'PURGE_OFFSET', 'Counter': 'COUNTER'}
+        self._subsections = {'OUTER_SCF': 'OUTER_SCF', 'HIRSHFELD_CONSTRAINT': 'HIRSHFELD_CONSTRAINT'}
 

@@ -11,8 +11,8 @@ class _opt_ri_basis3(InputSection):
         self.Num_func = None
         self.Basis_size = None
         self._name = "OPT_RI_BASIS"
-        self._keywords = {'Basis_size': 'BASIS_SIZE', 'Max_iter': 'MAX_ITER', 'Num_func': 'NUM_FUNC', 'Eps_deriv': 'EPS_DERIV', 'Delta_ri': 'DELTA_RI', 'Delta_i_rel': 'DELTA_I_REL'}
-        self._aliases = {'Dri': 'Delta_ri', 'Eps_num_deriv': 'Eps_deriv', 'Di_rel': 'Delta_i_rel', 'Max_num_iter': 'Max_iter'}
+        self._keywords = {'Delta_i_rel': 'DELTA_I_REL', 'Delta_ri': 'DELTA_RI', 'Eps_deriv': 'EPS_DERIV', 'Max_iter': 'MAX_ITER', 'Num_func': 'NUM_FUNC', 'Basis_size': 'BASIS_SIZE'}
+        self._aliases = {'Di_rel': 'Delta_i_rel', 'Dri': 'Delta_ri', 'Eps_num_deriv': 'Eps_deriv', 'Max_num_iter': 'Max_iter'}
 
 
     @property

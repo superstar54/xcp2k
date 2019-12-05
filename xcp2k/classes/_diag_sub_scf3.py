@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _mixing3 import _mixing3
+from xcp2k.classes._mixing3 import _mixing3
 
 
 class _diag_sub_scf3(InputSection):
@@ -12,7 +12,7 @@ class _diag_sub_scf3(InputSection):
         self.Eps_skip_sub_diag = None
         self.MIXING = _mixing3()
         self._name = "DIAG_SUB_SCF"
-        self._keywords = {'Eps_ene': 'EPS_ENE', 'Max_iter': 'MAX_ITER', 'Eps_skip_sub_diag': 'EPS_SKIP_SUB_DIAG', 'Eps_adapt_scf': 'EPS_ADAPT_SCF'}
+        self._keywords = {'Max_iter': 'MAX_ITER', 'Eps_ene': 'EPS_ENE', 'Eps_adapt_scf': 'EPS_ADAPT_SCF', 'Eps_skip_sub_diag': 'EPS_SKIP_SUB_DIAG'}
         self._subsections = {'MIXING': 'MIXING'}
         self._attributes = ['Section_parameters']
 

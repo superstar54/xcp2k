@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _almo_eda_ct1 import _almo_eda_ct1
-from _almo_cta1 import _almo_cta1
+from xcp2k.classes._almo_eda_ct1 import _almo_eda_ct1
+from xcp2k.classes._almo_cta1 import _almo_cta1
 
 
 class _print23(InputSection):
@@ -9,5 +9,5 @@ class _print23(InputSection):
         self.ALMO_EDA_CT = _almo_eda_ct1()
         self.ALMO_CTA = _almo_cta1()
         self._name = "PRINT"
-        self._subsections = {'ALMO_CTA': 'ALMO_CTA', 'ALMO_EDA_CT': 'ALMO_EDA_CT'}
+        self._subsections = {'ALMO_EDA_CT': 'ALMO_EDA_CT', 'ALMO_CTA': 'ALMO_CTA'}
 

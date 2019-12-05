@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _ms_restart1 import _ms_restart1
+from xcp2k.classes._ms_restart1 import _ms_restart1
 
 
 class _print70(InputSection):

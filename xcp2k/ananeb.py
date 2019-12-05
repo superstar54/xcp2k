@@ -19,8 +19,14 @@ class AnaNEB(CP2K):
         self.nimages = nimages
         #
         self.read_ini()
+        self.read_inp()
+        # print(self.natoms)
         #
-        self.calcs = [CP2K() for i in range(self.nimages)]
+        self.calcs = []
+        for i in range(self.nimages):
+            calc = CP2K()
+            calc.natoms = self.natoms
+            self.calcs.append(calc)
         #
         self.out = None
         self.benergy = np.zeros(self.nimages)
@@ -48,12 +54,17 @@ class AnaNEB(CP2K):
     #
     def read_images(self, ):
         images = []
+        # print(self.natoms)
         cell = self.read_cell()
         for i in range(0, self.nimages):
             self.calcs[i].prefix = self.prefix
-            image = read('{0}/{1}-pos-Replica_nr_{2:02d}-1.xyz'.format(self.directory, self.calcs[i].prefix, i + 1))
+            if self.nimages < 10:
+                image = read('{0}/{1}-pos-Replica_nr_{2:1d}-1.xyz'.format(self.directory, self.calcs[i].prefix, i + 1))
+                self.calcs[i].out = join(self.directory, '{0}-BAND{1:1d}.out'.format(self.calcs[i].prefix, i + 1))
+            else:
+                image = read('{0}/{1}-pos-Replica_nr_{2:02d}-1.xyz'.format(self.directory, self.calcs[i].prefix, i + 1))
+                self.calcs[i].out = join(self.directory, '{0}-BAND{1:02d}.out'.format(self.calcs[i].prefix, i + 1))
             image.cell = cell
-            self.calcs[i].out = join(self.directory, '{0}-BAND{1:02d}.out'.format(self.calcs[i].prefix, i + 1))
             image.set_calculator(self.calcs[i])
             image.calc.read_energy()
             image.calc.read_forces()
@@ -150,6 +161,7 @@ class AnaNEB(CP2K):
 
     def write_images(self, name = None, rotation='10z,-80x'):
         #
+        write('{0}.xyz'.format(self.prefix), self.images)
         for i, image in enumerate(self.images):
             # rotate to the desired direction
             # image.rotate('z', 'x', rotate_cell=True)

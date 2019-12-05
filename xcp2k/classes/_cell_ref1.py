@@ -15,7 +15,7 @@ class _cell_ref1(InputSection):
         self.Multiple_unit_cell = None
         self.Symmetry = None
         self._name = "CELL_REF"
-        self._keywords = {'A': 'A', 'Cell_file_format': 'CELL_FILE_FORMAT', 'C': 'C', 'B': 'B', 'Symmetry': 'SYMMETRY', 'Alpha_beta_gamma': 'ALPHA_BETA_GAMMA', 'Multiple_unit_cell': 'MULTIPLE_UNIT_CELL', 'Periodic': 'PERIODIC', 'Abc': 'ABC', 'Cell_file_name': 'CELL_FILE_NAME'}
+        self._keywords = {'A': 'A', 'B': 'B', 'C': 'C', 'Abc': 'ABC', 'Alpha_beta_gamma': 'ALPHA_BETA_GAMMA', 'Cell_file_name': 'CELL_FILE_NAME', 'Cell_file_format': 'CELL_FILE_FORMAT', 'Periodic': 'PERIODIC', 'Multiple_unit_cell': 'MULTIPLE_UNIT_CELL', 'Symmetry': 'SYMMETRY'}
         self._aliases = {'Angles': 'Alpha_beta_gamma'}
 
 

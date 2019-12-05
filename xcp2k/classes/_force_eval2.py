@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _fragment4 import _fragment4
+from xcp2k.classes._fragment4 import _fragment4
 
 
 class _force_eval2(InputSection):

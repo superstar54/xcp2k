@@ -10,5 +10,5 @@ class _mol_displacements1(InputSection):
         self.Rmrot = None
         self.Rmtrans = None
         self._name = "MOL_DISPLACEMENTS"
-        self._keywords = {'Rmtrans': 'RMTRANS', 'Rmangle': 'RMANGLE', 'Rmdihedral': 'RMDIHEDRAL', 'Rmbond': 'RMBOND', 'Rmrot': 'RMROT'}
+        self._keywords = {'Rmbond': 'RMBOND', 'Rmangle': 'RMANGLE', 'Rmdihedral': 'RMDIHEDRAL', 'Rmrot': 'RMROT', 'Rmtrans': 'RMTRANS'}
 

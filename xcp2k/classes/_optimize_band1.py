@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _md2 import _md2
-from _diis1 import _diis1
+from xcp2k.classes._md2 import _md2
+from xcp2k.classes._diis1 import _diis1
 
 
 class _optimize_band1(InputSection):
@@ -11,6 +11,6 @@ class _optimize_band1(InputSection):
         self.MD = _md2()
         self.DIIS = _diis1()
         self._name = "OPTIMIZE_BAND"
-        self._keywords = {'Optimize_end_points': 'OPTIMIZE_END_POINTS', 'Opt_type': 'OPT_TYPE'}
+        self._keywords = {'Opt_type': 'OPT_TYPE', 'Optimize_end_points': 'OPTIMIZE_END_POINTS'}
         self._subsections = {'MD': 'MD', 'DIIS': 'DIIS'}
 

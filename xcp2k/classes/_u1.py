@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _mixed2 import _mixed2
+from xcp2k.classes._mixed2 import _mixed2
 
 
 class _u1(InputSection):

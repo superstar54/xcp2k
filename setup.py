@@ -44,14 +44,14 @@ def which(program):
 def ask(question, options):
     answer_valid = False
     while not answer_valid:
-        answer = raw_input(question)
+        answer = input(question)
         try:
             answer = int(answer)
             if answer not in options:
                 raise ValueError
             answer_valid = True
         except ValueError:
-            print str(answer) + " is not a valid option. Please try again."
+            print(str(answer) + " is not a valid option. Please try again.")
     return answer
 
 
@@ -79,12 +79,12 @@ def main():
 
     #---------------------------------------------------------------------------
     # Ask user whether to use executable or xml
-    print textwrap.fill("How should the input structure be created?", width=80)
+    print(textwrap.fill("How should the input structure be created?", width=80))
     options1 = ["from CP2K executable", "from .xml file"]
-    print ""
+    print("")
     for i_option, option in enumerate(options1):
-        print "    [{}]  {}".format(i_option+1, option)
-    print ""
+        print("    [{}]  {}".format(i_option+1, option))
+    print("")
     opt = range(1, len(options1)+1)
     source = ask('Enter option number: ', opt)
 
@@ -93,21 +93,21 @@ def main():
     if source == 1:
 
         # Ask user what to do
-        print "|------------------------------------------------------------------------------|"
-        print textwrap.fill("Choose the CP2K executable. It will be used for creating the xml file and set as the default CP2K executable for xcp2k. This setting can be changed by modifying config.py in the xcp2k folder, and can be dynamically overridden for each simulation with the 'cp2k_command' attribute.", width=80)
-        print ""
+        print("|------------------------------------------------------------------------------|")
+        print(textwrap.fill("Choose the CP2K executable. It will be used for creating the xml file and set as the default CP2K executable for xcp2k. This setting can be changed by modifying config.py in the xcp2k folder, and can be dynamically overridden for each simulation with the 'cp2k_command' attribute.", width=80))
+        print("")
         for i, [name, avail] in enumerate(cp2k_commands):
             if avail:
-                print "    [{}] {}".format(i+1, name)
+                print("    [{}] {}".format(i+1, name))
             else:
-                print "    [x] {} not available".format(name)
-        print "    [" + str(len(cp2k_commands)+1) + "] Custom CP2K executable name\n"
+                print("    [x] {} not available".format(name))
+        print("    [" + str(len(cp2k_commands)+1) + "] Custom CP2K executable name\n")
         options = [x for x in range(1, len(cp2k_commands)) if cp2k_commands[x-1][1]]
         options.append(len(cp2k_commands)+1)
         option_number = ask('Enter option number: ', options)
 
         if option_number == len(cp2k_commands)+1:
-            cp2k_default_command = raw_input('Enter CP2K executable name: ')
+            cp2k_default_command = input('Enter CP2K executable name: ')
         else:
             cp2k_default_command = cp2k_commands[int(option_number-1)][0]
 
@@ -123,25 +123,25 @@ def main():
     #---------------------------------------------------------------------------
     # xml chosen
     else:
-        print "|------------------------------------------------------------------------------|"
-        xml_path = raw_input('Enter path to .xml file: ')
+        print("|------------------------------------------------------------------------------|")
+        xml_path = input('Enter path to .xml file: ')
         while not os.path.isfile(xml_path):
-            print "Invalid path provided. Please try again"
-            xml_path = raw_input('Enter path to .xml file:')
+            print("Invalid path provided. Please try again")
+            xml_path = input('Enter path to .xml file:')
 
         #---------------------------------------------------------------------------
         # Ask for the default CP2K command
-        print "|------------------------------------------------------------------------------|"
-        print textwrap.fill("Choose the default CP2K executable if available. This executable is used by default for running CP2K. It can be changed by modifying config.py in the xcp2k folder, and can be dynamically overridden for each simulation with the 'cp2k_command' attribute.", width=80)
-        print ""
+        print("|------------------------------------------------------------------------------|")
+        print(textwrap.fill("Choose the default CP2K executable if available. This executable is used by default for running CP2K. It can be changed by modifying config.py in the xcp2k folder, and can be dynamically overridden for each simulation with the 'cp2k_command' attribute.", width=80))
+        print("")
         for i, [name, avail] in enumerate(cp2k_commands):
-                print "    [" + str(i+1) + "] " + name
-        print "    [{}] Custom CP2K executable name".format(len(cp2k_commands)+1)
-        print ""
+                print("    [" + str(i+1) + "] " + name)
+        print("    [{}] Custom CP2K executable name".format(len(cp2k_commands)+1))
+        print("")
         option_number = ask('Enter option number: ', range(1, len(cp2k_commands)+2))
 
         if option_number == len(cp2k_commands)+1:
-            cp2k_default_command = raw_input('Enter CP2K executable name: ')
+            cp2k_default_command = input('Enter CP2K executable name: ')
         else:
             cp2k_default_command = cp2k_commands[int(option_number-1)][0]
 

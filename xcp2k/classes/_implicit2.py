@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _dielectric2 import _dielectric2
-from _dirichlet_bc2 import _dirichlet_bc2
+from xcp2k.classes._dielectric2 import _dielectric2
+from xcp2k.classes._dirichlet_bc2 import _dirichlet_bc2
 
 
 class _implicit2(InputSection):
@@ -15,8 +15,8 @@ class _implicit2(InputSection):
         self.DIELECTRIC = _dielectric2()
         self.DIRICHLET_BC = _dirichlet_bc2()
         self._name = "IMPLICIT"
-        self._keywords = {'Zero_initial_guess': 'ZERO_INITIAL_GUESS', 'Max_iter': 'MAX_ITER', 'Boundary_conditions': 'BOUNDARY_CONDITIONS', 'Neumann_directions': 'NEUMANN_DIRECTIONS', 'Tol': 'TOL', 'Or_parameter': 'OR_PARAMETER'}
-        self._subsections = {'DIRICHLET_BC': 'DIRICHLET_BC', 'DIELECTRIC': 'DIELECTRIC'}
+        self._keywords = {'Boundary_conditions': 'BOUNDARY_CONDITIONS', 'Zero_initial_guess': 'ZERO_INITIAL_GUESS', 'Max_iter': 'MAX_ITER', 'Tol': 'TOL', 'Or_parameter': 'OR_PARAMETER', 'Neumann_directions': 'NEUMANN_DIRECTIONS'}
+        self._subsections = {'DIELECTRIC': 'DIELECTRIC', 'DIRICHLET_BC': 'DIRICHLET_BC'}
         self._aliases = {'Omega': 'Or_parameter'}
 
 

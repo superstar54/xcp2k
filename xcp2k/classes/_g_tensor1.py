@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _each379 import _each379
-from _xc5 import _xc5
+from xcp2k.classes._each379 import _each379
+from xcp2k.classes._xc5 import _xc5
 
 
 class _g_tensor1(InputSection):
@@ -16,7 +16,7 @@ class _g_tensor1(InputSection):
         self.EACH = _each379()
         self.XC = _xc5()
         self._name = "G_TENSOR"
-        self._keywords = {'Gapw_max_alpha': 'GAPW_MAX_ALPHA', 'Soo_rho_hard': 'SOO_RHO_HARD', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST'}
-        self._subsections = {'XC': 'XC', 'EACH': 'EACH'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Gapw_max_alpha': 'GAPW_MAX_ALPHA', 'Soo_rho_hard': 'SOO_RHO_HARD'}
+        self._subsections = {'EACH': 'EACH', 'XC': 'XC'}
         self._attributes = ['Section_parameters']
 

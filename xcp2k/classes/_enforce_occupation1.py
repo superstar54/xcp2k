@@ -11,8 +11,8 @@ class _enforce_occupation1(InputSection):
         self.Max_scf = None
         self.Smear = None
         self._name = "ENFORCE_OCCUPATION"
-        self._keywords = {'Max_scf': 'MAX_SCF', 'Eps_scf': 'EPS_SCF', 'Nelec': 'NELEC', 'Orbitals': 'ORBITALS', 'Smear': 'SMEAR'}
-        self._aliases = {'M': 'Orbitals', 'N_electrons': 'Nelec'}
+        self._keywords = {'Nelec': 'NELEC', 'Orbitals': 'ORBITALS', 'Eps_scf': 'EPS_SCF', 'Max_scf': 'MAX_SCF', 'Smear': 'SMEAR'}
+        self._aliases = {'N_electrons': 'Nelec', 'M': 'Orbitals'}
         self._attributes = ['Section_parameters']
 
 

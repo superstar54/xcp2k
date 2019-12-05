@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _polar_matrix1 import _polar_matrix1
+from xcp2k.classes._polar_matrix1 import _polar_matrix1
 
 
 class _print63(InputSection):

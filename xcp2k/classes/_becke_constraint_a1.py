@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
-from _program_run_info44 import _program_run_info44
-from _atom_group2 import _atom_group2
-from _dummy_atoms2 import _dummy_atoms2
+from xcp2k.classes._program_run_info44 import _program_run_info44
+from xcp2k.classes._atom_group2 import _atom_group2
+from xcp2k.classes._dummy_atoms2 import _dummy_atoms2
 
 
 class _becke_constraint_a1(InputSection):
@@ -33,19 +33,11 @@ class _becke_constraint_a1(InputSection):
         self.ATOM_GROUP_list = []
         self.DUMMY_ATOMS_list = []
         self._name = "BECKE_CONSTRAINT_A"
-        self._keywords = {'Cavity_use_bohr': 'CAVITY_USE_BOHR', 'Global_cutoff': 'GLOBAL_CUTOFF', 'Strength': 'STRENGTH', 'Fragment_a_file_name': 'FRAGMENT_A_FILE_NAME', 'Fragment_a_spin_file': 'FRAGMENT_A_SPIN_FILE', 'Eps_cavity': 'EPS_CAVITY', 'Element_cutoff': 'ELEMENT_CUTOFF', 'Cutoff_type': 'CUTOFF_TYPE', 'Cavity_radius': 'CAVITY_RADIUS', 'Atomic_charges': 'ATOMIC_CHARGES', 'Cavity_confine': 'CAVITY_CONFINE', 'Fragment_b_spin_file': 'FRAGMENT_B_SPIN_FILE', 'Flip_fragment_b': 'FLIP_FRAGMENT_B', 'Target': 'TARGET', 'Flip_fragment_a': 'FLIP_FRAGMENT_A', 'Cavity_print': 'CAVITY_PRINT', 'Adjust_size': 'ADJUST_SIZE', 'Atomic_radii': 'ATOMIC_RADII', 'Cavity_shape': 'CAVITY_SHAPE', 'In_memory': 'IN_MEMORY', 'Should_skip': 'SHOULD_SKIP', 'Fragment_b_file_name': 'FRAGMENT_B_FILE_NAME'}
+        self._keywords = {'Strength': 'STRENGTH', 'Target': 'TARGET', 'Adjust_size': 'ADJUST_SIZE', 'Atomic_radii': 'ATOMIC_RADII', 'Should_skip': 'SHOULD_SKIP', 'Atomic_charges': 'ATOMIC_CHARGES', 'Cavity_confine': 'CAVITY_CONFINE', 'Cavity_shape': 'CAVITY_SHAPE', 'Cavity_use_bohr': 'CAVITY_USE_BOHR', 'Cavity_print': 'CAVITY_PRINT', 'Cavity_radius': 'CAVITY_RADIUS', 'Eps_cavity': 'EPS_CAVITY', 'Cutoff_type': 'CUTOFF_TYPE', 'Global_cutoff': 'GLOBAL_CUTOFF', 'Element_cutoff': 'ELEMENT_CUTOFF', 'In_memory': 'IN_MEMORY', 'Fragment_a_file_name': 'FRAGMENT_A_FILE_NAME', 'Fragment_b_file_name': 'FRAGMENT_B_FILE_NAME', 'Fragment_a_spin_file': 'FRAGMENT_A_SPIN_FILE', 'Fragment_b_spin_file': 'FRAGMENT_B_SPIN_FILE', 'Flip_fragment_a': 'FLIP_FRAGMENT_A', 'Flip_fragment_b': 'FLIP_FRAGMENT_B'}
         self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO'}
-        self._repeated_subsections = {'DUMMY_ATOMS': '_dummy_atoms2', 'ATOM_GROUP': '_atom_group2'}
-        self._aliases = {'Fragment_a_file': 'Fragment_a_file_name', 'Fragment_a_spin_file_name': 'Fragment_a_spin_file', 'Fragment_b_spin_file_name': 'Fragment_b_spin_file', 'Fragment_b_file': 'Fragment_b_file_name'}
+        self._repeated_subsections = {'ATOM_GROUP': '_atom_group2', 'DUMMY_ATOMS': '_dummy_atoms2'}
+        self._aliases = {'Fragment_a_file': 'Fragment_a_file_name', 'Fragment_b_file': 'Fragment_b_file_name', 'Fragment_a_spin_file_name': 'Fragment_a_spin_file', 'Fragment_b_spin_file_name': 'Fragment_b_spin_file'}
         self._attributes = ['ATOM_GROUP_list', 'DUMMY_ATOMS_list']
-
-    def DUMMY_ATOMS_add(self, section_parameters=None):
-        new_section = _dummy_atoms2()
-        if section_parameters is not None:
-            if hasattr(new_section, 'Section_parameters'):
-                new_section.Section_parameters = section_parameters
-        self.DUMMY_ATOMS_list.append(new_section)
-        return new_section
 
     def ATOM_GROUP_add(self, section_parameters=None):
         new_section = _atom_group2()
@@ -53,6 +45,14 @@ class _becke_constraint_a1(InputSection):
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters
         self.ATOM_GROUP_list.append(new_section)
+        return new_section
+
+    def DUMMY_ATOMS_add(self, section_parameters=None):
+        new_section = _dummy_atoms2()
+        if section_parameters is not None:
+            if hasattr(new_section, 'Section_parameters'):
+                new_section.Section_parameters = section_parameters
+        self.DUMMY_ATOMS_list.append(new_section)
         return new_section
 
 

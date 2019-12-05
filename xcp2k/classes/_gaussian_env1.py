@@ -7,5 +7,5 @@ class _gaussian_env1(InputSection):
         self.T0 = None
         self.Sigma = None
         self._name = "GAUSSIAN_ENV"
-        self._keywords = {'Sigma': 'SIGMA', 'T0': 'T0'}
+        self._keywords = {'T0': 'T0', 'Sigma': 'SIGMA'}
 

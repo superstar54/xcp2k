@@ -8,6 +8,6 @@ class _pz814(InputSection):
         self.Parametrization = None
         self.Scale_c = None
         self._name = "PZ81"
-        self._keywords = {'Scale_c': 'SCALE_C', 'Parametrization': 'PARAMETRIZATION'}
+        self._keywords = {'Parametrization': 'PARAMETRIZATION', 'Scale_c': 'SCALE_C'}
         self._attributes = ['Section_parameters']
 

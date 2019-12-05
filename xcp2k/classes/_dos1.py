@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from _each116 import _each116
+from xcp2k.classes._each116 import _each116
 
 
 class _dos1(InputSection):
@@ -13,7 +13,7 @@ class _dos1(InputSection):
         self.N_gridpoints = None
         self.EACH = _each116()
         self._name = "DOS"
-        self._keywords = {'N_gridpoints': 'N_GRIDPOINTS', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Log_print_key': 'LOG_PRINT_KEY', 'Add_last': 'ADD_LAST', 'Filename': 'FILENAME'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'N_gridpoints': 'N_GRIDPOINTS'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

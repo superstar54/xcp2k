@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
-from _thermostat_energy1 import _thermostat_energy1
-from _rng_init1 import _rng_init1
+from xcp2k.classes._thermostat_energy1 import _thermostat_energy1
+from xcp2k.classes._rng_init1 import _rng_init1
 
 
 class _csvr1(InputSection):

@@ -7,7 +7,7 @@ class _cphf5(InputSection):
         self.Max_iter = None
         self.Eps_conv = None
         self._name = "CPHF"
-        self._keywords = {'Eps_conv': 'EPS_CONV', 'Max_iter': 'MAX_ITER'}
+        self._keywords = {'Max_iter': 'MAX_ITER', 'Eps_conv': 'EPS_CONV'}
         self._aliases = {'Max_num_iter': 'Max_iter'}
 
 

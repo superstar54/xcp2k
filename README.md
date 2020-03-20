@@ -1,14 +1,15 @@
-XCP2K: a ASE interface to CP2K
-==================================================
+## XCP2K: a ASE interface to CP2K
 
-* Goals
-1. Provide an interface that with all CP2K input tags
-2. compliant with ASE calculator.
+### Goals
+* Provide an interface that with all CP2K input tags
+* Simplify the creation of input files
+* Automates job submission, management to a queue system
+* Post-simulation data processing
 
 
-* Install
-1. Generate the CP2K input reference manual
+### Install
+* Generate the CP2K input reference manual
    cp2k.sopt --xml
-2. Run python setup.py
-3. Add xcp2k to you PYTHONPATH
+* Run python setup.py
+* Add xcp2k to you PYTHONPATH
 

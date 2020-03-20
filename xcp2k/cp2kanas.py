@@ -62,10 +62,12 @@ class CP2KAnas(CP2K):
     #
     def write_image(self, rotation='10z,-80x'):
         self.read_geometry()
-        if self.atoms:
-            ase.io.write('{0}.png'.format(self.prefix), self.atoms, rotation=rotation)
-            ase.io.write('{0}-top.png'.format(self.prefix), self.atoms)
-            ase.io.write('{0}-side.png'.format(self.prefix), self.atoms, rotation='-90x')
+        if self.results['geometry']:
+            atoms = self.results['geometry']
+            print("writing image...")
+            ase.io.write('{0}.png'.format(self.prefix), atoms, rotation=rotation)
+            ase.io.write('{0}-top.png'.format(self.prefix), atoms)
+            ase.io.write('{0}-side.png'.format(self.prefix), atoms, rotation='-90x')
     def write_pov(self, rotation='10z,-80x', elecolors = None, **extra_kwargs):
         self.atoms.cell = self.atoms.cell*0.98
         # view(self.atoms)

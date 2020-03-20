@@ -17,7 +17,7 @@ from ase.io.cube import read_cube_data
 from ase.data.colors import cpk_colors
 
 orbitals = ['s', 'p', 'd', 'f']
-colors = ['b', 'g', 'c', 'm', 'y', 'k']
+colors = ['C{0}'.format(i) for i in range(20)]
 
 class AnaDOS(CP2K):
     """Class to make many of the common tools for CP2K DOS analysis available to
@@ -193,6 +193,7 @@ class AnaDOS(CP2K):
             for i, y in dos.items():
                 ele = self.kinds[i][0]
                 legend.append(ele)
+                print(i, j, ele)
                 plt.plot(x, y[j][0:len(x)]*(-1)**j, linewidth=1, color=colors[i])
         if not sef:
             plt.axvline(x=self.Ef, linewidth=0.5, color='r', linestyle='dashed')

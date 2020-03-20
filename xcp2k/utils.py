@@ -1,4 +1,20 @@
 import numpy as np
+import os
+
+
+def is_cp2k(path):
+    '''
+    check cp2k 
+    '''
+    dirs = os.listdir(path)
+    # print(dirs)
+    flag = True
+    for file in ['cp2k.inp', 'cp2k.out']:
+        if file not in dirs:
+            flag = False
+            break
+    return flag
+
 
 def highlight_atoms(pov_fid, pov_obj, atomlist, radius_scale=1.2,
                            color='Green', transmit=0.7):

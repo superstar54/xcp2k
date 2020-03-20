@@ -18,7 +18,7 @@ class AnaNEB(CP2K):
         self.prefix = prefix
         self.nimages = nimages
         #
-        self.read_ini()
+        self.read_info()
         self.read_inp()
         # print(self.natoms)
         #
@@ -32,25 +32,7 @@ class AnaNEB(CP2K):
         self.benergy = np.zeros(self.nimages)
         #
         self.read_images()
-    #
-    def read_ini(self, ):
-        #
-        energies = []
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
-        # print(self.out)
-        lines = open(self.out, 'r').readlines()
-        for line in lines:
-            if line.rfind('GLOBAL| Project name') > -1:
-                prefix = line.split()[-1]
-            if line.rfind('NUMBER OF NEB REPLICA') > -1:
-                nimages = int(line.split()[-1])
-            if line.rfind('BAND TOTAL ENERGY [au]') > -1:
-                e = float(line.split()[-1])
-                energies.append(e)
-        self.prefix = prefix
-        self.nimages = nimages
-        self.band_total_energies = energies
+    
     #
     def read_images(self, ):
         images = []
@@ -186,7 +168,7 @@ class AnaNEB(CP2K):
             filename = '{0}.gif'.format(name)
         else:
             filename = '{0}.gif'.format(self.prefix)
-        os.system('convert -delay 20 temp*png {0}'.format(filename))
+        os.system('convert -dispose background -delay 20 temp*png {0}'.format(filename))
         os.system('''convert {0}  \
           \( -clone 0 -set delay 200 \) -swap 0 +delete \
           \( +clone   -set delay 100 \) +swap   +delete \

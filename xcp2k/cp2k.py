@@ -204,7 +204,7 @@ class CP2K(Calculator):
 
         if atoms is not None:
             self.atoms = atoms
-        self.natoms = len(atoms)
+        # self.natoms = len(atoms)
 
         #generate inputfile
         logger.debug(os.getcwd())
@@ -298,38 +298,49 @@ class CP2K(Calculator):
     def read_cell(self,):
         #
         cell = np.zeros([3, 3])
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
-        lines = open(self.out, 'r').readlines()
-        n = len(lines)
+        
+        n = len(self.outlines)
         for i in range(n):
-            if 'CELL| Volume' in lines[i]:
+            if 'CELL| Volume' in self.outlines[i]:
                 for j in range(3):
-                    data = lines[i + 1 + j].split()
+                    data = self.outlines[i + 1 + j].split()
                     for icell in range(3):
                         cell[j, icell] = float(data[4 + icell])
         return cell
     #
-    def read_results(self):
-        converged = self.read_convergence()
-        if self.out is None:
+    def read_results(self, out = None):
+        # self.read_inp()
+        if not out:
             self.out = join(self.directory, 'cp2k.out')
+        # print(self.out)
+        with open(self.out, 'r') as f:
+            self.outlines = f.readlines()
+        self.read_info()
+        converged = self.read_convergence()
         if not converged:
             os.system('tail -20 ' + self.out)
-            # raise RuntimeError('CP2K did not converge!\n' +
+        # raise RuntimeError('CP2K did not converge!\n' +
             #                    'The last lines of output are printed above ' +
             #                    'and should give an indication why.')
-        self.read_inp()
         self.read_energy()
         self.read_geometry()
-        self.read_forces()
-        #self.read_charges()
-        #self.read_fermi()
-        #if self.CP2K_INPUT.FORCE_EVAL_list[0].DFT.PRINT.PDOS.
-        #self.read_bandgap()
-        self.read_time()
+        # self.read_forces()
+        # self.read_time()
         #self.read_stress()
 
+    #
+    def read_info(self):
+        #
+        energies = []
+        for line in self.outlines:
+            if line.rfind('GLOBAL| Project name') > -1:
+                self.prefix = line.split()[-1]
+            if line.rfind('NUMBER OF NEB REPLICA') > -1:
+                self.nimages = int(line.split()[-1])
+            if line.rfind('BAND TOTAL ENERGY [au]') > -1:
+                e = float(line.split()[-1])
+                energies.append(e)
+        self.band_total_energies = energies
 
     def set_results(self, atoms):
         #self.read(atoms)
@@ -340,10 +351,7 @@ class CP2K(Calculator):
 
     def read_convergence(self):
         converged = False
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
-        lines = open(self.out, 'r').readlines()[-100:-1]
-        for n, line in enumerate(lines):
+        for n, line in enumerate(self.outlines[-100:-1]):
             if line.rfind('PROGRAM ENDED AT') > -1:
                 converged = True
             if line.rfind('The number of warnings') > -1:
@@ -358,10 +366,7 @@ class CP2K(Calculator):
         free_energies = []
         cone = physical_constants['Hartree energy in eV'][0]
         #
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
-        # print(self.out)
-        for line in open(self.out, 'r'):
+        for line in self.outlines:
             if line.rfind('ENERGY|') > -1:
                 E0 = float(line.split()[8])*cone
                 energies.append(E0)
@@ -382,49 +387,60 @@ class CP2K(Calculator):
         in the output file will be returned, in other case only the
         forces for the last ionic configuration are returned."""
         conf = physical_constants['atomic unit of force'][0]/physical_constants['electron volt'][0]*10**(-10)
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
-        lines = open(self.out, 'r').readlines()
+        
         forces = np.zeros([self.natoms, 3])
-        for n, line in enumerate(lines):
+        for n, line in enumerate(self.outlines):
             if line.rfind('# Atom   Kind   Element') > -1:
                 try :
                     for iatom in range(self.natoms):
-                        data = lines[n + iatom + 1].split()
+                        data = self.outlines[n + iatom + 1].split()
                         for iforce in range(3):
                             forces[iatom, iforce] = float(data[3 + iforce])*conf
                 except:
                     print('read forces error, cp2k run may be interupt')
         self.results['forces'] = forces
+    def read_bader_charge(self, filename = None, atoms = None):
+        if filename is None:
+            filename = 'ACF.dat'
+        # if 'ACF.dat' is None:
+            # os.system('bader *.cube')
+        if atoms is None:
+            atoms = self.atoms
+        natoms = len(atoms)
+        bader_charge = np.zeros([natoms])
+        with open(filename, 'r') as f:
+            lines = f.readlines()
+        for iatom in range(natoms):
+            data = lines[iatom + 2].split()
+            bader_charge[iatom] = float(data[4])
+        self.results['bader_charge'] = bader_charge
 
     def read_charges_moments(self):
         """Method that reads charges from the output file.
         """
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
-        lines = open(self.out, 'r').readlines()
+        
         self.get_number_of_spins()
         index = 4
         if self.spin == 2:
             index = 5
-        for n, line in enumerate(lines):
+        for n, line in enumerate(self.outlines):
             if line.rfind('Mulliken Population Analysis') > -1:
                 charges = []
                 moments = []
                 for iatom in range(self.natoms):
-                    data = lines[n + iatom + 3].split()
+                    data = self.outlines[n + iatom + 3].split()
                     charges.append([iatom, data[1], float(data[index])])
                     if self.spin == 2:
                         moments.append([iatom, data[1], float(data[index + 1])])
         self.results['charges-M'] = charges
         self.results['moments-M'] = moments
         #
-        for n, line in enumerate(lines):
+        for n, line in enumerate(self.outlines):
             if line.rfind('Hirshfeld Charges') > -1:
                 charges = []
                 moments = []
                 for iatom in range(self.natoms):
-                    data = lines[n + iatom + 3].split()
+                    data = self.outlines[n + iatom + 3].split()
                     charges.append([iatom, data[1], float(data[index + 1])])
                     if self.spin == 2:
                         moments.append([iatom, data[1], float(data[index])])
@@ -433,33 +449,30 @@ class CP2K(Calculator):
 
 
     def read_stress(self):
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
-        lines = open(self.out, 'r').readlines()
+        
         stress = None
-        for n, line in enumerate(lines):
+        for n, line in enumerate(self.outlines):
             if (line.rfind('STRESS TENSOR [GPa]') > -1):
                 stress = []
                 for i in [n + 3, n + 4, n + 5]:
-                    data = lines[i].split()
+                    data = self.outlines[i].split()
                     stress += [float(data[1]), float(data[2]), float(data[3])]
         # rearrange in 6-component form and return
         self.results['stress'] = np.array([stress[0], stress[4], stress[8],
                                            stress[5], stress[2], stress[1]])
     def read_time(self):
-        lines = open(join(self.directory, 'cp2k.out'), 'r').readlines()
-        for n, line in enumerate(lines):
+
+        for n, line in enumerate(self.outlines):
             if (line.rfind('TOTAL TIME') > -1):
-                time = float(lines[n + 2].split()[6])
+                time = float(self.outlines[n + 2].split()[6])
                 self.results['time'] = time
     #
     def read_frequency(self):
         frequencies = []
         #
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
+        
         # print(self.out)
-        for line in open(self.out, 'r'):
+        for line in self.outlines:
             if line.rfind('VIB|Frequency') > -1:
                 for f in line.split()[2:]:
                     frequencies.append(float(f))
@@ -499,7 +512,7 @@ class CP2K(Calculator):
         return atoms
     def read_version(self):
         version = None
-        for line in open(join(self.directory, 'cp2k.out')):
+        for line in self.outlines:
             if line.find('CP2K| version string') != -1:  # find the first occurence
                 version = "CP@K version " + line.split[-1]
                 break
@@ -608,7 +621,7 @@ class CP2K(Calculator):
 
         try:
             p=Popen(cmdlist, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-            out, err = p.communicate(self.xcp2krc['script_new'])
+            out, err = p.communicate(str.encode(self.xcp2krc['script_new']))
             if out == '' or err != '':
                 raise Exception('something went wrong in job queue :\n\n{0}'.format(err))
         except Exception as e:
@@ -702,8 +715,8 @@ class CP2K(Calculator):
         atom_list = []
         for i_atom, atom in enumerate(atoms):
             if symbol:
-                if hasattr(atoms, 'labels'):
-                    new_atom = [atoms.labels[i_atom], atom.position[0], atom.position[1], atom.position[2]]
+                if hasattr(atoms, 'kinds'):
+                    new_atom = [atoms.kinds[i_atom], atom.position[0], atom.position[1], atom.position[2]]
                 else:
                     new_atom = [atom.symbol, atom.position[0], atom.position[1], atom.position[2]]
             else:
@@ -845,21 +858,23 @@ class CP2K(Calculator):
 
         """ 
         kinds = {}
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
+        
         # print(self.out)
         nk = 0
-        for line in open(self.out, 'r'):
+        for line in self.outlines:
             if line.rfind('Atomic kind:') > -1:
                 nk += 1
                 kind = line.split()[3]
                 na = int(line.split()[-1])
                 flag=True
                 for k, e in kinds.items():
+                    # print(k, e)
                     if e[0]==kind:
                         flag=False
+                        kinds[k][1] = na
                 if flag:
                     kinds[nk] = [kind, na]
+        print(kinds)
         self.kinds = kinds
 
             
@@ -869,10 +884,9 @@ class CP2K(Calculator):
         free_energies = []
         cone = physical_constants['Hartree energy in eV'][0]
         #
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
+        
         # print(self.out)
-        for line in open(self.out, 'r'):
+        for line in self.outlines:
             if line.rfind('Fermi Energy') > -1 and line.rfind('eV') > -1:
                 Ef = float(line.split()[-1])
             if line.rfind('Fermi Energy') > -1 and line.rfind('eV') == -1:
@@ -882,11 +896,10 @@ class CP2K(Calculator):
     def read_bandgap(self,):
         """Return the Fermi level."""
         #
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
+        
         # print(self.out)
         bandgap = 10000000
-        for line in open(self.out, 'r'):
+        for line in self.outlines:
             if line.rfind('HOMO - LUMO gap') > -1:
                 tempe = float(line.split()[-1])
                 if tempe < bandgap:
@@ -899,10 +912,9 @@ class CP2K(Calculator):
         2 if spin-polarized 
 
         """ 
-        if self.out is None:
-            self.out = join(self.directory, 'cp2k.out')
+        
         # print(self.out)
-        for line in open(self.out, 'r'):
+        for line in self.outlines:
             if line.rfind('DFT| Spin') > -1:
                 method = line.split()[-1]
                 break
@@ -911,25 +923,15 @@ class CP2K(Calculator):
         else:
             spin=1
         self.spin = spin
-    def is_cp2k(self, path):
-        '''
-        check cp2k 
-        '''
-        import os
-        dirs = os.listdir(path)
-        # print(dirs)
-        flag = True
-        for file in ['cp2k.inp', 'cp2k.out']:
-            if file not in dirs:
-                flag = False
-                break
-        return flag
+
     def read_geometry(self, prefix = None):
         atoms = None
         if prefix:
             self.prefix = prefix
-        filename = '{0}.in'.format(self.prefix)
-        filename1 = '{0}-pos-1.xyz'.format(self.prefix)
+        # print(self.prefix)
+        filename = self.directory + '/{0}.in'.format(self.prefix)
+        filename1 = self.directory + '/{0}-pos-1.xyz'.format(self.prefix)
+        # print(filename)
         if os.path.isfile(filename):
             atoms = ase.io.read(filename)
             atoms.wrap()

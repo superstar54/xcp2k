@@ -28,9 +28,8 @@ from os.path import join, isfile, split, islink
 import numpy as np
 import ase.io
 from ase import Atoms, Atom
-from ase.calculators.calculator import Calculator, all_changes, Parameters
+from ase.calculators.calculator import FileIOCalculator, all_changes, Parameters
 from ase.units import Rydberg
-from xcp2k.cp2k_params import *
 from xcp2k.cp2k_tools import *
 from xcp2k.cp2krc import *
 from scipy.constants import physical_constants, c, h, hbar, e
@@ -47,7 +46,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 # logger.setLevel(logging.DEBUG) 
 
-class CP2K(Calculator):
+class CP2K(FileIOCalculator):
     """ASE-Calculator for CP2K.
 
     CP2K is a program to perform atomistic and molecular simulations of solid
@@ -77,25 +76,40 @@ class CP2K(Calculator):
     name = 'cp2k'
     implemented_properties = ['energy', 'energies', 'forces', 'stress', 'charges', 'frequencies']
 
-    def __init__(self, restart=None, mode = 0,  directory = '.', ignore_bad_restart_file=False,
-                  env = 'SLURM', ntasks = None, nodes = None, ntasks_per_node = None, time = '1:00:00', atoms=None, command=None,
+    def __init__(self, restart=None, mode = 0,  label = 'cp2k', ignore_bad_restart_file=False,
+                 queue = None, 
+                 atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
-        self.xcp2krc = xcp2krc
-        self.xcp2krc['env'] = env    # set environment for  job submission
-        self.xcp2krc['ntasks'] = ntasks
-        self.xcp2krc['nodes'] = nodes
-        self.xcp2krc['ntasks-per-node'] = ntasks_per_node
-
-        self.xcp2krc['time'] = time
+        # {'nodes': None, 'ntasks-per-node': None, partition': None, 'account': None, 'time': '01:00:00'},
+        FileIOCalculator.__init__(self, restart, ignore_bad_restart_file,
+                                  label, atoms, **kwargs)
+        self.prefix = label.split('/')[-1]
+        self.directory = './' + label[0:-len(self.prefix)]
+        if queue:
+            # Write the file
+            command = os.environ.get('ASE_CP2K_COMMAND')
+            if not os.path.exists(self.directory):
+                os.makedirs(self.directory)
+            with open('%s.job_file' % self.directory, 'w') as fh:
+                fh.writelines("#!/bin/bash\n")
+                fh.writelines("#SBATCH --job-name=%s \n" % self.prefix)
+                fh.writelines("#SBATCH --output=%s.out\n" % self.prefix)
+                fh.writelines("#SBATCH --error=%s.err\n" % self.prefix)
+                fh.writelines("#SBATCH --wait\n")
+                for key, value in queue.items():
+                    if value:
+                        fh.writelines("#SBATCH --%s=%s\n" %(key, value))
+                fh.writelines("module load CP2K/5.1-intel-2018a \n")
+                fh.writelines("%s \n" % command)
+            self.command = "sbatch {0}".format('.job_file')
         if debug:
             logger.setLevel(logging.DEBUG)
 
         self.CP2K_INPUT = _CP2K_INPUT1()
         self._debug = debug
         self.mode = mode
-        self.directory = directory
-        self.prefix = None
+        
         self.out = None
         self.inp = None
 
@@ -114,57 +128,6 @@ class CP2K(Calculator):
 
         self.params = params
         self.ase_params = ase_params
-        self.set(**kwargs)
-        
-        
-        # Several places are check to determine self.command
-        if command is not None:
-            self.command = command
-        elif 'ASE_CP2K_COMMAND' in os.environ:
-            self.command = os.environ['ASE_CP2K_COMMAND']
-        else:
-            raise RuntimeError('Please set ASE_CP2K_COMMAND')
-
-        
-        if restart is not None:
-            try:
-                self.read(restart)
-            except:
-                if ignore_bad_restart_file:
-                    self.reset()
-                else:
-                    raise
-        #print('Finish construct CP2K-calculator object.')
-
-
-    def set(self, **kwargs):
-        """Set parameters like set(key1=value1, key2=value2, ...)."""
-        changed_parameters = {}
-        kwargs = capitalize_keys(kwargs)
-        for key in kwargs:
-            oldvalue = self.parameters.get(key)
-            if key not in self.parameters:
-                if isinstance(oldvalue, dict):
-                # Special treatment for dictionary parameters:
-                    for name in value:
-                        if name not in oldvalue:
-                            raise KeyError(
-                                'Unknown subparameter "%s" in '
-                                'dictionary parameter "%s"' % (name, key))
-                    oldvalue.update(value)
-                    value = oldvalue
-                changed_parameters[key] = kwargs[key]
-                self.parameters[key] = kwargs[key]
-            flag = 0
-            for param in self.params:
-                if key in self.params[param]:
-                    self.params[param][key] = kwargs[key]
-                    flag = 1
-                    break
-            if flag ==0 and key in self.ase_params:
-                self.ase_params[key] = kwargs[key]
-            elif flag ==0 and key not in self.ase_params:
-                   raise TypeError('Parameter not defined: ' + key)
 
 
     def update(self, atoms):
@@ -194,42 +157,6 @@ class CP2K(Calculator):
         results_txt = open(label + '_results.ase').read()
         self.results = eval(results_txt, {'array': np.array})
 
-    def calculate(self, atoms=None, properties=None,
-                  system_changes=all_changes):
-        """Do the calculation."""
-        if not properties:
-            properties = ['energy']
-        
-        # logger.debug("system_changes:", system_changes)
-
-        if atoms is not None:
-            self.atoms = atoms
-        # self.natoms = len(atoms)
-
-        #generate inputfile
-        logger.debug(os.getcwd())
-        self.write_input_file()
-        if self.mode == 1:
-            return
-        cwd = os.getcwd()
-        # os.chdir(self.directory)
-        self.xcp2krc['script_new'] = self.xcp2krc['script'] + '''
-                cd {0}  # this is the current working directory
-                cd {1}  # this is the vasp directory
-                $ASE_CP2K_COMMAND
-            '''.format(cwd, self.directory)
-        self.run()
-        # print(os.getcwd())
-        # os.chdir(cwd)
-        self.converged = self.read_convergence()
-        # read results
-        self.read_results()
-        self.set_results(self.atoms)
-        # read new geometry
-        self.update_atoms(self.atoms)
-        # write Jmol
-        self.atoms.write(join(self.directory, self.prefix+'.in'))
-        self.write(self.directory + '/' + self.prefix)
     def read_inp(self, ):
         #
         if self.inp is None:
@@ -243,42 +170,6 @@ class CP2K(Calculator):
         self.inpcalc = inpcalc
         # print(inputparser)
         # print(calc.CP2K_INPUT)
-        
-
-        # for section in root_section:
-            # print(section)
-
-
-    # def read_inp(self, ):
-        
-    #     lines = open(self.inp, 'r').readlines()
-    #     n = len(lines)
-    #     for i in range(n):
-    #         
-    #     #
-    #     eles = []
-    #     poss = []
-    #     natoms = 0
-    #     for n, line in enumerate(lines):
-    #         if line.rfind('MODULE QUICKSTEP:  ATOMIC COORDINATES IN angstrom') > -1:
-    #             # print(lines[n+4+natoms])
-    #             while(len(lines[n+4+natoms])>1):
-    #                 datas = lines[n+4+natoms].split()
-    #                 eles.append(datas[2])
-    #                 pos = []
-    #                 for ip in range(3):
-    #                     pos.append(float(datas[4 + ip]))
-    #                 poss.append(pos)
-    #                 natoms += 1
-    #             n += natoms
-    #     self.natoms = natoms
-    #     # print(eles)
-    #     # print(poss)
-    #     self.initial_atoms = Atoms(eles, poss)
-    #     # print(self.natoms)
-    #     # print(self.initial_atoms)
-    #     # self.re
-
 
     def update_atoms(self, atoms):
         """read new geometry when ."""
@@ -534,133 +425,7 @@ class CP2K(Calculator):
             raise NotImplementedError
         return self.stress
 
-
-#=======================
-    def run(self):
-        """Monkey patch to submit job through the queue.    
-
-        If this is called, then the calculator thinks a job should be run.
-        If we are in the queue, we should run it, otherwise, a job should
-        be submitted.   
-
-        """ 
-
-        # if we are in the queue and jasp is called or if we want to use
-        # mode='run' , we should just run the job. First, we consider how.
-        logger.debug('run function')
-        cwd = os.getcwd()
-        # print(cwd)
-
-        if 'ASE_CP2K_COMMAND' not in os.environ:
-            raise RuntimeError('Please set ASE_CP2K_COMMAND in the environment variable')
-
-        #print(os.environ)
-        if self.xcp2krc['mode'] == 'run':
-            # probably running at cmd line, in serial.
-            cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            exitcode = os.system(cp2kcmd)
-            return exitcode
-        elif 'NHOSTS' in os.environ:
-            # we are in the queue. determine if we should run serial
-            # or parallel
-            #NPROCS = os.environ['NSLOTS ']
-            # no question. running in serial.
-            cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            #parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
-            exitcode = os.system(cp2kcmd)
-            return exitcode
-        elif 'SLURM_JOB_NODELIST' in os.environ:
-            # we are in the queue. determine if we should run serial
-            # or parallel
-            # NPROCS = int(os.environ['SLURM_NTASKS'])
-            # no question. running in serial.
-            cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            exitcode = os.system(''' cd {0}  # this is the current working directory
-                 cd {1}  # this is the vasp directory
-                {2} '''.format(cwd, self.directory, cp2kcmd))
-            # exitcode = os.system(cp2kcmd)
-            return exitcode
-        elif 'PBS_NODEFILE' in os.environ:
-            # we are in the queue. determine if we should run serial
-            # or parallel
-            # NPROCS = int(os.environ['SLURM_NTASKS'])
-            # no question. running in serial.
-            cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            exitcode = os.system(cp2kcmd)
-            return exitcode 
-    
-
-        # if you get here, a job is getting submitted   
-
-        jobname = self.prefix   
-
-        if self.xcp2krc['env'].upper() == 'SLURM':
-            cmdlist = ['sbatch']
-            cmdlist += ['--wait']
-            cmdlist += ['--job-name', '{0}'.format(jobname)]
-            if self.xcp2krc['nodes']:
-                cmdlist += ['--nodes', '{0}'.format(self.xcp2krc['nodes'])]
-            if self.xcp2krc['ntasks']:
-                cmdlist += ['--ntasks', '{0}'.format(self.xcp2krc['ntasks'])]
-            if self.xcp2krc['ntasks-per-node']:
-                cmdlist += ['--ntasks-per-node', '{0}'.format(self.xcp2krc['ntasks-per-node'])]
-            cmdlist += ['--time', '{0}'.format(self.xcp2krc['time'])]
-            # cmdlist += ['--ntasks-per-node', '{0}'.format(self.cpu)]
-        if self.xcp2krc['env'].upper() == 'SGE':
-            cmdlist = ['qsub']
-            cmdlist += ['-N', '{0}'.format(jobname)]
-            cmdlist += ['-pe', 'openmpi', '{0}'.format(self.cpu)]
-        if self.xcp2krc['env'].upper() == 'gridview':
-            cmdlist = ['qsub']
-            cmdlist += ['-N', '{0}'.format(jobname)]
-            cmdlist += ['-l', 'nodes=1:ppn={0}'.format(self.cpu)]
-            cmdlist += ['-q', 'low']
-        
-        logger.debug(cmdlist)
-        logger.debug(self.xcp2krc['script_new'])    
-
-        try:
-            p=Popen(cmdlist, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-            out, err = p.communicate(str.encode(self.xcp2krc['script_new']))
-            if out == '' or err != '':
-                raise Exception('something went wrong in job queue :\n\n{0}'.format(err))
-        except Exception as e:
-                print('\n\n something went wrong in job queue.\n\n')
-                traceback.print_exc()
-                print()
-                raise e
-        logger.debug(out)
-        if self.xcp2krc['env'].upper() == 'SLURM':
-            job_id = int(out.split()[3])
-        elif self.xcp2krc['env'].upper() == 'SGE':
-            job_id = int(out.split()[2])
-        elif self.xcp2krc['env'].upper() == 'gridview':
-            job_id = int(out.split('.')[0]) 
-        logger.debug('jobs_id = ', job_id)
-                
-
-        if self.xcp2krc['env'].upper() == 'SLURM':
-            output = Popen("sacct -j %i" %(job_id), shell = True,
-                   stdin = PIPE,
-                   stdout = PIPE,
-                   stderr = PIPE).communicate()
-            if "COMPLETED" in output[0] and output[0].split()[15]==self.prefix:
-                return 
-        elif self.xcp2krc['env'].upper() == 'SGE':
-            output = Popen("qstat -j %i" %(job_id), shell = True,
-                   stdin = PIPE,
-                   stdout = PIPE,
-                   stderr = PIPE).communicate()
-            if "do not exist" in output[1]:
-                return 
-        elif self.xcp2krc['env'].upper() == 'gridview':
-            output = Popen("qstat -R %i" %(job_id), shell = True,
-                   stdin = PIPE,
-                   stdout = PIPE,
-                   stderr = PIPE).communicate()
-            if "Unknown" in output[1]:
-                return 
-        # print('jobs failed')    
+   
     
 
     def create_cell(self, CELL, atoms):
@@ -782,7 +547,7 @@ class CP2K(Calculator):
         else:
             poisson.Periodic = pbc[0]*"X" + pbc[1]*"Y" + pbc[2]*"Z" 
 
-    def write_input_file(self):
+    def write_input(self, atoms, properties=None, system_changes=None):
         """Creates an input file for CP2K executable from the object tree
         defined in CP2K_INPUT.
         """

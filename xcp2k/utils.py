@@ -1,6 +1,37 @@
 import numpy as np
+from xcp2k import CP2K
 import os
+import pickle
 
+def summary(updates = [], prefix = 'datas'):
+    file = '%s.pickle' % prefix
+    if os.path.exists(file):
+        with open(file, 'rb') as f:
+            datas = pickle.load(f)
+    else:
+        datas = {}
+    calc = CP2K()
+    print('Reading.....')
+    for update in updates:
+        print(update)
+        cwd = os.getcwd()
+        for i,j,y in os.walk(update):
+            output = is_cp2k(i)
+            if output:
+                os.chdir(i)
+                print('dire:', i)
+                # calc.directory = cwd + '/' + i
+                # calc.prefix = output[0:-4]
+                try:
+                    calc.results = {}
+                    calc.read_results()
+                    datas[i] = calc.results
+                except Exception as e:
+                    print('='*30, '\n', i, e)
+            os.chdir(cwd)
+    with open(file, 'wb') as f:
+        pickle.dump(datas, f)
+    print('Finished')
 
 def is_cp2k(path):
     '''

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+       # -*- coding: utf-8 -*-
 from __future__ import print_function
 
 """This module defines an ASE interface to CP2K.
@@ -28,9 +28,10 @@ from os.path import join, isfile, split, islink
 import numpy as np
 import ase.io
 from ase import Atoms, Atom
-from ase.calculators.calculator import FileIOCalculator, all_changes, Parameters
+from ase.calculators.calculator import Calculator, all_changes, Parameters
 from ase.units import Rydberg
-from ase.constraints import FixAtoms, FixScaled
+from ase.constraints import FixAtoms
+from xcp2k.cp2k_params import *
 from xcp2k.cp2k_tools import *
 from xcp2k.cp2krc import *
 from scipy.constants import physical_constants, c, h, hbar, e
@@ -47,7 +48,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 # logger.setLevel(logging.DEBUG) 
 
-class CP2K(FileIOCalculator):
+class CP2K(Calculator):
     """ASE-Calculator for CP2K.
 
     CP2K is a program to perform atomistic and molecular simulations of solid
@@ -77,66 +78,104 @@ class CP2K(FileIOCalculator):
     name = 'cp2k'
     implemented_properties = ['energy', 'energies', 'forces', 'stress', 'charges', 'frequencies']
 
-    def __init__(self, restart=None, mode = 0,  label = 'cp2k', ignore_bad_restart_file=False,
-                 queue = None, 
-                 atoms=None, command=None,
+    def __init__(self, restart=None, mode = 0,  directory = '.', ignore_bad_restart_file=False,
+                  env = 'SLURM', ntasks = None, nodes = None, ntasks_per_node = None, time = '1:00:00', atoms=None, command=None,
                  debug=False, **kwargs):
         """Construct CP2K-calculator object."""
-        # {'nodes': None, 'ntasks-per-node': None, partition': None, 'account': None, 'time': '01:00:00'},
-        FileIOCalculator.__init__(self, restart, ignore_bad_restart_file,
-                                  label, atoms, **kwargs)
-        self.prefix = label.split('/')[-1]
-        self.directory = './' + label[0:-len(self.prefix)]
-        self.set_queue(queue)
+        self.xcp2krc = xcp2krc
+        self.xcp2krc['env'] = env    # set environment for  job submission
+        self.xcp2krc['ntasks'] = ntasks
+        self.xcp2krc['nodes'] = nodes
+        self.xcp2krc['ntasks-per-node'] = ntasks_per_node
+
+        self.xcp2krc['time'] = time
         if debug:
             logger.setLevel(logging.DEBUG)
 
         self.CP2K_INPUT = _CP2K_INPUT1()
         self._debug = debug
+        self.mode = mode
+        self.directory = directory
+        self.prefix = None
         self.out = None
         self.inp = None
+
         self.symmetry = None
+
         self.results = {}
         self.parameters = {}  # calculational parameters
+
         self.atoms = None
         self.positions = None
+
         if atoms is not None:
             atoms.calc = self
             self.atoms = atoms
             self.natoms = len(atoms)
-    def set_queue(self, queue = None):
-        command = os.environ.get('ASE_CP2K_COMMAND')
-        if queue:
-            # Write the file
-            if not os.path.exists(self.directory):
-                os.makedirs(self.directory)
-            with open('%s.job_file' % self.directory, 'w') as fh:
-                fh.writelines("#!/bin/bash\n")
-                fh.writelines("#SBATCH --job-name=%s \n" % self.prefix)
-                fh.writelines("#SBATCH --output=%s.out\n" % self.prefix)
-                fh.writelines("#SBATCH --error=%s.err\n" % self.prefix)
-                fh.writelines("#SBATCH --wait\n")
-                for key, value in queue.items():
-                    if value:
-                        fh.writelines("#SBATCH --%s=%s\n" %(key, value))
-                fh.writelines('''export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK \n
-module load CP2K/6.1-intel-2018a \n
-ulimit -s unlimited\n
-export ASE_CP2K_COMMAND="mpirun cp2k.popt -i cp2k.inp -o cp2k.out"\n
-export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
-                fh.writelines("%s \n" % command)
-            self.command = "sbatch {0}".format('.job_file')
-        else:
-            self.command = command
 
-    def update(self, atoms):
-        if self.calculation_required(atoms, ['energy']):
-            if (self.atoms is None or
-                self.atoms.positions.shape != atoms.positions.shape):
-                # Completely new calculation just reusing the same
-                # calculator, so delete any old cp2k files found.
-                self.clean()
-            self.calculate(atoms)
+        self.params = params
+        self.ase_params = ase_params
+        self.set(**kwargs)
+        
+        
+        # Several places are check to determine self.command
+        if command is not None:
+            self.command = command
+        elif 'ASE_CP2K_COMMAND' in os.environ:
+            self.command = os.environ['ASE_CP2K_COMMAND']
+        else:
+            raise RuntimeError('Please set ASE_CP2K_COMMAND')
+
+        
+        if restart is not None:
+            try:
+                self.read(restart)
+            except:
+                if ignore_bad_restart_file:
+                    self.reset()
+                else:
+                    raise
+        #print('Finish construct CP2K-calculator object.')
+
+
+    def set(self, **kwargs):
+        """Set parameters like set(key1=value1, key2=value2, ...)."""
+        changed_parameters = {}
+        kwargs = capitalize_keys(kwargs)
+        for key in kwargs:
+            oldvalue = self.parameters.get(key)
+            if key not in self.parameters:
+                if isinstance(oldvalue, dict):
+                # Special treatment for dictionary parameters:
+                    for name in value:
+                        if name not in oldvalue:
+                            raise KeyError(
+                                'Unknown subparameter "%s" in '
+                                'dictionary parameter "%s"' % (name, key))
+                    oldvalue.update(value)
+                    value = oldvalue
+                changed_parameters[key] = kwargs[key]
+                self.parameters[key] = kwargs[key]
+            flag = 0
+            for param in self.params:
+                if key in self.params[param]:
+                    self.params[param][key] = kwargs[key]
+                    flag = 1
+                    break
+            if flag ==0 and key in self.ase_params:
+                self.ase_params[key] = kwargs[key]
+            elif flag ==0 and key not in self.ase_params:
+                   raise TypeError('Parameter not defined: ' + key)
+
+
+    # def update(self, atoms):
+    #     if self.calculation_required(atoms, ['energy']):
+    #         if (self.atoms is None or
+    #             self.atoms.positions.shape != atoms.positions.shape):
+    #             # Completely new calculation just reusing the same
+    #             # calculator, so delete any old cp2k files found.
+    #             self.clean()
+    #         self.calculate(atoms)
 
     def write(self, label):
         'Write atoms, parameters and calculated results into restart files.'
@@ -156,6 +195,42 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
         results_txt = open(label + '_results.ase').read()
         self.results = eval(results_txt, {'array': np.array})
 
+    def calculate(self, atoms=None, properties=None,
+                  system_changes=all_changes):
+        """Do the calculation."""
+        if not properties:
+            properties = ['energy']
+        
+        # logger.debug("system_changes:", system_changes)
+
+        if atoms is not None:
+            self.atoms = atoms
+        # self.natoms = len(atoms)
+
+        #generate inputfile
+        logger.debug(os.getcwd())
+        self.write_input_file()
+        if self.mode == 1:
+            return
+        cwd = os.getcwd()
+        # os.chdir(self.directory)
+        self.xcp2krc['script_new'] = self.xcp2krc['script'] + '''
+                cd {0}  # this is the current working directory
+                cd {1}  # this is the cp2k directory
+                $ASE_CP2K_COMMAND
+            '''.format(cwd, self.directory)
+        self.run()
+        # print(os.getcwd())
+        # os.chdir(cwd)
+        self.converged = self.read_convergence()
+        # read results
+        self.read_results()
+        self.set_results(self.atoms)
+        # read new geometry
+        self.update_atoms(self.atoms)
+        # write Jmol
+        self.atoms.write(join(self.directory, self.prefix+'.in'))
+        self.write(self.directory + '/' + self.prefix)
     #
     def update_atoms(self, atoms):
         """read new geometry when ."""
@@ -813,6 +888,8 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
         # print(self.prefix)
         filename = self.directory + '/{0}.in'.format(self.prefix)
         filename1 = self.directory + '/{0}-pos-1.xyz'.format(self.prefix)
+        # print(filename)
+        # print(filename1)
         if os.path.isfile(filename):
             atoms = ase.io.read(filename)
             atoms.wrap()
@@ -825,7 +902,7 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
             # print(self.constraints.FIXED_ATOMS_list[0].List[0].split())
             constraints = []
             if len(self.constraints.FIXED_ATOMS_list) > 0:
-                print(self.constraints.FIXED_ATOMS_list)
+                # print(self.constraints.FIXED_ATOMS_list)
                 for List in self.constraints.FIXED_ATOMS_list[0].List:
                     # print(List)
                     List = List.split()

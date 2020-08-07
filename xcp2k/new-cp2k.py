@@ -30,7 +30,6 @@ import ase.io
 from ase import Atoms, Atom
 from ase.calculators.calculator import FileIOCalculator, all_changes, Parameters
 from ase.units import Rydberg
-from ase.constraints import FixAtoms, FixScaled
 from xcp2k.cp2k_tools import *
 from xcp2k.cp2krc import *
 from scipy.constants import physical_constants, c, h, hbar, e
@@ -129,12 +128,13 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
         else:
             self.command = command
 
+
     def update(self, atoms):
         if self.calculation_required(atoms, ['energy']):
             if (self.atoms is None or
                 self.atoms.positions.shape != atoms.positions.shape):
                 # Completely new calculation just reusing the same
-                # calculator, so delete any old cp2k files found.
+                # calculator, so delete any old VASP files found.
                 self.clean()
             self.calculate(atoms)
 
@@ -156,7 +156,20 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
         results_txt = open(label + '_results.ase').read()
         self.results = eval(results_txt, {'array': np.array})
 
-    #
+    def read_inp(self, ):
+        #
+        if self.inp is None:
+            self.inp = join(self.directory, 'cp2k.inp')
+        inputparser = CP2KInputParser()
+        inpcalc = inputparser.parse(self, self.inp)
+        # print(inpcalc.CP2K_INPUT)
+        self.prefix = inpcalc.CP2K_INPUT.GLOBAL.Project_name
+        # print(inpcalc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.COORD.Default_keyword)
+        self.natoms = len(inpcalc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.COORD.Default_keyword)
+        self.inpcalc = inpcalc
+        # print(inputparser)
+        # print(calc.CP2K_INPUT)
+
     def update_atoms(self, atoms):
         """read new geometry when ."""
     # Updata atoms positions and cell
@@ -175,7 +188,7 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
     def read_cell(self,):
         #
         cell = np.zeros([3, 3])
-        # self.read_results()
+        
         n = len(self.outlines)
         for i in range(n):
             if 'CELL| Volume' in self.outlines[i]:
@@ -185,40 +198,40 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
                         cell[j, icell] = float(data[4 + icell])
         return cell
     #
-    def read_inp(self, inp = None):
-        #
-        self.CP2K_INPUT = _CP2K_INPUT1()
-        if inp is None:
-            self.inp = join(self.directory, 'cp2k.inp')
-        inputparser = CP2KInputParser()
-        inpcalc = inputparser.parse(self, self.inp)
-        self.prefix = inpcalc.CP2K_INPUT.GLOBAL.Project_name
-        self.natoms = len(inpcalc.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS.COORD.Default_keyword)
-        self.inpcalc = inpcalc
-        self.constraints = inpcalc.CP2K_INPUT.MOTION.CONSTRAINT
-    #
     def read_results(self, out = None):
-        self.read_inp()
-        # print(self.out)
-        if not out and not self.out:
+        # self.read_inp()
+        if not out:
             self.out = join(self.directory, 'cp2k.out')
-        # print('reading results:...', self.out)
         # print(self.out)
         with open(self.out, 'r') as f:
             self.outlines = f.readlines()
-        # print(self.outlines[-5:])
+        self.read_info()
         converged = self.read_convergence()
         if not converged:
-            os.system('tail -5 ' + self.out)
+            os.system('tail -20 ' + self.out)
         # raise RuntimeError('CP2K did not converge!\n' +
             #                    'The last lines of output are printed above ' +
             #                    'and should give an indication why.')
         self.read_energy()
         self.read_geometry()
-        self.read_forces()
+        # self.read_forces()
         # self.read_time()
         #self.read_stress()
+
     #
+    def read_info(self):
+        #
+        energies = []
+        for line in self.outlines:
+            if line.rfind('GLOBAL| Project name') > -1:
+                self.prefix = line.split()[-1]
+            if line.rfind('NUMBER OF NEB REPLICA') > -1:
+                self.nimages = int(line.split()[-1])
+            if line.rfind('BAND TOTAL ENERGY [au]') > -1:
+                e = float(line.split()[-1])
+                energies.append(e)
+        self.band_total_energies = energies
+
     def set_results(self, atoms):
         #self.read(atoms)
         self.old_params = self.params.copy()
@@ -228,11 +241,6 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
 
     def read_convergence(self):
         converged = False
-        # self.out = join(self.directory, 'cp2k.out')
-        # print('reading results:...', self.out)
-        # print(self.out)
-        with open(self.out, 'r') as f:
-            self.outlines = f.readlines()
         for n, line in enumerate(self.outlines[-100:-1]):
             if line.rfind('PROGRAM ENDED AT') > -1:
                 converged = True
@@ -302,7 +310,6 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
         """
         
         self.get_number_of_spins()
-        self.natoms = len(self.results['geometry'])
         index = 4
         if self.spin == 2:
             index = 5
@@ -352,6 +359,8 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
     #
     def read_frequency(self):
         frequencies = []
+        #
+        
         # print(self.out)
         for line in self.outlines:
             if line.rfind('VIB|Frequency') > -1:
@@ -377,9 +386,8 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
     def calculation_required(self, atoms, quantities):
         if (self.positions is None or
             (self.atoms != atoms) or
-            (self.directory != self.old_directory) 
-            or (self.params != self.old_params) 
-            or not self.converged):
+            (self.directory != self.old_directory) or
+            (self.params != self.old_params) or not self.converged):
             return True
         return False
 
@@ -402,152 +410,21 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
     def get_time(self):
         return self.results['time']
 
-    # def get_forces(self, atoms):
-    #     print('='*100)
-    #     print('\n'*5)
-    #     print("write_input_file id:", os.getpid())
-    #     self.update(atoms)
-    #     return self.results['forces']
+    def get_forces(self, atoms):
+        self.update(atoms)
+        return self.results['forces']
 
-    # def get_charges(self, atoms):
-    #     self.update(atoms)
-    #     return self.results['charges']
+    def get_charges(self, atoms):
+        self.update(atoms)
+        return self.results['charges']
 
-    # def get_stress(self, atoms):
-    #     self.update(atoms)
-    #     if self.stress is None:
-    #         raise NotImplementedError
-    #     return self.stress
+    def get_stress(self, atoms):
+        self.update(atoms)
+        if self.stress is None:
+            raise NotImplementedError
+        return self.stress
 
-
-#=======================
-    def run(self):
-        """Monkey patch to submit job through the queue.    
-
-        If this is called, then the calculator thinks a job should be run.
-        If we are in the queue, we should run it, otherwise, a job should
-        be submitted.   
-
-        """ 
-
-        # if we are in the queue and jasp is called or if we want to use
-        # mode='run' , we should just run the job. First, we consider how.
-        logger.debug('run function')
-        cwd = os.getcwd()
-        # print(cwd)
-        # print(os.environ)
-
-        if 'ASE_CP2K_COMMAND' not in os.environ:
-            raise RuntimeError('Please set ASE_CP2K_COMMAND in the environment variable')
-
-        #print(os.environ)
-        if self.xcp2krc['mode'] == 'run':
-            # probably running at cmd line, in serial.
-            cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            exitcode = os.system(cp2kcmd)
-            return exitcode
-        elif 'NHOSTS' in os.environ:
-            # we are in the queue. determine if we should run serial
-            # or parallel
-            #NPROCS = os.environ['NSLOTS ']
-            # no question. running in serial.
-            cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            #parcmd = 'mpirun -np %i %s' % (NPROCS, cp2kcmd)
-            exitcode = os.system(cp2kcmd)
-            return exitcode
-        elif 'SLURM_JOB_NODELIST' in os.environ:
-            # we are in the queue. determine if we should run serial
-            # or parallel
-            # NPROCS = int(os.environ['SLURM_NTASKS'])
-            # no question. running in serial.
-            cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            exitcode = os.system(''' cd {0}  # this is the current working directory
-                 cd {1}  # this is the cp2k directory
-                {2} '''.format(cwd, self.directory, cp2kcmd))
-            # exitcode = os.system(cp2kcmd)
-            return exitcode
-        elif 'PBS_NODEFILE' in os.environ:
-            # we are in the queue. determine if we should run serial
-            # or parallel
-            # NPROCS = int(os.environ['SLURM_NTASKS'])
-            # no question. running in serial.
-            cp2kcmd = os.environ['ASE_CP2K_COMMAND']
-            exitcode = os.system(cp2kcmd)
-            return exitcode 
-    
-
-        # if you get here, a job is getting submitted   
-
-        jobname = self.prefix   
-
-        if self.xcp2krc['env'].upper() == 'SLURM':
-            cmdlist = ['sbatch']
-            cmdlist += ['--wait']
-            cmdlist += ['--job-name', '{0}'.format(jobname)]
-            if self.xcp2krc['nodes']:
-                cmdlist += ['--nodes', '{0}'.format(self.xcp2krc['nodes'])]
-            if self.xcp2krc['ntasks']:
-                cmdlist += ['--ntasks', '{0}'.format(self.xcp2krc['ntasks'])]
-            if self.xcp2krc['ntasks-per-node']:
-                cmdlist += ['--ntasks-per-node', '{0}'.format(self.xcp2krc['ntasks-per-node'])]
-            cmdlist += ['--time', '{0}'.format(self.xcp2krc['time'])]
-            # cmdlist += ['--ntasks-per-node', '{0}'.format(self.cpu)]
-        if self.xcp2krc['env'].upper() == 'SGE':
-            cmdlist = ['qsub']
-            cmdlist += ['-N', '{0}'.format(jobname)]
-            cmdlist += ['-pe', 'openmpi', '{0}'.format(self.cpu)]
-        if self.xcp2krc['env'].upper() == 'gridview':
-            cmdlist = ['qsub']
-            cmdlist += ['-N', '{0}'.format(jobname)]
-            cmdlist += ['-l', 'nodes=1:ppn={0}'.format(self.cpu)]
-            cmdlist += ['-q', 'low']
-        
-        logger.debug(cmdlist)
-        logger.debug(self.xcp2krc['script_new'])    
-
-        try:
-            p=Popen(cmdlist, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-            out, err = p.communicate(str.encode(self.xcp2krc['script_new']))
-            if len(out) <= 1 or len(err) > 0:
-                raise Exception('something went wrong in job queue :\n\n{0}'.format(err))
-        except Exception as e:
-                print('\n\n something went wrong in job queue.\n\n')
-                traceback.print_exc()
-                print()
-                raise e
-        logger.debug(out)
-        if self.xcp2krc['env'].upper() == 'SLURM':
-            job_id = int(out.split()[3])
-        elif self.xcp2krc['env'].upper() == 'SGE':
-            job_id = int(out.split()[2])
-        elif self.xcp2krc['env'].upper() == 'gridview':
-            job_id = int(out.split('.')[0]) 
-        logger.debug('jobs_id = ', job_id)
-                
-
-        if self.xcp2krc['env'].upper() == 'SLURM':
-            output = Popen("sacct -j %i" %(job_id), shell = True,
-                   stdin = PIPE,
-                   stdout = PIPE,
-                   stderr = PIPE).communicate()
-            output = str(output)
-            if "COMPLETED" in output[0] and output[0].split()[15]==self.prefix:
-                return 
-        elif self.xcp2krc['env'].upper() == 'SGE':
-            output = Popen("qstat -j %i" %(job_id), shell = True,
-                   stdin = PIPE,
-                   stdout = PIPE,
-                   stderr = PIPE).communicate()
-            if "do not exist" in output[1]:
-                return 
-        elif self.xcp2krc['env'].upper() == 'gridview':
-            output = Popen("qstat -R %i" %(job_id), shell = True,
-                   stdin = PIPE,
-                   stdout = PIPE,
-                   stderr = PIPE).communicate()
-            if "Unknown" in output[1]:
-                return 
-        # print('jobs failed')    
+   
     
 
     def create_cell(self, CELL, atoms):
@@ -669,10 +546,14 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
         else:
             poisson.Periodic = pbc[0]*"X" + pbc[1]*"Y" + pbc[2]*"Z" 
 
-    def write_input_file(self):
+    def write_input(self, atoms, properties=None, system_changes=None):
         """Creates an input file for CP2K executable from the object tree
         defined in CP2K_INPUT.
         """
+        #self.old_input = self.new_input
+        #print("write_input_file")
+        
+        
         self.pre_write_input_file() 
 
         SUBSYS = self.CP2K_INPUT.FORCE_EVAL_list[0].SUBSYS
@@ -795,7 +676,8 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
         2 if spin-polarized 
 
         """ 
-        self.read_results()
+        
+        # print(self.out)
         for line in self.outlines:
             if line.rfind('DFT| Spin') > -1:
                 method = line.split()[-1]
@@ -813,25 +695,13 @@ export CP2K_DATA_DIR=/home/ubelix/dcb/xw20n572/apps/cp2k-7.1.0/data\n''')
         # print(self.prefix)
         filename = self.directory + '/{0}.in'.format(self.prefix)
         filename1 = self.directory + '/{0}-pos-1.xyz'.format(self.prefix)
+        # print(filename)
         if os.path.isfile(filename):
             atoms = ase.io.read(filename)
             atoms.wrap()
         elif os.path.isfile(filename1):
-            # print(filename1)
             atoms = ase.io.read(filename1)
             atoms.wrap()
             atoms.cell = self.read_cell()
-            atoms.pbc = [True, True, True]
-            # print(self.constraints.FIXED_ATOMS_list[0].List[0].split())
-            constraints = []
-            if len(self.constraints.FIXED_ATOMS_list) > 0:
-                print(self.constraints.FIXED_ATOMS_list)
-                for List in self.constraints.FIXED_ATOMS_list[0].List:
-                    # print(List)
-                    List = List.split()
-                    constraint = FixAtoms(indices = [int(x) -1 for x in List])
-                    constraints.append(constraint)
-                atoms.set_constraint(constraints)
-        # print(atoms)
         self.results['geometry'] = atoms
         return atoms

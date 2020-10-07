@@ -99,7 +99,7 @@ PAIR_POTENTIAL = DFT.XC.VDW_POTENTIAL.PAIR_POTENTIAL_add()
 PAIR_POTENTIAL.Parameter_file_name = 'dftd3.dat'
 PAIR_POTENTIAL.Type = 'DFTD3'
 PAIR_POTENTIAL.Reference_functional = 'PBE'
-PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
+# PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
 
 # print(CP2K_INPUT_OT.FORCE_EVAL_list[0].DFT.XC.VDW_POTENTIAL.Potential_type)
 # print(CP2K_INPUT_OT_VDW.FORCE_EVAL_list[0].DFT.XC.VDW_POTENTIAL.Potential_type)
@@ -153,7 +153,7 @@ PAIR_POTENTIAL = DFT.XC.VDW_POTENTIAL.PAIR_POTENTIAL_add()
 PAIR_POTENTIAL.Parameter_file_name = 'dftd3.dat'
 PAIR_POTENTIAL.Type = 'DFTD3'
 PAIR_POTENTIAL.Reference_functional = 'PBE'
-PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
+# PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
 #===============================================================================
 CP2K_INPUT_DIAG_NEB = copy.deepcopy(CP2K_INPUT_DIAG)
 DFT = CP2K_INPUT_DIAG_NEB.FORCE_EVAL_list[0].DFT

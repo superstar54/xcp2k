@@ -18,6 +18,7 @@ class AnaNEB(CP2K):
         self.prefix = prefix
         self.nimages = nimages
         #
+        self.read_results()
         self.read_info()
         self.read_inp()
         # print(self.natoms)
@@ -48,6 +49,7 @@ class AnaNEB(CP2K):
                 self.calcs[i].out = join(self.directory, '{0}-BAND{1:02d}.out'.format(self.calcs[i].prefix, i + 1))
             image.cell = cell
             image.set_calculator(self.calcs[i])
+            image.calc.read_results()
             image.calc.read_energy()
             image.calc.read_forces()
             images.append(image)

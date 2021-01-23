@@ -87,14 +87,18 @@ class CP2K(FileIOCalculator):
                                   label, atoms, **kwargs)
         self.prefix = label.split('/')[-1]
         self.directory = './' + label[0:-len(self.prefix)]
+        self.logger = logger
+        if debug:
+            self.logger.setLevel(debug)
+        self.logger.debug('Label: %s'%(self.label))
+        self.logger.debug('Directory: %s'%(self.directory))
+        self.logger.debug('Prefix: %s'%(self.prefix))
         # Write the file
         if not os.path.exists(self.directory):
             os.makedirs(self.directory)
         self.set_queue(queue)
-        if debug:
-            logger.setLevel(logging.DEBUG)
+        self.logger = logger
         self.CP2K_INPUT = _CP2K_INPUT1()
-        self._debug = debug
         self.out = None
         self.inp = None
         self.symmetry = None
@@ -124,6 +128,7 @@ class CP2K(FileIOCalculator):
             self.command = "sbatch {0}".format('.job_file')
         else:
             self.command = command
+        self.logger.debug('Command: %s'%(self.command))
 
     def update(self, atoms):
         if self.calculation_required(atoms, ['energy']):
@@ -136,7 +141,7 @@ class CP2K(FileIOCalculator):
 
     def write(self, label):
         'Write atoms, parameters and calculated results into restart files.'
-        logger.debug("Writting restart to: ", label)
+        self.logger.debug("Writting restart to: ", label)
 
         self.atoms.write(label + '_restart.traj')
         f = open(label + '_params.ase', 'a')
@@ -170,6 +175,7 @@ class CP2K(FileIOCalculator):
     #
     def read_cell(self,):
         #
+        all_cell = []
         cell = np.zeros([3, 3])
         # self.read_results()
         n = len(self.outlines)
@@ -179,6 +185,9 @@ class CP2K(FileIOCalculator):
                     data = self.outlines[i + 1 + j].split()
                     for icell in range(3):
                         cell[j, icell] = float(data[4 + icell])
+                all_cell.append(cell)
+        self.results['cell'] = cell
+        self.results['all_cell'] = np.array(all_cell)
         return cell
     #
     def read_inp(self, inp = None):
@@ -196,7 +205,7 @@ class CP2K(FileIOCalculator):
     def read_results(self, out = None):
         self.read_inp()
         # print(self.out)
-        if not out and not self.out:
+        if not out:
             self.out = join(self.directory, 'cp2k.out')
         # print('reading results:...', self.out)
         # print(self.out)
@@ -211,9 +220,11 @@ class CP2K(FileIOCalculator):
             #                    'The last lines of output are printed above ' +
             #                    'and should give an indication why.')
         self.read_energy()
+        self.read_forces()
         self.read_geometry()
-        # self.read_forces()
+        # self.read_bader_charge()
         # self.read_time()
+        self.logger.debug('Read result successfully!')
         #self.read_stress()
     #
     def read_info(self):
@@ -247,10 +258,11 @@ class CP2K(FileIOCalculator):
         for n, line in enumerate(self.outlines[-100:-1]):
             if line.rfind('PROGRAM ENDED AT') > -1:
                 converged = True
+                self.logger.debug(line)
             if line.rfind('The number of warnings') > -1:
                 data = int(line.split()[9])
                 if data>0:
-                    print(line)
+                    self.logger.debug(line)
         return converged
 
 
@@ -269,10 +281,34 @@ class CP2K(FileIOCalculator):
                 F = float(line.split()[5])
                 free_energies.append(F)
                 self.results['free_energy'] = F
-        self.results['energies'] = energies
+        self.results['all_energies'] = energies
         self.results['free_energies'] = free_energies
 
+    def read_atoms(self):
+        """Method that reads positions from the output file.
 
+        If 'all' is switched on, the positions for all ionic steps
+        in the output file will be returned, in other case only the
+        positions for the last ionic configuration are returned."""
+
+        frames = []
+        all_positions = []
+        positions = np.zeros([self.natoms, 3])
+        # print('positions:')
+        for n, line in enumerate(self.outlines):
+            if line.rfind('ATOMIC COORDINATES IN angstrom') > -1:
+                symbols = []
+                for iatom in range(self.natoms):
+                    data = self.outlines[n + iatom + 4].split()
+                    symbols.append(data[2])
+                    for ic in range(3):
+                        positions[iatom, ic] = float(data[4 + ic])
+                atoms = Atoms(symbols = symbols, positions = positions)
+                all_positions.append(positions)
+                frames.append(atoms)
+                        # print(float(data[3 + ic])*conf)
+        self.results['frames'] = frames
+        self.results['all_positions'] = np.array(all_positions)
     def read_forces(self):
         """Method that reads forces from the output file.
 
@@ -280,25 +316,30 @@ class CP2K(FileIOCalculator):
         in the output file will be returned, in other case only the
         forces for the last ionic configuration are returned."""
         conf = physical_constants['atomic unit of force'][0]/physical_constants['electron volt'][0]*10**(-10)
-        
+        all_forces = []
         forces = np.zeros([self.natoms, 3])
+        # print('forces:')
         for n, line in enumerate(self.outlines):
-            if line.rfind('# Atom   Kind   Element') > -1:
+            if line.rfind('ATOMIC FORCES in [a.u.]') > -1:
                 try :
                     for iatom in range(self.natoms):
-                        data = self.outlines[n + iatom + 1].split()
+                        data = self.outlines[n + iatom + 3].split()
                         for iforce in range(3):
                             forces[iatom, iforce] = float(data[3 + iforce])*conf
+                    all_forces.append(forces)
                 except:
                     print('read forces error, cp2k run may be interupt')
         self.results['forces'] = forces
+        self.results['forces0'] = forces.copy()
+        self.results['all_forces'] = np.array(all_forces)
     def read_bader_charge(self, filename = None, atoms = None):
         if filename is None:
-            filename = 'ACF.dat'
-        # if 'ACF.dat' is None:
-            # os.system('bader *.cube')
+            filename = join(self.directory, 'ACF.dat')
+        if not os.path.exists(filename):
+            self.results['bader_charge'] = None
+            return
         if atoms is None:
-            atoms = self.atoms
+            atoms = self.results['atoms']
         natoms = len(atoms)
         bader_charge = np.zeros([natoms])
         with open(filename, 'r') as f:
@@ -313,7 +354,7 @@ class CP2K(FileIOCalculator):
         """
         
         self.get_number_of_spins()
-        self.natoms = len(self.results['geometry'])
+        self.natoms = len(self.results['atoms'])
         index = 4
         if self.spin == 2:
             index = 5
@@ -413,20 +454,6 @@ class CP2K(FileIOCalculator):
     def get_time(self):
         return self.results['time']
 
-    def get_forces(self, atoms):
-        self.update(atoms)
-        return self.results['forces']
-
-    def get_charges(self, atoms):
-        self.update(atoms)
-        return self.results['charges']
-
-    def get_stress(self, atoms):
-        self.update(atoms)
-        if self.stress is None:
-            raise NotImplementedError
-        return self.stress
-
     def create_cell(self, CELL, atoms):
         """Creates the cell for a SUBSYS from an ASE Atoms object.  
 
@@ -461,8 +488,9 @@ class CP2K(FileIOCalculator):
         else:
             CELL.Periodic = "".join(periodicity)
         #
-        if hasattr(atoms, 'symmetry'):
-            CELL.Symmetry = atoms.symmetry  
+        if 'symmetry' in atoms.info:
+            # print('symmetry', atoms.info['symmetry'])
+            CELL.Symmetry = atoms.info['symmetry']
     
 
     def create_coord(self, COORD, atoms, molnames=None, symbol = 'True'):
@@ -479,8 +507,8 @@ class CP2K(FileIOCalculator):
         atom_list = []
         for i_atom, atom in enumerate(atoms):
             if symbol:
-                if hasattr(atoms, 'kinds'):
-                    new_atom = [atoms.kinds[i_atom], atom.position[0], atom.position[1], atom.position[2]]
+                if 'species' in atoms.info:
+                    new_atom = [atoms.info['species'][i_atom], atom.position[0], atom.position[1], atom.position[2]]
                 else:
                     new_atom = [atom.symbol, atom.position[0], atom.position[1], atom.position[2]]
             else:
@@ -502,6 +530,9 @@ class CP2K(FileIOCalculator):
             The MOLNAME for each atom in correct order
         """
         #write constraint
+        if 'cp2k_constraint' in atoms.info:
+            if not atoms.info['cp2k_constraint']:
+                return
         from ase.constraints import FixAtoms, FixScaled
         self.natoms = len(atoms)
         sflags = np.zeros((self.natoms, 3), dtype=bool)
@@ -689,7 +720,7 @@ class CP2K(FileIOCalculator):
         atoms = None
         if prefix:
             self.prefix = prefix
-        print(self.prefix)
+        self.logger.debug('Read geometry')
         filename = self.directory + '/{0}.in'.format(self.prefix)
         filename1 = self.directory + '/{0}-pos-1.xyz'.format(self.prefix)
         if os.path.isfile(filename):
@@ -760,3 +791,54 @@ class CP2K(FileIOCalculator):
         wf = np.average(axy[ind]) - ef
         print('min: %s, max: %s'%(pos, pos + 3))
         print('The workfunction is {0:1.2f} eV'.format(wf))
+    def write_deepmd(self, label = './', type_map = False, elements = [], energies = None):
+        self.read_results()
+        self.read_atoms()
+        self.read_cell()
+        frames = self.results['frames']
+        all_cell = self.results['all_cell']
+        all_energies = self.results['all_energies']
+        all_positions = self.results['all_positions']
+        all_forces = self.results['all_forces']
+        nframe = len(all_forces)
+        all_cell = all_cell[0:nframe]
+        all_energies = all_energies[0:nframe]
+        all_positions = all_positions[0:nframe]
+        #
+        natom = len(self.results['frames'][0])
+        symbols = self.results['frames'][0].get_chemical_symbols()
+        if not elements:
+            elements = list(set(symbols))
+            elements.sort()
+        print('nframe: ', nframe)
+        print(elements)
+        print(enegies)
+        #
+        all_cell = all_cell.reshape(nframe, -1)
+        np.save('%s/box.npy'%label, all_cell)
+        #
+        all_positions = all_positions.reshape(nframe, -1)
+        np.save('%s/coord.npy'%label, all_positions)
+        #
+        print(all_energies)
+        if energies:
+            nelement = {}
+            for element in elements:
+                nelement[element] = symbols.account(element)
+            print(nelement)
+            for i in range(nframe):
+                for element in elements:
+                    all_energies[i] -= nelement[element]*energies[element]
+        print(all_energies)
+        np.save('%s/energy.npy'%label, all_energies)
+        #
+        all_forces = all_forces.reshape(nframe, -1)
+        np.save('%s/force.npy'%label, all_forces)
+        
+        #
+        prefix = label.split('/')[-1]
+        directory = './' + label[0:-len(prefix)]
+        if type_map:
+            np.savetxt('%s/type_map.raw'%directory, elements, fmt = '%s')
+        symbols = [elements.index(x) for x in symbols]
+        np.savetxt('%s/type.raw'%directory, np.array(symbols), fmt = '%d')

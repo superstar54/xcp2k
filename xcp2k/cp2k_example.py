@@ -181,4 +181,4 @@ PAIR_POTENTIAL = DFT.XC.VDW_POTENTIAL.PAIR_POTENTIAL_add()
 PAIR_POTENTIAL.Parameter_file_name = 'dftd3.dat'
 PAIR_POTENTIAL.Type = 'DFTD3'
 PAIR_POTENTIAL.Reference_functional = 'PBE'
-PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'
+# PAIR_POTENTIAL.R_cutoff = '[angstrom] 16'

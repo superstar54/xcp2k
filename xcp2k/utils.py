@@ -3,6 +3,16 @@ from xcp2k import CP2K
 import os
 import pickle
 
+def dwubelix(updates = []):
+    file = 'inp err out dos pdos cube xyz'
+    print('Downloading.....')
+    cwd = os.getcwd()
+    for update in updates:
+        os.chdir(update)
+        os.system('dwubelix.py %s'%file)
+        os.chdir(cwd)
+    print('Finished')
+
 def summary(updates = [], prefix = 'datas'):
     file = '%s.pickle' % prefix
     if os.path.exists(file):

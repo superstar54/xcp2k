@@ -62,17 +62,21 @@ class AnaDOS(CP2K):
             labels = ['', '']
         pdos = {}
         energies=[[], []]
+        orbitals = {}
+        print(self.kinds)
         for i, kind in self.kinds.items():
             pdos[i] = []
+            print(kind)
             for j in range(self.spin):
-                file = os.path.join('{0}-{1}k{2}-1.pdos'.format(self.prefix, labels[j], i))
-                print(file, self.kinds)
-                efermi, xmesh, ymesh = self.cp2k_pdos(fpdos = file, natoms = kind[1], sigma = sigma, de=de, output='smeared-{0}'.format(file))
+                fileinp = os.path.join(self.directory, '{0}-{1}k{2}-1.pdos'.format(self.prefix, labels[j], i))
+                fileout = os.path.join(self.directory, 'smeared-{0}-{1}k{2}-1.pdos'.format(self.prefix, labels[j], i))
+                efermi, xmesh, ymesh, header = self.cp2k_pdos(fpdos = fileinp, natoms = kind[1], sigma = sigma, de=de, output=fileout)
                 pdos[i].append(ymesh)
-                print(ymesh.shape)
+                orbitals[i] = header
                 energies[j] = xmesh
         self.energies = energies
         self.pdos = pdos
+        self.orbitals = orbitals
         self.Ef = efermi
         # calculate total dos
         dos = {}
@@ -138,7 +142,7 @@ class AnaDOS(CP2K):
             fhandle.write(("#{:>16}" + " {:>16}"*ncols + "\n").format("Energy_[eV]", *header[3:]))
         for mpnt in range(nmesh):
             fhandle.write(("{:16.8f}" + " {:16.8f}"*ncols + "\n").format(xmesh[mpnt], *ymesh[mpnt, :]))
-        return efermi, xmesh, ymesh
+        return efermi, xmesh, ymesh, header[3:]
 
     def plot_ele_pdos(self, xlim=[-20, 10], sef=True, prefix=None):
         """
@@ -147,15 +151,15 @@ class AnaDOS(CP2K):
         for i, pdos in self.pdos.items():
             ele = self.kinds[i][0]
             plt.figure()
-            for i in range(self.spin):
+            for k in range(self.spin):
                 if not sef:
-                    x = self.energies[i] + self.Ef
+                    x = self.energies[k] + self.Ef
                 else:
-                    x = self.energies[i]
-                y = pdos[i]
+                    x = self.energies[k]
+                y = pdos[k]
                 no = len(y[0, :])
                 for j in range(no):
-                    plt.plot(x, y[:, j]*(-1)**i, linewidth=1, color=colors[j])
+                    plt.plot(x, y[:, j]*(-1)**k, linewidth=1, color=colors[j])
             if not sef:
                 plt.axvline(x=self.Ef, linewidth=0.5, color='r', linestyle='dashed')
             else:
@@ -166,7 +170,7 @@ class AnaDOS(CP2K):
             plt.ylabel('DOS')
             plt.title('{0}'.format(ele))
             plt.xlim([max(xlim[0], min(self.energies[0])), min(xlim[1], max(self.energies[0]))])
-            plt.legend(orbitals[0:no])
+            plt.legend(self.orbitals[i])
             plt.grid(True, 'major', 'x', ls='--', lw=.5, c='k', alpha=.3)
             if prefix:
                 plt.savefig('{0}dos-{1}.jpg'.format(prefix, ele), dpi = 600)
@@ -193,7 +197,6 @@ class AnaDOS(CP2K):
             for i, y in dos.items():
                 ele = self.kinds[i][0]
                 legend.append(ele)
-                print(i, j, ele)
                 plt.plot(x, y[j][0:len(x)]*(-1)**j, linewidth=1, color=colors[i])
         if not sef:
             plt.axvline(x=self.Ef, linewidth=0.5, color='r', linestyle='dashed')

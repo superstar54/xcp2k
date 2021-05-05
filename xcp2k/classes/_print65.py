@@ -1,14 +1,13 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._mo_cubes2 import _mo_cubes2
+from xcp2k.classes._neighbor_lists9 import _neighbor_lists9
+from xcp2k.classes._subcell5 import _subcell5
 
 
 class _print65(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.Mo_coeff_atom = []
-        self.Mo_coeff_atom_state = []
-        self.MO_CUBES = _mo_cubes2()
+        self.NEIGHBOR_LISTS = _neighbor_lists9()
+        self.SUBCELL = _subcell5()
         self._name = "PRINT"
-        self._repeated_keywords = {'Mo_coeff_atom': 'MO_COEFF_ATOM', 'Mo_coeff_atom_state': 'MO_COEFF_ATOM_STATE'}
-        self._subsections = {'MO_CUBES': 'MO_CUBES'}
+        self._subsections = {'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS', 'SUBCELL': 'SUBCELL'}
 

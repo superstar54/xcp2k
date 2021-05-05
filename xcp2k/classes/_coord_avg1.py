@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each334 import _each334
+from xcp2k.classes._each460 import _each460
 
 
 class _coord_avg1(InputSection):
@@ -10,7 +10,7 @@ class _coord_avg1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each334()
+        self.EACH = _each460()
         self._name = "COORD_AVG"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

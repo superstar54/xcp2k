@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each427 import _each427
+from xcp2k.classes._each617 import _each617
 
 
 class _minima_trajectory1(InputSection):
@@ -11,7 +11,7 @@ class _minima_trajectory1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Unit = None
-        self.EACH = _each427()
+        self.EACH = _each617()
         self._name = "MINIMA_TRAJECTORY"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Unit': 'UNIT'}
         self._subsections = {'EACH': 'EACH'}

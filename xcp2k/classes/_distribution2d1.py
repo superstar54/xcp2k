@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each414 import _each414
+from xcp2k.classes._each602 import _each602
 
 
 class _distribution2d1(InputSection):
@@ -10,7 +10,7 @@ class _distribution2d1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each414()
+        self.EACH = _each602()
         self._name = "DISTRIBUTION2D"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

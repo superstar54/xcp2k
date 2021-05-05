@@ -3,6 +3,7 @@ from xcp2k.classes._scf1 import _scf1
 from xcp2k.classes._ls_scf1 import _ls_scf1
 from xcp2k.classes._almo_scf1 import _almo_scf1
 from xcp2k.classes._kg_method1 import _kg_method1
+from xcp2k.classes._energy_correction1 import _energy_correction1
 from xcp2k.classes._auxiliary_density_matrix_method1 import _auxiliary_density_matrix_method1
 from xcp2k.classes._qs1 import _qs1
 from xcp2k.classes._tddfpt1 import _tddfpt1
@@ -22,9 +23,10 @@ from xcp2k.classes._kpoints1 import _kpoints1
 from xcp2k.classes._scrf1 import _scrf1
 from xcp2k.classes._density_fitting1 import _density_fitting1
 from xcp2k.classes._xas1 import _xas1
-from xcp2k.classes._localize2 import _localize2
+from xcp2k.classes._xas_tdp1 import _xas_tdp1
+from xcp2k.classes._localize10 import _localize10
 from xcp2k.classes._real_time_propagation1 import _real_time_propagation1
-from xcp2k.classes._print42 import _print42
+from xcp2k.classes._print55 import _print55
 from xcp2k.classes._sccs2 import _sccs2
 
 
@@ -45,10 +47,15 @@ class _dft1(InputSection):
         self.Auto_basis = []
         self.Surface_dipole_correction = None
         self.Surf_dip_dir = None
+        self.Surf_dip_pos = None
+        self.Surf_dip_switch = None
+        self.Core_corr_dip = None
+        self.Sort_basis = None
         self.SCF = _scf1()
         self.LS_SCF = _ls_scf1()
         self.ALMO_SCF = _almo_scf1()
         self.KG_METHOD = _kg_method1()
+        self.ENERGY_CORRECTION = _energy_correction1()
         self.AUXILIARY_DENSITY_MATRIX_METHOD = _auxiliary_density_matrix_method1()
         self.QS = _qs1()
         self.TDDFPT = _tddfpt1()
@@ -68,14 +75,15 @@ class _dft1(InputSection):
         self.SCRF = _scrf1()
         self.DENSITY_FITTING = _density_fitting1()
         self.XAS = _xas1()
-        self.LOCALIZE = _localize2()
+        self.XAS_TDP = _xas_tdp1()
+        self.LOCALIZE = _localize10()
         self.REAL_TIME_PROPAGATION = _real_time_propagation1()
-        self.PRINT = _print42()
+        self.PRINT = _print55()
         self.SCCS = _sccs2()
         self._name = "DFT"
-        self._keywords = {'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Uks': 'UKS', 'Roks': 'ROKS', 'Multiplicity': 'MULTIPLICITY', 'Charge': 'CHARGE', 'Excitations': 'EXCITATIONS', 'Plus_u_method': 'PLUS_U_METHOD', 'Relax_multiplicity': 'RELAX_MULTIPLICITY', 'Subcells': 'SUBCELLS', 'Surface_dipole_correction': 'SURFACE_DIPOLE_CORRECTION', 'Surf_dip_dir': 'SURF_DIP_DIR'}
+        self._keywords = {'Potential_file_name': 'POTENTIAL_FILE_NAME', 'Wfn_restart_file_name': 'WFN_RESTART_FILE_NAME', 'Uks': 'UKS', 'Roks': 'ROKS', 'Multiplicity': 'MULTIPLICITY', 'Charge': 'CHARGE', 'Excitations': 'EXCITATIONS', 'Plus_u_method': 'PLUS_U_METHOD', 'Relax_multiplicity': 'RELAX_MULTIPLICITY', 'Subcells': 'SUBCELLS', 'Surface_dipole_correction': 'SURFACE_DIPOLE_CORRECTION', 'Surf_dip_dir': 'SURF_DIP_DIR', 'Surf_dip_pos': 'SURF_DIP_POS', 'Surf_dip_switch': 'SURF_DIP_SWITCH', 'Core_corr_dip': 'CORE_CORR_DIP', 'Sort_basis': 'SORT_BASIS'}
         self._repeated_keywords = {'Basis_set_file_name': 'BASIS_SET_FILE_NAME', 'Auto_basis': 'AUTO_BASIS'}
-        self._subsections = {'SCF': 'SCF', 'LS_SCF': 'LS_SCF', 'ALMO_SCF': 'ALMO_SCF', 'KG_METHOD': 'KG_METHOD', 'AUXILIARY_DENSITY_MATRIX_METHOD': 'AUXILIARY_DENSITY_MATRIX_METHOD', 'QS': 'QS', 'TDDFPT': 'TDDFPT', 'MGRID': 'MGRID', 'XC': 'XC', 'RELATIVISTIC': 'RELATIVISTIC', 'SIC': 'SIC', 'LOW_SPIN_ROKS': 'LOW_SPIN_ROKS', 'EXTERNAL_POTENTIAL': 'EXTERNAL_POTENTIAL', 'TRANSPORT': 'TRANSPORT', 'EXTERNAL_DENSITY': 'EXTERNAL_DENSITY', 'EXTERNAL_VXC': 'EXTERNAL_VXC', 'POISSON': 'POISSON', 'KPOINTS': 'KPOINTS', 'SCRF': 'SCRF', 'DENSITY_FITTING': 'DENSITY_FITTING', 'XAS': 'XAS', 'LOCALIZE': 'LOCALIZE', 'REAL_TIME_PROPAGATION': 'REAL_TIME_PROPAGATION', 'PRINT': 'PRINT', 'SCCS': 'SCCS'}
+        self._subsections = {'SCF': 'SCF', 'LS_SCF': 'LS_SCF', 'ALMO_SCF': 'ALMO_SCF', 'KG_METHOD': 'KG_METHOD', 'ENERGY_CORRECTION': 'ENERGY_CORRECTION', 'AUXILIARY_DENSITY_MATRIX_METHOD': 'AUXILIARY_DENSITY_MATRIX_METHOD', 'QS': 'QS', 'TDDFPT': 'TDDFPT', 'MGRID': 'MGRID', 'XC': 'XC', 'RELATIVISTIC': 'RELATIVISTIC', 'SIC': 'SIC', 'LOW_SPIN_ROKS': 'LOW_SPIN_ROKS', 'EXTERNAL_POTENTIAL': 'EXTERNAL_POTENTIAL', 'TRANSPORT': 'TRANSPORT', 'EXTERNAL_DENSITY': 'EXTERNAL_DENSITY', 'EXTERNAL_VXC': 'EXTERNAL_VXC', 'POISSON': 'POISSON', 'KPOINTS': 'KPOINTS', 'SCRF': 'SCRF', 'DENSITY_FITTING': 'DENSITY_FITTING', 'XAS': 'XAS', 'XAS_TDP': 'XAS_TDP', 'LOCALIZE': 'LOCALIZE', 'REAL_TIME_PROPAGATION': 'REAL_TIME_PROPAGATION', 'PRINT': 'PRINT', 'SCCS': 'SCCS'}
         self._repeated_subsections = {'EFIELD': '_efield1', 'PERIODIC_EFIELD': '_periodic_efield1'}
         self._aliases = {'Restart_file_name': 'Wfn_restart_file_name', 'Unrestricted_kohn_sham': 'Uks', 'Lsd': 'Uks', 'Spin_polarized': 'Uks', 'Restricted_open_kohn_sham': 'Roks', 'Multip': 'Multiplicity', 'Relax_multip': 'Relax_multiplicity', 'Surface_dipole': 'Surface_dipole_correction', 'Surf_dip': 'Surface_dipole_correction'}
         self._attributes = ['EFIELD_list', 'PERIODIC_EFIELD_list']

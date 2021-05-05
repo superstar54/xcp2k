@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._print59 import _print59
+from xcp2k.classes._print74 import _print74
 from xcp2k.classes._interpolator11 import _interpolator11
 
 
@@ -13,7 +13,7 @@ class _spinspin1(InputSection):
         self.Do_sd = None
         self.Do_pso = None
         self.Do_dso = None
-        self.PRINT = _print59()
+        self.PRINT = _print74()
         self.INTERPOLATOR = _interpolator11()
         self._name = "SPINSPIN"
         self._keywords = {'Restart_spinspin': 'RESTART_SPINSPIN', 'Do_fc': 'DO_FC', 'Do_sd': 'DO_SD', 'Do_pso': 'DO_PSO', 'Do_dso': 'DO_DSO'}

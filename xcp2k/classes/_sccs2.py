@@ -11,7 +11,7 @@ class _sccs2(InputSection):
         self.Beta = None
         self.Delta_rho = None
         self.Derivative_method = None
-        self.Dielectric_constant = None
+        self.Relative_permittivity = None
         self.Eps_sccs = None
         self.Eps_scf = None
         self.Gamma = None
@@ -21,18 +21,32 @@ class _sccs2(InputSection):
         self.ANDREUSSI = _andreussi1()
         self.FATTEBERT_GYGI = _fattebert_gygi1()
         self._name = "SCCS"
-        self._keywords = {'Alpha': 'ALPHA', 'Beta': 'BETA', 'Delta_rho': 'DELTA_RHO', 'Derivative_method': 'DERIVATIVE_METHOD', 'Dielectric_constant': 'DIELECTRIC_CONSTANT', 'Eps_sccs': 'EPS_SCCS', 'Eps_scf': 'EPS_SCF', 'Gamma': 'GAMMA', 'Max_iter': 'MAX_ITER', 'Method': 'METHOD', 'Mixing': 'MIXING'}
+        self._keywords = {'Alpha': 'ALPHA', 'Beta': 'BETA', 'Delta_rho': 'DELTA_RHO', 'Derivative_method': 'DERIVATIVE_METHOD', 'Relative_permittivity': 'RELATIVE_PERMITTIVITY', 'Eps_sccs': 'EPS_SCCS', 'Eps_scf': 'EPS_SCF', 'Gamma': 'GAMMA', 'Max_iter': 'MAX_ITER', 'Method': 'METHOD', 'Mixing': 'MIXING'}
         self._subsections = {'ANDREUSSI': 'ANDREUSSI', 'FATTEBERT_GYGI': 'FATTEBERT-GYGI'}
-        self._aliases = {'Epsilon_solvent': 'Dielectric_constant', 'Eps_iter': 'Eps_sccs', 'Tau_pol': 'Eps_sccs', 'Surface_tension': 'Gamma', 'Eta': 'Mixing'}
+        self._aliases = {'Dielectric_constant': 'Relative_permittivity', 'Epsilon_relative': 'Relative_permittivity', 'Epsilon_solvent': 'Relative_permittivity', 'Eps_iter': 'Eps_sccs', 'Tau_pol': 'Eps_sccs', 'Surface_tension': 'Gamma', 'Eta': 'Mixing'}
         self._attributes = ['Section_parameters']
 
 
     @property
+    def Dielectric_constant(self):
+        """
+        See documentation for Relative_permittivity
+        """
+        return self.Relative_permittivity
+
+    @property
+    def Epsilon_relative(self):
+        """
+        See documentation for Relative_permittivity
+        """
+        return self.Relative_permittivity
+
+    @property
     def Epsilon_solvent(self):
         """
-        See documentation for Dielectric_constant
+        See documentation for Relative_permittivity
         """
-        return self.Dielectric_constant
+        return self.Relative_permittivity
 
     @property
     def Eps_iter(self):
@@ -62,9 +76,17 @@ class _sccs2(InputSection):
         """
         return self.Mixing
 
+    @Dielectric_constant.setter
+    def Dielectric_constant(self, value):
+        self.Relative_permittivity = value
+
+    @Epsilon_relative.setter
+    def Epsilon_relative(self, value):
+        self.Relative_permittivity = value
+
     @Epsilon_solvent.setter
     def Epsilon_solvent(self, value):
-        self.Dielectric_constant = value
+        self.Relative_permittivity = value
 
     @Eps_iter.setter
     def Eps_iter(self, value):

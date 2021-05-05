@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each233 import _each233
+from xcp2k.classes._each342 import _each342
 
 
 class _mo1(InputSection):
@@ -16,7 +16,7 @@ class _mo1(InputSection):
         self.Occupation_numbers = None
         self.Ndigits = None
         self.Mo_index_range = None
-        self.EACH = _each233()
+        self.EACH = _each342()
         self._name = "MO"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Cartesian': 'CARTESIAN', 'Eigenvalues': 'EIGENVALUES', 'Eigenvectors': 'EIGENVECTORS', 'Occupation_numbers': 'OCCUPATION_NUMBERS', 'Ndigits': 'NDIGITS', 'Mo_index_range': 'MO_INDEX_RANGE'}
         self._subsections = {'EACH': 'EACH'}

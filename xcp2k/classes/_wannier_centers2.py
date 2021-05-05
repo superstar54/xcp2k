@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each201 import _each201
+from xcp2k.classes._each149 import _each149
 
 
 class _wannier_centers2(InputSection):
@@ -16,7 +16,7 @@ class _wannier_centers2(InputSection):
         self.Charge_occup = None
         self.Charge_beta = None
         self.Charge_extended = None
-        self.EACH = _each201()
+        self.EACH = _each149()
         self._name = "WANNIER_CENTERS"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Unit': 'UNIT', 'Ionspluscenters': 'IONS+CENTERS', 'Format': 'FORMAT', 'Charge_occup': 'CHARGE_OCCUP', 'Charge_beta': 'CHARGE_BETA', 'Charge_extended': 'CHARGE_EXTENDED'}
         self._subsections = {'EACH': 'EACH'}

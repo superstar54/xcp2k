@@ -51,7 +51,6 @@ DFT.XC.XC_FUNCTIONAL.Section_parameters = "PBE"
 
 DFT.QS.Method = 'GPW'
 DFT.QS.Eps_default = 1.0E-12
-DFT.QS.Map_consistent = True
 DFT.QS.Extrapolation = 'ASPC'
 DFT.QS.Extrapolation_order = 3
 

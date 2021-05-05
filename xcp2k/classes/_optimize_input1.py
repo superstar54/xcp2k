@@ -2,7 +2,7 @@ from xcp2k.inputsection import InputSection
 from xcp2k.classes._variable1 import _variable1
 from xcp2k.classes._force_matching1 import _force_matching1
 from xcp2k.classes._history1 import _history1
-from xcp2k.classes._restart15 import _restart15
+from xcp2k.classes._restart16 import _restart16
 
 
 class _optimize_input1(InputSection):
@@ -17,7 +17,7 @@ class _optimize_input1(InputSection):
         self.VARIABLE_list = []
         self.FORCE_MATCHING_list = []
         self.HISTORY = _history1()
-        self.RESTART = _restart15()
+        self.RESTART = _restart16()
         self._name = "OPTIMIZE_INPUT"
         self._keywords = {'Method': 'METHOD', 'Accuracy': 'ACCURACY', 'Step_size': 'STEP_SIZE', 'Max_fun': 'MAX_FUN', 'Iter_start_val': 'ITER_START_VAL', 'Randomize_variables': 'RANDOMIZE_VARIABLES'}
         self._subsections = {'HISTORY': 'HISTORY', 'RESTART': 'RESTART'}

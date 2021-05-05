@@ -10,6 +10,7 @@ class _eri_mme3(InputSection):
         self.Cutoff = None
         self.Sum_precision = None
         self.Do_calibrate_cutoff = None
+        self.Do_error_estimate = None
         self.Print_calib = None
         self.Debug = None
         self.Debug_tolerance = None
@@ -17,6 +18,6 @@ class _eri_mme3(InputSection):
         self.ERI_MME_INFO = _eri_mme_info3()
         self.CUTOFF_CALIB = _cutoff_calib3()
         self._name = "ERI_MME"
-        self._keywords = {'N_minimax': 'N_MINIMAX', 'Cutoff': 'CUTOFF', 'Sum_precision': 'SUM_PRECISION', 'Do_calibrate_cutoff': 'DO_CALIBRATE_CUTOFF', 'Print_calib': 'PRINT_CALIB', 'Debug': 'DEBUG', 'Debug_tolerance': 'DEBUG_TOLERANCE', 'Debug_nsum_max': 'DEBUG_NSUM_MAX'}
+        self._keywords = {'N_minimax': 'N_MINIMAX', 'Cutoff': 'CUTOFF', 'Sum_precision': 'SUM_PRECISION', 'Do_calibrate_cutoff': 'DO_CALIBRATE_CUTOFF', 'Do_error_estimate': 'DO_ERROR_ESTIMATE', 'Print_calib': 'PRINT_CALIB', 'Debug': 'DEBUG', 'Debug_tolerance': 'DEBUG_TOLERANCE', 'Debug_nsum_max': 'DEBUG_NSUM_MAX'}
         self._subsections = {'ERI_MME_INFO': 'ERI_MME_INFO', 'CUTOFF_CALIB': 'CUTOFF_CALIB'}
 

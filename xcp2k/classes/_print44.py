@@ -1,29 +1,29 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._derivatives2 import _derivatives2
-from xcp2k.classes._ewald_info2 import _ewald_info2
-from xcp2k.classes._dipole3 import _dipole3
-from xcp2k.classes._neighbor_lists6 import _neighbor_lists6
-from xcp2k.classes._iter_info1 import _iter_info1
-from xcp2k.classes._subcell3 import _subcell3
-from xcp2k.classes._program_banner2 import _program_banner2
-from xcp2k.classes._program_run_info30 import _program_run_info30
-from xcp2k.classes._ff_parameter_file1 import _ff_parameter_file1
-from xcp2k.classes._ff_info1 import _ff_info1
+from xcp2k.classes._program_run_info24 import _program_run_info24
+from xcp2k.classes._wannier_cubes8 import _wannier_cubes8
+from xcp2k.classes._wannier_centers8 import _wannier_centers8
+from xcp2k.classes._wannier_spreads8 import _wannier_spreads8
+from xcp2k.classes._loc_restart8 import _loc_restart8
+from xcp2k.classes._total_dipole8 import _total_dipole8
+from xcp2k.classes._molecular_dipoles8 import _molecular_dipoles8
+from xcp2k.classes._molecular_moments8 import _molecular_moments8
+from xcp2k.classes._molecular_states8 import _molecular_states8
+from xcp2k.classes._wannier_states8 import _wannier_states8
 
 
 class _print44(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.DERIVATIVES = _derivatives2()
-        self.EWALD_INFO = _ewald_info2()
-        self.DIPOLE = _dipole3()
-        self.NEIGHBOR_LISTS = _neighbor_lists6()
-        self.ITER_INFO = _iter_info1()
-        self.SUBCELL = _subcell3()
-        self.PROGRAM_BANNER = _program_banner2()
-        self.PROGRAM_RUN_INFO = _program_run_info30()
-        self.FF_PARAMETER_FILE = _ff_parameter_file1()
-        self.FF_INFO = _ff_info1()
+        self.PROGRAM_RUN_INFO = _program_run_info24()
+        self.WANNIER_CUBES = _wannier_cubes8()
+        self.WANNIER_CENTERS = _wannier_centers8()
+        self.WANNIER_SPREADS = _wannier_spreads8()
+        self.LOC_RESTART = _loc_restart8()
+        self.TOTAL_DIPOLE = _total_dipole8()
+        self.MOLECULAR_DIPOLES = _molecular_dipoles8()
+        self.MOLECULAR_MOMENTS = _molecular_moments8()
+        self.MOLECULAR_STATES = _molecular_states8()
+        self.WANNIER_STATES = _wannier_states8()
         self._name = "PRINT"
-        self._subsections = {'DERIVATIVES': 'DERIVATIVES', 'EWALD_INFO': 'EWALD_INFO', 'DIPOLE': 'DIPOLE', 'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS', 'ITER_INFO': 'ITER_INFO', 'SUBCELL': 'SUBCELL', 'PROGRAM_BANNER': 'PROGRAM_BANNER', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'FF_PARAMETER_FILE': 'FF_PARAMETER_FILE', 'FF_INFO': 'FF_INFO'}
+        self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'WANNIER_CUBES': 'WANNIER_CUBES', 'WANNIER_CENTERS': 'WANNIER_CENTERS', 'WANNIER_SPREADS': 'WANNIER_SPREADS', 'LOC_RESTART': 'LOC_RESTART', 'TOTAL_DIPOLE': 'TOTAL_DIPOLE', 'MOLECULAR_DIPOLES': 'MOLECULAR_DIPOLES', 'MOLECULAR_MOMENTS': 'MOLECULAR_MOMENTS', 'MOLECULAR_STATES': 'MOLECULAR_STATES', 'WANNIER_STATES': 'WANNIER_STATES'}
 

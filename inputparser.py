@@ -179,6 +179,9 @@ def recursive_class_creation(section, level, class_dictionary, version_dictionar
         for keyname in keyword.findall("NAME"):
             keytype = keyname.get("type")
             name = keyname.text
+            if not name:
+                visible = False
+                continue
             newname = validify_keyword(name)
             if keytype == "default":
                 default_name = newname
@@ -339,6 +342,7 @@ def main(xml_path):
     class_dictionary = {}
     version_dictionary = {}
     recursive_class_creation(root, 0, class_dictionary, version_dictionary)
+    print('here')
 
     # Put each class into its own module. This produces manu small files, but
     # this way it it easier for autocompletion to handle everything
@@ -360,4 +364,4 @@ def main(xml_path):
 
 # Run main function by default
 if __name__ == "__main__":
-    main()
+    main("cp2k_input.xml")

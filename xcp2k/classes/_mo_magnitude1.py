@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each107 import _each107
+from xcp2k.classes._each108 import _each108
 
 
 class _mo_magnitude1(InputSection):
@@ -10,7 +10,7 @@ class _mo_magnitude1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each107()
+        self.EACH = _each108()
         self._name = "MO_MAGNITUDE"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

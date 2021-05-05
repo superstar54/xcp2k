@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each139 import _each139
+from xcp2k.classes._each178 import _each178
 
 
 class _mp2_info2(InputSection):
@@ -10,7 +10,7 @@ class _mp2_info2(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each139()
+        self.EACH = _each178()
         self._name = "MP2_INFO"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

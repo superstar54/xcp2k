@@ -3,7 +3,7 @@ from xcp2k.classes._qm_non_adaptive1 import _qm_non_adaptive1
 from xcp2k.classes._buffer_non_adaptive1 import _buffer_non_adaptive1
 from xcp2k.classes._buffer_links1 import _buffer_links1
 from xcp2k.classes._restart_info1 import _restart_info1
-from xcp2k.classes._print45 import _print45
+from xcp2k.classes._print60 import _print60
 
 
 class _force_mixing1(InputSection):
@@ -24,7 +24,7 @@ class _force_mixing1(InputSection):
         self.BUFFER_NON_ADAPTIVE_list = []
         self.BUFFER_LINKS_list = []
         self.RESTART_INFO = _restart_info1()
-        self.PRINT = _print45()
+        self.PRINT = _print60()
         self._name = "FORCE_MIXING"
         self._keywords = {'Momentum_conservation_type': 'MOMENTUM_CONSERVATION_TYPE', 'Momentum_conservation_region': 'MOMENTUM_CONSERVATION_REGION', 'R_core': 'R_CORE', 'R_qm': 'R_QM', 'Qm_extended_seed_is_only_core_list': 'QM_EXTENDED_SEED_IS_ONLY_CORE_LIST', 'R_buf': 'R_BUF', 'Max_n_qm': 'MAX_N_QM', 'Adaptive_exclude_molecules': 'ADAPTIVE_EXCLUDE_MOLECULES', 'Extended_delta_charge': 'EXTENDED_DELTA_CHARGE'}
         self._repeated_keywords = {'Qm_kind_element_mapping': 'QM_KIND_ELEMENT_MAPPING'}

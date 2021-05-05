@@ -12,7 +12,6 @@ from xcp2k.classes._lanczos1 import _lanczos1
 from xcp2k.classes._diag_sub_scf2 import _diag_sub_scf2
 from xcp2k.classes._davidson2 import _davidson2
 from xcp2k.classes._filter_matrix2 import _filter_matrix2
-from xcp2k.classes._mos_molden1 import _mos_molden1
 
 
 class _print20(InputSection):
@@ -32,8 +31,7 @@ class _print20(InputSection):
         self.DIAG_SUB_SCF = _diag_sub_scf2()
         self.DAVIDSON = _davidson2()
         self.FILTER_MATRIX = _filter_matrix2()
-        self.MOS_MOLDEN = _mos_molden1()
         self._name = "PRINT"
         self._keywords = {'Dm_restart_write': 'DM_RESTART_WRITE'}
-        self._subsections = {'RESTART': 'RESTART', 'RESTART_HISTORY': 'RESTART_HISTORY', 'ITERATION_INFO': 'ITERATION_INFO', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'MO_ORTHONORMALITY': 'MO_ORTHONORMALITY', 'MO_MAGNITUDE': 'MO_MAGNITUDE', 'DETAILED_ENERGY': 'DETAILED_ENERGY', 'DIIS_INFO': 'DIIS_INFO', 'TOTAL_DENSITIES': 'TOTAL_DENSITIES', 'LANCZOS': 'LANCZOS', 'DIAG_SUB_SCF': 'DIAG_SUB_SCF', 'DAVIDSON': 'DAVIDSON', 'FILTER_MATRIX': 'FILTER_MATRIX', 'MOS_MOLDEN': 'MOS_MOLDEN'}
+        self._subsections = {'RESTART': 'RESTART', 'RESTART_HISTORY': 'RESTART_HISTORY', 'ITERATION_INFO': 'ITERATION_INFO', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'MO_ORTHONORMALITY': 'MO_ORTHONORMALITY', 'MO_MAGNITUDE': 'MO_MAGNITUDE', 'DETAILED_ENERGY': 'DETAILED_ENERGY', 'DIIS_INFO': 'DIIS_INFO', 'TOTAL_DENSITIES': 'TOTAL_DENSITIES', 'LANCZOS': 'LANCZOS', 'DIAG_SUB_SCF': 'DIAG_SUB_SCF', 'DAVIDSON': 'DAVIDSON', 'FILTER_MATRIX': 'FILTER_MATRIX'}
 

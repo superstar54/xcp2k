@@ -9,7 +9,7 @@ from xcp2k.classes._interpolator8 import _interpolator8
 from xcp2k.classes._forcefield2 import _forcefield2
 from xcp2k.classes._walls1 import _walls1
 from xcp2k.classes._image_charge1 import _image_charge1
-from xcp2k.classes._print47 import _print47
+from xcp2k.classes._print62 import _print62
 
 
 class _qmmm1(InputSection):
@@ -37,7 +37,7 @@ class _qmmm1(InputSection):
         self.FORCEFIELD_list = []
         self.WALLS = _walls1()
         self.IMAGE_CHARGE = _image_charge1()
-        self.PRINT = _print47()
+        self.PRINT = _print62()
         self._name = "QMMM"
         self._keywords = {'E_coupl': 'E_COUPL', 'Mm_potential_file_name': 'MM_POTENTIAL_FILE_NAME', 'Use_geep_lib': 'USE_GEEP_LIB', 'Nocompatibility': 'NOCOMPATIBILITY', 'Eps_mm_rspace': 'EPS_MM_RSPACE', 'Spherical_cutoff': 'SPHERICAL_CUTOFF', 'Parallel_scheme': 'PARALLEL_SCHEME', 'Center': 'CENTER', 'Center_type': 'CENTER_TYPE', 'Center_grid': 'CENTER_GRID', 'Initial_translation_vector': 'INITIAL_TRANSLATION_VECTOR', 'Delta_charge': 'DELTA_CHARGE'}
         self._subsections = {'FORCE_MIXING': 'FORCE_MIXING', 'CELL': 'CELL', 'PERIODIC': 'PERIODIC', 'INTERPOLATOR': 'INTERPOLATOR', 'WALLS': 'WALLS', 'IMAGE_CHARGE': 'IMAGE_CHARGE', 'PRINT': 'PRINT'}

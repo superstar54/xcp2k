@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each254 import _each254
+from xcp2k.classes._each365 import _each365
 
 
 class _tot_density_cube1(InputSection):
@@ -12,7 +12,7 @@ class _tot_density_cube1(InputSection):
         self.Log_print_key = None
         self.Stride = None
         self.Append = None
-        self.EACH = _each254()
+        self.EACH = _each365()
         self._name = "TOT_DENSITY_CUBE"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Stride': 'STRIDE', 'Append': 'APPEND'}
         self._subsections = {'EACH': 'EACH'}

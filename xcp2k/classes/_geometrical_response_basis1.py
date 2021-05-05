@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each445 import _each445
+from xcp2k.classes._each636 import _each636
 
 
 class _geometrical_response_basis1(InputSection):
@@ -22,7 +22,7 @@ class _geometrical_response_basis1(InputSection):
         self.Geo_start_value = None
         self.Confinement = None
         self.Name_body = None
-        self.EACH = _each445()
+        self.EACH = _each636()
         self._name = "GEOMETRICAL_RESPONSE_BASIS"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Delta_charge': 'DELTA_CHARGE', 'Derivatives': 'DERIVATIVES', 'Quadrature': 'QUADRATURE', 'Grid_points': 'GRID_POINTS', 'Num_gto_core': 'NUM_GTO_CORE', 'Num_gto_extended': 'NUM_GTO_EXTENDED', 'Num_gto_polarization': 'NUM_GTO_POLARIZATION', 'Extension_basis': 'EXTENSION_BASIS', 'Geometrical_factor': 'GEOMETRICAL_FACTOR', 'Geo_start_value': 'GEO_START_VALUE', 'Confinement': 'CONFINEMENT', 'Name_body': 'NAME_BODY'}
         self._subsections = {'EACH': 'EACH'}

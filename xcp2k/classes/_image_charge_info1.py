@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each329 import _each329
+from xcp2k.classes._each455 import _each455
 
 
 class _image_charge_info1(InputSection):
@@ -10,7 +10,7 @@ class _image_charge_info1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each329()
+        self.EACH = _each455()
         self._name = "IMAGE_CHARGE_INFO"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

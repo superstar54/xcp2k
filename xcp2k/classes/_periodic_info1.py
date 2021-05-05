@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each323 import _each323
+from xcp2k.classes._each449 import _each449
 
 
 class _periodic_info1(InputSection):
@@ -10,7 +10,7 @@ class _periodic_info1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each323()
+        self.EACH = _each449()
         self._name = "PERIODIC_INFO"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

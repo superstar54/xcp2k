@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each385 import _each385
+from xcp2k.classes._each538 import _each538
 
 
 class _eri_mme_info7(InputSection):
@@ -10,7 +10,7 @@ class _eri_mme_info7(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each385()
+        self.EACH = _each538()
         self._name = "ERI_MME_INFO"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

@@ -1,6 +1,6 @@
 from xcp2k.inputsection import InputSection
 from xcp2k.classes._spline1 import _spline1
-from xcp2k.classes._nonbonded1 import _nonbonded1
+from xcp2k.classes._nonbonded2 import _nonbonded2
 from xcp2k.classes._nonbonded141 import _nonbonded141
 from xcp2k.classes._charge3 import _charge3
 from xcp2k.classes._charges1 import _charges1
@@ -27,7 +27,7 @@ class _forcefield1(InputSection):
         self.Multiple_potential = None
         self.Zbl_scattering = None
         self.SPLINE_list = []
-        self.NONBONDED = _nonbonded1()
+        self.NONBONDED = _nonbonded2()
         self.NONBONDED14 = _nonbonded141()
         self.CHARGE_list = []
         self.CHARGES = _charges1()

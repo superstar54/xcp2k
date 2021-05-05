@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each208 import _each208
+from xcp2k.classes._each312 import _each312
 from xcp2k.classes._ldos1 import _ldos1
 from xcp2k.classes._r_ldos1 import _r_ldos1
 
@@ -16,7 +16,7 @@ class _pdos1(InputSection):
         self.Append = None
         self.Nlumo = None
         self.Out_each_mo = None
-        self.EACH = _each208()
+        self.EACH = _each312()
         self.LDOS_list = []
         self.R_LDOS_list = []
         self._name = "PDOS"

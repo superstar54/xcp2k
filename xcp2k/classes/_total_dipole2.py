@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each216 import _each216
+from xcp2k.classes._each152 import _each152
 
 
 class _total_dipole2(InputSection):
@@ -13,7 +13,7 @@ class _total_dipole2(InputSection):
         self.Periodic = None
         self.Reference = None
         self.Reference_point = None
-        self.EACH = _each216()
+        self.EACH = _each152()
         self._name = "TOTAL_DIPOLE"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Periodic': 'PERIODIC', 'Reference': 'REFERENCE', 'Reference_point': 'REFERENCE_POINT'}
         self._subsections = {'EACH': 'EACH'}

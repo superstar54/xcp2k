@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each373 import _each373
+from xcp2k.classes._each500 import _each500
 
 
 class _chi_tensor1(InputSection):
@@ -10,7 +10,7 @@ class _chi_tensor1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each373()
+        self.EACH = _each500()
         self._name = "CHI_TENSOR"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

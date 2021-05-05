@@ -3,7 +3,7 @@ from xcp2k.classes._forcefield1 import _forcefield1
 from xcp2k.classes._neighbor_lists5 import _neighbor_lists5
 from xcp2k.classes._poisson2 import _poisson2
 from xcp2k.classes._periodic_efield2 import _periodic_efield2
-from xcp2k.classes._print44 import _print44
+from xcp2k.classes._print57 import _print57
 
 
 class _mm1(InputSection):
@@ -13,7 +13,7 @@ class _mm1(InputSection):
         self.NEIGHBOR_LISTS = _neighbor_lists5()
         self.POISSON = _poisson2()
         self.PERIODIC_EFIELD_list = []
-        self.PRINT = _print44()
+        self.PRINT = _print57()
         self._name = "MM"
         self._subsections = {'FORCEFIELD': 'FORCEFIELD', 'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS', 'POISSON': 'POISSON', 'PRINT': 'PRINT'}
         self._repeated_subsections = {'PERIODIC_EFIELD': '_periodic_efield2'}

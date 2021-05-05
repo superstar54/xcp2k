@@ -21,6 +21,7 @@ class _pint1(InputSection):
         self.Max_step = None
         self.Iteration = None
         self.Temp = None
+        self.Kt_correction = None
         self.T_tol = None
         self.Dt = None
         self.Harm_int = None
@@ -40,7 +41,7 @@ class _pint1(InputSection):
         self.HELIUM = _helium1()
         self.PRINT = _print15()
         self._name = "PINT"
-        self._keywords = {'P': 'P', 'Proc_per_replica': 'PROC_PER_REPLICA', 'Num_steps': 'NUM_STEPS', 'Max_step': 'MAX_STEP', 'Iteration': 'ITERATION', 'Temp': 'TEMP', 'T_tol': 'T_TOL', 'Dt': 'DT', 'Harm_int': 'HARM_INT', 'Nrespa': 'NRESPA', 'Transformation': 'TRANSFORMATION', 'Propagator': 'PROPAGATOR', 'Fix_centroid_pos': 'FIX_CENTROID_POS'}
+        self._keywords = {'P': 'P', 'Proc_per_replica': 'PROC_PER_REPLICA', 'Num_steps': 'NUM_STEPS', 'Max_step': 'MAX_STEP', 'Iteration': 'ITERATION', 'Temp': 'TEMP', 'Kt_correction': 'KT_CORRECTION', 'T_tol': 'T_TOL', 'Dt': 'DT', 'Harm_int': 'HARM_INT', 'Nrespa': 'NRESPA', 'Transformation': 'TRANSFORMATION', 'Propagator': 'PROPAGATOR', 'Fix_centroid_pos': 'FIX_CENTROID_POS'}
         self._subsections = {'NORMALMODE': 'NORMALMODE', 'STAGING': 'STAGING', 'BEADS': 'BEADS', 'NOSE': 'NOSE', 'GLE': 'GLE', 'PILE': 'PILE', 'PIGLET': 'PIGLET', 'QTB': 'QTB', 'INIT': 'INIT', 'HELIUM': 'HELIUM', 'PRINT': 'PRINT'}
         self._aliases = {'Temp_to': 'T_tol'}
 

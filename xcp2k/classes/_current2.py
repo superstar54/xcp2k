@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each225 import _each225
+from xcp2k.classes._each334 import _each334
 
 
 class _current2(InputSection):
@@ -12,7 +12,7 @@ class _current2(InputSection):
         self.Log_print_key = None
         self.Backup_copies = None
         self.Stride = None
-        self.EACH = _each225()
+        self.EACH = _each334()
         self._name = "CURRENT"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Backup_copies': 'BACKUP_COPIES', 'Stride': 'STRIDE'}
         self._subsections = {'EACH': 'EACH'}

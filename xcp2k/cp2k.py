@@ -32,12 +32,16 @@ from ase.calculators.calculator import FileIOCalculator, all_changes, Parameters
 from ase.units import Rydberg
 from ase.constraints import FixAtoms, FixScaled
 from xcp2k.cp2k_tools import *
-from xcp2k.cp2krc import *
 from scipy.constants import physical_constants, c, h, hbar, e
 from xcp2k.classes._CP2K_INPUT1 import _CP2K_INPUT1
 from xcp2k.inputparser import CP2KInputParser
 import logging
 import traceback
+
+
+
+config_files = [os.path.join(os.environ['HOME'], '.cp2krc'),
+            '.cp2krc']
 
 logger = logging.getLogger('CP2K')
 handler = logging.StreamHandler()
@@ -113,17 +117,27 @@ class CP2K(FileIOCalculator):
     def set_queue(self, queue = None):
         command = os.environ.get('ASE_CP2K_COMMAND')
         if queue:
+            script = ''
+            if 'config' in queue:
+                cf = os.path.join(os.environ['HOME'], queue['config'])
+                file = open(cf, 'r')
+                script = file.read()
+                del queue['config']
+            else:
+                for cf in config_files:
+                    if os.path.exists(cf):
+                        file = open(cf, 'r')
+                        script = file.read()
             with open('%s/.job_file' % self.directory, 'w') as fh:
                 fh.writelines("#!/bin/bash\n")
                 fh.writelines("#SBATCH --job-name=%s \n" % self.prefix)
                 fh.writelines("#SBATCH --output=%s.out\n" % self.prefix)
                 fh.writelines("#SBATCH --error=%s.err\n" % self.prefix)
                 fh.writelines("#SBATCH --wait\n")
-                cp2krc['queue'].update(queue)
-                for key, value in cp2krc['queue'].items():
+                for key, value in queue.items():
                     if value:
                         fh.writelines("#SBATCH --%s=%s\n" %(key, value))
-                fh.writelines('''%s'''% cp2krc['script'])
+                fh.writelines('''%s'''% script)
                 fh.writelines("%s \n" % command)
             self.command = "sbatch {0}".format('.job_file')
         else:
@@ -175,19 +189,19 @@ class CP2K(FileIOCalculator):
     #
     def read_cell(self,):
         #
-        all_cell = []
-        cell = np.zeros([3, 3])
+        all_cells = []
         # self.read_results()
         n = len(self.outlines)
         for i in range(n):
             if 'CELL| Volume' in self.outlines[i]:
+                cell = np.zeros([3, 3])
                 for j in range(3):
                     data = self.outlines[i + 1 + j].split()
                     for icell in range(3):
                         cell[j, icell] = float(data[4 + icell])
-                all_cell.append(cell)
+                all_cells.append(cell)
         self.results['cell'] = cell
-        self.results['all_cell'] = np.array(all_cell)
+        self.results['all_cells'] = np.array(all_cells)
         return cell
     #
     def read_inp(self, inp = None):
@@ -293,17 +307,17 @@ class CP2K(FileIOCalculator):
 
         frames = []
         all_positions = []
-        positions = np.zeros([self.natoms, 3])
         # print('positions:')
         for n, line in enumerate(self.outlines):
             if line.rfind('ATOMIC COORDINATES IN angstrom') > -1:
+                positions = np.zeros([self.natoms, 3])
                 symbols = []
                 for iatom in range(self.natoms):
                     data = self.outlines[n + iatom + 4].split()
                     symbols.append(data[2])
                     for ic in range(3):
                         positions[iatom, ic] = float(data[4 + ic])
-                atoms = Atoms(symbols = symbols, positions = positions)
+                atoms = Atoms(symbols = symbols, positions = positions, pbc = [True, True, True])
                 all_positions.append(positions)
                 frames.append(atoms)
                         # print(float(data[3 + ic])*conf)
@@ -317,10 +331,10 @@ class CP2K(FileIOCalculator):
         forces for the last ionic configuration are returned."""
         conf = physical_constants['atomic unit of force'][0]/physical_constants['electron volt'][0]*10**(-10)
         all_forces = []
-        forces = np.zeros([self.natoms, 3])
         # print('forces:')
         for n, line in enumerate(self.outlines):
             if line.rfind('ATOMIC FORCES in [a.u.]') > -1:
+                forces = np.zeros([self.natoms, 3])
                 try :
                     for iatom in range(self.natoms):
                         data = self.outlines[n + iatom + 3].split()
@@ -356,7 +370,7 @@ class CP2K(FileIOCalculator):
         self.get_number_of_spins()
         self.natoms = len(self.results['atoms'])
         index = 4
-        if self.spin == 2:
+        if self.nspin == 2:
             index = 5
         for n, line in enumerate(self.outlines):
             if line.rfind('Mulliken Population Analysis') > -1:
@@ -365,7 +379,7 @@ class CP2K(FileIOCalculator):
                 for iatom in range(self.natoms):
                     data = self.outlines[n + iatom + 3].split()
                     charges.append([iatom, data[1], float(data[index])])
-                    if self.spin == 2:
+                    if self.nspin == 2:
                         moments.append([iatom, data[1], float(data[index + 1])])
         self.results['charges-M'] = charges
         self.results['moments-M'] = moments
@@ -377,7 +391,7 @@ class CP2K(FileIOCalculator):
                 for iatom in range(self.natoms):
                     data = self.outlines[n + iatom + 3].split()
                     charges.append([iatom, data[1], float(data[index + 1])])
-                    if self.spin == 2:
+                    if self.nspin == 2:
                         moments.append([iatom, data[1], float(data[index])])
         self.results['charges-H'] = charges
         self.results['moments-H'] = moments
@@ -714,21 +728,15 @@ class CP2K(FileIOCalculator):
             spin=2
         else:
             spin=1
-        self.spin = spin
+        self.nspin = spin
+        return spin
 
     def read_geometry(self, prefix = None):
         atoms = None
         if prefix:
             self.prefix = prefix
         self.logger.debug('Read geometry')
-        filename = self.directory + '/{0}.in'.format(self.prefix)
         filename1 = self.directory + '/{0}-pos-1.xyz'.format(self.prefix)
-        if os.path.isfile(filename):
-            try:
-                atoms = ase.io.read(filename)
-                atoms.wrap()
-            except:
-                print('wrong %s'%filename)
         if os.path.isfile(filename1):
             # print(filename1)
             atoms = ase.io.read(filename1)
@@ -741,13 +749,20 @@ class CP2K(FileIOCalculator):
                 # print(self.constraints.FIXED_ATOMS_list)
                 for List in self.constraints.FIXED_ATOMS_list[0].List:
                     # print(List)
-                    List = List.split()
+                    if '..' in List:
+                        index = List.split('..')
+                        List = range(int(index[0]), int(index[1]))
+                    else:
+                        List = List.split()
                     constraint = FixAtoms(indices = [int(x) -1 for x in List])
                     constraints.append(constraint)
                 atoms.set_constraint(constraints)
         # print(atoms)
         if atoms:
             self.results['atoms'] = atoms.copy()
+            filename = self.directory + '/{0}.in'.format(self.prefix)
+            print('writing to file: ')
+            atoms.write(filename)
         else:
             self.results['atoms'] = None
         return atoms
@@ -791,54 +806,184 @@ class CP2K(FileIOCalculator):
         wf = np.average(axy[ind]) - ef
         print('min: %s, max: %s'%(pos, pos + 3))
         print('The workfunction is {0:1.2f} eV'.format(wf))
-    def write_deepmd(self, label = './', type_map = False, elements = [], energies = None):
+    def read_frames(self):
+        """Method that reads forces from the output file.
+
+        If 'all' is switched on, the forces for all ionic steps
+        in the output file will be returned, in other case only the
+        forces for the last ionic configuration are returned."""
+        cone = physical_constants['Hartree energy in eV'][0]
+        conf = physical_constants['atomic unit of force'][0]/physical_constants['electron volt'][0]*10**(-10)
+        START = 'PROGRAM STARTED AT'
+        END = 'PROGRAM ENDED AT'
+        indexs = []
         self.read_results()
-        self.read_atoms()
-        self.read_cell()
-        frames = self.results['frames']
-        all_cell = self.results['all_cell']
-        all_energies = self.results['all_energies']
-        all_positions = self.results['all_positions']
-        all_forces = self.results['all_forces']
-        nframe = len(all_forces)
-        all_cell = all_cell[0:nframe]
-        all_energies = all_energies[0:nframe]
-        all_positions = all_positions[0:nframe]
+        n = len(self.outlines)
+        for i in range(n):
+            index = []
+            if START in self.outlines[i]:
+                istart = i
+            if END in self.outlines[i]:
+                indexs.append([istart, i])
+        print('nframe: ', len(indexs))
+        frames = []
+        for index in indexs:
+            for i in range(index[0], index[1]):
+                line = self.outlines[i]
+                if 'CELL| Volume' in line:
+                    cell = np.zeros([3, 3])
+                    for j in range(3):
+                        data = self.outlines[i + 1 + j].split()
+                        for icell in range(3):
+                            cell[j, icell] = float(data[4 + icell])
+                #
+                if line.rfind('ENERGY|') > -1:
+                    energy = float(line.split()[8])*cone
+                # print('positions:')
+                if line.rfind('ATOMIC COORDINATES IN angstrom') > -1:
+                    positions = np.zeros([self.natoms, 3])
+                    symbols = []
+                    for iatom in range(self.natoms):
+                        data = self.outlines[i + iatom + 4].split()
+                        symbols.append(data[2])
+                        for ic in range(3):
+                            positions[iatom, ic] = float(data[4 + ic])
+                #
+                if line.rfind('ATOMIC FORCES in [a.u.]') > -1:
+                    forces = np.zeros([self.natoms, 3])
+                    try :
+                        for iatom in range(self.natoms):
+                            data = self.outlines[i + iatom + 3].split()
+                            for iforce in range(3):
+                                forces[iatom, iforce] = float(data[3 + iforce])*conf
+                        atoms = Atoms(symbols = symbols, positions = positions, cell = cell, pbc = [True, True, True])
+                        calc = CP2K()
+                        calc.results['energy'] = energy
+                        calc.results['forces'] = forces
+                        atoms.calc = calc
+                        frames.append(atoms)
+                    except:
+                        print('read forces error, cp2k run may be interupt')
+        self.results['frames'] = frames
+    def read_frames_geo(self):
+        """Method that reads forces from the output file.
+
+        If 'all' is switched on, the forces for all ionic steps
+        in the output file will be returned, in other case only the
+        forces for the last ionic configuration are returned."""
+        cone = physical_constants['Hartree energy in eV'][0]
+        conf = physical_constants['atomic unit of force'][0]/physical_constants['electron volt'][0]*10**(-10)
+        self.read_results()
         #
-        natom = len(self.results['frames'][0])
+        from ase.io import read
+        f = os.path.join(self.directory, '%s-pos-1.xyz'%self.prefix)
+        xyzs = read(f, index = ':')
+        self.results['xyzs'] = xyzs
+        print('n xyz: ', len(xyzs))
+        #
+        frames = []
+        n = 0
+        for i in range(len(self.outlines)):
+            line = self.outlines[i]
+            if 'CELL| Volume' in line:
+                cell = np.zeros([3, 3])
+                for j in range(3):
+                    data = self.outlines[i + 1 + j].split()
+                    for icell in range(3):
+                        cell[j, icell] = float(data[4 + icell])
+            #
+            if line.rfind('ENERGY|') > -1:
+                energy = float(line.split()[8])*cone
+            # print('positions:')
+            if line.rfind('ATOMIC COORDINATES IN angstrom') > -1:
+                positions = np.zeros([self.natoms, 3])
+                symbols = []
+                for iatom in range(self.natoms):
+                    data = self.outlines[i + iatom + 4].split()
+                    symbols.append(data[2])
+                    for ic in range(3):
+                        positions[iatom, ic] = float(data[4 + ic])
+            #
+            if n > 0: positions = xyzs[n - 1].positions
+            if line.rfind('ATOMIC FORCES in [a.u.]') > -1:
+                forces = np.zeros([self.natoms, 3])
+                try :
+                    for iatom in range(self.natoms):
+                        data = self.outlines[i + iatom + 3].split()
+                        for iforce in range(3):
+                            forces[iatom, iforce] = float(data[3 + iforce])*conf
+                    atoms = Atoms(symbols = symbols, positions = positions, cell = cell, pbc = [True, True, True])
+                    calc = CP2K()
+                    calc.results['energy'] = energy
+                    calc.results['forces'] = forces
+                    atoms.calc = calc
+                    frames.append(atoms)
+                    n += 1
+                except:
+                    print('read forces error, cp2k run may be interupt')
+        self.results['frames'] = frames
+        print('n frames: ', len(frames))
+        
+    def to_deepmd(self, label = './', elements = [], compress = False, energy_shift = None):
+        # self.read_results()
+        # self.read_frames()
+        self.results['deepmd'] = {}
+        # nframe = len(self.results['frames'])
+        all_cells = []
+        all_energies = []
+        all_positions = []
+        all_forces = []
+        E0 = 1e10
+        for atoms in self.results['frames']:
+            E = atoms.calc.results['energy']
+            if compress:
+                dE = abs(E - E0)
+                if dE < compress:
+                    continue
+            E0 = E
+            # print(dE)
+            all_energies.append(E)
+            all_cells.append(atoms.cell)
+            all_positions.append(atoms.positions)
+            all_forces.append(atoms.calc.results['forces'])
+        nframe = len(all_energies)
+        print('nframe: ', nframe)
+        all_cells = np.array(all_cells)
+        all_energies = np.array(all_energies)
+        all_positions = np.array(all_positions)
+        all_forces = np.array(all_forces)
+        #
+        all_cells = all_cells.reshape(nframe, -1)
+        all_positions = all_positions.reshape(nframe, -1)
+        all_forces = all_forces.reshape(nframe, -1)
+        #
         symbols = self.results['frames'][0].get_chemical_symbols()
         if not elements:
             elements = list(set(symbols))
             elements.sort()
-        print('nframe: ', nframe)
         print(elements)
-        print(enegies)
         #
-        all_cell = all_cell.reshape(nframe, -1)
-        np.save('%s/box.npy'%label, all_cell)
+        if energy_shift is not None:
+            all_energies = [e - energy_shift for e in all_energies]
         #
-        all_positions = all_positions.reshape(nframe, -1)
-        np.save('%s/coord.npy'%label, all_positions)
-        #
-        print(all_energies)
-        if energies:
-            nelement = {}
-            for element in elements:
-                nelement[element] = symbols.account(element)
-            print(nelement)
-            for i in range(nframe):
-                for element in elements:
-                    all_energies[i] -= nelement[element]*energies[element]
-        print(all_energies)
-        np.save('%s/energy.npy'%label, all_energies)
-        #
-        all_forces = all_forces.reshape(nframe, -1)
-        np.save('%s/force.npy'%label, all_forces)
-        
+        self.results['deepmd']['all_cells'] = all_cells
+        self.results['deepmd']['all_energies'] = all_energies
+        self.results['deepmd']['all_coords'] = all_positions
+        self.results['deepmd']['all_forces'] = all_forces
+        self.results['deepmd']['type_map'] = elements
+        symbols = np.array([elements.index(x) for x in symbols])
+        self.results['deepmd']['type'] = symbols
+    def write_deepmd(self, datas, label = './', type_map = False):
         #
         prefix = label.split('/')[-1]
         directory = './' + label[0:-len(prefix)]
+        print('save datas to: %s'%label)
+        # print(datas)
         if type_map:
-            np.savetxt('%s/type_map.raw'%directory, elements, fmt = '%s')
-        symbols = [elements.index(x) for x in symbols]
-        np.savetxt('%s/type.raw'%directory, np.array(symbols), fmt = '%d')
+            np.savetxt('%s/type_map.raw'%directory, datas['type_map'], fmt = '%s')
+        np.save('%s/box.npy'%label, datas['all_cells'])
+        np.save('%s/coord.npy'%label, datas['all_coords'])
+        np.save('%s/energy.npy'%label, datas['all_energies'])
+        np.save('%s/force.npy'%label, datas['all_forces'])
+        np.savetxt('%s/type.raw'%directory, datas['type'], fmt = '%d')
+        

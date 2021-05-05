@@ -13,12 +13,11 @@ class _periodic3(InputSection):
         self.Extrapolate_kpoints = None
         self.Do_aux_bas_gw = None
         self.Fraction_aux_mos = None
-        self.Contour_def_end = None
         self.Num_omega_points = None
         self._name = "PERIODIC"
-        self._keywords = {'Num_kp_grids': 'NUM_KP_GRIDS', 'Eps_kpoint': 'EPS_KPOINT', 'Mo_coeff_gamma': 'MO_COEFF_GAMMA', 'Average_degenerate_levels': 'AVERAGE_DEGENERATE_LEVELS', 'Eps_eigenval': 'EPS_EIGENVAL', 'Extrapolate_kpoints': 'EXTRAPOLATE_KPOINTS', 'Do_aux_bas_gw': 'DO_AUX_BAS_GW', 'Fraction_aux_mos': 'FRACTION_AUX_MOS', 'Contour_def_end': 'CONTOUR_DEF_END', 'Num_omega_points': 'NUM_OMEGA_POINTS'}
+        self._keywords = {'Num_kp_grids': 'NUM_KP_GRIDS', 'Eps_kpoint': 'EPS_KPOINT', 'Mo_coeff_gamma': 'MO_COEFF_GAMMA', 'Average_degenerate_levels': 'AVERAGE_DEGENERATE_LEVELS', 'Eps_eigenval': 'EPS_EIGENVAL', 'Extrapolate_kpoints': 'EXTRAPOLATE_KPOINTS', 'Do_aux_bas_gw': 'DO_AUX_BAS_GW', 'Fraction_aux_mos': 'FRACTION_AUX_MOS', 'Num_omega_points': 'NUM_OMEGA_POINTS'}
         self._repeated_keywords = {'Kpoints': 'KPOINTS'}
-        self._aliases = {'Adl': 'Average_degenerate_levels', 'Extrapolate': 'Extrapolate_kpoints', 'Cd_end': 'Contour_def_end'}
+        self._aliases = {'Adl': 'Average_degenerate_levels', 'Extrapolate': 'Extrapolate_kpoints'}
 
 
     @property
@@ -35,13 +34,6 @@ class _periodic3(InputSection):
         """
         return self.Extrapolate_kpoints
 
-    @property
-    def Cd_end(self):
-        """
-        See documentation for Contour_def_end
-        """
-        return self.Contour_def_end
-
     @Adl.setter
     def Adl(self, value):
         self.Average_degenerate_levels = value
@@ -49,7 +41,3 @@ class _periodic3(InputSection):
     @Extrapolate.setter
     def Extrapolate(self, value):
         self.Extrapolate_kpoints = value
-
-    @Cd_end.setter
-    def Cd_end(self, value):
-        self.Contour_def_end = value

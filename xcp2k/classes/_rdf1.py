@@ -7,8 +7,9 @@ class _rdf1(InputSection):
         self.Section_parameters = None
         self.Maxr = None
         self.Nbin = None
-        self.Centers_file_name = None
+        self.Solute_he = None
+        self.He_he = None
         self._name = "RDF"
-        self._keywords = {'Maxr': 'MAXR', 'Nbin': 'NBIN', 'Centers_file_name': 'CENTERS_FILE_NAME'}
+        self._keywords = {'Maxr': 'MAXR', 'Nbin': 'NBIN', 'Solute_he': 'SOLUTE_HE', 'He_he': 'HE_HE'}
         self._attributes = ['Section_parameters']
 

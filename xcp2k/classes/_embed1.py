@@ -6,13 +6,13 @@ from xcp2k.classes._print19 import _print19
 class _embed1(InputSection):
     def __init__(self):
         InputSection.__init__(self)
-        self.Dfet = None
+        self.Embed_method = None
         self.Group_partition = None
         self.Ngroups = None
         self.MAPPING_list = []
         self.PRINT = _print19()
         self._name = "EMBED"
-        self._keywords = {'Dfet': 'DFET', 'Group_partition': 'GROUP_PARTITION', 'Ngroups': 'NGROUPS'}
+        self._keywords = {'Embed_method': 'EMBED_METHOD', 'Group_partition': 'GROUP_PARTITION', 'Ngroups': 'NGROUPS'}
         self._subsections = {'PRINT': 'PRINT'}
         self._repeated_subsections = {'MAPPING': '_mapping2'}
         self._aliases = {'Ngroup': 'Ngroups'}

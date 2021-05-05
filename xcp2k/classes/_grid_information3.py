@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each411 import _each411
+from xcp2k.classes._each599 import _each599
 
 
 class _grid_information3(InputSection):
@@ -10,7 +10,7 @@ class _grid_information3(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each411()
+        self.EACH = _each599()
         self._name = "GRID_INFORMATION"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

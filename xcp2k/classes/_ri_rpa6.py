@@ -1,31 +1,30 @@
 from xcp2k.inputsection import InputSection
 from xcp2k.classes._hf12 import _hf12
-from xcp2k.classes._ri_g0w06 import _ri_g0w06
-from xcp2k.classes._im_time6 import _im_time6
+from xcp2k.classes._gw6 import _gw6
 from xcp2k.classes._ri_axk6 import _ri_axk6
 
 
 class _ri_rpa6(InputSection):
     def __init__(self):
         InputSection.__init__(self)
+        self.Section_parameters = None
         self.Quadrature_points = None
         self.Size_freq_integ_group = None
         self.Mm_style = None
         self.Minimax_quadrature = None
-        self.Ri_g0w0 = None
         self.Ri_axk = None
+        self.Rse = None
         self.Admm = None
-        self.Im_time = None
+        self.Scale_rpa = None
         self.HF_list = []
-        self.RI_G0W0 = _ri_g0w06()
-        self.IM_TIME = _im_time6()
+        self.GW = _gw6()
         self.RI_AXK = _ri_axk6()
         self._name = "RI_RPA"
-        self._keywords = {'Quadrature_points': 'QUADRATURE_POINTS', 'Size_freq_integ_group': 'SIZE_FREQ_INTEG_GROUP', 'Mm_style': 'MM_STYLE', 'Minimax_quadrature': 'MINIMAX_QUADRATURE', 'Ri_g0w0': 'RI_G0W0', 'Ri_axk': 'RI_AXK', 'Admm': 'ADMM', 'Im_time': 'IM_TIME'}
-        self._subsections = {'RI_G0W0': 'RI_G0W0', 'IM_TIME': 'IM_TIME', 'RI_AXK': 'RI_AXK'}
+        self._keywords = {'Quadrature_points': 'QUADRATURE_POINTS', 'Size_freq_integ_group': 'SIZE_FREQ_INTEG_GROUP', 'Mm_style': 'MM_STYLE', 'Minimax_quadrature': 'MINIMAX_QUADRATURE', 'Ri_axk': 'RI_AXK', 'Rse': 'RSE', 'Admm': 'ADMM', 'Scale_rpa': 'SCALE_RPA'}
+        self._subsections = {'GW': 'GW', 'RI_AXK': 'RI_AXK'}
         self._repeated_subsections = {'HF': '_hf12'}
-        self._aliases = {'Rpa_num_quad_points': 'Quadrature_points', 'Rpa_group_size': 'Size_freq_integ_group', 'Minimax': 'Minimax_quadrature', 'Gw': 'Ri_g0w0', 'Axk': 'Ri_axk', 'Imag_time': 'Im_time'}
-        self._attributes = ['HF_list']
+        self._aliases = {'Rpa_num_quad_points': 'Quadrature_points', 'Rpa_group_size': 'Size_freq_integ_group', 'Minimax': 'Minimax_quadrature', 'Axk': 'Ri_axk', 'Se': 'Rse'}
+        self._attributes = ['Section_parameters', 'HF_list']
 
     def HF_add(self, section_parameters=None):
         new_section = _hf12()
@@ -58,13 +57,6 @@ class _ri_rpa6(InputSection):
         return self.Minimax_quadrature
 
     @property
-    def Gw(self):
-        """
-        See documentation for Ri_g0w0
-        """
-        return self.Ri_g0w0
-
-    @property
     def Axk(self):
         """
         See documentation for Ri_axk
@@ -72,11 +64,11 @@ class _ri_rpa6(InputSection):
         return self.Ri_axk
 
     @property
-    def Imag_time(self):
+    def Se(self):
         """
-        See documentation for Im_time
+        See documentation for Rse
         """
-        return self.Im_time
+        return self.Rse
 
     @Rpa_num_quad_points.setter
     def Rpa_num_quad_points(self, value):
@@ -90,14 +82,10 @@ class _ri_rpa6(InputSection):
     def Minimax(self, value):
         self.Minimax_quadrature = value
 
-    @Gw.setter
-    def Gw(self, value):
-        self.Ri_g0w0 = value
-
     @Axk.setter
     def Axk(self, value):
         self.Ri_axk = value
 
-    @Imag_time.setter
-    def Imag_time(self, value):
-        self.Im_time = value
+    @Se.setter
+    def Se(self, value):
+        self.Rse = value

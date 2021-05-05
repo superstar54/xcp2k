@@ -5,7 +5,7 @@ from xcp2k.classes._torsion2 import _torsion2
 from xcp2k.classes._improper2 import _improper2
 from xcp2k.classes._isolated_atoms1 import _isolated_atoms1
 from xcp2k.classes._neighbor_lists8 import _neighbor_lists8
-from xcp2k.classes._print50 import _print50
+from xcp2k.classes._print65 import _print65
 
 
 class _generate1(InputSection):
@@ -23,7 +23,7 @@ class _generate1(InputSection):
         self.IMPROPER_list = []
         self.ISOLATED_ATOMS = _isolated_atoms1()
         self.NEIGHBOR_LISTS = _neighbor_lists8()
-        self.PRINT = _print50()
+        self.PRINT = _print65()
         self._name = "GENERATE"
         self._keywords = {'Reorder': 'REORDER', 'Create_molecules': 'CREATE_MOLECULES', 'Bondparm': 'BONDPARM', 'Bondparm_factor': 'BONDPARM_FACTOR', 'Bondlength_max': 'BONDLENGTH_MAX', 'Bondlength_min': 'BONDLENGTH_MIN'}
         self._subsections = {'ISOLATED_ATOMS': 'ISOLATED_ATOMS', 'NEIGHBOR_LISTS': 'NEIGHBOR_LISTS', 'PRINT': 'PRINT'}

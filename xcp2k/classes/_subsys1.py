@@ -11,7 +11,7 @@ from xcp2k.classes._shell_coord1 import _shell_coord1
 from xcp2k.classes._shell_velocity1 import _shell_velocity1
 from xcp2k.classes._core_coord1 import _core_coord1
 from xcp2k.classes._core_velocity1 import _core_velocity1
-from xcp2k.classes._print55 import _print55
+from xcp2k.classes._print70 import _print70
 
 
 class _subsys1(InputSection):
@@ -30,7 +30,7 @@ class _subsys1(InputSection):
         self.SHELL_VELOCITY = _shell_velocity1()
         self.CORE_COORD = _core_coord1()
         self.CORE_VELOCITY = _core_velocity1()
-        self.PRINT = _print55()
+        self.PRINT = _print70()
         self._name = "SUBSYS"
         self._keywords = {'Seed': 'SEED'}
         self._subsections = {'RNG_INIT': 'RNG_INIT', 'CELL': 'CELL', 'COORD': 'COORD', 'VELOCITY': 'VELOCITY', 'TOPOLOGY': 'TOPOLOGY', 'MULTIPOLES': 'MULTIPOLES', 'SHELL_COORD': 'SHELL_COORD', 'SHELL_VELOCITY': 'SHELL_VELOCITY', 'CORE_COORD': 'CORE_COORD', 'CORE_VELOCITY': 'CORE_VELOCITY', 'PRINT': 'PRINT'}

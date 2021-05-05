@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._print61 import _print61
+from xcp2k.classes._print77 import _print77
 
 
 class _load_balance10(InputSection):
@@ -8,7 +8,7 @@ class _load_balance10(InputSection):
         self.Nbins = None
         self.Block_size = None
         self.Randomize = None
-        self.PRINT = _print61()
+        self.PRINT = _print77()
         self._name = "LOAD_BALANCE"
         self._keywords = {'Nbins': 'NBINS', 'Block_size': 'BLOCK_SIZE', 'Randomize': 'RANDOMIZE'}
         self._subsections = {'PRINT': 'PRINT'}

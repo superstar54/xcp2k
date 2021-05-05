@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each259 import _each259
+from xcp2k.classes._each372 import _each372
 
 
 class _dirichlet_cstr_charge_cube1(InputSection):
@@ -12,7 +12,7 @@ class _dirichlet_cstr_charge_cube1(InputSection):
         self.Log_print_key = None
         self.Stride = None
         self.Append = None
-        self.EACH = _each259()
+        self.EACH = _each372()
         self._name = "DIRICHLET_CSTR_CHARGE_CUBE"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Stride': 'STRIDE', 'Append': 'APPEND'}
         self._subsections = {'EACH': 'EACH'}

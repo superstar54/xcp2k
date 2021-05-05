@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each435 import _each435
+from xcp2k.classes._each378 import _each378
 
 
 class _dos2(InputSection):
@@ -10,12 +10,11 @@ class _dos2(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.From_energy = None
-        self.Till_energy = None
-        self.N_gridpoints = None
-        self.EACH = _each435()
+        self.Append = None
+        self.Delta_e = None
+        self.EACH = _each378()
         self._name = "DOS"
-        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'From_energy': 'FROM_ENERGY', 'Till_energy': 'TILL_ENERGY', 'N_gridpoints': 'N_GRIDPOINTS'}
+        self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Append': 'APPEND', 'Delta_e': 'DELTA_E'}
         self._subsections = {'EACH': 'EACH'}
         self._attributes = ['Section_parameters']
 

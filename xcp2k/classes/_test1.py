@@ -21,7 +21,6 @@ class _test1(InputSection):
         self.Eri = None
         self.Clebsch_gordon = None
         self.Mpi = None
-        self.Random_number_generator = None
         self.Minimax = None
         self.Least_sq_ft = None
         self.GRID_INFORMATION = _grid_information1()
@@ -34,10 +33,10 @@ class _test1(InputSection):
         self.ERI_MME_TEST = _eri_mme_test1()
         self.SHG_INTEGRALS_TEST = _shg_integrals_test1()
         self._name = "TEST"
-        self._keywords = {'Memory': 'MEMORY', 'Copy': 'COPY', 'Matmul': 'MATMUL', 'Dgemm': 'DGEMM', 'Fft': 'FFT', 'Eri': 'ERI', 'Clebsch_gordon': 'CLEBSCH_GORDON', 'Mpi': 'MPI', 'Random_number_generator': 'RANDOM_NUMBER_GENERATOR', 'Minimax': 'MINIMAX', 'Least_sq_ft': 'LEAST_SQ_FT'}
+        self._keywords = {'Memory': 'MEMORY', 'Copy': 'COPY', 'Matmul': 'MATMUL', 'Dgemm': 'DGEMM', 'Fft': 'FFT', 'Eri': 'ERI', 'Clebsch_gordon': 'CLEBSCH_GORDON', 'Mpi': 'MPI', 'Minimax': 'MINIMAX', 'Least_sq_ft': 'LEAST_SQ_FT'}
         self._subsections = {'GRID_INFORMATION': 'GRID_INFORMATION', 'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'RS_PW_TRANSFER': 'RS_PW_TRANSFER', 'ERI_MME_TEST': 'ERI_MME_TEST', 'SHG_INTEGRALS_TEST': 'SHG_INTEGRALS_TEST'}
         self._repeated_subsections = {'EIGENSOLVER': '_eigensolver1', 'PW_TRANSFER': '_pw_transfer1', 'CP_FM_GEMM': '_cp_fm_gemm1', 'CP_DBCSR': '_cp_dbcsr1'}
-        self._aliases = {'Clebsch': 'Clebsch_gordon', 'Rng': 'Random_number_generator'}
+        self._aliases = {'Clebsch': 'Clebsch_gordon'}
         self._attributes = ['EIGENSOLVER_list', 'PW_TRANSFER_list', 'CP_FM_GEMM_list', 'CP_DBCSR_list']
 
     def EIGENSOLVER_add(self, section_parameters=None):
@@ -80,17 +79,6 @@ class _test1(InputSection):
         """
         return self.Clebsch_gordon
 
-    @property
-    def Rng(self):
-        """
-        See documentation for Random_number_generator
-        """
-        return self.Random_number_generator
-
     @Clebsch.setter
     def Clebsch(self, value):
         self.Clebsch_gordon = value
-
-    @Rng.setter
-    def Rng(self, value):
-        self.Random_number_generator = value

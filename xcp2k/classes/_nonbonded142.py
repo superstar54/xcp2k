@@ -2,7 +2,7 @@ from xcp2k.inputsection import InputSection
 from xcp2k.classes._lennard_jones4 import _lennard_jones4
 from xcp2k.classes._williams4 import _williams4
 from xcp2k.classes._goodwin4 import _goodwin4
-from xcp2k.classes._genpot4 import _genpot4
+from xcp2k.classes._genpot5 import _genpot5
 
 
 class _nonbonded142(InputSection):
@@ -13,7 +13,7 @@ class _nonbonded142(InputSection):
         self.GOODWIN_list = []
         self.GENPOT_list = []
         self._name = "NONBONDED14"
-        self._repeated_subsections = {'LENNARD_JONES': '_lennard_jones4', 'WILLIAMS': '_williams4', 'GOODWIN': '_goodwin4', 'GENPOT': '_genpot4'}
+        self._repeated_subsections = {'LENNARD_JONES': '_lennard_jones4', 'WILLIAMS': '_williams4', 'GOODWIN': '_goodwin4', 'GENPOT': '_genpot5'}
         self._attributes = ['LENNARD_JONES_list', 'WILLIAMS_list', 'GOODWIN_list', 'GENPOT_list']
 
     def LENNARD_JONES_add(self, section_parameters=None):
@@ -41,7 +41,7 @@ class _nonbonded142(InputSection):
         return new_section
 
     def GENPOT_add(self, section_parameters=None):
-        new_section = _genpot4()
+        new_section = _genpot5()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

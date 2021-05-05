@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each238 import _each238
+from xcp2k.classes._each182 import _each182
 
 
 class _wannier_cubes4(InputSection):
@@ -14,7 +14,7 @@ class _wannier_cubes4(InputSection):
         self.Cubes_lu_bounds = None
         self.Cubes_list = []
         self.Append = None
-        self.EACH = _each238()
+        self.EACH = _each182()
         self._name = "WANNIER_CUBES"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Stride': 'STRIDE', 'Cubes_lu_bounds': 'CUBES_LU_BOUNDS', 'Append': 'APPEND'}
         self._repeated_keywords = {'Cubes_list': 'CUBES_LIST'}

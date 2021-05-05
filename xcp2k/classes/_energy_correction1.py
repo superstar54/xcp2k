@@ -1,5 +1,6 @@
 from xcp2k.inputsection import InputSection
 from xcp2k.classes._xc2 import _xc2
+from xcp2k.classes._ls_solver1 import _ls_solver1
 
 
 class _energy_correction1(InputSection):
@@ -15,8 +16,9 @@ class _energy_correction1(InputSection):
         self.Factorization = None
         self.Eps_default = None
         self.XC = _xc2()
+        self.LS_SOLVER = _ls_solver1()
         self._name = "ENERGY_CORRECTION"
         self._keywords = {'Energy_functional': 'ENERGY_FUNCTIONAL', 'Harris_basis': 'HARRIS_BASIS', 'Mao': 'MAO', 'Mao_max_iter': 'MAO_MAX_ITER', 'Mao_eps_grad': 'MAO_EPS_GRAD', 'Algorithm': 'ALGORITHM', 'Factorization': 'FACTORIZATION', 'Eps_default': 'EPS_DEFAULT'}
-        self._subsections = {'XC': 'XC'}
+        self._subsections = {'XC': 'XC', 'LS_SOLVER': 'LS_SOLVER'}
         self._attributes = ['Section_parameters']
 

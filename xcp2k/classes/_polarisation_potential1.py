@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each287 import _each287
+from xcp2k.classes._each406 import _each406
 
 
 class _polarisation_potential1(InputSection):
@@ -12,7 +12,7 @@ class _polarisation_potential1(InputSection):
         self.Log_print_key = None
         self.Stride = None
         self.Append = None
-        self.EACH = _each287()
+        self.EACH = _each406()
         self._name = "POLARISATION_POTENTIAL"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Stride': 'STRIDE', 'Append': 'APPEND'}
         self._subsections = {'EACH': 'EACH'}

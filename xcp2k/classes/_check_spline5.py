@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each312 import _each312
+from xcp2k.classes._each438 import _each438
 
 
 class _check_spline5(InputSection):
@@ -10,7 +10,7 @@ class _check_spline5(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each312()
+        self.EACH = _each438()
         self._name = "CHECK_SPLINE"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

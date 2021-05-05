@@ -2,7 +2,7 @@ from xcp2k.inputsection import InputSection
 from xcp2k.classes._fragment5 import _fragment5
 from xcp2k.classes._configuration1 import _configuration1
 from xcp2k.classes._fragment_energies1 import _fragment_energies1
-from xcp2k.classes._print49 import _print49
+from xcp2k.classes._print64 import _print64
 
 
 class _bsse1(InputSection):
@@ -11,7 +11,7 @@ class _bsse1(InputSection):
         self.FRAGMENT_list = []
         self.CONFIGURATION_list = []
         self.FRAGMENT_ENERGIES_list = []
-        self.PRINT = _print49()
+        self.PRINT = _print64()
         self._name = "BSSE"
         self._subsections = {'PRINT': 'PRINT'}
         self._repeated_subsections = {'FRAGMENT': '_fragment5', 'CONFIGURATION': '_configuration1', 'FRAGMENT_ENERGIES': '_fragment_energies1'}

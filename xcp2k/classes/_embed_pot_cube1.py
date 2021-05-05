@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each151 import _each151
+from xcp2k.classes._each202 import _each202
 
 
 class _embed_pot_cube1(InputSection):
@@ -11,7 +11,7 @@ class _embed_pot_cube1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Stride = None
-        self.EACH = _each151()
+        self.EACH = _each202()
         self._name = "EMBED_POT_CUBE"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Stride': 'STRIDE'}
         self._subsections = {'EACH': 'EACH'}

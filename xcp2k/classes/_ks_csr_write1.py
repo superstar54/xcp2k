@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each274 import _each274
+from xcp2k.classes._each390 import _each390
 
 
 class _ks_csr_write1(InputSection):
@@ -13,7 +13,7 @@ class _ks_csr_write1(InputSection):
         self.Threshold = None
         self.Upper_triangular = None
         self.Binary = None
-        self.EACH = _each274()
+        self.EACH = _each390()
         self._name = "KS_CSR_WRITE"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Threshold': 'THRESHOLD', 'Upper_triangular': 'UPPER_TRIANGULAR', 'Binary': 'BINARY'}
         self._subsections = {'EACH': 'EACH'}

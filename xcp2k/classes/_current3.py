@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._print57 import _print57
+from xcp2k.classes._print72 import _print72
 from xcp2k.classes._interpolator9 import _interpolator9
 
 
@@ -18,7 +18,7 @@ class _current3(InputSection):
         self.Selected_states_on_atom_list = []
         self.Selected_states_atom_radius = None
         self.Restart_current = None
-        self.PRINT = _print57()
+        self.PRINT = _print72()
         self.INTERPOLATOR = _interpolator9()
         self._name = "CURRENT"
         self._keywords = {'Gauge': 'GAUGE', 'Gauge_atom_radius': 'GAUGE_ATOM_RADIUS', 'Use_old_gauge_atom': 'USE_OLD_GAUGE_ATOM', 'Orbital_center': 'ORBITAL_CENTER', 'Common_center': 'COMMON_CENTER', 'Nbox': 'NBOX', 'Chi_pbc': 'CHI_PBC', 'Force_no_full': 'FORCE_NO_FULL', 'Selected_states_atom_radius': 'SELECTED_STATES_ATOM_RADIUS', 'Restart_current': 'RESTART_CURRENT'}

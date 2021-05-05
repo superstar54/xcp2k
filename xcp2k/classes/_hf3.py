@@ -5,6 +5,7 @@ from xcp2k.classes._screening3 import _screening3
 from xcp2k.classes._interaction_potential4 import _interaction_potential4
 from xcp2k.classes._load_balance3 import _load_balance3
 from xcp2k.classes._memory3 import _memory3
+from xcp2k.classes._ri4 import _ri4
 
 
 class _hf3(InputSection):
@@ -20,7 +21,8 @@ class _hf3(InputSection):
         self.INTERACTION_POTENTIAL = _interaction_potential4()
         self.LOAD_BALANCE = _load_balance3()
         self.MEMORY = _memory3()
+        self.RI = _ri4()
         self._name = "HF"
         self._keywords = {'Fraction': 'FRACTION', 'Treat_lsd_in_core': 'TREAT_LSD_IN_CORE', 'Pw_hfx': 'PW_HFX', 'Pw_hfx_blocksize': 'PW_HFX_BLOCKSIZE'}
-        self._subsections = {'HF_INFO': 'HF_INFO', 'PERIODIC': 'PERIODIC', 'SCREENING': 'SCREENING', 'INTERACTION_POTENTIAL': 'INTERACTION_POTENTIAL', 'LOAD_BALANCE': 'LOAD_BALANCE', 'MEMORY': 'MEMORY'}
+        self._subsections = {'HF_INFO': 'HF_INFO', 'PERIODIC': 'PERIODIC', 'SCREENING': 'SCREENING', 'INTERACTION_POTENTIAL': 'INTERACTION_POTENTIAL', 'LOAD_BALANCE': 'LOAD_BALANCE', 'MEMORY': 'MEMORY', 'RI': 'RI'}
 

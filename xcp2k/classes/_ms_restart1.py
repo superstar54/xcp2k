@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each428 import _each428
+from xcp2k.classes._each618 import _each618
 
 
 class _ms_restart1(InputSection):
@@ -10,7 +10,7 @@ class _ms_restart1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each428()
+        self.EACH = _each618()
         self._name = "MS_RESTART"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

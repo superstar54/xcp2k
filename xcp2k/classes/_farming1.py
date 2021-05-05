@@ -1,7 +1,7 @@
 from xcp2k.inputsection import InputSection
 from xcp2k.classes._job1 import _job1
-from xcp2k.classes._program_run_info50 import _program_run_info50
-from xcp2k.classes._restart14 import _restart14
+from xcp2k.classes._program_run_info59 import _program_run_info59
+from xcp2k.classes._restart15 import _restart15
 
 
 class _farming1(InputSection):
@@ -18,8 +18,8 @@ class _farming1(InputSection):
         self.Do_restart = None
         self.Restart_file_name = None
         self.JOB_list = []
-        self.PROGRAM_RUN_INFO = _program_run_info50()
-        self.RESTART = _restart14()
+        self.PROGRAM_RUN_INFO = _program_run_info59()
+        self.RESTART = _restart15()
         self._name = "FARMING"
         self._keywords = {'Master_slave': 'MASTER_SLAVE', 'Ngroups': 'NGROUPS', 'Group_size': 'GROUP_SIZE', 'Stride': 'STRIDE', 'Group_partition': 'GROUP_PARTITION', 'Max_jobs_per_group': 'MAX_JOBS_PER_GROUP', 'Cycle': 'CYCLE', 'Wait_time': 'WAIT_TIME', 'Do_restart': 'DO_RESTART', 'Restart_file_name': 'RESTART_FILE_NAME'}
         self._subsections = {'PROGRAM_RUN_INFO': 'PROGRAM_RUN_INFO', 'RESTART': 'RESTART'}

@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each405 import _each405
+from xcp2k.classes._each591 import _each591
 
 
 class _guess_vectors1(InputSection):
@@ -10,7 +10,7 @@ class _guess_vectors1(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each405()
+        self.EACH = _each591()
         self._name = "GUESS_VECTORS"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

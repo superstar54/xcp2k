@@ -3,7 +3,7 @@ from xcp2k.classes._constraint2 import _constraint2
 from xcp2k.classes._restraint8 import _restraint8
 from xcp2k.classes._sphere_sampling1 import _sphere_sampling1
 from xcp2k.classes._slab_sampling1 import _slab_sampling1
-from xcp2k.classes._print66 import _print66
+from xcp2k.classes._print85 import _print85
 
 
 class _resp1(InputSection):
@@ -19,7 +19,7 @@ class _resp1(InputSection):
         self.RESTRAINT_list = []
         self.SPHERE_SAMPLING = _sphere_sampling1()
         self.SLAB_SAMPLING_list = []
-        self.PRINT = _print66()
+        self.PRINT = _print85()
         self._name = "RESP"
         self._keywords = {'Stride': 'STRIDE', 'Integer_total_charge': 'INTEGER_TOTAL_CHARGE', 'Restrain_heavies_to_zero': 'RESTRAIN_HEAVIES_TO_ZERO', 'Restrain_heavies_strength': 'RESTRAIN_HEAVIES_STRENGTH', 'Width': 'WIDTH', 'Use_repeat_method': 'USE_REPEAT_METHOD'}
         self._subsections = {'SPHERE_SAMPLING': 'SPHERE_SAMPLING', 'PRINT': 'PRINT'}

@@ -4,6 +4,7 @@ from xcp2k.inputsection import InputSection
 class _opt_ri_basis5(InputSection):
     def __init__(self):
         InputSection.__init__(self)
+        self.Section_parameters = None
         self.Delta_i_rel = None
         self.Delta_ri = None
         self.Eps_deriv = None
@@ -13,6 +14,7 @@ class _opt_ri_basis5(InputSection):
         self._name = "OPT_RI_BASIS"
         self._keywords = {'Delta_i_rel': 'DELTA_I_REL', 'Delta_ri': 'DELTA_RI', 'Eps_deriv': 'EPS_DERIV', 'Max_iter': 'MAX_ITER', 'Num_func': 'NUM_FUNC', 'Basis_size': 'BASIS_SIZE'}
         self._aliases = {'Di_rel': 'Delta_i_rel', 'Dri': 'Delta_ri', 'Eps_num_deriv': 'Eps_deriv', 'Max_num_iter': 'Max_iter'}
+        self._attributes = ['Section_parameters']
 
 
     @property

@@ -22,7 +22,7 @@ from xcp2k.classes._wc4 import _wc4
 from xcp2k.classes._hbp4 import _hbp4
 from xcp2k.classes._ring_puckering4 import _ring_puckering4
 from xcp2k.classes._conditioned_distance4 import _conditioned_distance4
-from xcp2k.classes._print53 import _print53
+from xcp2k.classes._print68 import _print68
 from xcp2k.classes._colvar_func_info3 import _colvar_func_info3
 
 
@@ -56,11 +56,11 @@ class _colvar4(InputSection):
         self.COLVAR_FUNC_INFO = _colvar_func_info3()
         self._name = "COLVAR"
         self._subsections = {'DISTANCE': 'DISTANCE', 'ANGLE': 'ANGLE', 'TORSION': 'TORSION', 'COORDINATION': 'COORDINATION', 'POPULATION': 'POPULATION', 'GYRATION_RADIUS': 'GYRATION_RADIUS', 'DISTANCE_POINT_PLANE': 'DISTANCE_POINT_PLANE', 'ANGLE_PLANE_PLANE': 'ANGLE_PLANE_PLANE', 'BOND_ROTATION': 'BOND_ROTATION', 'DISTANCE_FUNCTION': 'DISTANCE_FUNCTION', 'QPARM': 'QPARM', 'HYDRONIUM_SHELL': 'HYDRONIUM_SHELL', 'HYDRONIUM_DISTANCE': 'HYDRONIUM_DISTANCE', 'ACID_HYDRONIUM_DISTANCE': 'ACID_HYDRONIUM_DISTANCE', 'ACID_HYDRONIUM_SHELL': 'ACID_HYDRONIUM_SHELL', 'RMSD': 'RMSD', 'XYZ_DIAG': 'XYZ_DIAG', 'XYZ_OUTERDIAG': 'XYZ_OUTERDIAG', 'U': 'U', 'WC': 'WC', 'HBP': 'HBP', 'RING_PUCKERING': 'RING_PUCKERING', 'CONDITIONED_DISTANCE': 'CONDITIONED_DISTANCE', 'COLVAR_FUNC_INFO': 'COLVAR_FUNC_INFO'}
-        self._repeated_subsections = {'PRINT': '_print53'}
+        self._repeated_subsections = {'PRINT': '_print68'}
         self._attributes = ['PRINT_list']
 
     def PRINT_add(self, section_parameters=None):
-        new_section = _print53()
+        new_section = _print68()
         if section_parameters is not None:
             if hasattr(new_section, 'Section_parameters'):
                 new_section.Section_parameters = section_parameters

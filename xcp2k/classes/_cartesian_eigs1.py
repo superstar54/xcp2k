@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each433 import _each433
+from xcp2k.classes._each623 import _each623
 
 
 class _cartesian_eigs1(InputSection):
@@ -11,7 +11,7 @@ class _cartesian_eigs1(InputSection):
         self.Filename = None
         self.Log_print_key = None
         self.Backup_copies = None
-        self.EACH = _each433()
+        self.EACH = _each623()
         self._name = "CARTESIAN_EIGS"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY', 'Backup_copies': 'BACKUP_COPIES'}
         self._subsections = {'EACH': 'EACH'}

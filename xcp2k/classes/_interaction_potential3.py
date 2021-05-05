@@ -7,6 +7,7 @@ class _interaction_potential3(InputSection):
         self.Potential_type = None
         self.Truncation_radius = None
         self.Tshpsc_data = None
+        self.Omega = None
         self._name = "INTERACTION_POTENTIAL"
-        self._keywords = {'Potential_type': 'POTENTIAL_TYPE', 'Truncation_radius': 'TRUNCATION_RADIUS', 'Tshpsc_data': 'TSHPSC_DATA'}
+        self._keywords = {'Potential_type': 'POTENTIAL_TYPE', 'Truncation_radius': 'TRUNCATION_RADIUS', 'Tshpsc_data': 'TSHPSC_DATA', 'Omega': 'OMEGA'}
 

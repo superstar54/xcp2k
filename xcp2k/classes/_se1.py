@@ -5,7 +5,7 @@ from xcp2k.classes._screening5 import _screening5
 from xcp2k.classes._lr_correction1 import _lr_correction1
 from xcp2k.classes._neighbor_lists2 import _neighbor_lists2
 from xcp2k.classes._memory5 import _memory5
-from xcp2k.classes._print29 import _print29
+from xcp2k.classes._print35 import _print35
 from xcp2k.classes._ga1 import _ga1
 
 
@@ -30,7 +30,7 @@ class _se1(InputSection):
         self.LR_CORRECTION = _lr_correction1()
         self.NEIGHBOR_LISTS = _neighbor_lists2()
         self.MEMORY = _memory5()
-        self.PRINT = _print29()
+        self.PRINT = _print35()
         self.GA = _ga1()
         self._name = "SE"
         self._keywords = {'Orthogonal_basis': 'ORTHOGONAL_BASIS', 'Sto_ng': 'STO_NG', 'Analytical_gradients': 'ANALYTICAL_GRADIENTS', 'Delta': 'DELTA', 'Integral_screening': 'INTEGRAL_SCREENING', 'Periodic': 'PERIODIC', 'Force_kdso_d_exchange': 'FORCE_KDSO-D_EXCHANGE', 'Dispersion': 'DISPERSION', 'Dispersion_parameter_file': 'DISPERSION_PARAMETER_FILE', 'Dispersion_radius': 'DISPERSION_RADIUS', 'Coordination_cutoff': 'COORDINATION_CUTOFF', 'D3_scaling': 'D3_SCALING'}

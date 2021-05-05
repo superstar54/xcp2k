@@ -1,5 +1,5 @@
 from xcp2k.inputsection import InputSection
-from xcp2k.classes._each187 import _each187
+from xcp2k.classes._each291 import _each291
 
 
 class _filter_matrix4(InputSection):
@@ -10,7 +10,7 @@ class _filter_matrix4(InputSection):
         self.Common_iteration_levels = None
         self.Filename = None
         self.Log_print_key = None
-        self.EACH = _each187()
+        self.EACH = _each291()
         self._name = "FILTER_MATRIX"
         self._keywords = {'Add_last': 'ADD_LAST', 'Common_iteration_levels': 'COMMON_ITERATION_LEVELS', 'Filename': 'FILENAME', 'Log_print_key': 'LOG_PRINT_KEY'}
         self._subsections = {'EACH': 'EACH'}

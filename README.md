@@ -82,7 +82,7 @@ calc = CP2K(queue = queue)
 
 
 #### Using default example parameters
-Hubbard, starting_magnetization, starting_charge and so on. See example/dft+u.py
+
 
 ``` python
 from xcp2k.cp2k_example import CP2K_INPUT_OT, CP2K_INPUT_DIAG

@@ -14,7 +14,7 @@ import subprocess
 
 from ase.data import covalent_radii
 from ase.io.cube import read_cube_data
-from ase.data.colors import cpk_colors, jmol_colors
+from xcp2k.data import cpk_colors, jmol_colors, vesta_color
 from ase.data import covalent_radii, atomic_numbers, chemical_symbols
 
 orbitals = ['s', 'p', 'd', 'f']
@@ -188,7 +188,7 @@ class DOS(CP2K):
             ax.set_xlabel('Energy (eV)')
             ax.set_ylabel('PDOS (a.u.)')
         if output is not None:
-            plt.savefig('%s'%output)
+            plt.savefig('%s'%output, dpi = 300)
         return ax
     def plot_ldos(self, Emin = -10, Emax = 10, ef = True,
                   ax = None, total = False, select = None, fill = False, 
@@ -219,6 +219,7 @@ class DOS(CP2K):
         if xylabel:
             ax.set_xlabel('Energy (eV)')
             ax.set_ylabel('LDOS (a.u.)')
+        plt.tight_layout()
         if output is not None:
             plt.savefig('%s'%output)
         return ax

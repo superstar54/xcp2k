@@ -350,8 +350,9 @@ class CP2K(FileIOCalculator):
         if filename is None:
             filename = join(self.directory, 'ACF.dat')
         if not os.path.exists(filename):
+            os.system('bader *cube')
             self.results['bader_charge'] = None
-            return
+            # return
         if atoms is None:
             atoms = self.results['atoms']
         natoms = len(atoms)
@@ -521,8 +522,8 @@ class CP2K(FileIOCalculator):
         atom_list = []
         for i_atom, atom in enumerate(atoms):
             if symbol:
-                if 'species' in atoms.info:
-                    new_atom = [atoms.info['species'][i_atom], atom.position[0], atom.position[1], atom.position[2]]
+                if 'species' in atoms.arrays:
+                    new_atom = [atoms.arrays['species'][i_atom], atom.position[0], atom.position[1], atom.position[2]]
                 else:
                     new_atom = [atom.symbol, atom.position[0], atom.position[1], atom.position[2]]
             else:
